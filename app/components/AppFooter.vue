@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { en, vi, ja, zh_cn } from '@nuxt/ui/locale'
+
+const appStore = useAppStore()
+const { locale } = storeToRefs(appStore)
+
 const { footer } = useAppConfig()
+
+const { locale: i18nLocale } = useI18n()
+
+watch(i18nLocale, (newLocale) => {
+  // zh-CN -> zh_cn
+  locale.value = newLocale.replace('-', '_').toLocaleLowerCase()
+})
 </script>
 
 <template>
@@ -8,10 +20,37 @@ const { footer } = useAppConfig()
     :ui="{ left: 'text-xs' }"
   >
     <template #left>
-      {{ footer.credits }}
+      <div class="flex gap-2 items-center">
+        <div>
+          {{ footer.credits }}
+        </div>
+      </div>
     </template>
 
     <template #right>
+      <div class="flex gap-2 items-center">
+        <ULocaleSelect
+          v-model="i18nLocale"
+          :locales="[en, ja, vi, zh_cn]"
+          variant="ghost"
+          size="xs"
+          :ui="{
+            content: 'w-40'
+          }"
+        />
+        <USeparator
+          orientation="vertical"
+          class="h-4"
+        />
+        <UColorModeSelect
+          size="xs"
+          variant="ghost"
+        />
+        <USeparator
+          orientation="vertical"
+          class="h-4"
+        />
+      </div>
       <template v-if="footer?.links">
         <UButton
           v-for="(link, index) of footer?.links"

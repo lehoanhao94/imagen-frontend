@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import * as locales from '@nuxt/ui-pro/locale'
+
+const appStore = useAppStore()
+const { locale } = storeToRefs(appStore)
+const { locale: i18nLocale, locales: i18nLocales } = useI18n()
+
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
@@ -13,7 +19,7 @@ useHead({
     { rel: 'icon', href: '/favicon.ico' }
   ],
   htmlAttrs: {
-    lang: 'en'
+    lang: locale.value
   }
 })
 
@@ -41,10 +47,19 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
     transform: data => data.flat()
   })
 ])
+
+onMounted(() => {
+  i18nLocale.value = locale.value as any || 'en'
+})
+
+// Add a watcher to update i18n locale when app store locale changes
+watch(locale, (newLocale) => {
+  i18nLocale.value = newLocale as any
+})
 </script>
 
 <template>
-  <UApp>
+  <UApp :locale="locales[locale as keyof typeof locales]">
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />

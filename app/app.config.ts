@@ -27,7 +27,7 @@ export default defineAppConfig({
     }
   },
   footer: {
-    credits: `Copyright © ${new Date().getFullYear()}, Text To Image Creation`,
+    credits: `Copyright © ${new Date().getFullYear()}, AI Image Creation`,
     colorMode: false,
     links: [
       {

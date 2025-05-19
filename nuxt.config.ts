@@ -9,8 +9,10 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'motion-v/nuxt',
     '@nuxtjs/i18n',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt'
   ],
+  ssr: false,
 
   devtools: {
     enabled: true
@@ -26,9 +28,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: [
-        '/'
-      ],
+      routes: ['/'],
       crawlLinks: true
     }
   },
@@ -40,5 +40,18 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  i18n: {
+    defaultLocale: 'en',
+    langDir: 'locales/',
+    lazy: true,
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'ja', name: '日本語', file: 'ja.json' },
+      { code: 'vi', name: 'Tiếng Việt', file: 'vi.json' },
+      { code: 'zh_cn', name: '简体中文', file: 'zh_cn.json' }
+    ]
   }
 })
