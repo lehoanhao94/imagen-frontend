@@ -36,12 +36,7 @@ const aiPhotos = [
         delay: 0.1
       }"
     >
-      <UColorModeAvatar
-        class="size-18 mx-auto ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
-        :light="global.picture?.light!"
-        :dark="global.picture?.dark!"
-        :alt="global.picture?.alt!"
-      />
+      <BaseLogo />
     </Motion>
     <Motion
       :initial="{
