@@ -15,5 +15,10 @@ export const navLinks: NavigationMenuItem[] = [
     label: 'API',
     icon: 'i-lucide-file-text',
     to: '/blog'
+  },
+  {
+    label: 'Login',
+    icon: 'i-lucide-file-text',
+    to: '/auth/login'
   }
 ]

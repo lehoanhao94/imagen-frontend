@@ -8,5 +8,6 @@
       <slot />
       <AppFooter />
     </UContainer>
+    <LazyLayoutStarBg />
   </div>
 </template>
