@@ -36,7 +36,7 @@ const aiPhotos = [
         delay: 0.1
       }"
     >
-      <BaseLogo />
+      <BaseLogo loading />
     </Motion>
     <Motion
       :initial="{

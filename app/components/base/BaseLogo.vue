@@ -1,6 +1,15 @@
+<script lang="ts" setup>
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false
+  }
+})
+</script>
+
 <template>
   <div class="circulate">
-    <div class="circle mx-auto">
+    <div class="circle mx-auto border-2 dark:border-gray-400 w-24 h-24">
       <div class="wave _one" />
       <div class="wave _two" />
       <div class="wave _three" />
@@ -30,20 +39,16 @@
 
 <style lang="scss" scoped>
 .circulate .circle {
-  width: 90px;
-  height: 90px;
   border-radius: 100%;
-  border: 2px solid rgba(255, 255, 255, 0.8);
   background: white;
   /* Enhanced shadow for crystal ball effect */
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.3),
-    0 20px 60px rgba(0, 0, 0, 0.2),
-    0 0 120px rgba(142, 45, 226, 0.2),
-    inset 0 0 20px rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg,
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 20px 60px rgba(0, 0, 0, 0.2),
+    0 0 120px rgba(142, 45, 226, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    135deg,
     rgba(35, 52, 93, 0.9),
-    rgba(146, 22, 100, 0.9));
+    rgba(146, 22, 100, 0.9)
+  );
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
@@ -57,7 +62,7 @@
   transition: transform 0.3s ease;
 
   &:hover {
-    transform: perspective(800px) rotateX(5deg) scale(1.02);
+    transform: perspective(800px) rotateX(5deg) scale(1.40);
   }
 
   &::before {
@@ -163,7 +168,8 @@
 }
 
 @keyframes moveReflection {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.7;
     transform: rotate(-40deg) translateY(0);
   }
@@ -200,9 +206,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg,
+  background: linear-gradient(
+    45deg,
     rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0) 70%);
+    rgba(255, 255, 255, 0) 70%
+  );
   z-index: 3;
 }
 
@@ -210,9 +218,15 @@
   top: 30%;
   left: 25%;
   background-color: #f5a623;
-  background-image: linear-gradient(45deg, #f5a623 25%, #f8e71c 50%, #f5a623 75%);
+  background-image: linear-gradient(
+    45deg,
+    #f5a623 25%,
+    #f8e71c 50%,
+    #f5a623 75%
+  );
   transform: scale(0.8) rotate(-5deg);
-  animation: float 7s infinite ease-in-out, rotate 15s infinite linear, pulse 3s infinite alternate;
+  animation: float 7s infinite ease-in-out, rotate 15s infinite linear,
+    pulse 3s infinite alternate;
 }
 
 .circulate .image-element.photo2 {
@@ -221,9 +235,15 @@
   top: 60%;
   left: 60%;
   background-color: #7ed321;
-  background-image: linear-gradient(45deg, #7ed321 25%, #b8e986 50%, #7ed321 75%);
+  background-image: linear-gradient(
+    45deg,
+    #7ed321 25%,
+    #b8e986 50%,
+    #7ed321 75%
+  );
   transform: scale(0.7) rotate(10deg);
-  animation: float 8s infinite ease-in-out, rotate 12s infinite linear reverse, pulse 4s infinite alternate;
+  animation: float 8s infinite ease-in-out, rotate 12s infinite linear reverse,
+    pulse 4s infinite alternate;
   animation-delay: 0.5s;
 }
 
@@ -233,9 +253,15 @@
   top: 40%;
   left: 55%;
   background-color: #bd10e0;
-  background-image: linear-gradient(45deg, #bd10e0 25%, #d86eff 50%, #bd10e0 75%);
+  background-image: linear-gradient(
+    45deg,
+    #bd10e0 25%,
+    #d86eff 50%,
+    #bd10e0 75%
+  );
   transform: scale(0.75) rotate(-8deg);
-  animation: float 6s infinite ease-in-out, rotate 18s infinite linear, pulse 5s infinite alternate;
+  animation: float 6s infinite ease-in-out, rotate 18s infinite linear,
+    pulse 5s infinite alternate;
   animation-delay: 1s;
 }
 
@@ -245,9 +271,15 @@
   top: 25%;
   left: 45%;
   background-color: #4a90e2;
-  background-image: linear-gradient(45deg, #4a90e2 25%, #50e3c2 50%, #4a90e2 75%);
+  background-image: linear-gradient(
+    45deg,
+    #4a90e2 25%,
+    #50e3c2 50%,
+    #4a90e2 75%
+  );
   transform: scale(0.65) rotate(15deg);
-  animation: float 9s infinite ease-in-out, rotate 20s infinite linear reverse, pulse 6s infinite alternate;
+  animation: float 9s infinite ease-in-out, rotate 20s infinite linear reverse,
+    pulse 6s infinite alternate;
   animation-delay: 1.5s;
 }
 
@@ -270,14 +302,53 @@
   filter: blur(1px);
 }
 
-.circulate .particle.p1 { top: 20%; left: 30%; animation: particleFloat 4s infinite ease-in-out; }
-.circulate .particle.p2 { top: 70%; left: 40%; animation: particleFloat 5s infinite ease-in-out; animation-delay: 0.3s; }
-.circulate .particle.p3 { top: 40%; left: 70%; animation: particleFloat 6s infinite ease-in-out; animation-delay: 0.6s; }
-.circulate .particle.p4 { top: 60%; left: 20%; animation: particleFloat 7s infinite ease-in-out; animation-delay: 0.9s; }
-.circulate .particle.p5 { top: 30%; left: 60%; animation: particleFloat 5s infinite ease-in-out; animation-delay: 1.2s; }
-.circulate .particle.p6 { top: 50%; left: 50%; animation: particleFloat 6s infinite ease-in-out; animation-delay: 1.5s; }
-.circulate .particle.p7 { top: 75%; left: 65%; animation: particleFloat 7s infinite ease-in-out; animation-delay: 1.8s; }
-.circulate .particle.p8 { top: 35%; left: 35%; animation: particleFloat 4s infinite ease-in-out; animation-delay: 2.1s; }
+.circulate .particle.p1 {
+  top: 20%;
+  left: 30%;
+  animation: particleFloat 4s infinite ease-in-out;
+}
+.circulate .particle.p2 {
+  top: 70%;
+  left: 40%;
+  animation: particleFloat 5s infinite ease-in-out;
+  animation-delay: 0.3s;
+}
+.circulate .particle.p3 {
+  top: 40%;
+  left: 70%;
+  animation: particleFloat 6s infinite ease-in-out;
+  animation-delay: 0.6s;
+}
+.circulate .particle.p4 {
+  top: 60%;
+  left: 20%;
+  animation: particleFloat 7s infinite ease-in-out;
+  animation-delay: 0.9s;
+}
+.circulate .particle.p5 {
+  top: 30%;
+  left: 60%;
+  animation: particleFloat 5s infinite ease-in-out;
+  animation-delay: 1.2s;
+}
+.circulate .particle.p6 {
+  top: 50%;
+  left: 50%;
+  animation: particleFloat 6s infinite ease-in-out;
+  animation-delay: 1.5s;
+}
+.circulate .particle.p7 {
+  top: 75%;
+  left: 65%;
+  animation: particleFloat 7s infinite ease-in-out;
+  animation-delay: 1.8s;
+}
+.circulate .particle.p8 {
+  top: 35%;
+  left: 35%;
+  animation: particleFloat 4s infinite ease-in-out;
+  animation-delay: 2.1s;
+}
 
 /* Energy glow effect */
 .circulate .energy-glow {
@@ -324,7 +395,8 @@
 
 /* Animation keyframes */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
   }
   25% {
@@ -359,7 +431,8 @@
 }
 
 @keyframes particleFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) translateX(0);
   }
   50% {
