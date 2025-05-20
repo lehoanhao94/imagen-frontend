@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import BasePixelRevealImage from '~/components/base/BasePixelRevealImage.vue'
 
 defineProps({
   orientation: {
@@ -33,9 +34,23 @@ defineProps({
 })
 
 const isFullScreenOpen = ref(false)
+const isImageRevealed = ref(false)
 
 const openFullScreen = () => {
   isFullScreenOpen.value = true
+}
+
+const onRevealComplete = (event: any) => {
+  isImageRevealed.value = true
+  console.log(event?.message || 'Image reveal complete')
+}
+
+const onImageLoaded = (event: any) => {
+  console.log(event?.message || 'Image loaded')
+}
+
+const onImageProcessing = (event: any) => {
+  console.log(event?.message || 'Processing image')
 }
 </script>
 
@@ -49,11 +64,19 @@ const openFullScreen = () => {
       container: 'lg:items-start'
     }"
   >
-    <img
+    <BasePixelRevealImage
       :src="imageUrl"
-      class="order-first lg:order-last w-full imagen cursor-pointer hover:opacity-90 transition-opacity"
+      class="order-first lg:order-last w-full"
+      custom-class="imagen"
+      :pixel-size="4"
+      :reveal-speed="50"
+      reveal-pattern="random"
+      :reveal-delay="500"
       @click="openFullScreen"
-    >
+      @reveal-complete="onRevealComplete"
+      @loaded="onImageLoaded"
+      @processing="onImageProcessing"
+    />
 
     <template #description>
       <div class="text-xs mt-2">

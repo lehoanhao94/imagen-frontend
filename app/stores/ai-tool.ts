@@ -19,7 +19,7 @@ export const useAIToolStore = defineStore('aiToolStore', {
         appStore.loading = false
         this.textToImageResult = {
           imageUrl:
-            'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512',
+            'https://cdn.leonardo.ai/users/dae3edd9-f7aa-4aef-adc1-63cb53d7d8b8/generations/d2236476-d02a-4d4c-8369-b1671b64ca6b/variations/alchemyrefiner_alchemymagic_3_d2236476-d02a-4d4c-8369-b1671b64ca6b_0.jpg?w=512',
           title:
             'A warm and vibrant image of a happy woman with a bright and radiant smile',
           prompt:
