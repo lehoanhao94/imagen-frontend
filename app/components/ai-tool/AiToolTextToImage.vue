@@ -31,12 +31,19 @@ const onGenerate = () => {
 
 <template>
   <div class="flex flex-col justify-center pt-30">
-    <div class="logo-container w-20 h-20 mx-auto">
+    <div
+      class="logo-container w-20 h-20 mx-auto animate__animated"
+      :class="{
+        animate__zoomInDown: !loading
+      }"
+    >
       <BaseLogo
         id="main-logo"
         :loading="loading"
-        :class="{ 'logo-loading animate__pulse': loading }"
-        class="animate__animated animate__infinite"
+        :class="{
+          'logo-loading animate__pulse animate__infinite': loading
+        }"
+        class="animate__animated"
       />
     </div>
     <Motion

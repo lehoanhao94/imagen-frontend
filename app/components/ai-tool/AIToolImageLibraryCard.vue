@@ -8,15 +8,18 @@ const props = defineProps({
   },
   imageUrl: {
     type: String,
-    default: 'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512'
+    default:
+      'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512'
   },
   title: {
     type: String,
-    default: 'A warm and vibrant image of a happy woman with a bright and radiant smile'
+    default:
+      'A warm and vibrant image of a happy woman with a bright and radiant smile'
   },
   prompt: {
     type: String,
-    default: 'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.'
+    default:
+      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.'
   },
   preset: {
     type: String,
@@ -38,7 +41,8 @@ const isTouchDevice = ref(false)
 
 // Check if it's a touch device on component mount
 onMounted(() => {
-  isTouchDevice.value = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+  isTouchDevice.value
+    = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 })
 
 const openFullScreen = () => {
@@ -81,8 +85,9 @@ const generateWithPrompt = () => {
       >
         <div class="flex justify-between items-start gap-2">
           <div
-            class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-100"
+            class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
             :class="{ 'translate-y-0 opacity-100': isHovered }"
+            @click.stop="openFullScreen"
           >
             {{ title }}
           </div>
@@ -132,7 +137,9 @@ const generateWithPrompt = () => {
         />
 
         <!-- Left side: Image -->
-        <div class="w-full md:w-2/3 lg:w-3/4 h-1/2 md:h-full flex items-center justify-center animate-fadeIn p-4">
+        <div
+          class="w-full md:w-2/3 lg:w-3/4 h-1/2 md:h-full flex items-center justify-center animate-fadeIn p-4"
+        >
           <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
           <img
             :src="imageUrl"
@@ -153,16 +160,16 @@ const generateWithPrompt = () => {
 
           <div class="text-white/80 mb-4 md:mb-6">
             <h3 class="text-white text-base md:text-lg font-medium mb-2">
-              {{ $t('promptDetails') }}
+              {{ $t("promptDetails") }}
             </h3>
-            <p class="text-xs md:text-sm mb-4 md:mb-6 max-h-24 md:max-h-36 overflow-y-auto">
+            <p class="text-xs md:text-sm mb-4 md:mb-6 overflow-y-auto bg-muted p-2 rounded-lg">
               {{ prompt }}
             </p>
 
             <div class="grid grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-6">
               <div>
                 <h4 class="text-white/60 text-xs uppercase mb-1">
-                  {{ $t('preset') }}
+                  {{ $t("preset") }}
                 </h4>
                 <p class="text-xs md:text-sm">
                   {{ preset }}
@@ -170,15 +177,15 @@ const generateWithPrompt = () => {
               </div>
               <div>
                 <h4 class="text-white/60 text-xs uppercase mb-1">
-                  {{ $t('style') }}
+                  {{ $t("style") }}
                 </h4>
                 <p class="text-xs md:text-sm">
-                  {{ style }}
+                  {{ props.style }}
                 </p>
               </div>
               <div>
                 <h4 class="text-white/60 text-xs uppercase mb-1">
-                  {{ $t('resolution') }}
+                  {{ $t("resolution") }}
                 </h4>
                 <p class="text-xs md:text-sm">
                   {{ resolution }}
@@ -198,8 +205,10 @@ const generateWithPrompt = () => {
           </div>
         </div>
 
-        <div class="absolute bottom-4 left-4 text-white/70 text-xs md:text-sm hidden md:block">
-          {{ $t('clickToClose') }}
+        <div
+          class="absolute bottom-4 left-4 text-white/70 text-xs md:text-sm hidden md:block"
+        >
+          {{ $t("clickToClose") }}
         </div>
       </div>
     </template>
