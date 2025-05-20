@@ -22,6 +22,7 @@ const aiPhotos = [
 ]
 
 const aiToolStore = useAIToolStore()
+const { textToImageResult, aiToolImageCardRef } = storeToRefs(aiToolStore)
 
 const onGenerate = () => {
   aiToolStore.textToImage()
@@ -30,13 +31,12 @@ const onGenerate = () => {
 
 <template>
   <div class="flex flex-col justify-center pt-30">
-    <div
-      class="logo-container w-30 h-30 mx-auto"
-    >
+    <div class="logo-container w-20 h-20 mx-auto">
       <BaseLogo
         id="main-logo"
         :loading="loading"
-        :class="{ 'logo-loading': loading }"
+        :class="{ 'logo-loading animate__pulse': loading }"
+        class="animate__animated animate__infinite"
       />
     </div>
     <Motion
@@ -83,7 +83,7 @@ const onGenerate = () => {
           <UChatPromptSubmit
             color="primary"
             label="Generate"
-            class="bg-gradient-to-r from-primary to-violet-400 max-h-10"
+            class="bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 cursor-pointer"
             icon="mingcute:ai-fill"
             :loading="loading"
           />
@@ -131,6 +131,27 @@ const onGenerate = () => {
           </UFormField>
         </div>
       </Motion>
+      <Motion
+        v-if="textToImageResult"
+        ref="aiToolImageCardRef"
+        :initial="{
+          scale: 1.1,
+          opacity: 0,
+          filter: 'blur(20px)'
+        }"
+        :animate="{
+          scale: 1,
+          opacity: 1,
+          filter: 'blur(0px)'
+        }"
+        :transition="{
+          duration: 0.6,
+          delay: 0.5
+        }"
+        class="mt-10"
+      >
+        <AIToolImageCard v-bind="textToImageResult" />
+      </Motion>
 
       <Motion
         :initial="{
@@ -144,7 +165,7 @@ const onGenerate = () => {
           filter: 'blur(0px)'
         }"
         :transition="{
-          duration: 0.6,
+          duration: 0.5,
           delay: 1
         }"
       >

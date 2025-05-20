@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'vi',
     langDir: 'locales/',
     lazy: true,
     strategy: 'no_prefix',
