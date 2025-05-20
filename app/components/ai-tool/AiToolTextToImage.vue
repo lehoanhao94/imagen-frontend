@@ -30,7 +30,6 @@ const onGenerate = () => {
 
 <template>
   <div class="flex flex-col justify-center pt-30">
-    {{ loading }}
     <Motion
       :initial="{
         scale: 1.1,
