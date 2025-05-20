@@ -94,5 +94,11 @@
     "invalidEmail": "Email không hợp lệ",
     "passwordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
     "nameRequired": "Tên là bắt buộc"
+  },
+
+  "imageSelect": {
+    "pleaseSelectImageFile": "Vui lòng chọn một tệp hình ảnh",
+    "selectedImage": "Hình ảnh đã chọn",
+    "removeImage": "Xóa hình ảnh"
   }
 }

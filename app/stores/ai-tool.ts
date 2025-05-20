@@ -4,7 +4,9 @@ import { defineStore } from 'pinia'
 export const useAIToolStore = defineStore('aiToolStore', {
   state: () => ({
     textToImageResult: null as any,
-    aiToolImageCardRef: null as any
+    aiToolImageCardRef: null as any,
+
+    selectedImages: [] as any[]
   }),
 
   actions: {
@@ -40,6 +42,21 @@ export const useAIToolStore = defineStore('aiToolStore', {
         })
       }, 3000)
       return true
+    },
+
+    addImage(image: any) {
+      // Check if image already exists in selectedImages
+      const exists = this.selectedImages.some(img => img.src === image.src)
+      if (!exists) {
+        this.selectedImages.push(image)
+      }
+    },
+
+    removeImage(imageSrc: string) {
+      const index = this.selectedImages.findIndex(img => img.src === imageSrc)
+      if (index !== -1) {
+        this.selectedImages.splice(index, 1)
+      }
     }
   }
 })

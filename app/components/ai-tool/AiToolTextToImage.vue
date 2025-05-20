@@ -108,9 +108,7 @@ const onGenerate = () => {
         }"
       >
         <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
-          <UFormField
-            :label="$t('modelPreset')"
-          >
+          <UFormField :label="$t('modelPreset')">
             <BaseModelSelect class="w-full" />
           </UFormField>
           <UFormField
@@ -125,12 +123,15 @@ const onGenerate = () => {
           >
             <BaseImageDimensionsSelect />
           </UFormField>
-          <UFormField
+          <div
             v-if="model.options.includes('yourImage')"
-            :label="$t('yourImage')"
+            class="flex flex-row gap-3 items-end"
           >
-            <BaseImageSelect />
-          </UFormField>
+            <UFormField :label="$t('yourImage')">
+              <BaseImageSelect />
+            </UFormField>
+            <BaseImageSelectedList />
+          </div>
         </div>
       </Motion>
       <Motion
