@@ -27,7 +27,8 @@ export default defineAppConfig({
     }
   },
   footer: {
-    credits: `Copyright © ${new Date().getFullYear()}, AI Image Creation`,
+    // Credits will be translated in the component using $t('copyright', { year: new Date().getFullYear() })
+    credits: '',
     colorMode: false,
     links: [
       {

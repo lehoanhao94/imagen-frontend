@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
   <div
-    class="fixed top-2 sm:top-4 mx-auto left-1/2 transform -translate-x-1/2 z-10"
+    class="fixed top-2 sm:top-4 mx-auto left-1/2 transform -translate-x-1/2 z-10 bg-neutral-50 dark:bg-neutral-900 rounded-full"
   >
     <UNavigationMenu
       :items="links"

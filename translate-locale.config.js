@@ -3,7 +3,7 @@ module.exports = {
     { code: 'en', name: 'english' },
     { code: 'ja', name: 'japanese' },
     { code: 'vi', name: 'vietnamese' },
-    { code: 'zh_cn', name: 'chinese (simplified)' }
+    { code: 'zh', name: 'chinese (simplified)' }
   ],
   localePath: './i18n/locales',
   delayTime: 1000,

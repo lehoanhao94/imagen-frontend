@@ -7,6 +7,6 @@
     size="sm"
     color="neutral"
     variant="outline"
-    :label="$t('Add Image')"
+    :label="$t('addImage')"
   />
 </template>

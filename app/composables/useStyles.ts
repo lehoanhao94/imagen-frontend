@@ -19,6 +19,7 @@ export function useStyles() {
     'Stock Photo',
     'Watercolor'
   ]
+
   return {
     styles,
     style

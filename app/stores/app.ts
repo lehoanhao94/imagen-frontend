@@ -10,5 +10,10 @@ export const useAppStore = defineStore('appStore', {
       pick: ['locale'],
       storage: localStorage
     }
-  ]
+  ],
+  getters: {
+    localeForI18n: (state: any) => {
+      return state.locale.replace('-', '_').toLowerCase()
+    }
+  }
 })

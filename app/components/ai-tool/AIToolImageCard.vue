@@ -2,6 +2,10 @@
 import { ref } from 'vue'
 
 defineProps({
+  orientation: {
+    type: String as () => 'horizontal' | 'vertical',
+    default: 'horizontal'
+  },
   imageUrl: {
     type: String,
     default: 'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512'
@@ -38,7 +42,7 @@ const openFullScreen = () => {
 <template>
   <UPageCard
     :title="title"
-    orientation="horizontal"
+    :orientation="orientation"
     spotlight
     spotlight-color="primary"
     :ui="{
@@ -54,7 +58,7 @@ const openFullScreen = () => {
     <template #description>
       <div class="text-xs mt-2">
         <div class="font-bold">
-          <div>{{ $t("Prompt defails") }}</div>
+          <div>{{ $t("promptDetails") }}</div>
         </div>
         <div class="font-light p-2 bg-muted mt-1 rounded-lg">
           {{ prompt }}
@@ -64,7 +68,7 @@ const openFullScreen = () => {
       <div class="mt-2 grid grid-cols-3">
         <div>
           <div class="text-[10px] font-light">
-            Preset
+            {{ $t("preset") }}
           </div>
           <div class="text-xs">
             {{ preset }}
@@ -72,7 +76,7 @@ const openFullScreen = () => {
         </div>
         <div>
           <div class="text-[10px] font-light">
-            Style
+            {{ $t("style") }}
           </div>
           <div class="text-xs">
             {{ style }}
@@ -80,7 +84,7 @@ const openFullScreen = () => {
         </div>
         <div>
           <div class="text-[10px] font-light">
-            Resolution
+            {{ $t("resolution") }}
           </div>
           <div class="text-xs">
             {{ resolution }}
@@ -89,7 +93,7 @@ const openFullScreen = () => {
       </div>
       <UChatPromptSubmit
         color="primary"
-        label="Generate with this prompt"
+        :label="$t('generateWithPrompt')"
         class="cursor-pointer mt-4 w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
         icon="mingcute:ai-fill"
       />
@@ -125,7 +129,7 @@ const openFullScreen = () => {
           @click="isFullScreenOpen = false"
         />
         <div class="absolute bottom-4 text-white/70 text-sm">
-          Click anywhere or press ESC to close
+          {{ $t('clickToClose') }}
         </div>
       </div>
     </template>

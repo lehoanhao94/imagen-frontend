@@ -6,29 +6,31 @@ definePageMeta({
   layout: 'auth'
 })
 
+const { t } = useI18n()
+
 useSeoMeta({
-  title: 'Login',
-  description: 'Login to your account to continue'
+  title: t('auth.login'),
+  description: t('auth.loginDescription')
 })
 
 const toast = useToast()
 
-const fields = [{
+const fields = computed(() => [{
   name: 'email',
   type: 'text' as const,
-  label: 'Email',
-  placeholder: 'Enter your email',
+  label: t('auth.email'),
+  placeholder: t('auth.enterEmail'),
   required: true
 }, {
   name: 'password',
-  label: 'Password',
+  label: t('auth.password'),
   type: 'password' as const,
-  placeholder: 'Enter your password'
+  placeholder: t('auth.enterPassword')
 }, {
   name: 'remember',
-  label: 'Remember me',
+  label: t('auth.rememberMe'),
   type: 'checkbox' as const
-}]
+}])
 
 const providers = [{
   label: 'Google',
@@ -45,8 +47,8 @@ const providers = [{
 }]
 
 const schema = z.object({
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Must be at least 8 characters')
+  email: z.string().email(t('validation.invalidEmail')),
+  password: z.string().min(8, t('validation.passwordMinLength'))
 })
 
 type Schema = z.output<typeof schema>
@@ -61,15 +63,14 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     :fields="fields"
     :schema="schema"
     :providers="providers"
-    title="Welcome back"
-    icon="i-lucide-lock"
+    :title="$t('auth.welcomeBack')"
     @submit="onSubmit"
   >
     <template #description>
-      Don't have an account? <ULink
+      {{ $t('auth.dontHaveAccount') }} <ULink
         to="/auth/signup"
         class="text-primary font-medium"
-      >Sign up</ULink>.
+      >{{ $t('auth.signUp') }}</ULink>.
     </template>
 
     <template #password-hint>
@@ -77,14 +78,14 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         to="/"
         class="text-primary font-medium"
         tabindex="-1"
-      >Forgot password?</ULink>
+      >{{ $t('auth.forgotPassword') }}</ULink>
     </template>
 
     <template #footer>
-      By signing in, you agree to our <ULink
+      {{ $t('auth.bySigningIn') }} <ULink
         to="/"
         class="text-primary font-medium"
-      >Terms of Service</ULink>.
+      >{{ $t('auth.termsOfService') }}</ULink>.
     </template>
   </UAuthForm>
 </template>

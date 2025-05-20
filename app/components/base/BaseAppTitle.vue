@@ -1,11 +1,15 @@
+<script setup lang="ts">
+// Using $t() directly in the template
+</script>
+
 <template>
   <div class="tilt-wrapper">
     <div class="hero w-fit mx-auto">
       <div
-        class="glow-text text-5xl text-gray-50 dark:text-white dark:opacity-75 opacity-100"
-        data-text="AI Image Creation"
+        class="glow-text lg:text-5xl text-3xl transition-all duration-300 text-gray-50 dark:text-white dark:opacity-75 opacity-100"
+        :data-text="$t('appTitle')"
       >
-        AI Image Creation
+        {{ $t('appTitle') }}
       </div>
     </div>
   </div>

@@ -41,17 +41,14 @@ export default defineNuxtConfig({
       }
     }
   },
-
   i18n: {
     defaultLocale: 'vi',
-    langDir: 'locales/',
-    lazy: true,
-    strategy: 'no_prefix',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'ja', name: '日本語', file: 'ja.json' },
       { code: 'vi', name: 'Tiếng Việt', file: 'vi.json' },
-      { code: 'zh_cn', name: '简体中文', file: 'zh_cn.json' }
-    ]
+      { code: 'zh_cn', name: '简体中文', file: 'zh.json' },
+      { code: 'ja', name: '日本語', file: 'ja.json' }
+    ],
+    strategy: 'no_prefix'
   }
 })

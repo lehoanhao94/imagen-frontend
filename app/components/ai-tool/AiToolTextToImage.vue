@@ -82,7 +82,7 @@ const onGenerate = () => {
         >
           <UChatPromptSubmit
             color="primary"
-            label="Generate"
+            :label="$t('generate')"
             class="bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 cursor-pointer"
             icon="mingcute:ai-fill"
             :loading="loading"
@@ -107,25 +107,27 @@ const onGenerate = () => {
           delay: 0.5
         }"
       >
-        <div class="flex items-center gap-3 mt-4">
-          <UFormField :label="$t('Model/Preset')">
-            <BaseModelSelect />
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
+          <UFormField
+            :label="$t('modelPreset')"
+          >
+            <BaseModelSelect class="w-full" />
           </UFormField>
           <UFormField
             v-if="model.options.includes('style')"
-            :label="$t('Style')"
+            :label="$t('style')"
           >
-            <BaseStyleSelect />
+            <BaseStyleSelect class="w-full" />
           </UFormField>
           <UFormField
             v-if="model.options.includes('imageDimensions')"
-            :label="$t('Image Dimensions')"
+            :label="$t('imageDimensions')"
           >
             <BaseImageDimensionsSelect />
           </UFormField>
           <UFormField
             v-if="model.options.includes('yourImage')"
-            :label="$t('Your Image')"
+            :label="$t('yourImage')"
           >
             <BaseImageSelect />
           </UFormField>

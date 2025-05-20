@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import * as locales from '@nuxt/ui-pro/locale'
+import { navLinks } from '~/utils/links'
 
 const appStore = useAppStore()
-const { locale } = storeToRefs(appStore)
-const { locale: i18nLocale, locales: i18nLocales } = useI18n()
+const { locale, localeForI18n } = storeToRefs(appStore)
+const { locale: i18nLocale, t } = useI18n()
+
+// Create a computed property for the translated navLinks
+const translatedNavLinks = computed(() => {
+  return navLinks.map(link => ({
+    ...link,
+    label: link.label ? t(`nav.${link.label.toLowerCase().replace(/\s+/g, '')}`) : ''
+  }))
+})
 
 const colorMode = useColorMode()
 
@@ -16,7 +25,8 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' }
   ],
   htmlAttrs: {
     lang: locale.value
@@ -24,7 +34,7 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt Portfolio Template',
+  titleTemplate: 'ImagenPro AI - %s',
   ogImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3BvcnRmb2xpby10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTc0NTkzNDczMX0.XDWnQoyVy3XVtKQD6PLQ8RFUwr4yr1QnVwPxRrjCrro.jpg?theme=light',
   twitterImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3BvcnRmb2xpby10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTc0NTkzNDczMX0.XDWnQoyVy3XVtKQD6PLQ8RFUwr4yr1QnVwPxRrjCrro.jpg?theme=light',
   twitterCard: 'summary_large_image'
@@ -59,7 +69,7 @@ watch(locale, (newLocale) => {
 </script>
 
 <template>
-  <UApp :locale="locales[locale as keyof typeof locales]">
+  <UApp :locale="locales[localeForI18n as keyof typeof locales]">
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />
@@ -71,7 +81,7 @@ watch(locale, (newLocale) => {
         :files="files"
         :navigation="navigation"
         shortcut="meta_k"
-        :links="navLinks"
+        :links="translatedNavLinks"
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>

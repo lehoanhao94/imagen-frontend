@@ -4,13 +4,13 @@
 @source "../../../content/**/*";
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: 'Be Vietnam Pro', 'Public Sans', sans-serif;
   --font-serif: 'Instrument Serif', serif;
 }
 
 :root {
   --ui-container: var(--container-4xl);
-
+  font-family: 'Be Vietnam Pro', 'Public Sans', sans-serif;
 
   ::selection {
     color: #282a30;
@@ -22,5 +22,52 @@
   ::selection {
     color: #ffffff;
     background-color: #474747;
+  }
+}
+
+
+.logo-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#main-logo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 100;
+  transform-origin: center center;
+  will-change: transform, top, left, position;
+}
+
+#main-logo.logo-loading {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%) scale(1.05);
+  z-index: 10000;
+  animation: pulse 2s infinite ease-in-out;
+  /* Ensure logo is visible */
+  opacity: 1 !important;
+  visibility: visible !important;
+  /* Add shadow for better visibility */
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
   }
 }

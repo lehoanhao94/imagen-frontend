@@ -6,29 +6,31 @@ definePageMeta({
   layout: 'auth'
 })
 
+const { t } = useI18n()
+
 useSeoMeta({
-  title: 'Sign up',
-  description: 'Create an account to get started'
+  title: t('auth.signUpTitle'),
+  description: t('auth.signUpDescription')
 })
 
 const toast = useToast()
 
-const fields = [{
+const fields = computed(() => [{
   name: 'name',
   type: 'text' as const,
-  label: 'Name',
-  placeholder: 'Enter your name'
+  label: t('auth.name'),
+  placeholder: t('auth.enterName')
 }, {
   name: 'email',
   type: 'text' as const,
-  label: 'Email',
-  placeholder: 'Enter your email'
+  label: t('auth.email'),
+  placeholder: t('auth.enterEmail')
 }, {
   name: 'password',
-  label: 'Password',
+  label: t('auth.password'),
   type: 'password' as const,
-  placeholder: 'Enter your password'
-}]
+  placeholder: t('auth.enterPassword')
+}])
 
 const providers = [{
   label: 'Google',
@@ -45,9 +47,9 @@ const providers = [{
 }]
 
 const schema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email'),
-  password: z.string().min(8, 'Must be at least 8 characters')
+  name: z.string().min(1, t('validation.nameRequired')),
+  email: z.string().email(t('validation.invalidEmail')),
+  password: z.string().min(8, t('validation.passwordMinLength'))
 })
 
 type Schema = z.output<typeof schema>
@@ -62,23 +64,22 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     :fields="fields"
     :schema="schema"
     :providers="providers"
-    title="Create an account"
-    icon="mdi:account-box-plus-outline"
-    :submit="{ label: 'Create account' }"
+    :title="$t('auth.createAccount')"
+    :submit="{ label: $t('auth.createAccount') }"
     @submit="onSubmit"
   >
     <template #description>
-      Already have an account? <ULink
+      {{ $t('auth.alreadyHaveAccount') }} <ULink
         to="/auth/login"
         class="text-primary font-medium"
-      >Login</ULink>.
+      >{{ $t('auth.login') }}</ULink>.
     </template>
 
     <template #footer>
-      By signing up, you agree to our <ULink
+      {{ $t('auth.bySigningUp') }} <ULink
         to="/"
         class="text-primary font-medium"
-      >Terms of Service</ULink>.
+      >{{ $t('auth.termsOfService') }}</ULink>.
     </template>
   </UAuthForm>
 </template>

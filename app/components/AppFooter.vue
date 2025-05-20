@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { en, vi, ja, zh_cn } from '@nuxt/ui/locale'
+import { storeToRefs } from 'pinia'
+import { watch } from 'vue'
 
 const appStore = useAppStore()
-const { locale } = storeToRefs(appStore)
+const { locale, localeForI18n } = storeToRefs(appStore)
 
 const { footer } = useAppConfig()
 
-const { locale: i18nLocale } = useI18n()
-
-watch(i18nLocale, (newLocale) => {
+const { locale: i18nLocale, setLocale } = useI18n()
+watch(i18nLocale, (newLocale: string) => {
   // zh-CN -> zh_cn
-  locale.value = newLocale.replace('-', '_').toLocaleLowerCase()
+  locale.value = newLocale
+  setLocale(localeForI18n.value)
 })
 </script>
 
@@ -22,7 +24,7 @@ watch(i18nLocale, (newLocale) => {
     <template #left>
       <div class="flex gap-2 items-center">
         <div>
-          {{ footer.credits }}
+          {{ $t('copyright', { year: new Date().getFullYear() }) }}
         </div>
       </div>
     </template>

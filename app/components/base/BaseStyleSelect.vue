@@ -1,11 +1,20 @@
 <script setup lang="ts">
 const { styles, style } = useStyles()
+const { t } = useI18n()
+
+const translatedStyles = computed(() => {
+  return styles.map(styleItem => ({
+    value: styleItem,
+    label: t(styleItem || 'none')
+  }))
+})
 </script>
 
 <template>
   <USelectMenu
     v-model="style"
-    :items="styles"
+    :items="translatedStyles"
+    value-key="value"
     size="sm"
     icon="ic:baseline-style"
     class="min-w-40 hover:bg-default focus:bg-default data-[state=open]:bg-default"

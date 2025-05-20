@@ -59,7 +59,7 @@ const formatDate = (dateString: Date) => {
           class="text-sm flex items-center gap-1"
         >
           <UIcon name="lucide:chevron-left" />
-          Blog
+          {{ $t('blog') }}
         </ULink>
         <div class="flex flex-col gap-3 mt-8">
           <div class="flex text-xs text-muted items-center justify-center gap-2">
@@ -70,7 +70,7 @@ const formatDate = (dateString: Date) => {
               -
             </span>
             <span v-if="page.minRead">
-              {{ page.minRead }} MIN READ
+              {{ page.minRead }} {{ $t('minRead') }}
             </span>
           </div>
           <NuxtImg
@@ -105,8 +105,8 @@ const formatDate = (dateString: Date) => {
               size="sm"
               variant="link"
               color="neutral"
-              label="Copy link"
-              @click="copyToClipboard(articleLink, 'Article link copied to clipboard')"
+              :label="$t('copyLink')"
+              @click="copyToClipboard(articleLink, $t('articleLinkCopied'))"
             />
           </div>
           <UContentSurround :surround />
