@@ -51,7 +51,7 @@ const openFullScreen = () => {
   >
     <img
       :src="imageUrl"
-      class="w-full imagen cursor-pointer hover:opacity-90 transition-opacity"
+      class="order-first lg:order-last w-full imagen cursor-pointer hover:opacity-90 transition-opacity"
       @click="openFullScreen"
     >
 
