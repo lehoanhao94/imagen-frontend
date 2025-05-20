@@ -5,6 +5,10 @@ const { model } = useLLM()
 
 const { footer, global } = useAppConfig()
 
+const appStore = useAppStore()
+
+const { loading } = storeToRefs(appStore)
+
 defineProps<{
   page: IndexCollectionItem
 }>()
@@ -16,10 +20,17 @@ const aiPhotos = [
   'https://cdn.leonardo.ai/users/818a38be-6136-4eba-9b0e-9ec156e41811/generations/b0ec8580-6a5a-4e6c-a203-cd7dfe27b9b1/Leonardo_Phoenix_10_A_large_reddishgolden_colored_cartoon_cat_3.jpg?w=512',
   'https://cdn.leonardo.ai/users/684d2cf2-484a-44d8-bf86-4fac5fe47a59/generations/78afd409-dccb-4508-b4bc-5c2b625171e9/Leonardo_Phoenix_10_A_pair_of_enchanting_fantasy_birds_perched_0.jpg?w=512'
 ]
+
+const aiToolStore = useAIToolStore()
+
+const onGenerate = () => {
+  aiToolStore.textToImage()
+}
 </script>
 
 <template>
   <div class="flex flex-col justify-center pt-30">
+    {{ loading }}
     <Motion
       :initial="{
         scale: 1.1,
@@ -36,7 +47,7 @@ const aiPhotos = [
         delay: 0.1
       }"
     >
-      <BaseLogo loading />
+      <BaseLogo :loading="loading" />
     </Motion>
     <Motion
       :initial="{
@@ -77,12 +88,14 @@ const aiPhotos = [
         class="[view-transition-name:chat-prompt] mt-15"
         variant="subtle"
         :placeholder="$t('Describe the image you want to generate...')"
+        @submit="onGenerate"
       >
         <UChatPromptSubmit
           color="primary"
           label="Generate"
           class="bg-gradient-to-r from-primary to-violet-400 max-h-10"
           icon="mingcute:ai-fill"
+          :loading="loading"
         />
 
         <template #footer />

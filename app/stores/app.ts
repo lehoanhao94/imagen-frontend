@@ -1,6 +1,14 @@
+import { defineStore } from 'pinia'
+
 export const useAppStore = defineStore('appStore', {
   state: () => ({
-    locale: 'en'
+    locale: 'en',
+    loading: false
   }),
-  persist: true
+  persist: [
+    {
+      pick: ['locale'],
+      storage: localStorage
+    }
+  ]
 })

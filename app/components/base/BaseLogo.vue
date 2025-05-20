@@ -5,39 +5,115 @@ const props = defineProps({
     default: false
   }
 })
+
+// Reference to the logo element
+const logoRef = ref<HTMLElement | null>(null)
+
+// Number of stars to display when loading
+const starCount = 30 // Increased for more continuous effect
 </script>
 
 <template>
-  <div class="circulate">
-    <div class="circle mx-auto border-2 dark:border-gray-400 w-24 h-24">
-      <div class="wave _one" />
-      <div class="wave _two" />
-      <div class="wave _three" />
-      <div class="reflection" />
+  <div
+    ref="logoRef"
+    class="circulate"
+    :class="{ 'loading-active': loading }"
+  >
+    <!-- Stars that fly out from the ball when loading is true -->
+    <div
+      v-if="loading"
+      class="stars-container"
+    >
+      <div
+        v-for="n in starCount"
+        :key="`star-${n}`"
+        class="star"
+        :class="`star-${(n % 12) + 1}`"
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <div
+      class="circle mx-auto border-2 dark:border-gray-400 w-24 h-24"
+      :class="{ 'loading-rotate': loading }"
+    >
+      <div
+        class="wave _one"
+        :class="{ 'loading-wave': loading }"
+      />
+      <div
+        class="wave _two"
+        :class="{ 'loading-wave': loading }"
+      />
+      <div
+        class="wave _three"
+        :class="{ 'loading-wave': loading }"
+      />
+      <div
+        class="reflection"
+        :class="{ 'loading-reflection': loading }"
+      />
 
       <!-- Image elements being processed inside the ball -->
-      <div class="image-element photo photo1" />
-      <div class="image-element photo photo2" />
-      <div class="image-element photo photo3" />
-      <div class="image-element photo photo4" />
+      <div
+        class="image-element photo photo1"
+        :class="{ 'loading-photo': loading }"
+      />
+      <div
+        class="image-element photo photo2"
+        :class="{ 'loading-photo': loading }"
+      />
+      <div
+        class="image-element photo photo3"
+        :class="{ 'loading-photo': loading }"
+      />
+      <div
+        class="image-element photo photo4"
+        :class="{ 'loading-photo': loading }"
+      />
 
       <!-- Particles to enhance the processing effect -->
-      <div class="particles">
+      <div
+        class="particles"
+        :class="{ 'loading-particles': loading }"
+      >
         <div
           v-for="n in 8"
           :key="n"
           class="particle"
-          :class="`p${n}`"
+          :class="[`p${n}`, { 'loading-particle': loading }]"
         />
       </div>
 
       <!-- Energy glow effect -->
-      <div class="energy-glow" />
+      <div
+        class="energy-glow"
+        :class="{ 'loading-glow': loading }"
+      />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+/* Define the gradient angle custom property */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0turn;
+  inherits: false;
+}
+
 .circulate .circle {
   border-radius: 100%;
   background: white;
@@ -59,7 +135,9 @@ const props = defineProps({
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
   /* Add depth with a subtle 3D transform */
   transform: perspective(800px) rotateX(10deg);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  /* Default border style */
+  border: 2px solid transparent;
 
   &:hover {
     transform: perspective(800px) rotateX(5deg) scale(1.40);
@@ -81,6 +159,27 @@ const props = defineProps({
     border-radius: 100%;
     z-index: 2;
     pointer-events: none;
+  }
+
+  /* Gradient border animation when loading */
+  &.loading-rotate {
+    animation: 2s gradient-angle infinite linear;
+    border: 2px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: linear-gradient(
+      135deg,
+      rgba(35, 52, 93, 0.9),
+      rgba(146, 22, 100, 0.9)
+    ),
+    conic-gradient(
+      from var(--gradient-angle),
+      #00cfff 0%,
+      #a600ff 25%,
+      #ff006e 50%,
+      #ff8800 75%,
+      #00cfff 100%
+    );
   }
 }
 
@@ -114,6 +213,19 @@ const props = defineProps({
   filter: blur(0.5px);
 }
 
+/* Faster wave rotation when loading */
+.circulate .wave.loading-wave {
+  animation-duration: 1.5s;
+}
+
+.circulate .wave._three.loading-wave {
+  animation-duration: 3s;
+}
+
+.circulate .wave._two.loading-wave {
+  animation-duration: 5s;
+}
+
 .circulate .box:after {
   content: "";
   display: block;
@@ -138,6 +250,15 @@ const props = defineProps({
   filter: blur(2px);
   animation: moveReflection 8s infinite ease-in-out;
   z-index: 3;
+}
+
+/* Enhanced reflection when loading */
+.circulate .reflection.loading-reflection {
+  background: rgba(255, 255, 255, 0.25);
+  animation-duration: 4s;
+  filter: blur(1.5px);
+  width: 35%;
+  height: 18%;
 }
 
 .circulate .title {
@@ -455,6 +576,523 @@ const props = defineProps({
     opacity: 0.4;
     filter: blur(6px);
     transform: scale(0.95);
+  }
+}
+
+/* Animation for the gradient border rotation */
+@keyframes gradient-angle {
+  to {
+    --gradient-angle: 1turn;
+  }
+}
+
+/* Stars styles and animations */
+.stars-container {
+  position: absolute; /* Changed from fixed to absolute to prevent scroll issues */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: visible; /* Allow stars to be visible outside container */
+}
+
+.star {
+  position: absolute;
+  opacity: 0;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+  animation: starFlyOut 1.5s ease-out infinite, twinkle 1.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+  transform-origin: center center;
+  /* Position all stars at the center of the logo initially */
+  top: 50%;
+  left: 50%;
+  /* Adjust for the star's size to truly center it */
+  transform: translate(-50%, -50%);
+}
+
+/* Different orbit paths for stars */
+.star-1, .star-5, .star-9 {
+  animation-name: starFlyOut1, twinkle;
+}
+
+.star-2, .star-6, .star-10 {
+  animation-name: starFlyOut2, twinkle;
+}
+
+.star-3, .star-7, .star-11 {
+  animation-name: starFlyOut3, twinkle;
+}
+
+.star-4, .star-8, .star-12 {
+  animation-name: starFlyOut4, twinkle;
+}
+
+/* Additional directions for more stars */
+.star:nth-child(12n+1) { animation-name: starFlyOut1, twinkle; animation-duration: 8s, 1.5s; }
+.star:nth-child(12n+2) { animation-name: starFlyOut2, twinkle; animation-duration: 9s, 1.5s; }
+.star:nth-child(12n+3) { animation-name: starFlyOut3, twinkle; animation-duration: 10s, 1.5s; }
+.star:nth-child(12n+4) { animation-name: starFlyOut4, twinkle; animation-duration: 11s, 1.5s; }
+.star:nth-child(12n+5) { animation-name: starFlyOut5, twinkle; animation-duration: 9s, 1.5s; }
+.star:nth-child(12n+6) { animation-name: starFlyOut6, twinkle; animation-duration: 10s, 1.5s; }
+.star:nth-child(12n+7) { animation-name: starFlyOut7, twinkle; animation-duration: 11s, 1.5s; }
+.star:nth-child(12n+8) { animation-name: starFlyOut8, twinkle; animation-duration: 12s, 1.5s; }
+.star:nth-child(12n+9) { animation-name: starFlyOut9, twinkle; animation-duration: 10s, 1.5s; }
+.star:nth-child(12n+10) { animation-name: starFlyOut10, twinkle; animation-duration: 11s, 1.5s; }
+.star:nth-child(12n+11) { animation-name: starFlyOut11, twinkle; animation-duration: 12s, 1.5s; }
+.star:nth-child(12n+12) { animation-name: starFlyOut12, twinkle; animation-duration: 13s, 1.5s; }
+
+.star svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Different colors for stars */
+.star-1, .star-5, .star-9 {
+  color: #ffde59; /* Yellow */
+}
+
+.star-2, .star-6, .star-10 {
+  color: #ff7eb6; /* Pink */
+}
+
+.star-3, .star-7, .star-11 {
+  color: #7ed7ff; /* Light blue */
+}
+
+.star-4, .star-8, .star-12 {
+  color: #b6ffce; /* Light green */
+}
+
+/* Timing and size for each star */
+.star-1 {
+  animation-delay: 0s;
+  width: 12px;
+  height: 12px;
+}
+
+.star-2 {
+  animation-delay: 0.1s;
+  width: 10px;
+  height: 10px;
+}
+
+.star-3 {
+  animation-delay: 0.2s;
+  width: 14px;
+  height: 14px;
+}
+
+.star-4 {
+  animation-delay: 0.3s;
+  width: 11px;
+  height: 11px;
+}
+
+.star-5 {
+  animation-delay: 0.4s;
+  width: 9px;
+  height: 9px;
+}
+
+.star-6 {
+  animation-delay: 0.5s;
+  width: 13px;
+  height: 13px;
+}
+
+.star-7 {
+  animation-delay: 0.6s;
+  width: 10px;
+  height: 10px;
+}
+
+.star-8 {
+  animation-delay: 0.7s;
+  width: 12px;
+  height: 12px;
+}
+
+.star-9 {
+  animation-delay: 0.8s;
+  width: 8px;
+  height: 8px;
+}
+
+.star-10 {
+  animation-delay: 0.9s;
+  width: 11px;
+  height: 11px;
+}
+
+.star-11 {
+  animation-delay: 1.0s;
+  width: 9px;
+  height: 9px;
+}
+
+.star-12 {
+  animation-delay: 1.1s;
+  width: 10px;
+  height: 10px;
+}
+
+/* Staggered delays for continuous effect */
+.star:nth-child(n+13):nth-child(-n+24) {
+  animation-delay: 1.2s;
+}
+
+.star:nth-child(n+25) {
+  animation-delay: 2.4s;
+}
+
+/* Base animation for stars flying out in circular paths */
+@keyframes starFlyOut1 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  5% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(45deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(calc(-50% + 30px), calc(-50% - 20px)) scale(1) rotate(90deg);
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  30% {
+    opacity: 0.9;
+    transform: translate(calc(-50% + 60px), calc(-50% - 30px)) scale(0.9) rotate(180deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  45% {
+    opacity: 0.8;
+    transform: translate(calc(-50% + 90px), calc(-50% - 20px)) scale(0.8) rotate(270deg);
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translate(calc(-50% + 120px), calc(-50% + 10px)) scale(0.7) rotate(360deg);
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  75% {
+    opacity: 0.6;
+    transform: translate(calc(-50% + 100px), calc(-50% + 40px)) scale(0.6) rotate(450deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  90% {
+    opacity: 0.5;
+    transform: translate(calc(-50% + 60px), calc(-50% + 60px)) scale(0.5) rotate(540deg);
+    filter: drop-shadow(0 0 1px currentColor);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translate(calc(-50% + 20px), calc(-50% + 40px)) scale(0.4) rotate(630deg);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut2 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  5% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(-45deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(calc(-50% - 30px), calc(-50% - 20px)) scale(1) rotate(-90deg);
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  30% {
+    opacity: 0.9;
+    transform: translate(calc(-50% - 60px), calc(-50% - 30px)) scale(0.9) rotate(-180deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  45% {
+    opacity: 0.8;
+    transform: translate(calc(-50% - 90px), calc(-50% - 20px)) scale(0.8) rotate(-270deg);
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translate(calc(-50% - 120px), calc(-50% + 10px)) scale(0.7) rotate(-360deg);
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  75% {
+    opacity: 0.6;
+    transform: translate(calc(-50% - 100px), calc(-50% + 40px)) scale(0.6) rotate(-450deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  90% {
+    opacity: 0.5;
+    transform: translate(calc(-50% - 60px), calc(-50% + 60px)) scale(0.5) rotate(-540deg);
+    filter: drop-shadow(0 0 1px currentColor);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translate(calc(-50% - 20px), calc(-50% + 40px)) scale(0.4) rotate(-630deg);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut3 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  5% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(30deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(calc(-50% + 40px), calc(-50%)) scale(1) rotate(60deg);
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  30% {
+    opacity: 0.9;
+    transform: translate(calc(-50% + 80px), calc(-50% + 10px)) scale(0.9) rotate(120deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  45% {
+    opacity: 0.8;
+    transform: translate(calc(-50% + 120px), calc(-50% + 20px)) scale(0.8) rotate(180deg);
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translate(calc(-50% + 100px), calc(-50% + 40px)) scale(0.7) rotate(240deg);
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  75% {
+    opacity: 0.6;
+    transform: translate(calc(-50% + 60px), calc(-50% + 60px)) scale(0.6) rotate(300deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  90% {
+    opacity: 0.5;
+    transform: translate(calc(-50% + 20px), calc(-50% + 40px)) scale(0.5) rotate(360deg);
+    filter: drop-shadow(0 0 1px currentColor);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translate(calc(-50% - 20px), calc(-50% + 20px)) scale(0.4) rotate(420deg);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut4 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  5% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(-30deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(calc(-50%), calc(-50% + 40px)) scale(1) rotate(-60deg);
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  30% {
+    opacity: 0.9;
+    transform: translate(calc(-50% - 10px), calc(-50% + 80px)) scale(0.9) rotate(-120deg);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  45% {
+    opacity: 0.8;
+    transform: translate(calc(-50% - 20px), calc(-50% + 120px)) scale(0.8) rotate(-180deg);
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translate(calc(-50% - 40px), calc(-50% + 100px)) scale(0.7) rotate(-240deg);
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  75% {
+    opacity: 0.6;
+    transform: translate(calc(-50% - 60px), calc(-50% + 60px)) scale(0.6) rotate(-300deg);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  90% {
+    opacity: 0.5;
+    transform: translate(calc(-50% - 40px), calc(-50% + 20px)) scale(0.5) rotate(-360deg);
+    filter: drop-shadow(0 0 1px currentColor);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translate(calc(-50% - 20px), calc(-50% - 20px)) scale(0.4) rotate(-420deg);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut5 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 150px), calc(-50%)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut6 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50%), calc(-50% - 150px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+/* Add a twinkling effect to stars */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+}
+
+@keyframes starFlyOut7 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 150px), calc(-50% + 150px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut8 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 150px), calc(-50% + 150px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut9 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 100px), calc(-50% - 100px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut10 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 100px), calc(-50% - 100px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut11 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + 100px), calc(-50% + 100px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
+  }
+}
+
+@keyframes starFlyOut12 {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    filter: drop-shadow(0 0 2px currentColor);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 100px), calc(-50% + 100px)) scale(0.8);
+    filter: drop-shadow(0 0 0px currentColor);
   }
 }
 </style>

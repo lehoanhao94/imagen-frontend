@@ -3,6 +3,7 @@ interface Star {
   x: number
   y: number
   size: number
+  id: string // Add unique ID for each star
 }
 
 const props = withDefaults(defineProps<{
@@ -22,13 +23,54 @@ const props = withDefaults(defineProps<{
 
 // Generate random star positions and sizes
 const generateStars = (count: number): Star[] => {
-  return Array.from({ length: count }, () => ({
+  return Array.from({ length: count }, (_, index) => ({
     x: Math.floor(Math.random() * 2000),
     y: Math.floor(Math.random() * 2000),
     size: typeof props.size === 'number'
       ? props.size
-      : Math.random() * (props.size.max - props.size.min) + props.size.min
+      : Math.random() * (props.size.max - props.size.min) + props.size.min,
+    id: `star-${Math.random().toString(36).substring(2, 9)}-${index}` // Add unique ID
   }))
+}
+
+// Generate stars at the edges of the screen for continuous flow effect
+const generateEdgeStars = (count: number): Star[] => {
+  return Array.from({ length: count }, (_, index) => {
+    // Determine which edge to place the star (0: top, 1: right, 2: bottom, 3: left)
+    const edge = Math.floor(Math.random() * 4)
+    let x, y
+
+    switch (edge) {
+      case 0: // top
+        x = Math.floor(Math.random() * 2000)
+        y = -20 // Just above the viewport
+        break
+      case 1: // right
+        x = 2020 // Just to the right of the viewport
+        y = Math.floor(Math.random() * 2000)
+        break
+      case 2: // bottom
+        x = Math.floor(Math.random() * 2000)
+        y = 2020 // Just below the viewport
+        break
+      case 3: // left
+        x = -20 // Just to the left of the viewport
+        y = Math.floor(Math.random() * 2000)
+        break
+      default:
+        x = Math.floor(Math.random() * 2000)
+        y = -20
+    }
+
+    return {
+      x,
+      y,
+      size: typeof props.size === 'number'
+        ? props.size
+        : Math.random() * (props.size.max - props.size.min) + props.size.min,
+      id: `edge-star-${Math.random().toString(36).substring(2, 9)}-${index}`
+    }
+  })
 }
 
 // Define speed configurations once
