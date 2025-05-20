@@ -8,9 +8,6 @@ const props = defineProps({
 
 // Reference to the logo element
 const logoRef = ref<HTMLElement | null>(null)
-
-// Number of stars to display when loading
-const starCount = 30 // Increased for more continuous effect
 </script>
 
 <template>
@@ -19,34 +16,8 @@ const starCount = 30 // Increased for more continuous effect
     class="circulate"
     :class="{ 'loading-active': loading }"
   >
-    <!-- Stars that fly out from the ball when loading is true -->
     <div
-      v-if="loading"
-      class="stars-container"
-    >
-      <div
-        v-for="n in starCount"
-        :key="`star-${n}`"
-        class="star"
-        :class="`star-${(n % 12) + 1}`"
-      >
-        <svg
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-    </div>
-
-    <div
-      class="circle mx-auto border-2 dark:border-gray-400 w-24 h-24"
+      class="circle border-2 dark:border-gray-400 w-24 h-24"
       :class="{ 'loading-rotate': loading }"
     >
       <div
@@ -114,6 +85,35 @@ const starCount = 30 // Increased for more continuous effect
   inherits: false;
 }
 
+.circulate {
+  position: relative;
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Loading state styles for the container */
+.circulate.loading-active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  z-index: 10001;
+  transform: none;
+}
+
 .circulate .circle {
   border-radius: 100%;
   background: white;
@@ -135,12 +135,13 @@ const starCount = 30 // Increased for more continuous effect
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
   /* Add depth with a subtle 3D transform */
   transform: perspective(800px) rotateX(10deg);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.5s ease, border-color 0.3s ease, width 0.5s ease,
+    height 0.5s ease;
   /* Default border style */
   border: 2px solid transparent;
 
   &:hover {
-    transform: perspective(800px) rotateX(5deg) scale(1.40);
+    transform: perspective(800px) rotateX(5deg) scale(1.4);
   }
 
   &::before {
@@ -168,18 +169,22 @@ const starCount = 30 // Increased for more continuous effect
     background-clip: padding-box, border-box;
     background-origin: padding-box, border-box;
     background-image: linear-gradient(
-      135deg,
-      rgba(35, 52, 93, 0.9),
-      rgba(146, 22, 100, 0.9)
-    ),
-    conic-gradient(
-      from var(--gradient-angle),
-      #00cfff 0%,
-      #a600ff 25%,
-      #ff006e 50%,
-      #ff8800 75%,
-      #00cfff 100%
-    );
+        135deg,
+        rgba(35, 52, 93, 0.9),
+        rgba(146, 22, 100, 0.9)
+      ),
+      conic-gradient(
+        from var(--gradient-angle),
+        #00cfff 0%,
+        #a600ff 25%,
+        #ff006e 50%,
+        #ff8800 75%,
+        #00cfff 100%
+      );
+    /* Increase size slightly when loading */
+    width: 7rem !important;
+    height: 7rem !important;
+    transform: perspective(800px) rotateX(10deg) scale(1.1);
   }
 }
 
@@ -583,516 +588,6 @@ const starCount = 30 // Increased for more continuous effect
 @keyframes gradient-angle {
   to {
     --gradient-angle: 1turn;
-  }
-}
-
-/* Stars styles and animations */
-.stars-container {
-  position: absolute; /* Changed from fixed to absolute to prevent scroll issues */
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  pointer-events: none;
-  overflow: visible; /* Allow stars to be visible outside container */
-}
-
-.star {
-  position: absolute;
-  opacity: 0;
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
-  animation: starFlyOut 1s ease-out infinite, twinkle 1s ease-in-out infinite; /* Faster animation */
-  animation-fill-mode: forwards;
-  transform-origin: center center;
-  /* Position all stars at the center of the logo initially */
-  top: 50%;
-  left: 50%;
-  /* Adjust for the star's size to truly center it */
-  transform: translate(-50%, -50%);
-}
-
-/* Different orbit paths for stars */
-.star-1, .star-5, .star-9 {
-  animation-name: starFlyOut1, twinkle;
-}
-
-.star-2, .star-6, .star-10 {
-  animation-name: starFlyOut2, twinkle;
-}
-
-.star-3, .star-7, .star-11 {
-  animation-name: starFlyOut3, twinkle;
-}
-
-.star-4, .star-8, .star-12 {
-  animation-name: starFlyOut4, twinkle;
-}
-
-/* Additional directions for more stars - with faster durations */
-.star:nth-child(12n+1) { animation-name: starFlyOut1, twinkle; animation-duration: 4s, 1s; } /* Reduced from 8s to 4s */
-.star:nth-child(12n+2) { animation-name: starFlyOut2, twinkle; animation-duration: 4.5s, 1s; } /* Reduced from 9s to 4.5s */
-.star:nth-child(12n+3) { animation-name: starFlyOut3, twinkle; animation-duration: 5s, 1s; } /* Reduced from 10s to 5s */
-.star:nth-child(12n+4) { animation-name: starFlyOut4, twinkle; animation-duration: 5.5s, 1s; } /* Reduced from 11s to 5.5s */
-.star:nth-child(12n+5) { animation-name: starFlyOut5, twinkle; animation-duration: 4.5s, 1s; } /* Reduced from 9s to 4.5s */
-.star:nth-child(12n+6) { animation-name: starFlyOut6, twinkle; animation-duration: 5s, 1s; } /* Reduced from 10s to 5s */
-.star:nth-child(12n+7) { animation-name: starFlyOut7, twinkle; animation-duration: 5.5s, 1s; } /* Reduced from 11s to 5.5s */
-.star:nth-child(12n+8) { animation-name: starFlyOut8, twinkle; animation-duration: 6s, 1s; } /* Reduced from 12s to 6s */
-.star:nth-child(12n+9) { animation-name: starFlyOut9, twinkle; animation-duration: 5s, 1s; } /* Reduced from 10s to 5s */
-.star:nth-child(12n+10) { animation-name: starFlyOut10, twinkle; animation-duration: 5.5s, 1s; } /* Reduced from 11s to 5.5s */
-.star:nth-child(12n+11) { animation-name: starFlyOut11, twinkle; animation-duration: 6s, 1s; } /* Reduced from 12s to 6s */
-.star:nth-child(12n+12) { animation-name: starFlyOut12, twinkle; animation-duration: 6.5s, 1s; } /* Reduced from 13s to 6.5s */
-
-.star svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Different colors for stars */
-.star-1, .star-5, .star-9 {
-  color: #ffde59; /* Yellow */
-}
-
-.star-2, .star-6, .star-10 {
-  color: #ff7eb6; /* Pink */
-}
-
-.star-3, .star-7, .star-11 {
-  color: #7ed7ff; /* Light blue */
-}
-
-.star-4, .star-8, .star-12 {
-  color: #b6ffce; /* Light green */
-}
-
-/* Timing and size for each star - reduced delays for faster appearance */
-.star-1 {
-  animation-delay: 0s;
-  width: 12px;
-  height: 12px;
-}
-
-.star-2 {
-  animation-delay: 0.05s; /* Reduced from 0.1s */
-  width: 10px;
-  height: 10px;
-}
-
-.star-3 {
-  animation-delay: 0.1s; /* Reduced from 0.2s */
-  width: 14px;
-  height: 14px;
-}
-
-.star-4 {
-  animation-delay: 0.15s; /* Reduced from 0.3s */
-  width: 11px;
-  height: 11px;
-}
-
-.star-5 {
-  animation-delay: 0.2s; /* Reduced from 0.4s */
-  width: 9px;
-  height: 9px;
-}
-
-.star-6 {
-  animation-delay: 0.25s; /* Reduced from 0.5s */
-  width: 13px;
-  height: 13px;
-}
-
-.star-7 {
-  animation-delay: 0.3s; /* Reduced from 0.6s */
-  width: 10px;
-  height: 10px;
-}
-
-.star-8 {
-  animation-delay: 0.35s; /* Reduced from 0.7s */
-  width: 12px;
-  height: 12px;
-}
-
-.star-9 {
-  animation-delay: 0.4s; /* Reduced from 0.8s */
-  width: 8px;
-  height: 8px;
-}
-
-.star-10 {
-  animation-delay: 0.45s; /* Reduced from 0.9s */
-  width: 11px;
-  height: 11px;
-}
-
-.star-11 {
-  animation-delay: 0.5s; /* Reduced from 1.0s */
-  width: 9px;
-  height: 9px;
-}
-
-.star-12 {
-  animation-delay: 0.55s; /* Reduced from 1.1s */
-  width: 10px;
-  height: 10px;
-}
-
-/* Staggered delays for continuous effect - reduced for faster appearance */
-.star:nth-child(n+13):nth-child(-n+24) {
-  animation-delay: 0.6s; /* Reduced from 1.2s */
-}
-
-.star:nth-child(n+25) {
-  animation-delay: 1.2s; /* Reduced from 2.4s */
-}
-
-/* Base animation for stars flying out in circular paths - faster and further */
-@keyframes starFlyOut1 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  3% { /* Reduced from 5% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(45deg);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  10% { /* Reduced from 15% - faster movement */
-    opacity: 1;
-    transform: translate(calc(-50% + 40px), calc(-50% - 30px)) scale(1) rotate(90deg); /* Increased distance */
-    filter: drop-shadow(0 0 6px currentColor);
-  }
-  20% { /* Reduced from 30% - faster movement */
-    opacity: 0.9;
-    transform: translate(calc(-50% + 80px), calc(-50% - 50px)) scale(0.9) rotate(180deg); /* Increased distance */
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  35% { /* Reduced from 45% - faster movement */
-    opacity: 0.8;
-    transform: translate(calc(-50% + 120px), calc(-50% - 30px)) scale(0.8) rotate(270deg); /* Increased distance */
-    filter: drop-shadow(0 0 4px currentColor);
-  }
-  50% { /* Reduced from 60% - faster movement */
-    opacity: 0.7;
-    transform: translate(calc(-50% + 160px), calc(-50% + 20px)) scale(0.7) rotate(360deg); /* Increased distance */
-    filter: drop-shadow(0 0 3px currentColor);
-  }
-  65% { /* Reduced from 75% - faster movement */
-    opacity: 0.6;
-    transform: translate(calc(-50% + 140px), calc(-50% + 60px)) scale(0.6) rotate(450deg); /* Increased distance */
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  80% { /* Reduced from 90% - faster movement */
-    opacity: 0.5;
-    transform: translate(calc(-50% + 100px), calc(-50% + 100px)) scale(0.5) rotate(540deg); /* Increased distance */
-    filter: drop-shadow(0 0 1px currentColor);
-  }
-  100% {
-    opacity: 0.4;
-    transform: translate(calc(-50% + 40px), calc(-50% + 80px)) scale(0.4) rotate(630deg); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut2 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  3% { /* Reduced from 5% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(-45deg);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  10% { /* Reduced from 15% - faster movement */
-    opacity: 1;
-    transform: translate(calc(-50% - 40px), calc(-50% - 30px)) scale(1) rotate(-90deg); /* Increased distance */
-    filter: drop-shadow(0 0 6px currentColor);
-  }
-  20% { /* Reduced from 30% - faster movement */
-    opacity: 0.9;
-    transform: translate(calc(-50% - 80px), calc(-50% - 50px)) scale(0.9) rotate(-180deg); /* Increased distance */
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  35% { /* Reduced from 45% - faster movement */
-    opacity: 0.8;
-    transform: translate(calc(-50% - 120px), calc(-50% - 30px)) scale(0.8) rotate(-270deg); /* Increased distance */
-    filter: drop-shadow(0 0 4px currentColor);
-  }
-  50% { /* Reduced from 60% - faster movement */
-    opacity: 0.7;
-    transform: translate(calc(-50% - 160px), calc(-50% + 20px)) scale(0.7) rotate(-360deg); /* Increased distance */
-    filter: drop-shadow(0 0 3px currentColor);
-  }
-  65% { /* Reduced from 75% - faster movement */
-    opacity: 0.6;
-    transform: translate(calc(-50% - 140px), calc(-50% + 60px)) scale(0.6) rotate(-450deg); /* Increased distance */
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  80% { /* Reduced from 90% - faster movement */
-    opacity: 0.5;
-    transform: translate(calc(-50% - 100px), calc(-50% + 100px)) scale(0.5) rotate(-540deg); /* Increased distance */
-    filter: drop-shadow(0 0 1px currentColor);
-  }
-  100% {
-    opacity: 0.4;
-    transform: translate(calc(-50% - 40px), calc(-50% + 80px)) scale(0.4) rotate(-630deg); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut3 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  3% { /* Reduced from 5% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(30deg);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  10% { /* Reduced from 15% - faster movement */
-    opacity: 1;
-    transform: translate(calc(-50% + 50px), calc(-50%)) scale(1) rotate(60deg); /* Increased distance */
-    filter: drop-shadow(0 0 6px currentColor);
-  }
-  20% { /* Reduced from 30% - faster movement */
-    opacity: 0.9;
-    transform: translate(calc(-50% + 100px), calc(-50% + 15px)) scale(0.9) rotate(120deg); /* Increased distance */
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  35% { /* Reduced from 45% - faster movement */
-    opacity: 0.8;
-    transform: translate(calc(-50% + 150px), calc(-50% + 30px)) scale(0.8) rotate(180deg); /* Increased distance */
-    filter: drop-shadow(0 0 4px currentColor);
-  }
-  50% { /* Reduced from 60% - faster movement */
-    opacity: 0.7;
-    transform: translate(calc(-50% + 130px), calc(-50% + 60px)) scale(0.7) rotate(240deg); /* Increased distance */
-    filter: drop-shadow(0 0 3px currentColor);
-  }
-  65% { /* Reduced from 75% - faster movement */
-    opacity: 0.6;
-    transform: translate(calc(-50% + 90px), calc(-50% + 90px)) scale(0.6) rotate(300deg); /* Increased distance */
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  80% { /* Reduced from 90% - faster movement */
-    opacity: 0.5;
-    transform: translate(calc(-50% + 40px), calc(-50% + 70px)) scale(0.5) rotate(360deg); /* Increased distance */
-    filter: drop-shadow(0 0 1px currentColor);
-  }
-  100% {
-    opacity: 0.4;
-    transform: translate(calc(-50% - 30px), calc(-50% + 40px)) scale(0.4) rotate(420deg); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut4 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  3% { /* Reduced from 5% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(-30deg);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  10% { /* Reduced from 15% - faster movement */
-    opacity: 1;
-    transform: translate(calc(-50%), calc(-50% + 50px)) scale(1) rotate(-60deg); /* Increased distance */
-    filter: drop-shadow(0 0 6px currentColor);
-  }
-  20% { /* Reduced from 30% - faster movement */
-    opacity: 0.9;
-    transform: translate(calc(-50% - 15px), calc(-50% + 100px)) scale(0.9) rotate(-120deg); /* Increased distance */
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  35% { /* Reduced from 45% - faster movement */
-    opacity: 0.8;
-    transform: translate(calc(-50% - 30px), calc(-50% + 150px)) scale(0.8) rotate(-180deg); /* Increased distance */
-    filter: drop-shadow(0 0 4px currentColor);
-  }
-  50% { /* Reduced from 60% - faster movement */
-    opacity: 0.7;
-    transform: translate(calc(-50% - 60px), calc(-50% + 130px)) scale(0.7) rotate(-240deg); /* Increased distance */
-    filter: drop-shadow(0 0 3px currentColor);
-  }
-  65% { /* Reduced from 75% - faster movement */
-    opacity: 0.6;
-    transform: translate(calc(-50% - 90px), calc(-50% + 90px)) scale(0.6) rotate(-300deg); /* Increased distance */
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  80% { /* Reduced from 90% - faster movement */
-    opacity: 0.5;
-    transform: translate(calc(-50% - 70px), calc(-50% + 40px)) scale(0.5) rotate(-360deg); /* Increased distance */
-    filter: drop-shadow(0 0 1px currentColor);
-  }
-  100% {
-    opacity: 0.4;
-    transform: translate(calc(-50% - 40px), calc(-50% - 30px)) scale(0.4) rotate(-420deg); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut5 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 200px), calc(-50%)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut6 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50%), calc(-50% - 200px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-/* Add a twinkling effect to stars - faster and brighter */
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.7;
-    filter: drop-shadow(0 0 3px currentColor);
-  }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 10px currentColor); /* Increased glow */
-  }
-}
-
-@keyframes starFlyOut7 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 200px), calc(-50% + 200px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut8 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 200px), calc(-50% + 200px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut9 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 180px), calc(-50% - 180px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut10 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 180px), calc(-50% - 180px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut11 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% + 180px), calc(-50% + 180px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
-  }
-}
-
-@keyframes starFlyOut12 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.1);
-    filter: drop-shadow(0 0 2px currentColor);
-  }
-  5% { /* Reduced from 10% - faster initial appearance */
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    filter: drop-shadow(0 0 5px currentColor);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(calc(-50% - 180px), calc(-50% + 180px)) scale(0.8); /* Increased distance */
-    filter: drop-shadow(0 0 0px currentColor);
   }
 }
 </style>

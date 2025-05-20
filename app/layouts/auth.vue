@@ -16,5 +16,6 @@
       <slot />
     </UPageCard>
     <LazyLayoutStarBg />
+    <BaseLoadingOverlay />
   </div>
 </template>

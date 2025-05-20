@@ -63,5 +63,6 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
     </ClientOnly>
 
     <UToaster />
+    <BaseLoadingOverlay />
   </div>
 </template>

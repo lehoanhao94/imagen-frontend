@@ -1,13 +1,15 @@
 <script setup lang="ts">
+// No need to import app store here as BaseLoadingOverlay handles the loading state
 </script>
 
 <template>
-  <div>
-    <UContainer class="">
+  <div class="">
+    <div>
       <AppHeader :links="navLinks" />
       <slot />
       <AppFooter />
-    </UContainer>
+    </div>
     <LazyLayoutStarBg />
+    <BaseLoadingOverlay />
   </div>
 </template>
