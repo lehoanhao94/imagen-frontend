@@ -602,7 +602,7 @@ const starCount = 30 // Increased for more continuous effect
   position: absolute;
   opacity: 0;
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
-  animation: starFlyOut 1.5s ease-out infinite, twinkle 1.5s ease-in-out infinite;
+  animation: starFlyOut 1s ease-out infinite, twinkle 1s ease-in-out infinite; /* Faster animation */
   animation-fill-mode: forwards;
   transform-origin: center center;
   /* Position all stars at the center of the logo initially */
@@ -629,19 +629,19 @@ const starCount = 30 // Increased for more continuous effect
   animation-name: starFlyOut4, twinkle;
 }
 
-/* Additional directions for more stars */
-.star:nth-child(12n+1) { animation-name: starFlyOut1, twinkle; animation-duration: 8s, 1.5s; }
-.star:nth-child(12n+2) { animation-name: starFlyOut2, twinkle; animation-duration: 9s, 1.5s; }
-.star:nth-child(12n+3) { animation-name: starFlyOut3, twinkle; animation-duration: 10s, 1.5s; }
-.star:nth-child(12n+4) { animation-name: starFlyOut4, twinkle; animation-duration: 11s, 1.5s; }
-.star:nth-child(12n+5) { animation-name: starFlyOut5, twinkle; animation-duration: 9s, 1.5s; }
-.star:nth-child(12n+6) { animation-name: starFlyOut6, twinkle; animation-duration: 10s, 1.5s; }
-.star:nth-child(12n+7) { animation-name: starFlyOut7, twinkle; animation-duration: 11s, 1.5s; }
-.star:nth-child(12n+8) { animation-name: starFlyOut8, twinkle; animation-duration: 12s, 1.5s; }
-.star:nth-child(12n+9) { animation-name: starFlyOut9, twinkle; animation-duration: 10s, 1.5s; }
-.star:nth-child(12n+10) { animation-name: starFlyOut10, twinkle; animation-duration: 11s, 1.5s; }
-.star:nth-child(12n+11) { animation-name: starFlyOut11, twinkle; animation-duration: 12s, 1.5s; }
-.star:nth-child(12n+12) { animation-name: starFlyOut12, twinkle; animation-duration: 13s, 1.5s; }
+/* Additional directions for more stars - with faster durations */
+.star:nth-child(12n+1) { animation-name: starFlyOut1, twinkle; animation-duration: 4s, 1s; } /* Reduced from 8s to 4s */
+.star:nth-child(12n+2) { animation-name: starFlyOut2, twinkle; animation-duration: 4.5s, 1s; } /* Reduced from 9s to 4.5s */
+.star:nth-child(12n+3) { animation-name: starFlyOut3, twinkle; animation-duration: 5s, 1s; } /* Reduced from 10s to 5s */
+.star:nth-child(12n+4) { animation-name: starFlyOut4, twinkle; animation-duration: 5.5s, 1s; } /* Reduced from 11s to 5.5s */
+.star:nth-child(12n+5) { animation-name: starFlyOut5, twinkle; animation-duration: 4.5s, 1s; } /* Reduced from 9s to 4.5s */
+.star:nth-child(12n+6) { animation-name: starFlyOut6, twinkle; animation-duration: 5s, 1s; } /* Reduced from 10s to 5s */
+.star:nth-child(12n+7) { animation-name: starFlyOut7, twinkle; animation-duration: 5.5s, 1s; } /* Reduced from 11s to 5.5s */
+.star:nth-child(12n+8) { animation-name: starFlyOut8, twinkle; animation-duration: 6s, 1s; } /* Reduced from 12s to 6s */
+.star:nth-child(12n+9) { animation-name: starFlyOut9, twinkle; animation-duration: 5s, 1s; } /* Reduced from 10s to 5s */
+.star:nth-child(12n+10) { animation-name: starFlyOut10, twinkle; animation-duration: 5.5s, 1s; } /* Reduced from 11s to 5.5s */
+.star:nth-child(12n+11) { animation-name: starFlyOut11, twinkle; animation-duration: 6s, 1s; } /* Reduced from 12s to 6s */
+.star:nth-child(12n+12) { animation-name: starFlyOut12, twinkle; animation-duration: 6.5s, 1s; } /* Reduced from 13s to 6.5s */
 
 .star svg {
   width: 100%;
@@ -665,7 +665,7 @@ const starCount = 30 // Increased for more continuous effect
   color: #b6ffce; /* Light green */
 }
 
-/* Timing and size for each star */
+/* Timing and size for each star - reduced delays for faster appearance */
 .star-1 {
   animation-delay: 0s;
   width: 12px;
@@ -673,125 +673,125 @@ const starCount = 30 // Increased for more continuous effect
 }
 
 .star-2 {
-  animation-delay: 0.1s;
+  animation-delay: 0.05s; /* Reduced from 0.1s */
   width: 10px;
   height: 10px;
 }
 
 .star-3 {
-  animation-delay: 0.2s;
+  animation-delay: 0.1s; /* Reduced from 0.2s */
   width: 14px;
   height: 14px;
 }
 
 .star-4 {
-  animation-delay: 0.3s;
+  animation-delay: 0.15s; /* Reduced from 0.3s */
   width: 11px;
   height: 11px;
 }
 
 .star-5 {
-  animation-delay: 0.4s;
+  animation-delay: 0.2s; /* Reduced from 0.4s */
   width: 9px;
   height: 9px;
 }
 
 .star-6 {
-  animation-delay: 0.5s;
+  animation-delay: 0.25s; /* Reduced from 0.5s */
   width: 13px;
   height: 13px;
 }
 
 .star-7 {
-  animation-delay: 0.6s;
+  animation-delay: 0.3s; /* Reduced from 0.6s */
   width: 10px;
   height: 10px;
 }
 
 .star-8 {
-  animation-delay: 0.7s;
+  animation-delay: 0.35s; /* Reduced from 0.7s */
   width: 12px;
   height: 12px;
 }
 
 .star-9 {
-  animation-delay: 0.8s;
+  animation-delay: 0.4s; /* Reduced from 0.8s */
   width: 8px;
   height: 8px;
 }
 
 .star-10 {
-  animation-delay: 0.9s;
+  animation-delay: 0.45s; /* Reduced from 0.9s */
   width: 11px;
   height: 11px;
 }
 
 .star-11 {
-  animation-delay: 1.0s;
+  animation-delay: 0.5s; /* Reduced from 1.0s */
   width: 9px;
   height: 9px;
 }
 
 .star-12 {
-  animation-delay: 1.1s;
+  animation-delay: 0.55s; /* Reduced from 1.1s */
   width: 10px;
   height: 10px;
 }
 
-/* Staggered delays for continuous effect */
+/* Staggered delays for continuous effect - reduced for faster appearance */
 .star:nth-child(n+13):nth-child(-n+24) {
-  animation-delay: 1.2s;
+  animation-delay: 0.6s; /* Reduced from 1.2s */
 }
 
 .star:nth-child(n+25) {
-  animation-delay: 2.4s;
+  animation-delay: 1.2s; /* Reduced from 2.4s */
 }
 
-/* Base animation for stars flying out in circular paths */
+/* Base animation for stars flying out in circular paths - faster and further */
 @keyframes starFlyOut1 {
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  5% {
+  3% { /* Reduced from 5% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1) rotate(45deg);
     filter: drop-shadow(0 0 5px currentColor);
   }
-  15% {
+  10% { /* Reduced from 15% - faster movement */
     opacity: 1;
-    transform: translate(calc(-50% + 30px), calc(-50% - 20px)) scale(1) rotate(90deg);
+    transform: translate(calc(-50% + 40px), calc(-50% - 30px)) scale(1) rotate(90deg); /* Increased distance */
     filter: drop-shadow(0 0 6px currentColor);
   }
-  30% {
+  20% { /* Reduced from 30% - faster movement */
     opacity: 0.9;
-    transform: translate(calc(-50% + 60px), calc(-50% - 30px)) scale(0.9) rotate(180deg);
+    transform: translate(calc(-50% + 80px), calc(-50% - 50px)) scale(0.9) rotate(180deg); /* Increased distance */
     filter: drop-shadow(0 0 5px currentColor);
   }
-  45% {
+  35% { /* Reduced from 45% - faster movement */
     opacity: 0.8;
-    transform: translate(calc(-50% + 90px), calc(-50% - 20px)) scale(0.8) rotate(270deg);
+    transform: translate(calc(-50% + 120px), calc(-50% - 30px)) scale(0.8) rotate(270deg); /* Increased distance */
     filter: drop-shadow(0 0 4px currentColor);
   }
-  60% {
+  50% { /* Reduced from 60% - faster movement */
     opacity: 0.7;
-    transform: translate(calc(-50% + 120px), calc(-50% + 10px)) scale(0.7) rotate(360deg);
+    transform: translate(calc(-50% + 160px), calc(-50% + 20px)) scale(0.7) rotate(360deg); /* Increased distance */
     filter: drop-shadow(0 0 3px currentColor);
   }
-  75% {
+  65% { /* Reduced from 75% - faster movement */
     opacity: 0.6;
-    transform: translate(calc(-50% + 100px), calc(-50% + 40px)) scale(0.6) rotate(450deg);
+    transform: translate(calc(-50% + 140px), calc(-50% + 60px)) scale(0.6) rotate(450deg); /* Increased distance */
     filter: drop-shadow(0 0 2px currentColor);
   }
-  90% {
+  80% { /* Reduced from 90% - faster movement */
     opacity: 0.5;
-    transform: translate(calc(-50% + 60px), calc(-50% + 60px)) scale(0.5) rotate(540deg);
+    transform: translate(calc(-50% + 100px), calc(-50% + 100px)) scale(0.5) rotate(540deg); /* Increased distance */
     filter: drop-shadow(0 0 1px currentColor);
   }
   100% {
     opacity: 0.4;
-    transform: translate(calc(-50% + 20px), calc(-50% + 40px)) scale(0.4) rotate(630deg);
+    transform: translate(calc(-50% + 40px), calc(-50% + 80px)) scale(0.4) rotate(630deg); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -802,44 +802,44 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  5% {
+  3% { /* Reduced from 5% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1) rotate(-45deg);
     filter: drop-shadow(0 0 5px currentColor);
   }
-  15% {
+  10% { /* Reduced from 15% - faster movement */
     opacity: 1;
-    transform: translate(calc(-50% - 30px), calc(-50% - 20px)) scale(1) rotate(-90deg);
+    transform: translate(calc(-50% - 40px), calc(-50% - 30px)) scale(1) rotate(-90deg); /* Increased distance */
     filter: drop-shadow(0 0 6px currentColor);
   }
-  30% {
+  20% { /* Reduced from 30% - faster movement */
     opacity: 0.9;
-    transform: translate(calc(-50% - 60px), calc(-50% - 30px)) scale(0.9) rotate(-180deg);
+    transform: translate(calc(-50% - 80px), calc(-50% - 50px)) scale(0.9) rotate(-180deg); /* Increased distance */
     filter: drop-shadow(0 0 5px currentColor);
   }
-  45% {
+  35% { /* Reduced from 45% - faster movement */
     opacity: 0.8;
-    transform: translate(calc(-50% - 90px), calc(-50% - 20px)) scale(0.8) rotate(-270deg);
+    transform: translate(calc(-50% - 120px), calc(-50% - 30px)) scale(0.8) rotate(-270deg); /* Increased distance */
     filter: drop-shadow(0 0 4px currentColor);
   }
-  60% {
+  50% { /* Reduced from 60% - faster movement */
     opacity: 0.7;
-    transform: translate(calc(-50% - 120px), calc(-50% + 10px)) scale(0.7) rotate(-360deg);
+    transform: translate(calc(-50% - 160px), calc(-50% + 20px)) scale(0.7) rotate(-360deg); /* Increased distance */
     filter: drop-shadow(0 0 3px currentColor);
   }
-  75% {
+  65% { /* Reduced from 75% - faster movement */
     opacity: 0.6;
-    transform: translate(calc(-50% - 100px), calc(-50% + 40px)) scale(0.6) rotate(-450deg);
+    transform: translate(calc(-50% - 140px), calc(-50% + 60px)) scale(0.6) rotate(-450deg); /* Increased distance */
     filter: drop-shadow(0 0 2px currentColor);
   }
-  90% {
+  80% { /* Reduced from 90% - faster movement */
     opacity: 0.5;
-    transform: translate(calc(-50% - 60px), calc(-50% + 60px)) scale(0.5) rotate(-540deg);
+    transform: translate(calc(-50% - 100px), calc(-50% + 100px)) scale(0.5) rotate(-540deg); /* Increased distance */
     filter: drop-shadow(0 0 1px currentColor);
   }
   100% {
     opacity: 0.4;
-    transform: translate(calc(-50% - 20px), calc(-50% + 40px)) scale(0.4) rotate(-630deg);
+    transform: translate(calc(-50% - 40px), calc(-50% + 80px)) scale(0.4) rotate(-630deg); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -850,44 +850,44 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  5% {
+  3% { /* Reduced from 5% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1) rotate(30deg);
     filter: drop-shadow(0 0 5px currentColor);
   }
-  15% {
+  10% { /* Reduced from 15% - faster movement */
     opacity: 1;
-    transform: translate(calc(-50% + 40px), calc(-50%)) scale(1) rotate(60deg);
+    transform: translate(calc(-50% + 50px), calc(-50%)) scale(1) rotate(60deg); /* Increased distance */
     filter: drop-shadow(0 0 6px currentColor);
   }
-  30% {
+  20% { /* Reduced from 30% - faster movement */
     opacity: 0.9;
-    transform: translate(calc(-50% + 80px), calc(-50% + 10px)) scale(0.9) rotate(120deg);
+    transform: translate(calc(-50% + 100px), calc(-50% + 15px)) scale(0.9) rotate(120deg); /* Increased distance */
     filter: drop-shadow(0 0 5px currentColor);
   }
-  45% {
+  35% { /* Reduced from 45% - faster movement */
     opacity: 0.8;
-    transform: translate(calc(-50% + 120px), calc(-50% + 20px)) scale(0.8) rotate(180deg);
+    transform: translate(calc(-50% + 150px), calc(-50% + 30px)) scale(0.8) rotate(180deg); /* Increased distance */
     filter: drop-shadow(0 0 4px currentColor);
   }
-  60% {
+  50% { /* Reduced from 60% - faster movement */
     opacity: 0.7;
-    transform: translate(calc(-50% + 100px), calc(-50% + 40px)) scale(0.7) rotate(240deg);
+    transform: translate(calc(-50% + 130px), calc(-50% + 60px)) scale(0.7) rotate(240deg); /* Increased distance */
     filter: drop-shadow(0 0 3px currentColor);
   }
-  75% {
+  65% { /* Reduced from 75% - faster movement */
     opacity: 0.6;
-    transform: translate(calc(-50% + 60px), calc(-50% + 60px)) scale(0.6) rotate(300deg);
+    transform: translate(calc(-50% + 90px), calc(-50% + 90px)) scale(0.6) rotate(300deg); /* Increased distance */
     filter: drop-shadow(0 0 2px currentColor);
   }
-  90% {
+  80% { /* Reduced from 90% - faster movement */
     opacity: 0.5;
-    transform: translate(calc(-50% + 20px), calc(-50% + 40px)) scale(0.5) rotate(360deg);
+    transform: translate(calc(-50% + 40px), calc(-50% + 70px)) scale(0.5) rotate(360deg); /* Increased distance */
     filter: drop-shadow(0 0 1px currentColor);
   }
   100% {
     opacity: 0.4;
-    transform: translate(calc(-50% - 20px), calc(-50% + 20px)) scale(0.4) rotate(420deg);
+    transform: translate(calc(-50% - 30px), calc(-50% + 40px)) scale(0.4) rotate(420deg); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -898,44 +898,44 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  5% {
+  3% { /* Reduced from 5% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1) rotate(-30deg);
     filter: drop-shadow(0 0 5px currentColor);
   }
-  15% {
+  10% { /* Reduced from 15% - faster movement */
     opacity: 1;
-    transform: translate(calc(-50%), calc(-50% + 40px)) scale(1) rotate(-60deg);
+    transform: translate(calc(-50%), calc(-50% + 50px)) scale(1) rotate(-60deg); /* Increased distance */
     filter: drop-shadow(0 0 6px currentColor);
   }
-  30% {
+  20% { /* Reduced from 30% - faster movement */
     opacity: 0.9;
-    transform: translate(calc(-50% - 10px), calc(-50% + 80px)) scale(0.9) rotate(-120deg);
+    transform: translate(calc(-50% - 15px), calc(-50% + 100px)) scale(0.9) rotate(-120deg); /* Increased distance */
     filter: drop-shadow(0 0 5px currentColor);
   }
-  45% {
+  35% { /* Reduced from 45% - faster movement */
     opacity: 0.8;
-    transform: translate(calc(-50% - 20px), calc(-50% + 120px)) scale(0.8) rotate(-180deg);
+    transform: translate(calc(-50% - 30px), calc(-50% + 150px)) scale(0.8) rotate(-180deg); /* Increased distance */
     filter: drop-shadow(0 0 4px currentColor);
   }
-  60% {
+  50% { /* Reduced from 60% - faster movement */
     opacity: 0.7;
-    transform: translate(calc(-50% - 40px), calc(-50% + 100px)) scale(0.7) rotate(-240deg);
+    transform: translate(calc(-50% - 60px), calc(-50% + 130px)) scale(0.7) rotate(-240deg); /* Increased distance */
     filter: drop-shadow(0 0 3px currentColor);
   }
-  75% {
+  65% { /* Reduced from 75% - faster movement */
     opacity: 0.6;
-    transform: translate(calc(-50% - 60px), calc(-50% + 60px)) scale(0.6) rotate(-300deg);
+    transform: translate(calc(-50% - 90px), calc(-50% + 90px)) scale(0.6) rotate(-300deg); /* Increased distance */
     filter: drop-shadow(0 0 2px currentColor);
   }
-  90% {
+  80% { /* Reduced from 90% - faster movement */
     opacity: 0.5;
-    transform: translate(calc(-50% - 40px), calc(-50% + 20px)) scale(0.5) rotate(-360deg);
+    transform: translate(calc(-50% - 70px), calc(-50% + 40px)) scale(0.5) rotate(-360deg); /* Increased distance */
     filter: drop-shadow(0 0 1px currentColor);
   }
   100% {
     opacity: 0.4;
-    transform: translate(calc(-50% - 20px), calc(-50% - 20px)) scale(0.4) rotate(-420deg);
+    transform: translate(calc(-50% - 40px), calc(-50% - 30px)) scale(0.4) rotate(-420deg); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -946,14 +946,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% - 150px), calc(-50%)) scale(0.8);
+    transform: translate(calc(-50% - 200px), calc(-50%)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -964,19 +964,19 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50%), calc(-50% - 150px)) scale(0.8);
+    transform: translate(calc(-50%), calc(-50% - 200px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
 
-/* Add a twinkling effect to stars */
+/* Add a twinkling effect to stars - faster and brighter */
 @keyframes twinkle {
   0%, 100% {
     opacity: 0.7;
@@ -984,7 +984,7 @@ const starCount = 30 // Increased for more continuous effect
   }
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 8px currentColor);
+    filter: drop-shadow(0 0 10px currentColor); /* Increased glow */
   }
 }
 
@@ -994,14 +994,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% + 150px), calc(-50% + 150px)) scale(0.8);
+    transform: translate(calc(-50% + 200px), calc(-50% + 200px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -1012,14 +1012,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% - 150px), calc(-50% + 150px)) scale(0.8);
+    transform: translate(calc(-50% - 200px), calc(-50% + 200px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -1030,14 +1030,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% + 100px), calc(-50% - 100px)) scale(0.8);
+    transform: translate(calc(-50% + 180px), calc(-50% - 180px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -1048,14 +1048,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% - 100px), calc(-50% - 100px)) scale(0.8);
+    transform: translate(calc(-50% - 180px), calc(-50% - 180px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -1066,14 +1066,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% + 100px), calc(-50% + 100px)) scale(0.8);
+    transform: translate(calc(-50% + 180px), calc(-50% + 180px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
@@ -1084,14 +1084,14 @@ const starCount = 30 // Increased for more continuous effect
     transform: translate(-50%, -50%) scale(0.1);
     filter: drop-shadow(0 0 2px currentColor);
   }
-  10% {
+  5% { /* Reduced from 10% - faster initial appearance */
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: drop-shadow(0 0 5px currentColor);
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% - 100px), calc(-50% + 100px)) scale(0.8);
+    transform: translate(calc(-50% - 180px), calc(-50% + 180px)) scale(0.8); /* Increased distance */
     filter: drop-shadow(0 0 0px currentColor);
   }
 }
