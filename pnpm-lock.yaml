@@ -26,7 +26,7 @@ dependencies:
     version: 1.10.0
   '@nuxt/ui-pro':
     specifier: ^3.1.1
-    version: 3.1.2(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7)
+    version: 3.1.2(axios@1.9.0)(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7)
   '@pinia/nuxt':
     specifier: ^0.11.0
     version: 0.11.0(pinia@3.0.2)
@@ -39,6 +39,9 @@ dependencies:
   animejs:
     specifier: ^4.0.2
     version: 4.0.2
+  axios:
+    specifier: ^1.9.0
+    version: 1.9.0
   motion-v:
     specifier: ^1.0.1
     version: 1.0.2(vue@3.5.14)
@@ -1779,7 +1782,7 @@ packages:
       - magicast
     dev: false
 
-  /@nuxt/ui-pro@3.1.2(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7):
+  /@nuxt/ui-pro@3.1.2(axios@1.9.0)(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7):
     resolution: {integrity: sha512-oGpmtCcAX0pEPbkWmX5bvvIZ8t3PWKqmxIYbuGJ9aCEMtM6+zS5g1LNBTl7RygyrWPV+sG+lF3r6OMytSnZPZQ==}
     peerDependencies:
       joi: ^17.13.0
@@ -1803,7 +1806,7 @@ packages:
       '@ai-sdk/vue': 1.2.12(vue@3.5.14)(zod@3.25.7)
       '@nuxt/kit': 3.17.3(magicast@0.3.5)
       '@nuxt/schema': 3.17.3
-      '@nuxt/ui': 3.1.2(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7)
+      '@nuxt/ui': 3.1.2(axios@1.9.0)(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7)
       '@standard-schema/spec': 1.0.0
       '@vueuse/core': 13.2.0(vue@3.5.14)
       consola: 3.4.2
@@ -1862,7 +1865,7 @@ packages:
       - vue-router
     dev: false
 
-  /@nuxt/ui@3.1.2(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7):
+  /@nuxt/ui@3.1.2(axios@1.9.0)(embla-carousel@8.6.0)(typescript@5.8.3)(vite@6.3.5)(vue@3.5.14)(zod@3.25.7):
     resolution: {integrity: sha512-G6MuxO21gR2Jpo1xZUr9pwaP0mDgWXhF5dDpwSf1I//Zu02fo9in3J+tkJRR2TDnisrS0xwnsYRBpjLILBx0XQ==}
     hasBin: true
     peerDependencies:
@@ -1904,7 +1907,7 @@ packages:
       '@tanstack/vue-table': 8.21.3(vue@3.5.14)
       '@unhead/vue': 2.0.9(vue@3.5.14)
       '@vueuse/core': 13.2.0(vue@3.5.14)
-      '@vueuse/integrations': 13.2.0(fuse.js@7.1.0)(vue@3.5.14)
+      '@vueuse/integrations': 13.2.0(axios@1.9.0)(fuse.js@7.1.0)(vue@3.5.14)
       colortranslator: 4.1.0
       consola: 3.4.2
       defu: 6.1.4
@@ -2445,6 +2448,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.8
+      napi-wasm: 1.1.3
     dev: false
     bundledDependencies:
       - napi-wasm
@@ -3980,7 +3984,7 @@ packages:
       vue: 3.5.14(typescript@5.8.3)
     dev: false
 
-  /@vueuse/integrations@13.2.0(fuse.js@7.1.0)(vue@3.5.14):
+  /@vueuse/integrations@13.2.0(axios@1.9.0)(fuse.js@7.1.0)(vue@3.5.14):
     resolution: {integrity: sha512-tnwdzUYadAiewvMtBcjH/ZPgRCoQBvuVzbFA/VSysPDaIuG41Jp/Z1Sn/rYoFMOLJfcOEcVh+tN3mkrVIyumig==}
     peerDependencies:
       async-validator: ^4
@@ -4024,6 +4028,7 @@ packages:
     dependencies:
       '@vueuse/core': 13.2.0(vue@3.5.14)
       '@vueuse/shared': 13.2.0(vue@3.5.14)
+      axios: 1.9.0
       fuse.js: 7.1.0
       vue: 3.5.14(typescript@5.8.3)
     dev: false
@@ -4386,6 +4391,16 @@ packages:
       picocolors: 1.1.1
       postcss: 8.5.3
       postcss-value-parser: 4.2.0
+    dev: false
+
+  /axios@1.9.0:
+    resolution: {integrity: sha512-re4CqKTJaURpzbLHtIi6XpDv20/CnpXOtjRY5/CU32L8gU8ek9UIivcfvSWvmKEngmVbrUtPpdDwWDWL7DNHvg==}
+    dependencies:
+      follow-redirects: 1.15.9
+      form-data: 4.0.2
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /b4a@1.6.7:
@@ -6271,6 +6286,16 @@ packages:
 
   /fn.name@1.1.0:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
+    dev: false
+
+  /follow-redirects@1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /fontaine@0.6.0:
@@ -8375,6 +8400,10 @@ packages:
     hasBin: true
     dev: true
 
+  /napi-wasm@1.1.3:
+    resolution: {integrity: sha512-h/4nMGsHjZDCYmQVNODIrYACVJ+I9KItbG+0si6W/jSjdA9JbWDoU4LLeMXVcEQGHjttI2tuXqDrbGF7qkUHHg==}
+    dev: false
+
   /natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -9717,6 +9746,10 @@ packages:
 
   /protocols@2.0.2:
     resolution: {integrity: sha512-hHVTzba3wboROl0/aWRRG9dMytgH6ow//STBZh43l/wQgmMhYhOFi0EHWAPtoCz9IAUymsyP0TSBHkhgMEGNnQ==}
+    dev: false
+
+  /proxy-from-env@1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
 
   /pump@3.0.2:

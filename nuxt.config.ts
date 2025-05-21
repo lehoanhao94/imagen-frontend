@@ -20,6 +20,14 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css', 'animate.css/animate.min.css'],
 
+  runtimeConfig: {
+    public: {
+      api: {
+        imagenproService: process.env.IMAGENPRO_SERVICE_BASE_URL || 'https://api.imagenpro.ai/api/v1'
+      }
+    }
+  },
+
   future: {
     compatibilityVersion: 4
   },

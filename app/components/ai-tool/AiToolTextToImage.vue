@@ -31,12 +31,7 @@ const onGenerate = () => {
 
 <template>
   <div class="flex flex-col justify-center pt-30">
-    <div
-      class="logo-container w-20 h-20 mx-auto animate__animated"
-      :class="{
-        animate__zoomInDown: !loading
-      }"
-    >
+    <div class="logo-container w-20 h-20 mx-auto">
       <BaseLogo
         id="main-logo"
         :loading="loading"
@@ -119,19 +114,19 @@ const onGenerate = () => {
             <BaseModelSelect class="w-full" />
           </UFormField>
           <UFormField
-            v-if="model.options.includes('style')"
+            v-if="model?.options?.includes('style')"
             :label="$t('style')"
           >
             <BaseStyleSelect class="w-full" />
           </UFormField>
           <UFormField
-            v-if="model.options.includes('imageDimensions')"
+            v-if="model?.options?.includes('imageDimensions')"
             :label="$t('imageDimensions')"
           >
             <BaseImageDimensionsSelect />
           </UFormField>
           <div
-            v-if="model.options.includes('yourImage')"
+            v-if="model?.options?.includes('yourImage')"
             class="flex flex-row gap-3 items-end"
           >
             <UFormField :label="$t('yourImage')">
@@ -224,6 +219,7 @@ const onGenerate = () => {
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  background: transparent; /* Đảm bảo nền trong suốt */
 }
 
 #main-logo {
@@ -235,6 +231,7 @@ const onGenerate = () => {
   z-index: 100;
   transform-origin: center center;
   will-change: transform, top, left, position;
+  background: transparent; /* Đảm bảo nền trong suốt */
 }
 
 #main-logo.logo-loading {
@@ -249,6 +246,10 @@ const onGenerate = () => {
   visibility: visible !important;
   /* Add shadow for better visibility */
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+  /* Đảm bảo không có ô vuông màu đen kỳ lạ phía sau */
+  background: transparent !important;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 @keyframes pulse {
@@ -256,10 +257,12 @@ const onGenerate = () => {
   100% {
     transform: translate(-50%, -50%) scale(1.05);
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+    background: transparent;
   }
   50% {
     transform: translate(-50%, -50%) scale(1.1);
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+    background: transparent;
   }
 }
 </style>
