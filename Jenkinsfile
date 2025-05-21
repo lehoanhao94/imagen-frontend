@@ -13,10 +13,9 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '30')
     }
     environment {
-        SERVICE_NAME    = 'imagen-frontend-service'
+        SERVICE_NAME    = 'frontend-imagenpro-service'
         currentVersion  = "v1.0"
-        PROJECT_NAME  = "ttsopenai-clone"
-        PAGES_PROJECT_NAME = "imagen-frontend"
+        PAGES_PROJECT_NAME = "frontend-imagenpro"
         SHORT_COMMIT = "${GIT_COMMIT[0..7]}"
     }
     parameters {
@@ -30,7 +29,7 @@ pipeline {
             when{
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'imagen-frontend' }
+                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
                 }
                 anyOf {
                     branch 'main'
@@ -54,7 +53,7 @@ pipeline {
             when{
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'imagen-frontend' }
+                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
                 }
                 anyOf {
                     branch 'main'
@@ -82,7 +81,7 @@ pipeline {
             when {
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'imagen-frontend' }
+                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
                 }
                 anyOf {
                     branch 'main'
@@ -108,7 +107,7 @@ pipeline {
             when {
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'imagen-frontend' }
+                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
                 }
                 anyOf {
                     branch 'main'
