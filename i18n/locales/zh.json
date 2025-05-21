@@ -79,6 +79,8 @@
     "dontHaveAccount": "没有账户？",
     "signUp": "注册",
     "forgotPassword": "忘记密码？",
+    "signupFailed": "注册失败",
+    "signupFailedDescription": "注册过程中出现错误。请重试。",
     "bySigningIn": "通过登录，您同意我们的",
     "termsOfService": "服务条款",
     "signUpTitle": "注册",

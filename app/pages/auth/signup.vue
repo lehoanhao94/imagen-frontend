@@ -54,8 +54,34 @@ const schema = z.object({
 
 type Schema = z.output<typeof schema>
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload)
+const authStore = useAuthStore()
+
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const { name, email, password } = event.data
+
+  try {
+    const result = await authStore.signup({
+      email,
+      full_name: name,
+      password
+    })
+
+    if (!result) {
+      // If signup failed, show the error message from the auth store
+      toast.add({
+        title: t('auth.signupFailed') || 'Signup failed',
+        description: authStore.error || t('auth.signupFailedDescription') || 'There was an error during signup. Please try again.',
+        color: 'error'
+      })
+    }
+  } catch (error) {
+    console.error('Signup error:', error)
+    toast.add({
+      title: t('auth.signupFailed') || 'Signup failed',
+      description: t('auth.signupFailedDescription') || 'There was an error during signup. Please try again.',
+      color: 'error'
+    })
+  }
 }
 </script>
 

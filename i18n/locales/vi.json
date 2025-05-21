@@ -79,6 +79,8 @@
     "dontHaveAccount": "Chưa có tài khoản?",
     "signUp": "Đăng ký",
     "forgotPassword": "Quên mật khẩu?",
+    "signupFailed": "Đăng ký thất bại",
+    "signupFailedDescription": "Đã xảy ra lỗi trong quá trình đăng ký. Vui lòng thử lại.",
     "bySigningIn": "Bằng cách đăng nhập, bạn đồng ý với",
     "termsOfService": "Điều khoản dịch vụ",
     "signUpTitle": "Đăng ký",
