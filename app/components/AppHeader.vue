@@ -7,20 +7,18 @@ defineProps<{
 </script>
 
 <template>
-  <div class="fixed top-2 sm:top-4 mx-auto left-1/2 transform -translate-x-1/2 z-10">
+  <div
+    class="fixed top-2 sm:top-4 mx-auto left-1/2 transform -translate-x-1/2 z-10 bg-neutral-50 dark:bg-neutral-900 rounded-full"
+  >
     <UNavigationMenu
       :items="links"
       variant="link"
       color="neutral"
-      class="rounded-full px-2 sm:px-4 "
+      class="rounded-full px-2 sm:px-4"
       :ui="{
         link: 'px-2 py-1',
         linkLeadingIcon: 'hidden'
       }"
-    >
-      <template #list-trailing>
-        <ColorModeButton />
-      </template>
-    </UNavigationMenu>
+    />
   </div>
 </template>

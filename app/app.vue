@@ -1,4 +1,19 @@
 <script setup lang="ts">
+import * as locales from '@nuxt/ui-pro/locale'
+import { navLinks } from '~/utils/links'
+
+const appStore = useAppStore()
+const { locale, localeForI18n } = storeToRefs(appStore)
+const { locale: i18nLocale, t } = useI18n()
+
+// Create a computed property for the translated navLinks
+const translatedNavLinks = computed(() => {
+  return navLinks.map(link => ({
+    ...link,
+    label: link.label ? t(`nav.${link.label.toLowerCase().replace(/\s+/g, '')}`) : ''
+  }))
+})
+
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
@@ -10,15 +25,16 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' }
+    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' }
   ],
   htmlAttrs: {
-    lang: 'en'
+    lang: locale.value
   }
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt Portfolio Template',
+  titleTemplate: 'ImagenPro AI - %s',
   ogImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3BvcnRmb2xpby10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTc0NTkzNDczMX0.XDWnQoyVy3XVtKQD6PLQ8RFUwr4yr1QnVwPxRrjCrro.jpg?theme=light',
   twitterImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL3BvcnRmb2xpby10ZW1wbGF0ZS5udXh0LmRldiIsImlhdCI6MTc0NTkzNDczMX0.XDWnQoyVy3XVtKQD6PLQ8RFUwr4yr1QnVwPxRrjCrro.jpg?theme=light',
   twitterCard: 'summary_large_image'
@@ -41,10 +57,19 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
     transform: data => data.flat()
   })
 ])
+
+onMounted(() => {
+  i18nLocale.value = locale.value as any || 'en'
+})
+
+// Add a watcher to update i18n locale when app store locale changes
+watch(locale, (newLocale) => {
+  i18nLocale.value = newLocale as any
+})
 </script>
 
 <template>
-  <UApp>
+  <UApp :locale="locales[localeForI18n as keyof typeof locales]">
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />
@@ -56,7 +81,7 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
         :files="files"
         :navigation="navigation"
         shortcut="meta_k"
-        :links="navLinks"
+        :links="translatedNavLinks"
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>

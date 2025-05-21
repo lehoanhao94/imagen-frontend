@@ -7,14 +7,18 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@vueuse/nuxt',
     'nuxt-og-image',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    '@nuxtjs/i18n',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt'
   ],
+  ssr: false,
 
   devtools: {
     enabled: true
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/main.css', 'animate.css/animate.min.css'],
 
   future: {
     compatibilityVersion: 4
@@ -24,9 +28,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: [
-        '/'
-      ],
+      routes: ['/'],
       crawlLinks: true
     }
   },
@@ -38,5 +40,15 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+  i18n: {
+    defaultLocale: 'vi',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'vi', name: 'Tiếng Việt', file: 'vi.json' },
+      { code: 'zh_cn', name: '简体中文', file: 'zh.json' },
+      { code: 'ja', name: '日本語', file: 'ja.json' }
+    ],
+    strategy: 'no_prefix'
   }
 })
