@@ -94,6 +94,7 @@ const logoRef = ref<HTMLElement | null>(null)
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent; /* Đảm bảo nền trong suốt */
 }
 
 /* Loading state styles for the container */
@@ -112,6 +113,9 @@ const logoRef = ref<HTMLElement | null>(null)
   padding: 0;
   z-index: 10001;
   transform: none;
+  background: transparent; /* Đảm bảo nền trong suốt */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .circulate .circle {
