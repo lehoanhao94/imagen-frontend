@@ -76,6 +76,8 @@
     "enterPassword": "Enter your password",
     "rememberMe": "Remember me",
     "welcomeBack": "Welcome back",
+    "signupFailed": "Signup failed",
+    "signupFailedDescription": "There was an error during signup. Please try again.",
     "dontHaveAccount": "Don't have an account?",
     "signUp": "Sign up",
     "forgotPassword": "Forgot password?",

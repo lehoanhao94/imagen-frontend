@@ -79,6 +79,8 @@
     "dontHaveAccount": "アカウントをお持ちでないですか？",
     "signUp": "サインアップ",
     "forgotPassword": "パスワードをお忘れですか？",
+    "signupFailed": "サインアップに失敗しました",
+    "signupFailedDescription": "サインアップ中にエラーが発生しました。もう一度お試しください。",
     "bySigningIn": "ログインすることで、当社の",
     "termsOfService": "利用規約に同意したことになります",
     "signUpTitle": "サインアップ",
