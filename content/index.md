@@ -1,8 +1,7 @@
 ---
 seo:
-  title: Nuxt Docs Template
-  description: Nuxt UI Pro is a collection of premium Vue components built on top
-    of Nuxt UI to create beautiful & responsive Nuxt applications in minutes.
+  title: Image Generation API Documentation
+  description: Powerful AI Image Generation API - Create stunning images from text prompts and transform existing images with state-of-the-art AI models.
 ---
 
 ::u-page-hero
@@ -11,25 +10,44 @@ orientation: horizontal
 ---
   :::prose-pre
   ---
-  code: npx nuxi init -t github:nuxt-ui-pro/docs
+  code: |
+    curl -X POST https://api.imagen.ai/v1/text-to-image \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer YOUR_API_KEY" \
+      -d '{
+        "prompt": "A beautiful sunset over mountains",
+        "model": "imagen-v2",
+        "width": 1024,
+        "height": 1024,
+        "steps": 30
+      }'
   filename: Terminal
   ---
   ```bash
-  npx nuxi init -t github:nuxt-ui-pro/docs
+  curl -X POST https://api.imagen.ai/v1/text-to-image \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -d '{
+      "prompt": "A beautiful sunset over mountains",
+      "model": "imagen-v2",
+      "width": 1024,
+      "height": 1024,
+      "steps": 30
+    }'
   ```
   :::
 
 #title
-Build your docs with Nuxt UI Pro
+Build amazing apps with Image Generation API
 
 #description
-Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to create beautiful & responsive applications in minutes.
+Generate stunning images from text prompts, transform existing images, and create variations with our powerful AI image generation API. Built for developers, designed for scale.
 
 #links
   :::u-button
   ---
   size: xl
-  to: /api-docs/getting-started
+  to: /getting-started
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
@@ -38,110 +56,103 @@ Nuxt UI Pro is a collection of premium components built on top of Nuxt UI to cre
   :::u-button
   ---
   color: neutral
-  icon: i-simple-icons-github
+  icon: i-lucide-image
   size: xl
   target: _blank
-  to: https://github.com/nuxt-ui-pro/docs
+  to: https://imagen.ai/playground
   variant: subtle
   ---
-  Use this template
+  Try in Playground
   :::
 ::
 
 ::u-page-section
 #title
-All-in-one documentation template
+Powerful Image Generation API
 
 #links
   :::u-button
   ---
   color: neutral
   size: lg
-  target: _blank
-  to: https://ui.nuxt.com/getting-started/installation/pro/nuxt
+  to: /api-reference
   trailingIcon: i-lucide-arrow-right
   variant: subtle
   ---
-  Discover Nuxt UI Pro v3
+  Explore API Reference
   :::
 
 #features
   :::u-page-feature
   ---
-  icon: i-simple-icons-nuxt
-  target: _blank
-  to: https://nuxt.com
+  icon: i-lucide-type
+  to: /api-reference/text-to-image
   ---
   #title
-  Nuxt 3
+  Text to Image
 
   #description
-  Powered by Nuxt 3 for optimal performances and SEO.
+  Generate stunning images from text prompts using state-of-the-art AI models.
   :::
 
   :::u-page-feature
   ---
-  icon: i-simple-icons-markdown
-  target: _blank
-  to: https://content.nuxt.com
+  icon: i-lucide-image
+  to: /api-reference/image-to-image
   ---
   #title
-  Markdown
+  Image to Image
 
   #description
-  Write your pages with MDC thanks to Nuxt Content.
+  Transform existing images with AI-powered modifications and style transfers.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-sparkles
-  target: _blank
-  to: https://ui.nuxt.com
+  icon: i-lucide-shuffle
+  to: /api-reference/variations
   ---
   #title
-  Nuxt UI v3
+  Image Variations
 
   #description
-  Offers a very large set of full customizable components.
+  Create multiple variations of an existing image with different styles.
   :::
 
   :::u-page-feature
   ---
-  icon: i-simple-icons-typescript
-  target: _blank
-  to: https://www.typescriptlang.org
+  icon: i-lucide-cpu
+  to: /api-reference/models
   ---
   #title
-  TypeScript
+  Multiple Models
 
   #description
-  A fully typed development experience.
+  Choose from various AI models optimized for different use cases and styles.
   :::
 
   :::u-page-feature
   ---
-  icon: i-simple-icons-nuxtdotjs
-  target: _blank
-  to: https://content.nuxt.com/docs/studio
+  icon: i-lucide-zap
+  to: /getting-started/quickstart
   ---
   #title
-  Nuxt Studio
+  Fast & Reliable
 
   #description
-  Supported by Nuxt Studio for fast updates and previews.
+  High-performance API with 99.9% uptime and sub-second response times.
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-search
-  target: _blank
-  to: https://ui.nuxt.com/components/content-search
+  icon: i-lucide-shield-check
+  to: /getting-started/authentication
   ---
   #title
-  Search
+  Secure
 
   #description
-  A full-text search modal powered by Fuse.js.
+  Enterprise-grade security with API key authentication and rate limiting.
   :::
 ::
 
@@ -149,20 +160,19 @@ All-in-one documentation template
   :::u-page-c-t-a
   ---
   links:
-    - label: Buy now
-      to: https://ui.nuxt.com/pro/purchase
+    - label: Get API Key
+      to: https://imagen.ai/dashboard/api-keys
       target: _blank
-      icon: i-lucide-shopping-cart
-      color: neutral
-    - label: License
-      to: https://ui.nuxt.com/getting-started/license
-      trailingIcon: i-lucide-circle-help
+      icon: i-lucide-key
+      color: primary
+    - label: View Pricing
+      to: https://imagen.ai/pricing
+      trailingIcon: i-lucide-arrow-right
       target: _blank
       color: neutral
       variant: subtle
-  description: Nuxt UI Pro is free in development, but you need a license to use
-    it in production.
-  title: Start with Nuxt UI Pro today!
+  description: Start generating images today with our free tier. No credit card required to get started.
+  title: Ready to start creating amazing images?
   variant: subtle
   ---
   :::
