@@ -6,15 +6,20 @@ export const useAIToolStore = defineStore('aiToolStore', {
     textToImageResult: null as any,
     aiToolImageCardRef: null as any,
 
-    selectedImages: [] as any[]
+    selectedImages: [] as any[],
+
+    loadings: {
+      textToImage: false
+    } as Record<string, boolean>
   }),
 
   actions: {
-    textToImage() {
+    async textToImage() {
       console.log('🚀 ~ textToImage ~ textToImage:')
       const appStore = useAppStore()
       this.textToImageResult = null
       appStore.loading = true
+
       setTimeout(() => {
         appStore.loading = false
         this.textToImageResult = {
@@ -41,7 +46,21 @@ export const useAIToolStore = defineStore('aiToolStore', {
           }, 300)
         })
       }, 3000)
-      return true
+      // return true;
+
+      try {
+        // Make the actual API call to the signup endpoint
+        const { apiService } = useAPI()
+        // Call the signup API endpoint
+        const response = await apiService.post('/create_image', {
+          promt:
+            'A warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.'
+        })
+
+        return response
+      } catch (error: any) {
+        return null
+      }
     },
 
     addImage(image: any) {
@@ -53,7 +72,9 @@ export const useAIToolStore = defineStore('aiToolStore', {
     },
 
     removeImage(imageSrc: string) {
-      const index = this.selectedImages.findIndex(img => img.src === imageSrc)
+      const index = this.selectedImages.findIndex(
+        img => img.src === imageSrc
+      )
       if (index !== -1) {
         this.selectedImages.splice(index, 1)
       }
