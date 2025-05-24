@@ -14,6 +14,13 @@ export default defineNuxtConfig({
   ],
   ssr: false,
 
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
+  ],
+
   devtools: {
     enabled: true
   },
@@ -23,7 +30,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       api: {
-        imagenproService: process.env.IMAGENPRO_SERVICE_BASE_URL || 'https://api.imagenpro.ai/api/v1'
+        imagenproService:
+          process.env.IMAGENPRO_SERVICE_BASE_URL
+          || 'https://api.imagenpro.ai/api/v1'
       }
     }
   },

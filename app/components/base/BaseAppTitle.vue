@@ -3,81 +3,93 @@
 </script>
 
 <template>
-  <div class="tilt-wrapper">
-    <div class="hero w-fit mx-auto">
-      <div
-        class="glow-text lg:text-5xl text-3xl transition-all duration-300 text-gray-50 dark:text-white dark:opacity-75 opacity-100"
-        :data-text="$t('appTitle')"
-      >
-        {{ $t('appTitle') }}
-      </div>
-    </div>
-  </div>
+  <h1 class="font-bold gradient-text">
+    GeminiGen.AI
+  </h1>
 </template>
 
-<style lang="css" scoped>
-.label {
-  font-weight: 500;
-  color: #ffffff;
-  opacity: 0.85;
-  margin-bottom: 16px;
-  text-align: center;
-  transition: opacity 0.25s ease-out;
-}
+<style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css?family=Caveat|Righteous&display=swap");
 
-.glow-text {
-  position: relative;
-  letter-spacing: -0.015em;
-  filter: brightness(1.1);
-  z-index: 1;
+h1 {
+  font-family: "Righteous", cursive;
 }
+/* Tutorial on https://fossheim.io/writing/posts/css-text-gradient. */
 
-.glow-text::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #00cfff, #a600ff, #ff006e, #ff8800);
-  filter: blur(20px) brightness(0.8);
-  border-radius: 100px;
-  z-index: -1;
-  pointer-events: none;
-  background-size: 200% 200%;
-  animation: gradientShift 12s ease-in-out infinite;
-}
+.gradient-text {
+  /* Create the gradient. */
+  background-image: linear-gradient(
+    45deg,
+    #f6339a 16.666%,
+    #e16541 16.666%,
+    #e16541 33.333%,
+    #f18f43 33.333%,
+    #f18f43 50%,
+    #8b9862 50%,
+    #8b9862 66.666%,
+    #476098 66.666%,
+    #476098 83.333%,
+    #a7489b 83.333%
+  );
 
-.glow-text::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  font-family: inherit;
-  letter-spacing: inherit;
-  background: linear-gradient(90deg, #00cfff, #a600ff, #ff006e, #ff8800);
-  background-clip: text;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  mix-blend-mode: color-burn;
-  filter: blur(10px) brightness(1.7);
-  z-index: 0;
-  pointer-events: none;
-  background-size: 200% 200%;
-  animation: gradientShift 12s ease-in-out infinite;
+
+  /* Animate the text when loading the element. */
+  /* This animates it on page load and when hovering out. */
+  animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
 }
 
-.dark .glow-text::after {
-  filter: blur(3px) brightness(1.3);
+.gradient-text:hover {
+  animation: rainbow-text-simple-animation 0.5s ease-in forwards;
 }
 
-@keyframes gradientShift {
+/* Move the background and make it smaller. */
+/* Animation shown when entering the page and after the hover animation. */
+@keyframes rainbow-text-simple-animation-rev {
   0% {
-    background-position: 0% 50%;
+    background-size: 650%;
   }
-  50% {
-    background-position: 100% 50%;
+  40% {
+    background-size: 650%;
   }
   100% {
-    background-position: 0% 50%;
+    background-size: 100%;
   }
+}
+
+/* Move the background and make it larger. */
+/* Animation shown when hovering over the text. */
+@keyframes rainbow-text-simple-animation {
+  0% {
+    background-size: 100%;
+  }
+  80% {
+    background-size: 650%;
+  }
+  100% {
+    background-size: 650%;
+  }
+}
+
+/* Style the rest of the page. */
+body {
+  background-color: #fdf1f0;
+}
+
+header {
+  margin-top: 1em;
+  margin-top: calc(50vh - 3em);
+}
+
+h1 {
+  text-align: center;
+  cursor: pointer;
 }
 </style>

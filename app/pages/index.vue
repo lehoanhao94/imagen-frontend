@@ -2,6 +2,6 @@
 
 <template>
   <UPage>
-    <AiToolTextToImage />
+    <AITools />
   </UPage>
 </template>
