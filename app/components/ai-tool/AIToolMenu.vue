@@ -32,7 +32,6 @@ const value = ref(items.value[0])
     :icon="value?.icon"
     :items="items"
     class="w-52"
-    variant="soft"
     :search-input="false"
   />
 </template>

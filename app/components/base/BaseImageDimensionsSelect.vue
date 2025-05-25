@@ -23,7 +23,7 @@ const { imageDimensions, imageDimension } = useImageDimensions()
           align: 'center'
         }"
       >
-        <div class="flex flex-col items-center min-w-[40px] !py-1.5">
+        <div class="flex flex-col items-center min-w-[40px] !py-1.5 dark:bg-transparent bg-white rounded-2xl">
           <span class="text-xs">{{ item.label }}</span>
         </div>
         <template #content>

@@ -14,7 +14,7 @@ const translatedNavLinks = computed(() => {
 </script>
 
 <template>
-  <div class="bg-gray-100">
+  <div class="bg-gray-100/50 dark:bg-transparent">
     <div>
       <AppHeader :links="translatedNavLinks" />
       <slot />
