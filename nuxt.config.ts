@@ -36,6 +36,11 @@ export default defineNuxtConfig({
       }
     }
   },
+  routeRules: {
+    '/': {
+      redirect: '/app'
+    }
+  },
 
   future: {
     compatibilityVersion: 4

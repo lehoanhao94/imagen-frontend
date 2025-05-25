@@ -15,36 +15,36 @@ useSeoMeta({
 
 const toast = useToast()
 
-const fields = computed(() => [{
-  name: 'name',
-  type: 'text' as const,
-  label: t('auth.name'),
-  placeholder: t('auth.enterName')
-}, {
-  name: 'email',
-  type: 'text' as const,
-  label: t('auth.email'),
-  placeholder: t('auth.enterEmail')
-}, {
-  name: 'password',
-  label: t('auth.password'),
-  type: 'password' as const,
-  placeholder: t('auth.enterPassword')
-}])
+const fields = computed(() => [
+  {
+    name: 'name',
+    type: 'text' as const,
+    label: t('auth.name'),
+    placeholder: t('auth.enterName')
+  },
+  {
+    name: 'email',
+    type: 'text' as const,
+    label: t('auth.email'),
+    placeholder: t('auth.enterEmail')
+  },
+  {
+    name: 'password',
+    label: t('auth.password'),
+    type: 'password' as const,
+    placeholder: t('auth.enterPassword')
+  }
+])
 
-const providers = [{
-  label: 'Google',
-  icon: 'i-simple-icons-google',
-  onClick: () => {
-    toast.add({ title: 'Google', description: 'Login with Google' })
+const providers = [
+  {
+    label: 'Google',
+    icon: 'i-simple-icons-google',
+    onClick: () => {
+      toast.add({ title: 'Google', description: 'Login with Google' })
+    }
   }
-}, {
-  label: 'Apple',
-  icon: 'i-simple-icons-apple',
-  onClick: () => {
-    toast.add({ title: 'Apple', description: 'Login with Apple' })
-  }
-}]
+]
 
 const schema = z.object({
   name: z.string().min(1, t('validation.nameRequired')),
@@ -70,7 +70,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       // If signup failed, show the error message from the auth store
       toast.add({
         title: t('auth.signupFailed') || 'Signup failed',
-        description: authStore.error || t('auth.signupFailedDescription') || 'There was an error during signup. Please try again.',
+        description:
+          authStore.error
+          || t('auth.signupFailedDescription')
+          || 'There was an error during signup. Please try again.',
         color: 'error'
       })
     }
@@ -78,7 +81,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     console.error('Signup error:', error)
     toast.add({
       title: t('auth.signupFailed') || 'Signup failed',
-      description: t('auth.signupFailedDescription') || 'There was an error during signup. Please try again.',
+      description:
+        t('auth.signupFailedDescription')
+        || 'There was an error during signup. Please try again.',
       color: 'error'
     })
   }
@@ -95,17 +100,23 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     @submit="onSubmit"
   >
     <template #description>
-      {{ $t('auth.alreadyHaveAccount') }} <ULink
+      {{ $t("auth.alreadyHaveAccount") }}
+      <ULink
         to="/auth/login"
         class="text-primary font-medium"
-      >{{ $t('auth.login') }}</ULink>.
+      >{{
+        $t("auth.login")
+      }}</ULink>.
     </template>
 
     <template #footer>
-      {{ $t('auth.bySigningUp') }} <ULink
+      {{ $t("auth.bySigningUp") }}
+      <ULink
         to="/"
         class="text-primary font-medium"
-      >{{ $t('auth.termsOfService') }}</ULink>.
+      >{{
+        $t("auth.termsOfService")
+      }}</ULink>.
     </template>
   </UAuthForm>
 </template>

@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useColorMode } from '@vueuse/core'
+
 // Ported from Stefan Gustavson's java implementation
 // http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
 // Read Stefan's excellent paper for details on how this code works.
 //
 // Sean McCullough banksean@gmail.com
+
+const colorMode = useColorMode()
 
 /**
  * You can pass in a random number generator object if you like.
@@ -112,63 +117,159 @@ ClassicalNoise.prototype.noise = function (x, y, z) {
   return nxyz
 }
 onMounted(() => {
-  let canvas = document.getElementById('canvas'),
-    ctx = canvas.getContext('2d'),
-    perlin = new ClassicalNoise(),
-    variation = 0.0025,
-    amp = 300,
-    variators = [],
-    max_lines
-      = navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ? 25 : 40,
-    canvasWidth,
-    canvasHeight,
-    start_y
+  const canvas = document.getElementById('canvas') as HTMLCanvasElement
+  if (!canvas) return
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+
+  const perlin = new ClassicalNoise()
+  const variation = 0.0025
+  const amp = 200 // Reduced amplitude for better performance
+  const variators: number[] = []
+
+  // Reduced max_lines for better performance
+  const max_lines = navigator.userAgent.toLowerCase().indexOf('firefox') > -1 ? 15 : 25
+
+  let canvasWidth: number
+  let canvasHeight: number
+  let start_y: number
+  let animationId: number
+
+  // Performance optimization: Pre-calculate colors
+  const colorCache = new Map<string, string>()
+
+  // Throttle resize events
+  let resizeTimeout: NodeJS.Timeout
 
   for (let i = 0, u = 0; i < max_lines; i++, u += 0.02) {
     variators[i] = u
   }
 
-  function draw() {
-    ctx.shadowColor = 'rgba(43, 205, 255, 1)'
-    ctx.shadowBlur = 0
+  // Pre-calculate blue colors for better performance
+  function getColorForWave(i: number, isDark: boolean): string {
+    const cacheKey = `${i}-${isDark}`
+    if (colorCache.has(cacheKey)) {
+      return colorCache.get(cacheKey)!
+    }
 
-    for (let i = 0; i <= max_lines; i++) {
+    const waveProgress = i / max_lines
+
+    let color: string
+    if (isDark) {
+      // Dark mode: Light blue to deep blue gradient
+      const lightness = 70 - (waveProgress * 30) // 70% to 40%
+      const saturation = 60 + (waveProgress * 30) // 60% to 90%
+      const alpha = 0.3 + (waveProgress * 0.4) // 0.3 to 0.7
+      color = `hsla(210, ${saturation}%, ${lightness}%, ${alpha})`
+    } else {
+      // Light mode: Medium blue to dark blue gradient
+      const lightness = 50 - (waveProgress * 25) // 50% to 25%
+      const saturation = 70 + (waveProgress * 20) // 70% to 90%
+      const alpha = 0.4 + (waveProgress * 0.5) // 0.4 to 0.9
+      color = `hsla(210, ${saturation}%, ${lightness}%, ${alpha})`
+    }
+
+    colorCache.set(cacheKey, color)
+    return color
+  }
+
+  function draw() {
+    const isDark = colorMode.value === 'dark'
+
+    // Blue-only shadow setup
+    ctx.shadowColor = isDark ? 'rgba(100, 150, 255, 0.4)' : 'rgba(50, 100, 200, 0.3)'
+    ctx.shadowBlur = 10 // Reduced blur for better performance
+
+    // Simplified blend mode
+    ctx.globalCompositeOperation = isDark ? 'lighter' : 'source-over'
+
+    // Optimized drawing with reduced calculations
+    for (let i = 0; i < max_lines; i += 2) { // Skip every other line for performance
       ctx.beginPath()
       ctx.moveTo(0, start_y)
-      for (let x = 0; x <= canvasWidth; x++) {
-        var y = perlin.noise(x * variation + variators[i], x * variation, 0)
+
+      // Reduced point density for better performance
+      for (let x = 0; x <= canvasWidth; x += 3) {
+        const y = perlin.noise(x * variation + variators[i], x * variation, 0)
         ctx.lineTo(x, start_y + amp * y)
       }
-      const color = Math.floor(150 * Math.abs(y))
-      const alpha = Math.min(Math.abs(y) + 0.05, 0.05)
-      ctx.strokeStyle = 'rgba(255,255,255,' + alpha * 2 + ')'
+
+      // Use cached colors
+      const strokeStyle = getColorForWave(i, isDark)
+      ctx.strokeStyle = strokeStyle
+      ctx.lineWidth = isDark ? 1 : 1.5
+
+      // Simplified glow effect
+      if (i % 6 === 0) {
+        ctx.shadowBlur = 15
+      } else {
+        ctx.shadowBlur = 5
+      }
+
       ctx.stroke()
-      ctx.closePath()
-
-      variators[i] += 0.005
+      variators[i] += 0.003 // Slower animation for smoother performance
     }
+
+    // Reset blend mode
+    ctx.globalCompositeOperation = 'source-over'
   }
 
-  (function init() {
-    resizeCanvas()
-    animate()
-    window.addEventListener('resize', resizeCanvas)
-  })()
+  // Optimized animate function with adaptive frame rate
+  let lastTime = 0
+  const targetFPS = 30 // Reduced from 60fps for better performance
+  const frameInterval = 1000 / targetFPS
 
-  function animate() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-    draw()
-    requestAnimationFrame(animate)
+  function animate(currentTime: number = 0) {
+    // Throttle to target FPS
+    if (currentTime - lastTime >= frameInterval) {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+      draw()
+      lastTime = currentTime
+    }
+
+    animationId = requestAnimationFrame(animate)
   }
 
+  // Throttled resize function
   function resizeCanvas() {
-    (canvasWidth = document.documentElement.clientWidth),
-    (canvasHeight = document.documentElement.clientHeight)
+    canvasWidth = document.documentElement.clientWidth
+    canvasHeight = document.documentElement.clientHeight
 
-    canvas.setAttribute('width', canvasWidth)
-    canvas.setAttribute('height', canvasHeight)
+    canvas.setAttribute('width', canvasWidth.toString())
+    canvas.setAttribute('height', canvasHeight.toString())
 
     start_y = canvasHeight / 2
+
+    // Clear color cache on resize
+    colorCache.clear()
+  }
+
+  function throttledResize() {
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout)
+    }
+    resizeTimeout = setTimeout(resizeCanvas, 100)
+  }
+
+  // Initialize
+  function init() {
+    resizeCanvas()
+    animate()
+    window.addEventListener('resize', throttledResize)
+  }
+
+  init()
+
+  // Cleanup on unmount
+  return () => {
+    if (animationId) {
+      cancelAnimationFrame(animationId)
+    }
+    window.removeEventListener('resize', throttledResize)
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout)
+    }
   }
 })
 </script>

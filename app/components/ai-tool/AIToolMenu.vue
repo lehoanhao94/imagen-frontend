@@ -6,7 +6,7 @@ const items = [
     label: 'Imagen',
     icon: 'hugeicons:ai-image',
     slot: 'image' as const,
-    to: '/ai',
+    to: '/app',
     children: [
       {
         label: 'Imagen 3',
@@ -81,8 +81,6 @@ Agentic use cases`
       viewport: 'z[30]',
       content: 'sm:w-auto min-h-[200px]'
     }"
-    :popover="{
-      mode: 'click'
-    }"
+    :delay-duration="700"
   />
 </template>

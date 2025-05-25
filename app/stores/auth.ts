@@ -48,7 +48,7 @@ export const useAuthStore = defineStore('authStore', {
         // Make the actual API call to the signup endpoint
         const { apiService } = useAPI()
         // Call the signup API endpoint
-        const response = await apiService.post('/signup/', {
+        const response = await apiService.post('/signup', {
           ...payload,
           ps_xid: null,
           gsxid: null,
