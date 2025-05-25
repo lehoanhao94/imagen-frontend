@@ -2,6 +2,7 @@
 import * as locales from '@nuxt/ui-pro/locale'
 import { navLinks } from '~/utils/links'
 
+const authStore = useAuthStore()
 const appStore = useAppStore()
 const { locale, localeForI18n } = storeToRefs(appStore)
 const { locale: i18nLocale, t } = useI18n()
@@ -59,6 +60,7 @@ const [{ data: navigation }, { data: files }] = await Promise.all([
 ])
 
 onMounted(() => {
+  authStore.userMe()
   i18nLocale.value = locale.value as any || 'en'
 })
 

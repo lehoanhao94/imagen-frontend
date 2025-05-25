@@ -19,6 +19,6 @@ export const navLinks: NavigationMenuItem[] = [
   {
     label: 'Login',
     icon: 'i-lucide-file-text',
-    to: '/auth/login'
+    slot: 'auth' as const
   }
 ]

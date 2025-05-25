@@ -7,15 +7,15 @@ const createAxios = (baseURL: string) => {
   const toast = useToast()
   const newInstance = axios.create({ baseURL })
 
-  newInstance.interceptors.request.use((config) => {
+  newInstance.interceptors.request.use((config: any) => {
     const authStore = useAuthStore()
-    // const accessToken = authStore.token
-    // const refreshToken = authStore.refresh_token
-    // if (['/login/refresh'].includes(config.url) && refreshToken) {
-    //   config.headers['Authorization'] = 'Bearer ' + refreshToken
-    // } else if (accessToken) {
-    //   config.headers['Authorization'] = 'Bearer ' + accessToken
-    // }
+    const accessToken = authStore.access_token
+    const refreshToken = authStore.refresh_token
+    if (['/login/refresh'].includes(config.url) && refreshToken) {
+      config.headers['Authorization'] = 'Bearer ' + refreshToken
+    } else if (accessToken) {
+      config.headers['Authorization'] = 'Bearer ' + accessToken
+    }
     return config
   })
 
@@ -33,7 +33,7 @@ const createAxios = (baseURL: string) => {
       // const _errorResponse = error.response
       // const originalRequest = error.config
       // const status = _errorResponse.status
-      // const authStore = useAuthStore()
+      const authStore = useAuthStore()
       // // check it is login/refresh request, logout
       // if (['/login/refresh'].includes(originalRequest.url)) {
       //   await authStore.logout()

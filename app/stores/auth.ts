@@ -104,9 +104,29 @@ export const useAuthStore = defineStore('authStore', {
     async logout() {
       // Logout implementation would go here
       this.user = null
-      this.token = null
+      this.access_token = null
       this.refresh_token = null
       navigateTo('/auth/login')
+    },
+
+    async userMe() {
+      this.loading = true
+      this.error = null
+
+      try {
+        // Make the actual API call to the signup endpoint
+        const { apiService } = useAPI()
+        // Call the signup API endpoint
+        const response = await apiService.get('/me')
+
+        this.user = response.data
+
+        return response.data
+      } catch (error: any) {
+        return null
+      } finally {
+        this.loading = false
+      }
     }
   }
 })
