@@ -1,37 +1,88 @@
 <script setup lang="ts">
-import type { SelectMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from '@nuxt/ui'
 
-const items = ref([
+const items = [
   {
-    label: 'Image Generation',
-    value: 'image-generation',
-    icon: 'hugeicons:ai-image'
+    label: 'Imagen',
+    icon: 'hugeicons:ai-image',
+    slot: 'image' as const,
+    to: '/ai',
+    children: [
+      {
+        label: 'Imagen 3',
+        description:
+          'Generate high-quality, detailed images with accurate text rendering for creative visual content.'
+      },
+      {
+        label: 'Imagen 4',
+        description:
+          'Express your ideas like never before — with Imagen, creativity has no limits.'
+      },
+      {
+        label: 'Gemini 2.0 Flash',
+        description:
+          'Gemini 2.0 Flash is a powerful tool for generating images from text prompts.'
+      }
+    ]
   },
   {
-    label: 'Video Generation',
-    value: 'video-generation',
-    icon: 'hugeicons:ai-video'
+    label: 'Video Gen',
+    icon: 'i-lucide-box',
+    slot: 'components' as const,
+    children: [
+      {
+        label: 'Veo 2',
+        description:
+          'Greater control, consistency, and creativity than ever before.'
+      },
+      {
+        label: 'Veo 3',
+        description:
+          'Video, meet audio. Our latest video generation model, designed to empower filmmakers and storytellers.'
+      }
+    ]
   },
   {
-    label: 'Speech Generation',
-    value: 'image-to-video',
-    icon: 'hugeicons:ai-voice'
+    label: 'Speech Gen',
+    icon: 'hugeicons:ai-voice',
+    slot: 'components' as const,
+    children: [
+      {
+        label: 'Gemini 2.5 Pro',
+        description: 'The most advanced text-to-speech model available.'
+      },
+      {
+        label: 'Gemini 2.5 Flash',
+        description: `Large scale processing (e.g. multiple pdfs).
+Low latency, high volume tasks which require thinking
+Agentic use cases`
+      }
+    ]
   },
   {
-    label: 'Music Generation',
-    value: 'music-generation',
-    icon: 'ri:music-ai-fill'
+    label: 'Music Gen',
+    icon: 'ri:music-ai-fill',
+    slot: 'components' as const,
+    children: [
+      {
+        label: 'Link',
+        description: 'Use NuxtLink with superpowers.'
+      }
+    ]
   }
-] satisfies SelectMenuItem[])
-const value = ref(items.value[0])
+] satisfies NavigationMenuItem[]
 </script>
 
 <template>
-  <USelectMenu
-    v-model="value"
-    :icon="value?.icon"
+  <UNavigationMenu
     :items="items"
-    class="w-52"
-    :search-input="false"
+    class="w-full justify-start"
+    :ui="{
+      viewport: 'z[30]',
+      content: 'sm:w-auto min-h-[200px]'
+    }"
+    :popover="{
+      mode: 'click'
+    }"
   />
 </template>

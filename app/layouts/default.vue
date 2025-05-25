@@ -8,19 +8,22 @@ const { t } = useI18n()
 const translatedNavLinks = computed(() => {
   return navLinks.map(link => ({
     ...link,
-    label: link.label ? t(`nav.${link.label.toLowerCase().replace(/\s+/g, '')}`) : ''
+    label: link.label
+      ? t(`nav.${link.label.toLowerCase().replace(/\s+/g, '')}`)
+      : ''
   }))
 })
 </script>
 
 <template>
-  <div class="bg-gray-100/50 dark:bg-transparent">
+  <div class="">
     <div>
       <AppHeader :links="translatedNavLinks" />
       <slot />
       <AppFooter />
     </div>
     <LazyLayoutStarBg />
+    <LayoutWavesBg />
     <BaseLoadingOverlay />
   </div>
 </template>
