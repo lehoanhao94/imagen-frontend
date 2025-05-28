@@ -18,6 +18,7 @@ const translatedNavLinks = computed(() => {
 <template>
   <div class="">
     <div>
+      <AppHeaderBanner />
       <AppHeader :links="translatedNavLinks" />
       <slot />
       <AppFooter />

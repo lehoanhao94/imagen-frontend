@@ -2,6 +2,9 @@
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
+const authStore = useAuthStore()
+const { loading, error } = storeToRefs(authStore)
+
 definePageMeta({
   layout: 'auth'
 })
@@ -13,6 +16,11 @@ useSeoMeta({
   description: t('auth.signUpDescription')
 })
 
+const { isReady, login } = useTokenClient({
+  onSuccess: authStore.signInWithGoogle,
+  onError: authStore.signInError
+  // other options
+})
 const toast = useToast()
 
 const fields = computed(() => [
@@ -20,7 +28,8 @@ const fields = computed(() => [
     name: 'name',
     type: 'text' as const,
     label: t('auth.name'),
-    placeholder: t('auth.enterName')
+    placeholder: t('auth.enterName'),
+    value: ''
   },
   {
     name: 'email',
@@ -36,25 +45,47 @@ const fields = computed(() => [
   }
 ])
 
-const providers = [
-  {
-    label: 'Google',
-    icon: 'i-simple-icons-google',
-    onClick: () => {
-      toast.add({ title: 'Google', description: 'Login with Google' })
+const providers = computed(() => {
+  return [
+    {
+      label: 'Google',
+      icon: 'i-simple-icons-google',
+      onClick: login,
+      disabled: !isReady,
+      loading: loading.value
     }
-  }
-]
-
-const schema = z.object({
-  name: z.string().min(1, t('validation.nameRequired')),
-  email: z.string().email(t('validation.invalidEmail')),
-  password: z.string().min(8, t('validation.passwordMinLength'))
+  ]
 })
 
-type Schema = z.output<typeof schema>
+const schema = computed(() =>
+  z.object({
+    name: z
+      .string({
+        required_error: t('validation.required')
+      })
+      .min(1, t('validation.required')),
+    email: z
+      .string({
+        required_error: t('validation.required')
+      })
+      .nonempty(t('validation.required'))
+      .min(1, t('validation.required'))
+      .email(t('validation.invalidEmail')),
+    password: z
+      .string({
+        required_error: t('validation.required')
+      })
+      .nonempty(t('validation.required'))
+      .min(1, t('validation.required'))
+      .min(8, t('validation.passwordMinLength'))
+  })
+)
 
-const authStore = useAuthStore()
+type Schema = {
+  name: string
+  email: string
+  password: string
+}
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   const { name, email, password } = event.data

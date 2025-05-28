@@ -63,7 +63,7 @@ const { loading } = storeToRefs(appStore)
   left: 50%;
   transform: translateX(-50%);
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 100;
+  z-index: 30;
   transform-origin: center center;
   will-change: transform, top, left, position;
   background: transparent; /* Đảm bảo nền trong suốt */

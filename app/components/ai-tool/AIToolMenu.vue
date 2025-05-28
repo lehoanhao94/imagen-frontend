@@ -7,6 +7,7 @@ const items = [
     icon: 'hugeicons:ai-image',
     slot: 'image' as const,
     to: '/app',
+    exact: true,
     children: [
       {
         label: 'Imagen 3',
@@ -16,7 +17,9 @@ const items = [
       {
         label: 'Imagen 4',
         description:
-          'Express your ideas like never before — with Imagen, creativity has no limits.'
+          'Express your ideas like never before — with Imagen, creativity has no limits.',
+        disabled: true,
+        badge: 'Soon'
       },
       {
         label: 'Gemini 2.0 Flash',
@@ -29,6 +32,7 @@ const items = [
     label: 'Video Gen',
     icon: 'i-lucide-box',
     slot: 'components' as const,
+    to: '/app/video-gen',
     children: [
       {
         label: 'Veo 2',
@@ -46,6 +50,7 @@ const items = [
     label: 'Speech Gen',
     icon: 'hugeicons:ai-voice',
     slot: 'components' as const,
+    to: '/app/speech-gen',
     children: [
       {
         label: 'Gemini 2.5 Pro',
@@ -63,6 +68,7 @@ Agentic use cases`
     label: 'Music Gen',
     icon: 'ri:music-ai-fill',
     slot: 'components' as const,
+    to: '/app/music-gen',
     children: [
       {
         label: 'Link',

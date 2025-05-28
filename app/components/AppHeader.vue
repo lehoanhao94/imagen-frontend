@@ -24,7 +24,14 @@ const { user } = storeToRefs(authStore)
       }"
     >
       <template #auth="{ item }">
-        <AppUserMenu />
+        <AppUserMenu v-if="user" />
+        <span v-else>
+          <ULink
+            to="/auth/login"
+          >
+            {{ item.label }}
+          </ULink>
+        </span>
       </template>
     </UNavigationMenu>
   </div>

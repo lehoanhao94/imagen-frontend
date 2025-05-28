@@ -36,7 +36,7 @@ const items = computed(() => {
       {
         label: 'Logout',
         icon: 'i-lucide-log-out',
-        click: () => authStore.logout()
+        onSelect: () => authStore.logout()
       }
     ]
   ]

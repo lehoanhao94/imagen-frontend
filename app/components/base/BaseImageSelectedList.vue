@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const aiToolStore = useAIToolStore()
-const { selectedImages } = storeToRefs(aiToolStore)
+const textToImageStore = useTextToImageStore()
+const { selectedImages } = storeToRefs(textToImageStore)
 const { t } = useI18n()
 
 // Track which avatar is being hovered or tapped
@@ -34,7 +34,7 @@ const handleTap = (index: number) => {
 }
 
 const removeImage = (src: string) => {
-  aiToolStore.removeImage(src)
+  textToImageStore.removeImage(src)
 }
 </script>
 

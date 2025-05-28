@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const aiToolStore = useAIToolStore()
+const textToImageStore = useTextToImageStore()
 const { t } = useI18n()
 const fileInput = ref<HTMLInputElement | null>(null)
 
@@ -22,7 +22,7 @@ const handleFileChange = (event: Event) => {
       const imageUrl = URL.createObjectURL(file)
 
       // Add the image to the store
-      aiToolStore.addImage({
+      textToImageStore.addImage({
         src: imageUrl,
         alt: file.name,
         file: file

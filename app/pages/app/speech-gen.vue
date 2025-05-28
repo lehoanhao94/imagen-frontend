@@ -5,10 +5,6 @@ const appStore = useAppStore()
 
 const { loading } = storeToRefs(appStore)
 
-defineProps<{
-  page: IndexCollectionItem
-}>()
-
 const aiPhotos = [
   'https://cdn.leonardo.ai/users/c593f6db-e19b-43f4-b0ce-f5757ff82907/generations/27ceb2db-a6c1-4533-a1bc-35375113bf45/segments/5:8:1/Leonardo_Phoenix_10_A_Clean_Shaven_Strangely_Odd_Unorthodox_Av_0.jpg?w=512',
   'https://cdn.leonardo.ai/users/daeb794a-c999-4c7c-a7bd-1b22321efa4e/generations/1e0d2e32-d948-47c3-891a-7ea47ce900d8/Leonardo_Phoenix_10_HD_animestyle_couple_walking_along_a_narro_1.jpg?w=512',
@@ -50,7 +46,7 @@ const onGenerate = () => {
       <UChatPrompt
         v-model="prompt"
         class="[view-transition-name:chat-prompt]"
-        :placeholder="$t('Describe the image you want to generate...')"
+        :placeholder="$t('Describe the speech you want to generate...')"
         @submit="onGenerate"
       >
         <UChatPromptSubmit
@@ -106,76 +102,6 @@ const onGenerate = () => {
           <BaseImageSelectedList />
         </div>
       </div>
-    </Motion>
-    <Motion
-      v-if="textToImageResult"
-      ref="aiToolImageCardRef"
-      :initial="{
-        scale: 1.1,
-        opacity: 0,
-        filter: 'blur(20px)'
-      }"
-      :animate="{
-        scale: 1,
-        opacity: 1,
-        filter: 'blur(0px)'
-      }"
-      :transition="{
-        duration: 0.6,
-        delay: 0.5
-      }"
-      class="mt-10"
-    >
-      <AIToolImageCard v-bind="textToImageResult" />
-    </Motion>
-
-    <Motion
-      :initial="{
-        scale: 1.1,
-        opacity: 0,
-        filter: 'blur(20px)'
-      }"
-      :animate="{
-        scale: 1,
-        opacity: 1,
-        filter: 'blur(0px)'
-      }"
-      :transition="{
-        duration: 0.5,
-        delay: 1
-      }"
-    >
-      <UPageMarquee
-        pause-on-hover
-        class="py-2 -mx-4 sm:-mx-6 lg:-mx-8 [--duration:40s] mt-14"
-      >
-        <Motion
-          v-for="(img, index) in aiPhotos"
-          :key="index"
-          :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }"
-          :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }"
-          :transition="{
-            duration: 0.6,
-            delay: index * 0.1
-          }"
-        >
-          <img
-            width="234"
-            height="234"
-            class="rounded-lg"
-            :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
-            :src="img"
-          >
-        </Motion>
-      </UPageMarquee>
     </Motion>
   </UContainer>
 </template>

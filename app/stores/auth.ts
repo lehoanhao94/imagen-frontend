@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
+import type { AuthCodeFlowErrorResponse } from 'vue3-google-signin'
 
 interface User {
   id: string
   email: string
   full_name: string
+  is_active: boolean
 }
 
 interface AuthState {
@@ -11,7 +13,8 @@ interface AuthState {
   access_token: string | null
   refresh_token: string | null
   loading: boolean
-  error: string | null
+  error: any
+  canResendActivationEmailAfter: number
 }
 
 export const useAuthStore = defineStore('authStore', {
@@ -20,19 +23,27 @@ export const useAuthStore = defineStore('authStore', {
     access_token: null,
     refresh_token: null,
     loading: false,
-    error: null
+    error: null as any,
+
+    canResendActivationEmailAfter: 0
   }),
 
   persist: [
     {
-      pick: ['user', 'access_token', 'refresh_token'],
+      pick: [
+        'user',
+        'access_token',
+        'refresh_token',
+        'canResendActivationEmailAfter'
+      ],
       storage: localStorage
     }
   ],
 
   getters: {
     isAuthenticated: state => !!state.access_token && !!state.user,
-    getUser: state => state.user
+    getUser: state => state.user,
+    isNotVerifyAccount: state => state.user?.is_active !== true
   },
 
   actions: {
@@ -66,7 +77,7 @@ export const useAuthStore = defineStore('authStore', {
 
         // Navigate to home page after successful signup
         navigateTo('/')
-
+        this.userMe()
         return responseData
       } catch (error: any) {
         // Handle API error response
@@ -93,12 +104,31 @@ export const useAuthStore = defineStore('authStore', {
     },
 
     async login(payload: {
-      email: string
+      username: string
       password: string
-      remember?: boolean
+      remember_me?: boolean
     }) {
-      // Login implementation would go here
-      console.log('Login payload:', payload)
+      try {
+        this.loading = true
+        this.error = null
+        // Make the actual API call to the signup endpoint
+        const { apiService } = useAPI()
+        // Call the signup API endpoint
+        const response = await apiService.post('/login-v2', payload)
+
+        this.access_token = response.data.access_token
+        this.refresh_token = response.data.refresh_token
+        // Navigate to home page after successful signup
+        navigateTo('/')
+        this.userMe()
+        return response.data
+      } catch (error: any) {
+        console.log('🚀 ~ error:', error)
+        this.error = error.response.data.detail
+        return null
+      } finally {
+        this.loading = false
+      }
     },
 
     async logout() {
@@ -114,6 +144,7 @@ export const useAuthStore = defineStore('authStore', {
       this.error = null
 
       try {
+        if (!this.access_token) return null
         // Make the actual API call to the signup endpoint
         const { apiService } = useAPI()
         // Call the signup API endpoint
@@ -123,6 +154,100 @@ export const useAuthStore = defineStore('authStore', {
 
         return response.data
       } catch (error: any) {
+        return null
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async refreshToken() {
+      const { apiService } = useAPI()
+      const response = await apiService.post('/refresh-token', {
+        refresh_token: this.refresh_token
+      })
+      this.access_token = response.data.access_token
+      this.refresh_token = response.data.refresh_token
+      return response.data
+    },
+
+    async resendVerificationEmail() {
+      const { apiService } = useAPI()
+      const response = await apiService.post('/resend-activation', {
+        email: this.user?.email
+      })
+      return response.data
+    },
+
+    async signInWithGoogle(payload: any) {
+      try {
+        this.loading = true
+        const { apiService } = useAPI()
+        const _response = await apiService.post('/google-login-v2', {
+          google_access_token: payload.access_token,
+          user: { uid: 'fake', phoneNumber: 'fake', photoURL: 'fake' },
+          google_id_token: payload.id_token
+        })
+        this.access_token = _response.data.access_token
+        this.refresh_token = _response.data.refresh_token
+        navigateTo('/')
+        this.userMe()
+        this.loading = false
+        return _response.data
+      } catch (error: any) {
+        this.loading = false
+        return null
+      }
+    },
+
+    signInError(error: AuthCodeFlowErrorResponse) {
+      console.log('Error: ', error)
+    },
+
+    async passwordRecovery(payload: { email: string }) {
+      this.loading = true
+      this.error = null
+
+      try {
+        const { apiService } = useAPI()
+        const response = await apiService.post('/password-recovery', payload)
+        return response.data
+      } catch (error: any) {
+        console.log('🚀 ~ passwordRecovery error:', error)
+        this.error = error.response?.data?.detail || error.message
+        return null
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async passwordReset(payload: { token: string, new_password: string }) {
+      this.loading = true
+      this.error = null
+
+      try {
+        const { apiService } = useAPI()
+        const response = await apiService.put('/password-reset', payload)
+        return response.data
+      } catch (error: any) {
+        console.log('🚀 ~ passwordReset error:', error)
+        this.error = error.response?.data?.detail || error.message
+        return null
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async activateAccount(payload: { token: string }) {
+      this.loading = true
+      this.error = null
+
+      try {
+        const { apiService } = useAPI()
+        const response = await apiService.put('/activate-account', payload)
+        return response.data
+      } catch (error: any) {
+        console.log('🚀 ~ activateAccount error:', error)
+        this.error = error.response?.data?.detail || error.message
         return null
       } finally {
         this.loading = false

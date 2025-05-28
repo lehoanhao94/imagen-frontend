@@ -21,11 +21,11 @@ const aiPhotos = [
   'https://cdn.leonardo.ai/users/684d2cf2-484a-44d8-bf86-4fac5fe47a59/generations/78afd409-dccb-4508-b4bc-5c2b625171e9/Leonardo_Phoenix_10_A_pair_of_enchanting_fantasy_birds_perched_0.jpg?w=512'
 ]
 
-const aiToolStore = useAIToolStore()
-const { textToImageResult, aiToolImageCardRef } = storeToRefs(aiToolStore)
+const textToImageStore = useTextToImageStore()
+const { textToImageResult, aiToolImageCardRef } = storeToRefs(textToImageStore)
 
 const onGenerate = () => {
-  aiToolStore.textToImage()
+  textToImageStore.textToImage()
 }
 </script>
 
@@ -235,7 +235,7 @@ const onGenerate = () => {
   left: 50%;
   transform: translateX(-50%);
   transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 100;
+  z-index: 30;
   transform-origin: center center;
   will-change: transform, top, left, position;
   background: transparent; /* Đảm bảo nền trong suốt */

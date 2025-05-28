@@ -90,17 +90,53 @@
     "createAccount": "Tạo tài khoản",
     "alreadyHaveAccount": "Đã có tài khoản?",
     "bySigningUp": "Bằng cách đăng ký, bạn đồng ý với",
-    "backToHome": "Quay lại trang chủ"
+    "backToHome": "Quay lại trang chủ",
+    "notVerifyAccount": "Tài khoản của bạn chưa được xác minh. Vui lòng xác minh tài khoản để tiếp tục",
+    "verifyAccount": "Xác minh tài khoản",
+    "resendActivationEmail": "Gửi lại email kích hoạt",
+    "accountRecovery": "Khôi phục tài khoản",
+    "accountRecoveryTitle": "Khôi phục tài khoản của bạn",
+    "accountRecoveryDescription": "Nhập email của bạn để nhận hướng dẫn đặt lại mật khẩu",
+    "sendRecoveryEmail": "Gửi email khôi phục",
+    "recoveryEmailSent": "Email khôi phục đã được gửi",
+    "recoveryEmailSentDescription": "Vui lòng kiểm tra email của bạn để biết hướng dẫn đặt lại mật khẩu",
+    "resetPassword": "Đặt lại mật khẩu",
+    "resetPasswordTitle": "Đặt lại mật khẩu của bạn",
+    "resetPasswordDescription": "Nhập mật khẩu mới của bạn",
+    "newPassword": "Mật khẩu mới",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "enterNewPassword": "Nhập mật khẩu mới của bạn",
+    "enterConfirmPassword": "Xác nhận mật khẩu mới của bạn",
+    "passwordResetSuccess": "Đặt lại mật khẩu thành công",
+    "passwordResetSuccessDescription": "Mật khẩu của bạn đã được đặt lại thành công. Bây giờ bạn có thể đăng nhập bằng mật khẩu mới",
+    "activateAccount": "Kích hoạt tài khoản",
+    "activateAccountTitle": "Kích hoạt tài khoản của bạn",
+    "activateAccountDescription": "Tài khoản của bạn đang được kích hoạt...",
+    "accountActivated": "Tài khoản đã được kích hoạt",
+    "accountActivatedDescription": "Tài khoản của bạn đã được kích hoạt thành công. Bây giờ bạn có thể đăng nhập",
+    "activationFailed": "Kích hoạt thất bại",
+    "activationFailedDescription": "Không thể kích hoạt tài khoản của bạn. Vui lòng thử lại hoặc liên hệ hỗ trợ",
+    "backToLogin": "Quay lại đăng nhập",
+    "loginFailed": "Đăng nhập thất bại"
   },
   "validation": {
     "invalidEmail": "Email không hợp lệ",
     "passwordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
-    "nameRequired": "Tên là bắt buộc"
+    "nameRequired": "Tên là bắt buộc",
+    "required": "Trường này là bắt buộc",
+    "passwordsDoNotMatch": "Mật khẩu không khớp"
   },
 
   "imageSelect": {
     "pleaseSelectImageFile": "Vui lòng chọn một tệp hình ảnh",
     "selectedImage": "Hình ảnh đã chọn",
     "removeImage": "Xóa hình ảnh"
-  }
+  },
+  "pixelReveal": {
+    "loading": "Đang tải hình ảnh...",
+    "processing": "Đang xử lý hình ảnh...",
+    "revealComplete": "Hiển thị hình ảnh hoàn tất"
+  },
+  "SIGNIN_WRONG_EMAIL_PASSWORD": "Email hoặc mật khẩu sai",
+  "Try again": "Thử lại"
 }

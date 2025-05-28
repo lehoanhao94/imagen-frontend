@@ -5,14 +5,10 @@ const props = defineProps({
     default: false
   }
 })
-
-// Reference to the logo element
-const logoRef = ref<HTMLElement | null>(null)
 </script>
 
 <template>
   <div
-    ref="logoRef"
     class="circulate"
     :class="{ 'loading-active': loading }"
   >
