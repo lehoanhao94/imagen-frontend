@@ -1,11 +1,24 @@
 <script setup lang="ts">
-const { model, models } = useLLM()
+interface ModelSelectProps {
+  modelValue: any
+  models: any[]
+}
+
+const props = defineProps<ModelSelectProps>()
+const emit = defineEmits<{
+  'update:modelValue': [value: any]
+}>()
+
+const updateModel = (value: any) => {
+  emit('update:modelValue', value)
+}
 </script>
 
 <template>
   <USelectMenu
-    v-model="model"
-    :items="models"
+    :model-value="props.modelValue"
+    @update:model-value="updateModel"
+    :items="props.models"
     size="sm"
     icon="hugeicons:ai-chip"
     class="min-w-40 hover:bg-default focus:bg-default data-[state=open]:bg-default"

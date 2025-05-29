@@ -1,7 +1,5 @@
-export function useLLM() {
+export function useImageGenModels() {
   const models = [
-    // 'Imagen 3',
-    // 'Gemini 2.0 Flash'
     {
       label: 'Imagen 3',
       value: 'Imagen 3',
@@ -21,7 +19,7 @@ export function useLLM() {
       ]
     }
   ]
-  const model = useCookie<any>('llm-model', { default: () => models[0] })
+  const model = useCookie<any>('image-gen-model', { default: () => models[0] })
 
   return {
     models,
