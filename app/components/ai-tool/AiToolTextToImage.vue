@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IndexCollectionItem } from '@nuxt/content'
 
-const { model } = useLLM()
+const { model, models } = useImageGenModels()
 
 const { footer, global } = useAppConfig()
 
@@ -111,7 +111,7 @@ const onGenerate = () => {
       >
         <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
           <UFormField :label="$t('modelPreset')">
-            <BaseModelSelect class="w-full" />
+            <BaseModelSelect v-model="model" :models="models" class="w-full" />
           </UFormField>
           <UFormField
             v-if="model?.options?.includes('style')"
