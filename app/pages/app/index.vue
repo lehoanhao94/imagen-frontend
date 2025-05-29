@@ -24,7 +24,9 @@ const { textToImageResult, aiToolImageCardRef, prompt }
 const onGenerate = () => {
   textToImageStore.textToImage({
     prompt: prompt.value,
-    model: 'imagen-3'
+    model: 'imagen-3',
+    style: 'Portrait',
+    dimensions: '1:1'
   })
 }
 </script>
