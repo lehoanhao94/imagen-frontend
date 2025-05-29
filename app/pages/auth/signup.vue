@@ -143,7 +143,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     <template #footer>
       {{ $t("auth.bySigningUp") }}
       <ULink
-        to="/"
+        to="/terms"
         class="text-primary font-medium"
       >{{
         $t("auth.termsOfService")
