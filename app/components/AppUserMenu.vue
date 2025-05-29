@@ -15,7 +15,8 @@ const items = computed(() => {
     [
       {
         label: 'Profile',
-        icon: 'i-lucide-user'
+        icon: 'i-lucide-user',
+        to: '/profile'
       },
       {
         label: 'Buy Credits',
