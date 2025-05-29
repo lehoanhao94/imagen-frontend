@@ -118,7 +118,8 @@
     "activationFailedDescription": "无法激活您的账户。请重试或联系支持",
     "backToLogin": "返回登录",
     "loginFailed": "登录失败",
-    "loginWithGoogle": "使用Google登录"
+    "loginWithGoogle": "使用Google登录",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "无效的电子邮件",
@@ -161,5 +162,8 @@
     "link": "链接",
     "linkDescription": "使用超强的NuxtLink。",
     "soon": "即将推出"
-  }
+  },
+  "readArticle": "阅读文章",
+  "switchToLightMode": "切换到明亮模式",
+  "switchToDarkMode": "切换到深色模式"
 }

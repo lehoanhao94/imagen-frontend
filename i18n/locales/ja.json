@@ -118,7 +118,8 @@
     "activationFailedDescription": "アカウントの有効化に失敗しました。再試行するかサポートにお問い合わせください",
     "backToLogin": "ログインに戻る",
     "loginFailed": "ログインに失敗しました",
-    "loginWithGoogle": "Googleでログイン"
+    "loginWithGoogle": "Googleでログイン",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "無効なメールアドレス",
@@ -161,5 +162,8 @@
     "link": "リンク",
     "linkDescription": "スーパーパワーを持つNuxtLinkを使用。",
     "soon": "近日公開"
-  }
+  },
+  "readArticle": "記事を読む",
+  "switchToLightMode": "ライトモードに切り替え",
+  "switchToDarkMode": "ダークモードに切り替え"
 }

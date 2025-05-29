@@ -118,7 +118,8 @@
     "activationFailedDescription": "Không thể kích hoạt tài khoản của bạn. Vui lòng thử lại hoặc liên hệ hỗ trợ",
     "backToLogin": "Quay lại đăng nhập",
     "loginFailed": "Đăng nhập thất bại",
-    "loginWithGoogle": "Đăng nhập bằng Google"
+    "loginWithGoogle": "Đăng nhập bằng Google",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "Email không hợp lệ",
@@ -162,5 +163,8 @@
     "link": "Liên kết",
     "linkDescription": "Sử dụng NuxtLink với siêu năng lực.",
     "soon": "Sớm"
-  }
+  },
+  "readArticle": "Đọc bài viết",
+  "switchToLightMode": "Chuyển sang chế độ sáng",
+  "switchToDarkMode": "Chuyển sang chế độ tối"
 }

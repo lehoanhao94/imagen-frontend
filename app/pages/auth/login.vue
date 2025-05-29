@@ -45,7 +45,7 @@ const fields = computed(() => [
 const providers = computed(() => {
   return [
     {
-      label: 'Google',
+      label: t('auth.google'),
       icon: 'i-simple-icons-google',
       onClick: login,
       disabled: !isReady,

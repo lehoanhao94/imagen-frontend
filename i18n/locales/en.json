@@ -118,7 +118,8 @@
     "activationFailedDescription": "Failed to activate your account. Please try again or contact support",
     "backToLogin": "Back to login",
     "loginFailed": "Login failed",
-    "loginWithGoogle": "Login with Google"
+    "loginWithGoogle": "Login with Google",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "Invalid email",
@@ -161,5 +162,8 @@
     "link": "Link",
     "linkDescription": "Use NuxtLink with superpowers.",
     "soon": "Soon"
-  }
+  },
+  "readArticle": "Read Article",
+  "switchToLightMode": "Switch to light mode",
+  "switchToDarkMode": "Switch to dark mode"
 }
