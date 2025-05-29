@@ -1,82 +1,77 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-const items = [
+const { $t } = useNuxtApp()
+
+const items = computed(() => [
   {
-    label: 'Imagen',
+    label: $t('aiToolMenu.imagen'),
     icon: 'hugeicons:ai-image',
     slot: 'image' as const,
     to: '/app',
     exact: true,
     children: [
       {
-        label: 'Imagen 3',
-        description:
-          'Generate high-quality, detailed images with accurate text rendering for creative visual content.'
+        label: $t('aiToolMenu.imagen3'),
+        description: $t('aiToolMenu.imagen3Description')
       },
       {
-        label: 'Imagen 4',
-        description:
-          'Express your ideas like never before — with Imagen, creativity has no limits.',
+        label: $t('aiToolMenu.imagen4'),
+        description: $t('aiToolMenu.imagen4Description'),
         disabled: true,
-        badge: 'Soon'
+        badge: $t('aiToolMenu.soon')
       },
       {
-        label: 'Gemini 2.0 Flash',
-        description:
-          'Gemini 2.0 Flash is a powerful tool for generating images from text prompts.'
+        label: $t('aiToolMenu.gemini2Flash'),
+        description: $t('aiToolMenu.gemini2FlashDescription')
       }
     ]
   },
   {
-    label: 'Video Gen',
+    label: $t('aiToolMenu.videoGen'),
     icon: 'i-lucide-box',
     slot: 'components' as const,
     to: '/app/video-gen',
     children: [
       {
-        label: 'Veo 2',
-        description:
-          'Greater control, consistency, and creativity than ever before.'
+        label: $t('aiToolMenu.veo2'),
+        description: $t('aiToolMenu.veo2Description')
       },
       {
-        label: 'Veo 3',
-        description:
-          'Video, meet audio. Our latest video generation model, designed to empower filmmakers and storytellers.'
+        label: $t('aiToolMenu.veo3'),
+        description: $t('aiToolMenu.veo3Description')
       }
     ]
   },
   {
-    label: 'Speech Gen',
+    label: $t('aiToolMenu.speechGen'),
     icon: 'hugeicons:ai-voice',
     slot: 'components' as const,
     to: '/app/speech-gen',
     children: [
       {
-        label: 'Gemini 2.5 Pro',
-        description: 'The most advanced text-to-speech model available.'
+        label: $t('aiToolMenu.gemini25Pro'),
+        description: $t('aiToolMenu.gemini25ProDescription')
       },
       {
-        label: 'Gemini 2.5 Flash',
-        description: `Large scale processing (e.g. multiple pdfs).
-Low latency, high volume tasks which require thinking
-Agentic use cases`
+        label: $t('aiToolMenu.gemini25Flash'),
+        description: $t('aiToolMenu.gemini25FlashDescription')
       }
     ]
   },
   {
-    label: 'Music Gen',
+    label: $t('aiToolMenu.musicGen'),
     icon: 'ri:music-ai-fill',
     slot: 'components' as const,
     to: '/app/music-gen',
     children: [
       {
-        label: 'Link',
-        description: 'Use NuxtLink with superpowers.'
+        label: $t('aiToolMenu.link'),
+        description: $t('aiToolMenu.linkDescription')
       }
     ]
   }
-] satisfies NavigationMenuItem[]
+] satisfies NavigationMenuItem[])
 </script>
 
 <template>

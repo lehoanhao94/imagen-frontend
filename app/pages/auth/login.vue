@@ -131,7 +131,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         :disabled="!isReady"
         @click="() => login()"
       >
-        Login with Google
+        {{ $t("auth.loginWithGoogle") }}
       </button>
     </template>
   </UAuthForm>
