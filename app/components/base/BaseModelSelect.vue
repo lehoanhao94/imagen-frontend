@@ -1,16 +1,23 @@
 <script setup lang="ts">
 interface ModelSelectProps {
-  model: any
+  modelValue: any
   models: any[]
 }
 
 const props = defineProps<ModelSelectProps>()
-const model = defineModel<any>()
+const emit = defineEmits<{
+  'update:modelValue': [value: any]
+}>()
+
+const updateModel = (value: any) => {
+  emit('update:modelValue', value)
+}
 </script>
 
 <template>
   <USelectMenu
-    v-model="model"
+    :model-value="props.modelValue"
+    @update:model-value="updateModel"
     :items="props.models"
     size="sm"
     icon="hugeicons:ai-chip"
