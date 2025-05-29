@@ -11,6 +11,10 @@ export const useTextToImageStore = defineStore('textToImageStore', {
     loadings: {
       textToImage: false
     } as Record<string, boolean>,
+
+    errors: {
+      textToImage: false
+    } as Record<string, any>,
     prompt: ''
   }),
 
@@ -27,6 +31,8 @@ export const useTextToImageStore = defineStore('textToImageStore', {
       const toast = useToast()
 
       try {
+        this.loadings.textToImage = true
+        this.errors.textToImage = null
         // Make the actual API call to the signup endpoint
         const { apiService } = useAPI()
         // Call the signup API endpoint
@@ -42,9 +48,11 @@ export const useTextToImageStore = defineStore('textToImageStore', {
           description: error.response?.data?.detail || error.message,
           color: 'error'
         })
+        this.errors.textToImage = error
         return null
       } finally {
         appStore.loading = false
+        this.loadings.textToImage = false
       }
     },
 
