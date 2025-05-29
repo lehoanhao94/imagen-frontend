@@ -31,7 +31,7 @@ onMounted(() => {
 <template>
   <div class="fixed top-0 left-0 right-0 z-50">
     <UBanner
-      v-model="isNotVerifyAccount"
+      v-if="isNotVerifyAccount"
       color="warning"
       :title="$t('auth.notVerifyAccount')"
       :actions="[
