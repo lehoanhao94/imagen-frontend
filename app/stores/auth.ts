@@ -17,6 +17,20 @@ interface AuthState {
   canResendActivationEmailAfter: number
 }
 
+interface User {
+  id: string
+  email: string
+  full_name: string
+}
+
+interface AuthState {
+  user: User | null
+  token: string | null
+  refresh_token: string | null
+  loading: boolean
+  error: string | null
+}
+
 export const useAuthStore = defineStore('authStore', {
   state: (): AuthState => ({
     user: null,
