@@ -10,9 +10,17 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
     '@nuxtjs/i18n',
     '@pinia/nuxt',
-    'pinia-plugin-persistedstate/nuxt'
+    'pinia-plugin-persistedstate/nuxt',
+    'nuxt-vue3-google-signin'
   ],
   ssr: false,
+
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false
+    }
+  ],
 
   devtools: {
     enabled: true
@@ -23,8 +31,18 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       api: {
-        imagenproService: process.env.IMAGENPRO_SERVICE_BASE_URL || 'https://api.imagenpro.ai/api/v1'
-      }
+        imagenproService:
+          process.env.IMAGENPRO_SERVICE_BASE_URL
+          || 'https://api-dev.geminigen.ai/api/v1'
+      },
+      NUXT_GOOGLE_CLIENT_ID:
+        process.env.NUXT_GOOGLE_CLIENT_ID
+        || '309877442422-22t81sfdbm47ah0fi8e9ggedh0ih2jc8.apps.googleusercontent.com'
+    }
+  },
+  routeRules: {
+    '/': {
+      redirect: '/app'
     }
   },
 
@@ -48,6 +66,11 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  googleSignIn: {
+    clientId:
+      '309877442422-22t81sfdbm47ah0fi8e9ggedh0ih2jc8.apps.googleusercontent.com'
   },
   i18n: {
     defaultLocale: 'vi',

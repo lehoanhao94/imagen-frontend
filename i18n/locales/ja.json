@@ -90,12 +90,41 @@
     "createAccount": "アカウントを作成",
     "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
     "bySigningUp": "サインアップすることで、当社の",
-    "backToHome": "ホームに戻る"
+    "backToHome": "ホームに戻る",
+    "notVerifyAccount": "アカウントが確認されていません。続行するにはアカウントを確認してください",
+    "verifyAccount": "アカウントを確認",
+    "resendActivationEmail": "アクティベーションメールを再送信",
+    "accountRecovery": "アカウント復旧",
+    "accountRecoveryTitle": "アカウントを復旧する",
+    "accountRecoveryDescription": "パスワードリセットの手順を受け取るためにメールアドレスを入力してください",
+    "sendRecoveryEmail": "復旧メールを送信",
+    "recoveryEmailSent": "復旧メールが送信されました",
+    "recoveryEmailSentDescription": "パスワードリセットの手順についてメールをご確認ください",
+    "resetPassword": "パスワードリセット",
+    "resetPasswordTitle": "パスワードをリセット",
+    "resetPasswordDescription": "新しいパスワードを入力してください",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "パスワード確認",
+    "enterNewPassword": "新しいパスワードを入力してください",
+    "enterConfirmPassword": "新しいパスワードを確認してください",
+    "passwordResetSuccess": "パスワードリセット成功",
+    "passwordResetSuccessDescription": "パスワードが正常にリセットされました。新しいパスワードでログインできます",
+    "activateAccount": "アカウント有効化",
+    "activateAccountTitle": "アカウントを有効化",
+    "activateAccountDescription": "アカウントを有効化しています...",
+    "accountActivated": "アカウントが有効化されました",
+    "accountActivatedDescription": "アカウントが正常に有効化されました。ログインできます",
+    "activationFailed": "有効化に失敗しました",
+    "activationFailedDescription": "アカウントの有効化に失敗しました。再試行するかサポートにお問い合わせください",
+    "backToLogin": "ログインに戻る",
+    "loginFailed": "ログインに失敗しました"
   },
   "validation": {
     "invalidEmail": "無効なメールアドレス",
     "passwordMinLength": "パスワードは8文字以上である必要があります",
-    "nameRequired": "名前は必須です"
+    "nameRequired": "名前は必須です",
+    "required": "この項目は必須です",
+    "passwordsDoNotMatch": "パスワードが一致しません"
   },
   "imageSelect": {
     "pleaseSelectImageFile": "画像ファイルを選択してください",
@@ -106,5 +135,7 @@
     "loading": "画像を読み込み中...",
     "processing": "画像を処理中...",
     "revealComplete": "画像の表示が完了しました"
-  }
+  },
+  "SIGNIN_WRONG_EMAIL_PASSWORD": "メールアドレスまたはパスワードが間違っています",
+  "Try again": "再試行"
 }

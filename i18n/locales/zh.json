@@ -90,12 +90,41 @@
     "createAccount": "创建账户",
     "alreadyHaveAccount": "已有账户？",
     "bySigningUp": "通过注册，您同意我们的",
-    "backToHome": "返回首页"
+    "backToHome": "返回首页",
+    "notVerifyAccount": "您的账户尚未验证。请验证您的账户以继续",
+    "verifyAccount": "验证账户",
+    "resendActivationEmail": "重新发送激活邮件",
+    "accountRecovery": "账户恢复",
+    "accountRecoveryTitle": "恢复您的账户",
+    "accountRecoveryDescription": "输入您的邮箱以接收密码重置说明",
+    "sendRecoveryEmail": "发送恢复邮件",
+    "recoveryEmailSent": "恢复邮件已发送",
+    "recoveryEmailSentDescription": "请检查您的邮箱以获取密码重置说明",
+    "resetPassword": "重置密码",
+    "resetPasswordTitle": "重置您的密码",
+    "resetPasswordDescription": "输入您的新密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认密码",
+    "enterNewPassword": "输入您的新密码",
+    "enterConfirmPassword": "确认您的新密码",
+    "passwordResetSuccess": "密码重置成功",
+    "passwordResetSuccessDescription": "您的密码已成功重置。现在您可以使用新密码登录",
+    "activateAccount": "激活账户",
+    "activateAccountTitle": "激活您的账户",
+    "activateAccountDescription": "您的账户正在激活中...",
+    "accountActivated": "账户已激活",
+    "accountActivatedDescription": "您的账户已成功激活。现在您可以登录",
+    "activationFailed": "激活失败",
+    "activationFailedDescription": "无法激活您的账户。请重试或联系支持",
+    "backToLogin": "返回登录",
+    "loginFailed": "登录失败"
   },
   "validation": {
     "invalidEmail": "无效的电子邮件",
     "passwordMinLength": "密码必须至少8个字符",
-    "nameRequired": "姓名是必需的"
+    "nameRequired": "姓名是必需的",
+    "required": "此字段为必填项",
+    "passwordsDoNotMatch": "密码不匹配"
   },
   "imageSelect": {
     "pleaseSelectImageFile": "请选择一个图像文件",
@@ -106,5 +135,7 @@
     "loading": "加载图像中...",
     "processing": "处理图像中...",
     "revealComplete": "图像显示完成"
-  }
+  },
+  "SIGNIN_WRONG_EMAIL_PASSWORD": "邮箱或密码错误",
+  "Try again": "重试"
 }

@@ -1,21 +1,18 @@
 import axios from 'axios'
 
-const isRefreshingToken = false
-const requestsPending = [] as any[]
+let isRefreshingToken = false as boolean
+let requestsPending = [] as any[]
 
 const createAxios = (baseURL: string) => {
   const toast = useToast()
   const newInstance = axios.create({ baseURL })
 
-  newInstance.interceptors.request.use((config) => {
+  newInstance.interceptors.request.use((config: any) => {
     const authStore = useAuthStore()
-    // const accessToken = authStore.token
-    // const refreshToken = authStore.refresh_token
-    // if (['/login/refresh'].includes(config.url) && refreshToken) {
-    //   config.headers['Authorization'] = 'Bearer ' + refreshToken
-    // } else if (accessToken) {
-    //   config.headers['Authorization'] = 'Bearer ' + accessToken
-    // }
+    const accessToken = authStore.access_token
+    if (accessToken) {
+      config.headers['Authorization'] = 'Bearer ' + accessToken
+    }
     return config
   })
 
@@ -30,77 +27,76 @@ const createAxios = (baseURL: string) => {
       return { ...config, body: config.data }
     },
     async (error) => {
-      // const _errorResponse = error.response
-      // const originalRequest = error.config
-      // const status = _errorResponse.status
-      // const authStore = useAuthStore()
-      // // check it is login/refresh request, logout
-      // if (['/login/refresh'].includes(originalRequest.url)) {
-      //   await authStore.logout()
-      //   return Promise.reject(error)
-      // }
-      // // const { authService } = _useAPI()
+      const _errorResponse = error.response
+      const originalRequest = error.config
+      const status = _errorResponse.status
+      const authStore = useAuthStore()
+      console.log('🚀 ~ originalRequest.url:', originalRequest.url)
 
-      // switch (status) {
-      //   case 401:
-      //     if (['/logout'].includes(originalRequest.url)) {
-      //       // if auth_code request fails, redirect to login page
-      //       window.location.href = '/login?redirect=/mvno-mos/'
-      //     } else if (['/login/refresh'].includes(originalRequest.url)) {
-      //       await authStore.logout()
-      //       return Promise.reject(error)
-      //     } else {
-      //       // retry with refrest token first
-      //       if (!originalRequest._retry) {
-      //         // save request if it is not refresh token request
-      //         if (isRefreshingToken) {
-      //           return new Promise(function (resolve) {
-      //             requestsPending.push(function () {
-      //               resolve(newInstance(originalRequest))
-      //             })
-      //           })
-      //         }
-      //         originalRequest._retry = true
-      //         isRefreshingToken = true
+      // check it is login/refresh request, logout
+      if (['/refresh-token'].includes(originalRequest.url)) {
+        await authStore.logout()
+        return Promise.reject(error)
+      }
 
-      //         try {
-      //           const refreshTokenRes = await authStore.refreshToken()
+      switch (status) {
+        case 403:
+          if (['/refresh-token'].includes(originalRequest.url)) {
+            await authStore.logout()
+            return Promise.reject(error)
+          } else {
+            // retry with refrest token first
+            if (!originalRequest._retry) {
+              // save request if it is not refresh token request
+              if (isRefreshingToken) {
+                return new Promise(function (resolve) {
+                  requestsPending.push(function () {
+                    resolve(newInstance(originalRequest))
+                  })
+                })
+              }
+              originalRequest._retry = true
+              isRefreshingToken = true
 
-      //           if (refreshTokenRes) {
-      //             originalRequest.headers['Authorization']
-      //               = 'Bearer ' + refreshTokenRes.token
-      //             return newInstance(originalRequest)
-      //           } else {
-      //             await authStore.logout()
-      //           }
-      //         } catch (refreshError) {
-      //           isRefreshingToken = false
-      //           await authStore.logout()
-      //           return Promise.reject(refreshError)
-      //         } finally {
-      //           isRefreshingToken = false
-      //           requestsPending.forEach(callback => callback())
-      //           requestsPending = []
-      //         }
-      //       } else {
-      //         await authStore.logout()
-      //       }
-      //     }
+              try {
+                const refreshTokenRes = await authStore.refreshToken()
 
-      //     authStore.logout()
-      //     break
-      //   case 404:
-      //     break
+                if (refreshTokenRes) {
+                  originalRequest.headers['Authorization']
+                    = 'Bearer ' + refreshTokenRes.access_token
+                  return newInstance(originalRequest)
+                } else {
+                  await authStore.logout()
+                }
+              } catch (refreshError) {
+                isRefreshingToken = false
+                await authStore.logout()
+                return Promise.reject(refreshError)
+              } finally {
+                isRefreshingToken = false
+                requestsPending.forEach(callback => callback())
+                requestsPending = []
+              }
+            } else {
+              await authStore.logout()
+            }
+          }
 
-      //   default:
-      //     toast.add({
-      //       id: 'error',
-      //       title: 'エラー',
-      //       description: 'エラーが発生しました。' + error.message,
-      //       color: 'red'
-      //     })
-      //     break
-      // }
+          authStore.logout()
+          break
+        case 404:
+          break
+
+        default:
+          toast.add({
+            id: 'error',
+            title: 'Error',
+            description:
+              'Something went wrong. Please try again. ' + error.message,
+            color: 'error'
+          })
+          break
+      }
 
       return Promise.reject(error)
     }

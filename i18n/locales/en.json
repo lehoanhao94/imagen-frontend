@@ -90,12 +90,41 @@
     "createAccount": "Create account",
     "alreadyHaveAccount": "Already have an account?",
     "bySigningUp": "By signing up, you agree to our",
-    "backToHome": "Back to home"
+    "backToHome": "Back to home",
+    "notVerifyAccount": "Your account is not verified. Please verify your account to continue",
+    "verifyAccount": "Verify account",
+    "resendActivationEmail": "Resend activation email",
+    "accountRecovery": "Account Recovery",
+    "accountRecoveryTitle": "Recover your account",
+    "accountRecoveryDescription": "Enter your email to receive password reset instructions",
+    "sendRecoveryEmail": "Send recovery email",
+    "recoveryEmailSent": "Recovery email sent",
+    "recoveryEmailSentDescription": "Please check your email for password reset instructions",
+    "resetPassword": "Reset Password",
+    "resetPasswordTitle": "Reset your password",
+    "resetPasswordDescription": "Enter your new password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "enterNewPassword": "Enter your new password",
+    "enterConfirmPassword": "Confirm your new password",
+    "passwordResetSuccess": "Password reset successful",
+    "passwordResetSuccessDescription": "Your password has been reset successfully. You can now login with your new password",
+    "activateAccount": "Activate Account",
+    "activateAccountTitle": "Activate your account",
+    "activateAccountDescription": "Your account is being activated...",
+    "accountActivated": "Account activated",
+    "accountActivatedDescription": "Your account has been activated successfully. You can now login",
+    "activationFailed": "Activation failed",
+    "activationFailedDescription": "Failed to activate your account. Please try again or contact support",
+    "backToLogin": "Back to login",
+    "loginFailed": "Login failed"
   },
   "validation": {
     "invalidEmail": "Invalid email",
     "passwordMinLength": "Password must be at least 8 characters",
-    "nameRequired": "Name is required"
+    "nameRequired": "Name is required",
+    "required": "This field is required",
+    "passwordsDoNotMatch": "Passwords do not match"
   },
   "imageSelect": {
     "pleaseSelectImageFile": "Please select an image file",
@@ -106,5 +135,7 @@
     "loading": "Loading image...",
     "processing": "Processing image...",
     "revealComplete": "Image reveal complete"
-  }
+  },
+  "SIGNIN_WRONG_EMAIL_PASSWORD": "Wrong email or password",
+  "Try again": "Try again"
 }

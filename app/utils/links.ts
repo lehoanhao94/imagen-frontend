@@ -4,7 +4,7 @@ export const navLinks: NavigationMenuItem[] = [
   {
     label: 'AI Tool',
     icon: 'i-lucide-home',
-    to: '/'
+    to: '/app'
   },
   {
     label: 'Library',
@@ -19,6 +19,6 @@ export const navLinks: NavigationMenuItem[] = [
   {
     label: 'Login',
     icon: 'i-lucide-file-text',
-    to: '/auth/login'
+    slot: 'auth' as const
   }
 ]

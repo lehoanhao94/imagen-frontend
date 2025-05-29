@@ -54,12 +54,14 @@ const onGenerate = () => {
       }"
       :transition="{
         duration: 0.6,
-        delay: 0.1
+        delay: 0.5
       }"
     >
-      <BaseAppTitle />
+      <BaseAppTitle
+        class="justify-center text-center flex mx-auto text-6xl lg:w-[400px]"
+      />
     </Motion>
-    <UContainer>
+    <UContainer class="mt-10">
       <Motion
         :initial="{
           scale: 1.1,
@@ -76,8 +78,13 @@ const onGenerate = () => {
           delay: 0.3
         }"
       >
+        <div
+          class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-4"
+        >
+          <AIToolMenu />
+        </div>
         <UChatPrompt
-          class="[view-transition-name:chat-prompt] mt-15"
+          class="[view-transition-name:chat-prompt]"
           variant="subtle"
           :placeholder="$t('Describe the image you want to generate...')"
           @submit="onGenerate"

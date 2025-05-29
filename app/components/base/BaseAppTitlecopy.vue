@@ -7,9 +7,9 @@
     <div class="hero w-fit mx-auto">
       <div
         class="glow-text lg:text-5xl text-3xl transition-all duration-300 text-gray-50 dark:text-white dark:opacity-75 opacity-100"
-        data-text="GeminiGen.AI"
+        :data-text="$t('appTitle')"
       >
-        GeminiGen.AI
+        {{ $t('appTitle') }}
       </div>
     </div>
   </div>
