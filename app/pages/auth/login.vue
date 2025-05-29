@@ -122,7 +122,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     <template #footer>
       {{ $t("auth.bySigningIn") }}
       <ULink
-        to="/"
+        to="/terms"
         class="text-primary font-medium"
       >{{
         $t("auth.termsOfService")

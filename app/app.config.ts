@@ -54,6 +54,16 @@ export default defineAppConfig({
         'to': 'https://github.com/nuxt/ui',
         'target': '_blank',
         'aria-label': 'Youtube'
+      },
+      {
+        'label': 'Privacy',
+        'to': '/privacy',
+        'aria-label': 'Privacy Policy'
+      },
+      {
+        'label': 'Terms',
+        'to': '/terms',
+        'aria-label': 'Terms of Service'
       }
     ]
   }
