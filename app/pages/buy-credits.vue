@@ -16,9 +16,12 @@ const { user_credit } = storeToRefs(authStore)
         :headline="$t('Available credits')"
       />
     </UContainer>
-    <UContainer class="mt-6">
+    <UContainer class="mt-6 flex flex-col gap-4">
       <div>
         <BuyCreditsQuickTopup />
+      </div>
+      <div>
+        <BuyCreditsCustomTopup />
       </div>
     </UContainer>
   </UPage>
