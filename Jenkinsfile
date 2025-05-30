@@ -1,5 +1,11 @@
 def getEnvCode(def _git_branch){
-    if (_git_branch == "main") {
+    if (_git_branch == "develop") {
+        env_code = "dev"
+    }
+    else if (_git_branch == "staging") {
+        env_code = "stg"
+    }
+    else if (_git_branch == "main") {
         env_code = "prod"
     }
     return env_code
@@ -13,9 +19,9 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '30')
     }
     environment {
-        SERVICE_NAME    = 'frontend-imagenpro-service'
+        SERVICE_NAME    = 'frontend-geminigen-service'
         currentVersion  = "v1.0"
-        PAGES_PROJECT_NAME = "frontend-imagenpro"
+        PAGES_PROJECT_NAME = "frontend-geminigen"
         SHORT_COMMIT = "${GIT_COMMIT[0..7]}"
     }
     parameters {
@@ -29,7 +35,7 @@ pipeline {
             when{
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
+                    expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'main'
@@ -53,7 +59,7 @@ pipeline {
             when{
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
+                    expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'main'
@@ -81,7 +87,7 @@ pipeline {
             when {
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
+                    expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'main'
@@ -107,7 +113,7 @@ pipeline {
             when {
                 anyOf{
                     changeset "**"
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
+                    expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'main'
