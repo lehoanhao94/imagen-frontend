@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
 
-// Sample data for initial library items and mock API
+/**
+ * Library page with infinite scroll functionality
+ * 
+ * Features:
+ * - Loads initial set of items
+ * - Detects when user scrolls to bottom of page
+ * - Loads additional items and appends to existing list
+ * - Shows loading indicator while fetching
+ * - Maintains original data order (old data first, new data appended)
+ */
 const initialData = [
   {
     imageUrl:
@@ -125,16 +134,28 @@ const fetchMoreLibraryItems = async () => {
     // Simulate API call with delay
     await new Promise(resolve => setTimeout(resolve, 1000));
     
+    // In a real implementation, you would fetch from your API with pagination:
+    // const response = await fetch(`/api/library?page=${page.value}&limit=10`);
+    // const newData = await response.json();
+    
     // Mock response based on page
     if (page.value === 1) {
+      // Append new data to existing data (preserving order)
       libraries.value = [...libraries.value, ...moreData];
       page.value++;
     } else {
       // For demo purposes, we'll stop loading after second page
       hasMoreData.value = false;
     }
+    
+    // In a real implementation, you would check if there's more data available:
+    // if (newData.length < limit) {
+    //   hasMoreData.value = false;
+    // }
   } catch (error) {
     console.error('Error fetching more library items:', error);
+    // Show error to user
+    alert('Failed to load more items. Please try again.');
   } finally {
     isLoading.value = false;
   }
@@ -180,8 +201,17 @@ watch(libraries, () => {
   });
 });
 
-// Fallback scroll detection
-const checkScrollPosition = () => {
+// Debounce function to improve scroll performance
+const debounce = (fn: Function, delay: number) => {
+  let timeoutId: NodeJS.Timeout;
+  return function(...args: any[]) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+};
+
+// Fallback scroll detection with debouncing
+const checkScrollPosition = debounce(() => {
   if (isLoading.value || !hasMoreData.value) return;
   
   const scrollPosition = window.scrollY + window.innerHeight;
@@ -191,7 +221,7 @@ const checkScrollPosition = () => {
   if (scrollPosition >= documentHeight * 0.9) {
     fetchMoreLibraryItems();
   }
-};
+}, 200); // 200ms debounce;
 </script>
 
 <template>
@@ -226,16 +256,21 @@ const checkScrollPosition = () => {
       
       <!-- Loading indicator -->
       <div v-if="isLoading" class="flex justify-center items-center py-10">
-        <UIcon name="i-lucide-loader" class="animate-spin text-primary h-8 w-8" />
-        <span class="ml-2 text-primary">Loading more items...</span>
+        <UIcon name="i-lucide-loader" class="animate-spin text-primary h-8 w-8 mr-2" />
+        <span class="text-primary">Loading more items...</span>
       </div>
       
       <!-- End of list indicator for intersection observer -->
-      <div id="loading-trigger" class="h-1 w-full" v-if="hasMoreData && !isLoading"></div>
+      <div 
+        id="loading-trigger" 
+        class="h-1 w-full" 
+        v-if="hasMoreData && !isLoading"
+        aria-hidden="true"
+      ></div>
       
       <!-- End message when all data is loaded -->
-      <div v-if="!hasMoreData && !isLoading" class="text-center py-8 text-gray-500">
-        No more items to load
+      <div v-if="!hasMoreData" class="text-center py-8 text-gray-500">
+        You've reached the end of the library
       </div>
     </UContainer>
   </UPage>
