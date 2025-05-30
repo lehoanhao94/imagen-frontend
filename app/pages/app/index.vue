@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const { model, models } = useImageGenModels()
-definePageMeta({
-  middleware: 'auth'
-})
 
 const appStore = useAppStore()
 

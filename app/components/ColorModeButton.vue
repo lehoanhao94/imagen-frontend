@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
-const { $t } = useNuxtApp()
+const { t } = useI18n()
 
 const nextTheme = computed(() => (colorMode.value === 'dark' ? 'light' : 'dark'))
 
 const ariaLabel = computed(() => {
-  return nextTheme.value === 'dark' 
-    ? $t('switchToDarkMode') 
-    : $t('switchToLightMode')
+  return nextTheme.value === 'dark'
+    ? t('switchToDarkMode')
+    : t('switchToLightMode')
 })
 
 const switchTheme = () => {
