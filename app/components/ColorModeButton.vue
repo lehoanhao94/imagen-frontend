@@ -1,7 +1,14 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { $t } = useNuxtApp()
 
 const nextTheme = computed(() => (colorMode.value === 'dark' ? 'light' : 'dark'))
+
+const ariaLabel = computed(() => {
+  return nextTheme.value === 'dark' 
+    ? $t('switchToDarkMode') 
+    : $t('switchToLightMode')
+})
 
 const switchTheme = () => {
   colorMode.preference = nextTheme.value
@@ -46,7 +53,7 @@ const startViewTransition = (event: MouseEvent) => {
 <template>
   <ClientOnly>
     <UButton
-      :aria-label="`Switch to ${nextTheme} mode`"
+      :aria-label="ariaLabel"
       :icon="`i-lucide-${nextTheme === 'dark' ? 'sun' : 'moon'}`"
       color="neutral"
       variant="ghost"

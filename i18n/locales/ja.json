@@ -117,7 +117,9 @@
     "activationFailed": "有効化に失敗しました",
     "activationFailedDescription": "アカウントの有効化に失敗しました。再試行するかサポートにお問い合わせください",
     "backToLogin": "ログインに戻る",
-    "loginFailed": "ログインに失敗しました"
+    "loginFailed": "ログインに失敗しました",
+    "loginWithGoogle": "Googleでログイン",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "無効なメールアドレス",
@@ -137,5 +139,31 @@
     "revealComplete": "画像の表示が完了しました"
   },
   "SIGNIN_WRONG_EMAIL_PASSWORD": "メールアドレスまたはパスワードが間違っています",
-  "Try again": "再試行"
+  "Try again": "再試行",
+  "aiToolMenu": {
+    "imagen": "Imagen",
+    "videoGen": "動画生成",
+    "speechGen": "音声生成",
+    "musicGen": "音楽生成",
+    "imagen3": "Imagen 3",
+    "imagen3Description": "クリエイティブな視覚コンテンツのための正確なテキストレンダリングを備えた高品質で詳細な画像を生成します。",
+    "imagen4": "Imagen 4",
+    "imagen4Description": "かつてないほどあなたのアイデアを表現してください — Imagenを使えば、創造性に限界はありません。",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini2FlashDescription": "Gemini 2.0 Flashはテキストプロンプトから画像を生成する強力なツールです。",
+    "veo2": "Veo 2",
+    "veo2Description": "かつてないほどの制御力、一貫性、創造性。",
+    "veo3": "Veo 3",
+    "veo3Description": "動画がオーディオと出会う。映画制作者やストーリーテラーに力を与えるために設計された、私たちの最新の動画生成モデル。",
+    "gemini25Pro": "Gemini 2.5 Pro",
+    "gemini25ProDescription": "利用可能な最も先進的なテキスト読み上げモデル。",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "gemini25FlashDescription": "大規模処理（例：複数のPDF）。\n思考を必要とする低遅延、大容量タスク\nエージェンティックユースケース",
+    "link": "リンク",
+    "linkDescription": "スーパーパワーを持つNuxtLinkを使用。",
+    "soon": "近日公開"
+  },
+  "readArticle": "記事を読む",
+  "switchToLightMode": "ライトモードに切り替え",
+  "switchToDarkMode": "ダークモードに切り替え"
 }

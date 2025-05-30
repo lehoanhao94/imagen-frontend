@@ -117,7 +117,9 @@
     "activationFailed": "Activation failed",
     "activationFailedDescription": "Failed to activate your account. Please try again or contact support",
     "backToLogin": "Back to login",
-    "loginFailed": "Login failed"
+    "loginFailed": "Login failed",
+    "loginWithGoogle": "Login with Google",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "Invalid email",
@@ -137,5 +139,31 @@
     "revealComplete": "Image reveal complete"
   },
   "SIGNIN_WRONG_EMAIL_PASSWORD": "Wrong email or password",
-  "Try again": "Try again"
+  "Try again": "Try again",
+  "aiToolMenu": {
+    "imagen": "Imagen",
+    "videoGen": "Video Gen",
+    "speechGen": "Speech Gen",
+    "musicGen": "Music Gen",
+    "imagen3": "Imagen 3",
+    "imagen3Description": "Generate high-quality, detailed images with accurate text rendering for creative visual content.",
+    "imagen4": "Imagen 4",
+    "imagen4Description": "Express your ideas like never before — with Imagen, creativity has no limits.",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini2FlashDescription": "Gemini 2.0 Flash is a powerful tool for generating images from text prompts.",
+    "veo2": "Veo 2",
+    "veo2Description": "Greater control, consistency, and creativity than ever before.",
+    "veo3": "Veo 3",
+    "veo3Description": "Video, meet audio. Our latest video generation model, designed to empower filmmakers and storytellers.",
+    "gemini25Pro": "Gemini 2.5 Pro",
+    "gemini25ProDescription": "The most advanced text-to-speech model available.",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "gemini25FlashDescription": "Large scale processing (e.g. multiple pdfs).\nLow latency, high volume tasks which require thinking\nAgentic use cases",
+    "link": "Link",
+    "linkDescription": "Use NuxtLink with superpowers.",
+    "soon": "Soon"
+  },
+  "readArticle": "Read Article",
+  "switchToLightMode": "Switch to light mode",
+  "switchToDarkMode": "Switch to dark mode"
 }

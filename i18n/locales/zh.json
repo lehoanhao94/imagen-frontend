@@ -117,7 +117,9 @@
     "activationFailed": "激活失败",
     "activationFailedDescription": "无法激活您的账户。请重试或联系支持",
     "backToLogin": "返回登录",
-    "loginFailed": "登录失败"
+    "loginFailed": "登录失败",
+    "loginWithGoogle": "使用Google登录",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "无效的电子邮件",
@@ -137,5 +139,31 @@
     "revealComplete": "图像显示完成"
   },
   "SIGNIN_WRONG_EMAIL_PASSWORD": "邮箱或密码错误",
-  "Try again": "重试"
+  "Try again": "重试",
+  "aiToolMenu": {
+    "imagen": "Imagen",
+    "videoGen": "视频生成",
+    "speechGen": "语音生成",
+    "musicGen": "音乐生成",
+    "imagen3": "Imagen 3",
+    "imagen3Description": "生成高质量、详细的图像，具有准确的文本渲染功能，用于创意视觉内容。",
+    "imagen4": "Imagen 4",
+    "imagen4Description": "前所未有地表达您的想法——使用Imagen，创意无限。",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini2FlashDescription": "Gemini 2.0 Flash是从文本提示生成图像的强大工具。",
+    "veo2": "Veo 2",
+    "veo2Description": "比以往更强的控制力、一致性和创造力。",
+    "veo3": "Veo 3",
+    "veo3Description": "视频与音频的结合。我们最新的视频生成模型，旨在为电影制作人和故事讲述者提供支持。",
+    "gemini25Pro": "Gemini 2.5 Pro",
+    "gemini25ProDescription": "最先进的文本转语音模型。",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "gemini25FlashDescription": "大规模处理（例如多个PDF）。\n需要思考的低延迟、高容量任务\n代理用例",
+    "link": "链接",
+    "linkDescription": "使用超强的NuxtLink。",
+    "soon": "即将推出"
+  },
+  "readArticle": "阅读文章",
+  "switchToLightMode": "切换到明亮模式",
+  "switchToDarkMode": "切换到深色模式"
 }

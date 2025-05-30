@@ -117,7 +117,9 @@
     "activationFailed": "Kích hoạt thất bại",
     "activationFailedDescription": "Không thể kích hoạt tài khoản của bạn. Vui lòng thử lại hoặc liên hệ hỗ trợ",
     "backToLogin": "Quay lại đăng nhập",
-    "loginFailed": "Đăng nhập thất bại"
+    "loginFailed": "Đăng nhập thất bại",
+    "loginWithGoogle": "Đăng nhập bằng Google",
+    "google": "Google"
   },
   "validation": {
     "invalidEmail": "Email không hợp lệ",
@@ -138,5 +140,31 @@
     "revealComplete": "Hiển thị hình ảnh hoàn tất"
   },
   "SIGNIN_WRONG_EMAIL_PASSWORD": "Email hoặc mật khẩu sai",
-  "Try again": "Thử lại"
+  "Try again": "Thử lại",
+  "aiToolMenu": {
+    "imagen": "Imagen",
+    "videoGen": "Tạo Video",
+    "speechGen": "Tạo Giọng Nói",
+    "musicGen": "Tạo Nhạc",
+    "imagen3": "Imagen 3",
+    "imagen3Description": "Tạo hình ảnh chất lượng cao, chi tiết với khả năng hiển thị văn bản chính xác cho nội dung thị giác sáng tạo.",
+    "imagen4": "Imagen 4",
+    "imagen4Description": "Thể hiện ý tưởng của bạn như chưa từng có — với Imagen, sự sáng tạo không có giới hạn.",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini2FlashDescription": "Gemini 2.0 Flash là công cụ mạnh mẽ để tạo hình ảnh từ câu lệnh văn bản.",
+    "veo2": "Veo 2",
+    "veo2Description": "Kiểm soát, tính nhất quán và sự sáng tạo tốt hơn bao giờ hết.",
+    "veo3": "Veo 3",
+    "veo3Description": "Video gặp gỡ âm thanh. Mô hình tạo video mới nhất của chúng tôi, được thiết kế để trao quyền cho các nhà làm phim và người kể chuyện.",
+    "gemini25Pro": "Gemini 2.5 Pro",
+    "gemini25ProDescription": "Mô hình text-to-speech tiên tiến nhất hiện có.",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "gemini25FlashDescription": "Xử lý quy mô lớn (ví dụ: nhiều tệp PDF).\nCác tác vụ khối lượng lớn, độ trễ thấp đòi hỏi suy nghĩ\nCác trường hợp sử dụng Agentic",
+    "link": "Liên kết",
+    "linkDescription": "Sử dụng NuxtLink với siêu năng lực.",
+    "soon": "Sớm"
+  },
+  "readArticle": "Đọc bài viết",
+  "switchToLightMode": "Chuyển sang chế độ sáng",
+  "switchToDarkMode": "Chuyển sang chế độ tối"
 }

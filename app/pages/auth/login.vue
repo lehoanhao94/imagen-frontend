@@ -45,7 +45,7 @@ const fields = computed(() => [
 const providers = computed(() => {
   return [
     {
-      label: 'Google',
+      label: t('auth.google'),
       icon: 'i-simple-icons-google',
       onClick: login,
       disabled: !isReady,
@@ -131,7 +131,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         :disabled="!isReady"
         @click="() => login()"
       >
-        Login with Google
+        {{ $t("auth.loginWithGoogle") }}
       </button>
     </template>
   </UAuthForm>
