@@ -24,7 +24,7 @@ const { textToImageResult, aiToolImageCardRef, prompt }
 const onGenerate = () => {
   textToImageStore.textToImage({
     prompt: prompt.value,
-    model: 'imagen-3',
+    model: 'gemini-2.0-flash-exp-image-generation',
     style: 'Portrait',
     dimensions: '1:1'
   })

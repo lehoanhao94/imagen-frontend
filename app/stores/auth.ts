@@ -21,6 +21,7 @@ interface User {
   id: string
   email: string
   full_name: string
+  user_credit: any
 }
 
 interface AuthState {
@@ -57,7 +58,8 @@ export const useAuthStore = defineStore('authStore', {
   getters: {
     isAuthenticated: state => !!state.access_token && !!state.user,
     getUser: state => state.user,
-    isNotVerifyAccount: state => state.user && state.user?.is_active !== true
+    isNotVerifyAccount: state => state.user && state.user?.is_active !== true,
+    user_credit: state => state.user?.user_credit
   },
 
   actions: {

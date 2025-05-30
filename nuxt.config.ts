@@ -13,8 +13,8 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
     'nuxt-vue3-google-signin'
   ],
+  plugins: [{ src: '~/plugins/vue-number-animation', ssr: false }],
   ssr: false,
-
   components: [
     {
       path: '~/components',

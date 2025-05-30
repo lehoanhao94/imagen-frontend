@@ -20,7 +20,8 @@ const items = computed(() => {
       },
       {
         label: 'Buy Credits',
-        icon: 'mynaui:cart-plus'
+        icon: 'mynaui:cart-plus',
+        to: '/buy-credits'
       },
       {
         label: 'Settings',
