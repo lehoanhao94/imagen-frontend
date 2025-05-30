@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const libraries = [
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
+
+// Sample data for initial library items and mock API
+const initialData = [
   {
     imageUrl:
       'https://cdn.leonardo.ai/users/ae43823c-9b34-43ec-89d8-a561b2d817cf/generations/09b9108b-e6c3-4300-a31d-4a5a6012e2e1/Leonardo_Phoenix_10_create_an_illustration_of_A_woman_wearing_2.jpg?w=512',
@@ -30,7 +33,6 @@ const libraries = [
     style: 'Dynamic',
     resolution: '832x1472'
   },
-
   {
     imageUrl:
       'https://cdn.leonardo.ai/users/c675554b-c126-47eb-936a-7ee76290f5e3/generations/27d15640-a5a9-4dbc-a9bc-40fd28f82d10/Leonardo_Phoenix_10_Create_an_image_of_a_majestic_tortoise_in_3.jpg?w=512',
@@ -41,7 +43,6 @@ const libraries = [
     style: 'Dynamic',
     resolution: '832x1472'
   },
-
   {
     imageUrl:
       'https://cdn.leonardo.ai/users/dc4608ba-6fc1-415e-ad8f-8dde28127c66/generations/6313bb9e-0ba2-4e65-a72d-561b348e2100/Leonardo_Phoenix_10_Vibrant_and_highly_detailed_photograph_of_2.jpg?w=512',
@@ -51,7 +52,11 @@ const libraries = [
     preset: 'Imagen 3',
     style: 'Dynamic',
     resolution: '832x1472'
-  },
+  }
+];
+
+// More sample data for pagination
+const moreData = [
   {
     imageUrl:
       'https://cdn.leonardo.ai/users/f33d9042-22f3-4fbb-96ef-923567ea1ed9/generations/50b0bcd7-58f9-4a2c-a8c7-6a5a356bd852/Leonardo_Phoenix_10_Create_a_minimalist_and_elegant_vintageins_2.jpg?w=512',
@@ -102,7 +107,91 @@ const libraries = [
     style: 'Dynamic',
     resolution: '832x1472'
   }
-]
+];
+
+// Reactive state
+const libraries = ref(initialData);
+const page = ref(1);
+const isLoading = ref(false);
+const hasMoreData = ref(true);
+
+// Mock API fetch function
+const fetchMoreLibraryItems = async () => {
+  if (!hasMoreData.value || isLoading.value) return;
+  
+  isLoading.value = true;
+  
+  try {
+    // Simulate API call with delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Mock response based on page
+    if (page.value === 1) {
+      libraries.value = [...libraries.value, ...moreData];
+      page.value++;
+    } else {
+      // For demo purposes, we'll stop loading after second page
+      hasMoreData.value = false;
+    }
+  } catch (error) {
+    console.error('Error fetching more library items:', error);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+// Intersection observer for infinite scroll
+let observer: IntersectionObserver | null = null;
+
+const observeLastElement = (entries: IntersectionObserverEntry[]) => {
+  const entry = entries[0];
+  if (entry && entry.isIntersecting && !isLoading.value) {
+    fetchMoreLibraryItems();
+  }
+};
+
+// Setup scroll observer on component mount
+onMounted(() => {
+  observer = new IntersectionObserver(observeLastElement, {
+    threshold: 0.5,
+    rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
+  });
+  
+  // Setup scroll event for fallback
+  window.addEventListener('scroll', checkScrollPosition);
+});
+
+// Clean up on unmount
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+  window.removeEventListener('scroll', checkScrollPosition);
+});
+
+// Update observer target when the libraries array changes
+watch(libraries, () => {
+  nextTick(() => {
+    const loadingTrigger = document.getElementById('loading-trigger');
+    if (loadingTrigger && observer) {
+      observer.disconnect();
+      observer.observe(loadingTrigger);
+    }
+  });
+});
+
+// Fallback scroll detection
+const checkScrollPosition = () => {
+  if (isLoading.value || !hasMoreData.value) return;
+  
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+  
+  // Load more when user scrolls to 90% of the page
+  if (scrollPosition >= documentHeight * 0.9) {
+    fetchMoreLibraryItems();
+  }
+};
 </script>
 
 <template>
@@ -134,6 +223,20 @@ const libraries = [
           />
         </Motion>
       </UPageColumns>
+      
+      <!-- Loading indicator -->
+      <div v-if="isLoading" class="flex justify-center items-center py-10">
+        <UIcon name="i-lucide-loader" class="animate-spin text-primary h-8 w-8" />
+        <span class="ml-2 text-primary">Loading more items...</span>
+      </div>
+      
+      <!-- End of list indicator for intersection observer -->
+      <div id="loading-trigger" class="h-1 w-full" v-if="hasMoreData && !isLoading"></div>
+      
+      <!-- End message when all data is loaded -->
+      <div v-if="!hasMoreData && !isLoading" class="text-center py-8 text-gray-500">
+        No more items to load
+      </div>
     </UContainer>
   </UPage>
 </template>
