@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'auth'
+})
+
 const authStore = useAuthStore()
 const { user_credit } = storeToRefs(authStore)
 </script>
@@ -12,10 +16,10 @@ const { user_credit } = storeToRefs(authStore)
         :headline="$t('Available credits')"
       />
     </UContainer>
-    <UPageSection>
-      <div class="prose dark:prose-invert max-w-none">
+    <UContainer class="mt-6">
+      <div>
         <BuyCreditsQuickTopup />
       </div>
-    </UPageSection>
+    </UContainer>
   </UPage>
 </template>
