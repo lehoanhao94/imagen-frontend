@@ -38,6 +38,8 @@ pipeline {
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
+                    branch 'develop'
+                    branch 'staging'
                     branch 'main'
                 }
             }
@@ -62,6 +64,8 @@ pipeline {
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
+                    branch 'develop'
+                    branch 'staging'
                     branch 'main'
                 }
             }
@@ -90,6 +94,8 @@ pipeline {
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
+                    branch 'develop'
+                    branch 'staging'
                     branch 'main'
                 }
             }
@@ -116,6 +122,8 @@ pipeline {
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
+                    branch 'develop'
+                    branch 'staging'
                     branch 'main'
                 }
             }
