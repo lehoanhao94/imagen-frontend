@@ -9,6 +9,27 @@ const toast = useToast()
 const passwordChangeSuccess = ref(false)
 const profileUpdateSuccess = ref(false)
 
+// Notification preferences
+const emailNotifications = ref(true)
+const marketingEmails = ref(false)
+const securityAlerts = ref(true)
+
+// Language preferences
+const selectedLanguage = ref('en')
+const languageOptions = [
+  { name: 'English', value: 'en' },
+  { name: 'Vietnamese', value: 'vi' },
+  { name: 'Spanish', value: 'es' },
+  { name: 'French', value: 'fr' },
+  { name: 'German', value: 'de' },
+  { name: 'Japanese', value: 'ja' },
+  { name: 'Chinese', value: 'zh' }
+]
+
+// Account deletion
+const confirmDeleteAccount = ref(false)
+const deleteConfirmText = ref('')
+
 useSeoMeta({
   title: 'Profile Settings - Imagen',
   description: 'Manage your account settings and preferences',
@@ -153,6 +174,46 @@ async function onPasswordSubmit(payload: FormSubmitEvent<PasswordSchema>) {
     })
   }
 }
+
+// Notification preferences methods
+function saveNotificationPreferences() {
+  // This would typically make an API call to save notification preferences
+  toast.add({
+    title: t('profile.preferencesUpdated') || 'Preferences Updated',
+    description: t('profile.notificationPreferencesUpdated') || 'Your notification preferences have been updated',
+    color: 'success'
+  })
+}
+
+// Language preferences methods
+function saveLanguagePreferences() {
+  // This would typically make an API call to save language preferences
+  toast.add({
+    title: t('profile.preferencesUpdated') || 'Preferences Updated',
+    description: t('profile.languagePreferencesUpdated') || 'Your language preferences have been updated',
+    color: 'success'
+  })
+}
+
+// Account deletion methods
+function deleteAccount() {
+  if (deleteConfirmText.value === 'DELETE') {
+    // This would make an API call to delete the user account
+    toast.add({
+      title: t('profile.accountDeleted') || 'Account Deleted',
+      description: t('profile.accountDeletedDescription') || 'Your account has been deleted successfully',
+      color: 'info'
+    })
+    
+    // Close modal and redirect to home or login page
+    confirmDeleteAccount.value = false
+    
+    // Log out user after account deletion
+    setTimeout(() => {
+      authStore.logout()
+    }, 2000)
+  }
+}
 </script>
 
 <template>
@@ -162,7 +223,7 @@ async function onPasswordSubmit(payload: FormSubmitEvent<PasswordSchema>) {
     <div class="container mx-auto px-4 py-8">
       <h1 class="text-2xl font-bold mb-8">{{ $t('profile.settings') || 'Profile Settings' }}</h1>
       
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 gap-8">
         <!-- Profile Information -->
         <UCard class="p-6">
           <template #header>
@@ -258,7 +319,148 @@ async function onPasswordSubmit(payload: FormSubmitEvent<PasswordSchema>) {
             </template>
           </UForm>
         </UCard>
+        
+        <!-- Notification Preferences -->
+        <UCard class="p-6">
+          <template #header>
+            <div class="flex items-center space-x-4 mb-4">
+              <UIcon name="i-lucide-bell" class="text-primary" />
+              <h2 class="text-xl font-semibold">
+                {{ $t('profile.notificationPreferences') || 'Notification Preferences' }}
+              </h2>
+            </div>
+          </template>
+          
+          <div class="space-y-4">
+            <UToggle
+              v-model="emailNotifications"
+              label="Email Notifications"
+              color="primary"
+            />
+            <UToggle
+              v-model="marketingEmails"
+              label="Marketing Emails"
+              color="primary"
+            />
+            <UToggle
+              v-model="securityAlerts"
+              label="Security Alerts"
+              color="primary"
+            />
+            
+            <div class="flex justify-end mt-4">
+              <UButton
+                color="primary"
+                @click="saveNotificationPreferences"
+              >
+                {{ $t('profile.saveChanges') || 'Save Changes' }}
+              </UButton>
+            </div>
+          </div>
+        </UCard>
+        
+        <!-- Language Preferences -->
+        <UCard class="p-6">
+          <template #header>
+            <div class="flex items-center space-x-4 mb-4">
+              <UIcon name="i-lucide-globe" class="text-primary" />
+              <h2 class="text-xl font-semibold">
+                {{ $t('profile.languagePreferences') || 'Language Preferences' }}
+              </h2>
+            </div>
+          </template>
+          
+          <div class="space-y-4">
+            <USelect
+              v-model="selectedLanguage"
+              :options="languageOptions"
+              option-attribute="name"
+              :placeholder="$t('profile.selectLanguage') || 'Select Language'"
+            />
+            
+            <div class="flex justify-end mt-4">
+              <UButton
+                color="primary"
+                @click="saveLanguagePreferences"
+              >
+                {{ $t('profile.saveChanges') || 'Save Changes' }}
+              </UButton>
+            </div>
+          </div>
+        </UCard>
+        
+        <!-- Danger Zone -->
+        <UCard class="p-6 border-red-300 dark:border-red-700">
+          <template #header>
+            <div class="flex items-center space-x-4 mb-4">
+              <UIcon name="i-lucide-alert-triangle" class="text-error" />
+              <h2 class="text-xl font-semibold text-error">
+                {{ $t('profile.dangerZone') || 'Danger Zone' }}
+              </h2>
+            </div>
+          </template>
+          
+          <div class="space-y-4">
+            <p class="text-gray-600 dark:text-gray-400">
+              {{ $t('profile.deleteAccountWarning') || 'Deleting your account is permanent and cannot be undone. All your data will be lost.' }}
+            </p>
+            
+            <UButton
+              color="error"
+              variant="soft"
+              @click="confirmDeleteAccount = true"
+            >
+              {{ $t('profile.deleteAccount') || 'Delete Account' }}
+            </UButton>
+          </div>
+        </UCard>
       </div>
     </div>
+    
+    <!-- Delete Account Confirmation Modal -->
+    <UModal v-model="confirmDeleteAccount">
+      <UCard>
+        <template #header>
+          <div class="flex items-center space-x-2">
+            <UIcon name="i-lucide-alert-triangle" class="text-error" />
+            <h3 class="text-lg font-semibold">
+              {{ $t('profile.confirmDeleteAccount') || 'Confirm Account Deletion' }}
+            </h3>
+          </div>
+        </template>
+        
+        <p class="mb-4">
+          {{ $t('profile.deleteAccountConfirmation') || 'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.' }}
+        </p>
+        
+        <div class="mt-4">
+          <UInput
+            v-model="deleteConfirmText"
+            :placeholder="$t('profile.typeConfirmation') || 'Type DELETE to confirm'"
+            class="mb-4"
+          />
+        </div>
+        
+        <template #footer>
+          <div class="flex justify-between">
+            <UButton
+              color="gray"
+              variant="soft"
+              @click="confirmDeleteAccount = false"
+            >
+              {{ $t('profile.cancel') || 'Cancel' }}
+            </UButton>
+            
+            <UButton
+              color="error"
+              :disabled="deleteConfirmText !== 'DELETE'"
+              @click="deleteAccount"
+            >
+              {{ $t('profile.deleteAccountPermanently') || 'Delete Account Permanently' }}
+            </UButton>
+          </div>
+        </template>
+      </UCard>
+    </UModal>
   </UPage>
 </template>
