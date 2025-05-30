@@ -128,6 +128,18 @@ const props = defineProps({
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
+}
+
+/* Adjust for light mode */
+:root:not(.dark) .circulate .circle {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15),
+    0 0 80px rgba(142, 45, 226, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(35, 52, 93, 0.8),
+    rgba(146, 22, 100, 0.8)
+  );
+}
   /* Glass effect */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);

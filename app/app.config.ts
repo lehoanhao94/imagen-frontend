@@ -12,8 +12,8 @@ export default defineAppConfig({
   },
   ui: {
     colors: {
-      primary: 'pink',
-      neutral: 'neutral'
+      primary: 'blue',
+      neutral: 'slate'
     }
   },
   uiPro: {
