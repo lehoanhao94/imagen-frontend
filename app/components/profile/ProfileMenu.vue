@@ -11,6 +11,11 @@ const items = [
     slot: 'logo' as const
   },
   {
+    label: 'Settings',
+    icon: 'i-lucide-settings',
+    to: '/profile/settings'
+  },
+  {
     label: 'Components',
     icon: 'i-lucide-box',
     slot: 'components' as const
