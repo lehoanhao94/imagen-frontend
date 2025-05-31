@@ -5,7 +5,7 @@ const appStore = useAppStore()
 
 const { loading } = storeToRefs(appStore)
 
-const aiPhotos = [
+const _aiPhotos = [
   'https://cdn.leonardo.ai/users/c593f6db-e19b-43f4-b0ce-f5757ff82907/generations/27ceb2db-a6c1-4533-a1bc-35375113bf45/segments/5:8:1/Leonardo_Phoenix_10_A_Clean_Shaven_Strangely_Odd_Unorthodox_Av_0.jpg?w=512',
   'https://cdn.leonardo.ai/users/daeb794a-c999-4c7c-a7bd-1b22321efa4e/generations/1e0d2e32-d948-47c3-891a-7ea47ce900d8/Leonardo_Phoenix_10_HD_animestyle_couple_walking_along_a_narro_1.jpg?w=512',
   'https://cdn.leonardo.ai/users/dae3edd9-f7aa-4aef-adc1-63cb53d7d8b8/generations/d2236476-d02a-4d4c-8369-b1671b64ca6b/variations/alchemyrefiner_alchemymagic_3_d2236476-d02a-4d4c-8369-b1671b64ca6b_0.jpg?w=512',
@@ -14,8 +14,11 @@ const aiPhotos = [
 ]
 
 const textToImageStore = useTextToImageStore()
-const { textToImageResult, aiToolImageCardRef, prompt }
+const { textToImageResult: _textToImageResult, aiToolImageCardRef: _aiToolImageCardRef, prompt }
   = storeToRefs(textToImageStore)
+
+// Video type selection
+const selectedVideoType = ref(null)
 
 const onGenerate = () => {
   textToImageStore.textToImage({
@@ -59,6 +62,29 @@ const onGenerate = () => {
 
         <template #footer />
       </UChatPrompt>
+    </Motion>
+    <Motion
+      :initial="{
+        scale: 1.1,
+        opacity: 0,
+        filter: 'blur(20px)'
+      }"
+      :animate="{
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)'
+      }"
+      :transition="{
+        duration: 0.6,
+        delay: 0.4
+      }"
+    >
+      <UFormField
+        :label="$t('videoTypeSelection')"
+        class="mt-6"
+      >
+        <BaseVideoTypeSelect v-model="selectedVideoType" />
+      </UFormField>
     </Motion>
     <Motion
       :initial="{
