@@ -139,7 +139,6 @@ const props = defineProps({
     rgba(35, 52, 93, 0.8),
     rgba(146, 22, 100, 0.8)
   );
-}
   /* Glass effect */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
