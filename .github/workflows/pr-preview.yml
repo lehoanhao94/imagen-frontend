@@ -50,7 +50,7 @@ jobs:
     - name: Deploy to GitHub Pages (PR Preview)
       uses: peaceiris/actions-gh-pages@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.NUXT_UI_GITHUB_TOKEN }}
         publish_dir: ./.output/public
         destination_dir: pr-${{ github.event.number }}
         keep_files: true
@@ -61,28 +61,28 @@ jobs:
         script: |
           const prNumber = context.payload.pull_request.number;
           const previewUrl = `https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${prNumber}/`;
-          
+
           // Find existing comment
           const comments = await github.rest.issues.listComments({
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: prNumber
           });
-          
-          const botComment = comments.data.find(comment => 
-            comment.user.type === 'Bot' && 
+
+          const botComment = comments.data.find(comment =>
+            comment.user.type === 'Bot' &&
             comment.body.includes('🚀 Preview deployed')
           );
-          
+
           const body = `🚀 Preview deployed successfully!
-          
+
           **Preview URL**: ${previewUrl}
-          
+
           This preview will be updated automatically when you push new commits to this PR.
-          
+
           ---
           *Powered by GitHub Actions PR Preview*`;
-          
+
           if (botComment) {
             await github.rest.issues.updateComment({
               owner: context.repo.owner,
