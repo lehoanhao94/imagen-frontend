@@ -251,5 +251,11 @@
     "components": "Components"
   },
   "loadingMoreItems": "Loading more items...",
-  "promptLabel": "Prompt:"
+  "promptLabel": "Prompt:",
+  "videoExamples": "Video Examples",
+  "videoExamplesDescription": "Explore these video examples with their prompts and settings. Click on any 'Use This Prompt' button to copy the prompt to your input field.",
+  "useThisPrompt": "Use This Prompt",
+  "model": "Model",
+  "duration": "Duration",
+  "Describe the video you want to generate...": "Describe the video you want to generate..."
 }

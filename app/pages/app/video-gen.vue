@@ -23,6 +23,10 @@ const onGenerate = () => {
     model: 'imagen-3'
   })
 }
+
+const onUsePrompt = (newPrompt: string) => {
+  prompt.value = newPrompt
+}
 </script>
 
 <template>
@@ -106,6 +110,26 @@ const onGenerate = () => {
           <BaseImageSelectedList />
         </div>
       </div>
+    </Motion>
+
+    <!-- Video Prompt Gallery -->
+    <Motion
+      :initial="{
+        scale: 1.1,
+        opacity: 0,
+        filter: 'blur(20px)'
+      }"
+      :animate="{
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)'
+      }"
+      :transition="{
+        duration: 0.6,
+        delay: 0.7
+      }"
+    >
+      <VideoPromptGallery @use-prompt="onUsePrompt" />
     </Motion>
   </UContainer>
 </template>
