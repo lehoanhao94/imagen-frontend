@@ -1,9 +1,11 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useSeoMeta({
-  title: 'Terms of Service - Imagen',
-  description: 'Terms and conditions for using Imagen services',
-  ogTitle: 'Terms of Service - Imagen',
-  ogDescription: 'Terms and conditions for using Imagen services'
+  title: `${t('terms.title')} - Imagen`,
+  description: t('terms.description'),
+  ogTitle: `${t('terms.title')} - Imagen`,
+  ogDescription: t('terms.description')
 })
 </script>
 
@@ -18,49 +20,44 @@ useSeoMeta({
       />
     </div>
     <UPageHero
-      title="Terms of Service"
-      description="Terms and conditions for using Imagen services"
+      :title="$t('terms.title')"
+      :description="$t('terms.description')"
     />
     <UPageSection>
       <div class="prose dark:prose-invert max-w-none">
-        <h2>1. Acceptance of Terms</h2>
+        <h2>{{ $t('terms.acceptanceOfTerms') }}</h2>
         <p>
-          By accessing and using Imagen services, you accept and agree to be
-          bound by the terms and provision of this agreement.
+          {{ $t('terms.acceptanceOfTermsDescription') }}
         </p>
 
-        <h2>2. Use License</h2>
+        <h2>{{ $t('terms.useOfService') }}</h2>
         <p>
-          Permission is granted to temporarily use Imagen services for personal,
-          non-commercial transitory viewing only. This is the grant of a
-          license, not a transfer of title.
+          {{ $t('terms.useOfServiceDescription') }}
         </p>
 
-        <h2>3. Disclaimer</h2>
+        <h2>{{ $t('terms.userAccounts') }}</h2>
         <p>
-          The materials on Imagen's services are provided on an 'as is' basis.
-          Imagen makes no warranties, expressed or implied, and hereby disclaims
-          all other warranties.
+          {{ $t('terms.userAccountsDescription') }}
         </p>
 
-        <h2>4. Limitations</h2>
+        <h2>{{ $t('terms.intellectualProperty') }}</h2>
         <p>
-          In no event shall Imagen or its suppliers be liable for any damages
-          (including, without limitation, damages for loss of data or profit)
-          arising out of the use or inability to use the materials on Imagen's
-          services.
+          {{ $t('terms.intellectualPropertyDescription') }}
         </p>
 
-        <h2>5. User Accounts</h2>
+        <h2>{{ $t('terms.termination') }}</h2>
         <p>
-          You are responsible for maintaining the confidentiality of your
-          account and password and for restricting access to your account.
+          {{ $t('terms.terminationDescription') }}
         </p>
 
-        <h2>6. Contact Information</h2>
+        <h2>{{ $t('terms.disclaimers') }}</h2>
         <p>
-          If you have any questions about these Terms of Service, please contact
-          us at legal@imagen.ai
+          {{ $t('terms.disclaimersDescription') }}
+        </p>
+
+        <h2>{{ $t('terms.contactUsTerms') }}</h2>
+        <p>
+          {{ $t('terms.contactUsTermsDescription') }}
         </p>
       </div>
     </UPageSection>

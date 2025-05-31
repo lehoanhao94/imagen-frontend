@@ -165,5 +165,73 @@
   },
   "readArticle": "阅读文章",
   "switchToLightMode": "切换到明亮模式",
-  "switchToDarkMode": "切换到深色模式"
+  "switchToDarkMode": "切换到深色模式",
+  "profile": "个人资料",
+  "buyCredits": {
+    "checkout": "结账",
+    "checkoutDescription": "确认您的订单，然后选择付款方式。",
+    "depositDetail": "存款详情",
+    "credits": "积分",
+    "pricePerUnit": "单价",
+    "totalCredits": "总积分",
+    "totalPrice": "总价",
+    "payment": "付款",
+    "submit": "提交",
+    "cancel": "取消"
+  },
+  "pricing": {
+    "title": "价格",
+    "description": "为您的图像生成需求选择完美的计划",
+    "comingSoon": "即将推出",
+    "comingSoonDescription": "我们的定价计划正在最终确定中。请稍后回来查看更新。"
+  },
+  "magicImageDemo": {
+    "title": "AI图像粒子效果",
+    "description": "演示BaseMagicImage组件将粒子转换为AI生成的图像",
+    "image": "图像",
+    "aboutTitle": "关于此组件",
+    "aboutDescription": "BaseMagicImage组件使用Three.js创建粒子系统，可以在随机位置和AI生成的图像之间转换。粒子以旋涡和流动效果移动，创造神奇的转换。",
+    "featuresTitle": "特性",
+    "features": {
+      "particleRendering": "基于粒子的图像渲染",
+      "smoothTransitions": "随机粒子位置和图像形成之间的平滑过渡",
+      "interactiveControls": "交互式相机控制（拖动旋转，滚动缩放）",
+      "customizable": "可自定义粒子数量和动画持续时间",
+      "automatic": "自动或手动转换触发"
+    },
+    "howItWorksTitle": "工作原理",
+    "howItWorksDescription": "该组件分析图像的像素并创建3D粒子系统，其中每个粒子代表一个像素。较亮的像素更靠近查看者，创造微妙的3D效果。粒子最初在3D空间中随机散布，然后在触发时动画形成图像。"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "description": "了解我们如何保护您的隐私和处理您的数据",
+    "informationWeCollect": "我们收集的信息",
+    "informationWeCollectDescription": "我们收集您直接向我们提供的信息，例如当您创建帐户、使用我们的服务或联系我们寻求支持时。",
+    "howWeUseInformation": "我们如何使用您的信息",
+    "howWeUseInformationDescription": "我们使用收集的信息来提供、维护和改进我们的服务，处理交易，并与您沟通。",
+    "informationSharing": "信息共享",
+    "informationSharingDescription": "未经您的同意，我们不会出售、交易或以其他方式将您的个人信息转移给第三方，除非本政策中描述的情况。",
+    "dataSecurity": "数据安全",
+    "dataSecurityDescription": "我们实施适当的安全措施来保护您的个人信息免受未经授权的访问、更改、披露或破坏。",
+    "contactUs": "联系我们",
+    "contactUsDescription": "如果您对本隐私政策有任何疑问，请通过我们的支持渠道联系我们。"
+  },
+  "terms": {
+    "title": "服务条款",
+    "description": "使用Imagen服务的条款和条件",
+    "acceptanceOfTerms": "1. 接受条款",
+    "acceptanceOfTermsDescription": "通过访问和使用Imagen服务，您接受并同意受本协议的条款和条件约束。",
+    "useOfService": "2. 服务使用",
+    "useOfServiceDescription": "您同意仅出于合法目的并根据这些服务条款使用我们的服务。",
+    "userAccounts": "3. 用户账户",
+    "userAccountsDescription": "您有责任维护您的账户和密码的机密性。",
+    "intellectualProperty": "4. 知识产权",
+    "intellectualPropertyDescription": "我们服务上可用的所有内容和材料均受知识产权保护。",
+    "termination": "5. 终止",
+    "terminationDescription": "我们可能会完全自行决定终止或暂停您的账户和对服务的访问。",
+    "disclaimers": "6. 免责声明",
+    "disclaimersDescription": "服务按\"现状\"提供，不提供任何形式的保证。",
+    "contactUsTerms": "联系我们",
+    "contactUsTermsDescription": "如果您对这些服务条款有任何疑问，请通过我们的支持渠道联系我们。"
+  }
 }

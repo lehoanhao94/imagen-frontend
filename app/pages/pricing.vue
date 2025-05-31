@@ -1,23 +1,25 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 useSeoMeta({
-  title: 'Pricing - Imagen',
-  description: 'Choose the perfect plan for your image generation needs',
-  ogTitle: 'Pricing - Imagen',
-  ogDescription: 'Choose the perfect plan for your image generation needs'
+  title: `${t('pricing.title')} - Imagen`,
+  description: t('pricing.description'),
+  ogTitle: `${t('pricing.title')} - Imagen`,
+  ogDescription: t('pricing.description')
 })
 </script>
 
 <template>
   <UPage>
     <UPageHero
-      title="Pricing"
-      description="Choose the perfect plan for your image generation needs"
+      :title="$t('pricing.title')"
+      :description="$t('pricing.description')"
     />
     <UPageSection>
       <div class="text-center">
-        <h2 class="text-2xl font-bold mb-4">Coming Soon</h2>
+        <h2 class="text-2xl font-bold mb-4">{{ $t('pricing.comingSoon') }}</h2>
         <p class="text-muted-foreground">
-          Our pricing plans are being finalized. Check back soon for updates.
+          {{ $t('pricing.comingSoonDescription') }}
         </p>
       </div>
     </UPageSection>
