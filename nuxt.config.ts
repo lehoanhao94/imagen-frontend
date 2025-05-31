@@ -42,7 +42,10 @@ export default defineNuxtConfig({
       },
       NUXT_GOOGLE_CLIENT_ID:
         process.env.NUXT_GOOGLE_CLIENT_ID
-        || '309877442422-22t81sfdbm47ah0fi8e9ggedh0ih2jc8.apps.googleusercontent.com'
+        || '309877442422-22t81sfdbm47ah0fi8e9ggedh0ih2jc8.apps.googleusercontent.com',
+      features: {
+        paymentWithCrypto: process.env.FEATURE_PAYMENT_WITH_CRYPTO === 'true'
+      }
     }
   },
   routeRules: {

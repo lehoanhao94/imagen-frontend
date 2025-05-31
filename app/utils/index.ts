@@ -12,3 +12,13 @@ export const abbreviatedUnit = (number: number) => {
     maximumFractionDigits: 1
   }).format(number)
 }
+
+export const canUseFeature = (feature: string): boolean => {
+  const runtimeConfig = useRuntimeConfig()
+  const authStore = useAuthStore()
+  return (
+    runtimeConfig.public.features[
+      feature as keyof typeof runtimeConfig.public.features
+    ] === (true as boolean) || authStore.isSuperUser === true
+  )
+}

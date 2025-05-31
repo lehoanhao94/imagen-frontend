@@ -6,6 +6,8 @@ interface User {
   email: string
   full_name: string
   is_active: boolean
+  is_superuser: boolean
+  user_credit: any
 }
 
 interface AuthState {
@@ -15,21 +17,6 @@ interface AuthState {
   loading: boolean
   error: any
   canResendActivationEmailAfter: number
-}
-
-interface User {
-  id: string
-  email: string
-  full_name: string
-  user_credit: any
-}
-
-interface AuthState {
-  user: User | null
-  token: string | null
-  refresh_token: string | null
-  loading: boolean
-  error: string | null
 }
 
 export const useAuthStore = defineStore('authStore', {
@@ -59,7 +46,8 @@ export const useAuthStore = defineStore('authStore', {
     isAuthenticated: state => !!state.access_token && !!state.user,
     getUser: state => state.user,
     isNotVerifyAccount: state => state.user && state.user?.is_active !== true,
-    user_credit: state => state.user?.user_credit
+    user_credit: state => state.user?.user_credit,
+    isSuperUser: state => state.user && state.user?.is_superuser === true
   },
 
   actions: {
@@ -269,7 +257,7 @@ export const useAuthStore = defineStore('authStore', {
         this.loading = false
       }
     },
-    
+
     async changePassword(payload: { current_password: string, new_password: string }) {
       this.loading = true
       this.error = null
@@ -294,12 +282,12 @@ export const useAuthStore = defineStore('authStore', {
       try {
         const { apiService } = useAPI()
         const response = await apiService.put('/update-profile', payload)
-        
+
         // Update user information in store
         if (response.data && this.user) {
           this.user.full_name = payload.full_name
         }
-        
+
         return response.data
       } catch (error: any) {
         console.log('🚀 ~ updateProfile error:', error)
