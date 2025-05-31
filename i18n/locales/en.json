@@ -22,6 +22,8 @@
   "imageDimensions": "Image Dimensions",
   "yourImage": "Your Image",
   "generate": "Generate",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
   "nav": {
     "aitool": "AI Tool",
     "library": "Library",
@@ -266,9 +268,13 @@
   "useThisPrompt": "Use This Prompt",
   "model": "Model",
   "duration": "Duration",
-  "Describe the video you want to generate...": "Describe the video you want to generate...",
   "videoTypeSelection": "Select Video Type",
   "videoTypes": {
+    "selectVideoType": "Select Video Type",
+    "searchPlaceholder": "Search video types...",
+    "chooseType": "Choose Type",
+    "examples": "Examples",
+    "selectTypeToSeeExamples": "Select a type to see examples",
     "advertisingMarketing": {
       "title": "Advertising & Marketing",
       "description": "Promote products/services, run Facebook, TikTok, YouTube ads, introduce brands or projects, optimize video marketing production costs"

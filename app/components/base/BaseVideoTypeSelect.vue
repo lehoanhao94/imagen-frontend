@@ -6,6 +6,17 @@ interface VideoType {
   icon: string
 }
 
+interface VideoExample {
+  id: string
+  title: string
+  prompt: string
+  videoUrl: string
+  thumbnailUrl: string
+  model: string
+  style: string
+  duration: string
+}
+
 interface VideoTypeSelectProps {
   modelValue?: VideoType | null
 }
@@ -62,12 +73,144 @@ const videoTypes: VideoType[] = [
   }
 ]
 
-const selectedType = ref<VideoType | null>(props.modelValue || null)
-
-const selectType = (type: VideoType) => {
-  selectedType.value = type
-  emit('update:modelValue', type)
+// Video examples for each type
+const videoExamplesByType: Record<string, VideoExample[]> = {
+  'advertising-marketing': [
+    {
+      id: '1',
+      title: 'Product Launch Ad',
+      prompt: 'Modern product showcase with dynamic camera movements, sleek lighting, professional commercial style, high-end branding',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Commercial',
+      duration: '5s'
+    },
+    {
+      id: '2',
+      title: 'Brand Story Video',
+      prompt: 'Corporate brand storytelling with emotional narrative, lifestyle shots, inspiring music, professional cinematography',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Cinematic',
+      duration: '8s'
+    }
+  ],
+  'social-media-content': [
+    {
+      id: '3',
+      title: 'TikTok Dance Trend',
+      prompt: 'Energetic dance video with vibrant colors, quick cuts, trending music, vertical format, social media style',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=300&fit=crop',
+      model: 'RunwayML Gen-3',
+      style: 'Dynamic',
+      duration: '3s'
+    },
+    {
+      id: '4',
+      title: 'Instagram Reel',
+      prompt: 'Lifestyle content with aesthetic visuals, smooth transitions, trendy effects, engaging storytelling',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Aesthetic',
+      duration: '4s'
+    }
+  ],
+  'personal-entertainment': [
+    {
+      id: '5',
+      title: 'Comedy Sketch',
+      prompt: 'Funny comedy scene with expressive characters, humorous situations, entertaining dialogue, lighthearted mood',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=500&h=300&fit=crop',
+      model: 'RunwayML Gen-3',
+      style: 'Comedy',
+      duration: '6s'
+    }
+  ],
+  'education-training': [
+    {
+      id: '6',
+      title: 'Tutorial Video',
+      prompt: 'Educational content with clear explanations, step-by-step demonstrations, professional presentation style',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Educational',
+      duration: '7s'
+    }
+  ],
+  'corporate-communication': [
+    {
+      id: '7',
+      title: 'Company Announcement',
+      prompt: 'Professional corporate video with executive presentation, clean office environment, business formal style',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Corporate',
+      duration: '5s'
+    }
+  ],
+  'personalized-videos': [
+    {
+      id: '8',
+      title: 'Birthday Greeting',
+      prompt: 'Personalized birthday video with festive decorations, warm lighting, celebratory atmosphere, heartfelt message',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&h=300&fit=crop',
+      model: 'RunwayML Gen-3',
+      style: 'Personal',
+      duration: '4s'
+    }
+  ],
+  'time-cost-savings': [
+    {
+      id: '9',
+      title: 'Quick Promo Video',
+      prompt: 'Fast-paced promotional content with efficient production, cost-effective visuals, streamlined messaging',
+      videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Efficient',
+      duration: '3s'
+    }
+  ]
 }
+
+const selectedType = ref<VideoType | null>(props.modelValue || null)
+const isModalOpen = ref(false)
+const tempSelectedType = ref<VideoType | null>(null)
+
+const openModal = () => {
+  tempSelectedType.value = selectedType.value
+  isModalOpen.value = true
+}
+
+const confirmSelection = () => {
+  if (tempSelectedType.value) {
+    selectedType.value = tempSelectedType.value
+    emit('update:modelValue', tempSelectedType.value)
+  }
+  isModalOpen.value = false
+}
+
+const cancelSelection = () => {
+  tempSelectedType.value = selectedType.value
+  isModalOpen.value = false
+}
+
+const selectTempType = (type: VideoType) => {
+  tempSelectedType.value = type
+}
+
+const currentVideoExamples = computed(() => {
+  if (!tempSelectedType.value) return []
+  return videoExamplesByType[tempSelectedType.value.id] || []
+})
 
 watch(() => props.modelValue, (newValue) => {
   selectedType.value = newValue || null
@@ -75,44 +218,166 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <UCard
-      v-for="type in videoTypes"
-      :key="type.id"
-      class="cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105"
-      :class="{
-        'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-950': selectedType?.id === type.id,
-        'hover:bg-gray-50 dark:hover:bg-gray-800': selectedType?.id !== type.id
+  <div>
+    <!-- Button to open Modal -->
+    <UButton
+      :label="selectedType ? selectedType.title : t('videoTypes.selectVideoType')"
+      :icon="selectedType ? selectedType.icon : 'lucide:video'"
+      color="neutral"
+      variant="outline"
+      trailing-icon="lucide:chevron-down"
+      class="w-full justify-between"
+      @click="openModal"
+    />
+
+    <!-- Video Type Selection Modal -->
+    <UModal
+      v-model:open="isModalOpen"
+      :ui="{
+        content: 'max-w-6xl'
       }"
-      @click="selectType(type)"
     >
-      <template #header>
-        <div class="flex items-center gap-3">
-          <UIcon
-            :name="type.icon"
-            class="w-6 h-6 text-primary-500"
-          />
-          <h3
-            class="font-semibold text-sm text-gray-900 dark:text-white line-clamp-2"
-          >
-            {{ type.title }}
-          </h3>
+      <template #content>
+        <div class="p-6">
+          <!-- Header -->
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-semibold">
+              {{ t('videoTypes.selectVideoType') }}
+            </h3>
+            <UButton
+              icon="lucide:x"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              @click="cancelSelection"
+            />
+          </div>
+
+          <!-- Two Column Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[500px]">
+            <!-- Left Column: Video Types -->
+            <div class="space-y-4">
+              <h4 class="text-lg font-medium text-gray-900 dark:text-white">
+                {{ t('videoTypes.chooseType') }}
+              </h4>
+              <div class="space-y-3 max-h-[400px] overflow-y-auto">
+                <UCard
+                  v-for="type in videoTypes"
+                  :key="type.id"
+                  class="cursor-pointer transition-all duration-200 hover:shadow-md"
+                  :class="{
+                    'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-950': tempSelectedType?.id === type.id,
+                    'hover:bg-gray-50 dark:hover:bg-gray-800': tempSelectedType?.id !== type.id
+                  }"
+                  @click="selectTempType(type)"
+                >
+                  <div class="flex items-start gap-3">
+                    <UIcon
+                      :name="type.icon"
+                      class="w-6 h-6 text-primary-500 mt-1 flex-shrink-0"
+                    />
+                    <div class="flex-1 min-w-0">
+                      <h5 class="font-medium text-sm text-gray-900 dark:text-white line-clamp-2">
+                        {{ type.title }}
+                      </h5>
+                      <p class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
+                        {{ type.description }}
+                      </p>
+                    </div>
+                    <UIcon
+                      v-if="tempSelectedType?.id === type.id"
+                      name="lucide:check-circle"
+                      class="w-5 h-5 text-primary-500 flex-shrink-0"
+                    />
+                  </div>
+                </UCard>
+              </div>
+            </div>
+
+            <!-- Right Column: Video Examples -->
+            <div class="space-y-4">
+              <h4 class="text-lg font-medium text-gray-900 dark:text-white">
+                {{ t('videoTypes.examples') }}
+              </h4>
+              <div
+                v-if="tempSelectedType"
+                class="space-y-4 max-h-[400px] overflow-y-auto"
+              >
+                <div
+                  v-for="example in currentVideoExamples"
+                  :key="example.id"
+                  class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+                >
+                  <!-- Video Thumbnail -->
+                  <div class="relative aspect-video bg-gray-100 dark:bg-gray-800">
+                    <img
+                      :src="example.thumbnailUrl"
+                      :alt="example.title"
+                      class="w-full h-full object-cover"
+                    >
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <UButton
+                        icon="lucide:play"
+                        color="primary"
+                        variant="solid"
+                        size="lg"
+                        class="rounded-full shadow-lg"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Video Info -->
+                  <div class="p-3">
+                    <h6 class="font-medium text-sm text-gray-900 dark:text-white">
+                      {{ example.title }}
+                    </h6>
+                    <p class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
+                      {{ example.prompt }}
+                    </p>
+                    <div class="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                      <span>{{ example.model }}</span>
+                      <span>•</span>
+                      <span>{{ example.style }}</span>
+                      <span>•</span>
+                      <span>{{ example.duration }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                v-else
+                class="flex items-center justify-center h-[200px] text-gray-500"
+              >
+                <div class="text-center">
+                  <UIcon
+                    name="lucide:video"
+                    class="w-12 h-12 mx-auto mb-2 opacity-50"
+                  />
+                  <p class="text-sm">
+                    {{ t('videoTypes.selectTypeToSeeExamples') }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <UButton
+              :label="t('cancel')"
+              color="neutral"
+              variant="outline"
+              @click="cancelSelection"
+            />
+            <UButton
+              :label="t('confirm')"
+              color="primary"
+              :disabled="!tempSelectedType"
+              @click="confirmSelection"
+            />
+          </div>
         </div>
       </template>
-
-      <p class="text-xs text-gray-600 dark:text-gray-300 line-clamp-3">
-        {{ type.description }}
-      </p>
-
-      <template #footer>
-        <div class="flex justify-end">
-          <UIcon
-            v-if="selectedType?.id === type.id"
-            name="lucide:check-circle"
-            class="w-5 h-5 text-primary-500"
-          />
-        </div>
-      </template>
-    </UCard>
+    </UModal>
   </div>
 </template>
