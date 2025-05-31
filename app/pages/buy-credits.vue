@@ -24,5 +24,6 @@ const { user_credit } = storeToRefs(authStore)
         <BuyCreditsCustomTopup />
       </div>
     </UContainer>
+    <BuyCreditsDrawer />
   </UPage>
 </template>

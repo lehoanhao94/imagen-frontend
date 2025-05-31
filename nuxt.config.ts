@@ -25,6 +25,11 @@ export default defineNuxtConfig({
   devtools: {
     enabled: true
   },
+  app: {
+    rootAttrs: {
+      'data-vaul-drawer-wrapper': ''
+    }
+  },
 
   css: ['~/assets/css/main.css', 'animate.css/animate.min.css'],
 

@@ -84,14 +84,14 @@ watch(locale, (newLocale) => {
 </script>
 
 <template>
-  <UApp
-    :locale="locales[localeForI18n as keyof typeof locales]"
-  >
-    <NuxtLayout>
-      <UMain class="relative">
-        <NuxtPage />
-      </UMain>
-    </NuxtLayout>
+  <UApp :locale="locales[localeForI18n as keyof typeof locales]">
+    <div data-vaul-drawer-wrapper>
+      <NuxtLayout>
+        <UMain class="relative">
+          <NuxtPage />
+        </UMain>
+      </NuxtLayout>
+    </div>
 
     <ClientOnly>
       <LazyUContentSearch

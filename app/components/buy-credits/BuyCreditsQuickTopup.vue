@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const creditsStore = useCreditsStore()
-const { quickTopUpList } = storeToRefs(creditsStore)
+const { quickTopUpList, showDrawer } = storeToRefs(creditsStore)
 </script>
 
 <template>
@@ -23,6 +23,7 @@ const { quickTopUpList } = storeToRefs(creditsStore)
       <BuyCreditsQuickTopupCard
         class="rounded-lg"
         v-bind="item"
+        @click="creditsStore.processBuyCredits"
       />
     </UCarousel>
   </div>

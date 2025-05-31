@@ -3,7 +3,9 @@ import { defineStore } from 'pinia'
 export const useCreditsStore = defineStore('creditsStore', {
   state: () => ({
     locale: 'en',
-    creditUnitPrice: 8
+    creditUnitPrice: 8,
+    showDrawer: false,
+    numberOfCreditsWanted: 0
   }),
   getters: {
     buyCreditProduct: (state: any) => {
@@ -19,6 +21,13 @@ export const useCreditsStore = defineStore('creditsStore', {
           quantity: num
         }
       })
+    }
+  },
+
+  actions: {
+    processBuyCredits(numOfCredits: number) {
+      this.numberOfCreditsWanted = numOfCredits
+      this.showDrawer = true
     }
   }
 })
