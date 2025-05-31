@@ -63,8 +63,8 @@ const onUsePrompt = () => {
     }"
   >
     <!-- Video thumbnail with play button -->
-    <div 
-      class="relative order-first lg:order-last w-full group cursor-pointer" 
+    <div
+      class="relative order-first lg:order-last w-full group cursor-pointer"
       @click="openFullScreen"
     >
       <img
