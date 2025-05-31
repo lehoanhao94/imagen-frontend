@@ -170,7 +170,7 @@
   "buyCredits": {
     "checkout": "结账",
     "checkoutDescription": "确认您的订单，然后选择付款方式。",
-    "depositDetail": "存款详情",
+    "orderDetail": "订单详情",
     "credits": "积分",
     "pricePerUnit": "单价",
     "totalCredits": "总积分",
