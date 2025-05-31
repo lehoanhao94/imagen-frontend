@@ -22,6 +22,8 @@
   "imageDimensions": "Kích thước hình ảnh",
   "yourImage": "Hình ảnh của bạn",
   "generate": "Tạo ảnh",
+  "cancel": "Hủy",
+  "confirm": "Xác nhận",
   "nav": {
     "aitool": "Công cụ AI",
     "library": "Thư viện",
@@ -259,9 +261,13 @@
   "useThisPrompt": "Sử dụng Prompt này",
   "model": "Mô hình",
   "duration": "Thời lượng",
-  "Describe the video you want to generate...": "Mô tả video bạn muốn tạo...",
   "videoTypeSelection": "Chọn loại video",
   "videoTypes": {
+    "selectVideoType": "Chọn loại video",
+    "searchPlaceholder": "Tìm kiếm loại video...",
+    "chooseType": "Chọn loại",
+    "examples": "Ví dụ",
+    "selectTypeToSeeExamples": "Chọn một loại để xem ví dụ",
     "advertisingMarketing": {
       "title": "Quảng cáo & Tiếp thị",
       "description": "Quảng bá sản phẩm/dịch vụ, chạy quảng cáo Facebook, TikTok, YouTube, giới thiệu thương hiệu hoặc dự án, tối ưu chi phí sản xuất video marketing"
