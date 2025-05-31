@@ -124,6 +124,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
       <ULink
         to="/terms"
         class="text-primary font-medium"
+        target="_blank"
       >{{
         $t("auth.termsOfService")
       }}</ULink>.

@@ -84,8 +84,8 @@ Create `i18n/locales/[LANGUAGE_CODE].json` with the following structure:
 {
   "system": "[Translated: AI Image Generator]",
   "helloWorld": "[Translated: Hello World!]",
-  "appTitle": "[Translated: AI Image Creation]",
-  "copyright": "[Translated: Copyright © {year}, AI Image Creation]",
+  "appTitle": "[Translated: GeminiGen.AI]",
+  "copyright": "[Translated: Copyright © {year}, GeminiGen.AI]",
   "nav": {
     "aitool": "[Translated: AI Tool]",
     "library": "[Translated: Library]",

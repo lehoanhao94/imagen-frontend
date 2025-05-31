@@ -24,47 +24,56 @@ watch(i18nLocale, (newLocale: string) => {
     <template #left>
       <div class="flex gap-2 items-center">
         <div>
-          {{ $t('copyright', { year: new Date().getFullYear() }) }}
+          {{ $t("copyright", { year: new Date().getFullYear() }) }}
         </div>
       </div>
     </template>
 
     <template #right>
-      <div class="flex gap-2 items-center">
-        <ULocaleSelect
-          v-model="i18nLocale"
-          :locales="[en, ja, vi, zh_cn, es, fr, de, pt]"
-          variant="ghost"
-          size="xs"
-          :ui="{
-            content: 'w-40'
-          }"
-        />
-        <USeparator
-          orientation="vertical"
-          class="h-4"
-        />
-        <ClientOnly>
-          <UColorModeSelect
-            size="xs"
+      <div class="flex gap-2 items-center flex-col sm:flex-row">
+        <div class="flex gap-2 items-center">
+          <ULocaleSelect
+            v-model="i18nLocale"
+            :locales="[en, ja, vi, zh_cn, es, fr, de, pt]"
             variant="ghost"
+            size="xs"
+            :ui="{
+              content: 'w-40'
+            }"
           />
-          <template #fallback>
-            <div class="w-8 h-6" />
+          <USeparator
+            orientation="vertical"
+            class="h-4"
+          />
+          <ClientOnly>
+            <UColorModeSelect
+              size="xs"
+              variant="ghost"
+            />
+            <template #fallback>
+              <div class="w-8 h-6" />
+            </template>
+          </ClientOnly>
+          <USeparator
+            orientation="vertical"
+            class="h-4"
+          />
+        </div>
+        <div class="flex gap-1 items-center">
+          <template v-if="footer?.links">
+            <UButton
+              v-for="(link, index) of footer?.links"
+              :key="index"
+              v-bind="{
+                size: 'xs',
+                color: 'neutral',
+                variant: 'ghost',
+                ...link
+              }"
+            />
           </template>
-        </ClientOnly>
-        <USeparator
-          orientation="vertical"
-          class="h-4"
-        />
+        </div>
       </div>
-      <template v-if="footer?.links">
-        <UButton
-          v-for="(link, index) of footer?.links"
-          :key="index"
-          v-bind="{ size: 'xs', color: 'neutral', variant: 'ghost', ...link }"
-        />
-      </template>
     </template>
   </UFooter>
 </template>

@@ -3,7 +3,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <div class="relative h-screen flex-col">
+  <div class="relative flex-col">
     <div class="flex justify-center px-4 pt-10">
       <UButton
         icon="i-lucide-chevron-left"

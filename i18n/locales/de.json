@@ -1,9 +1,9 @@
 {
-  "system": "KI-Bildgenerator",
+  "system": "GeminiGen.AI",
   "helloWorld": "Hallo Welt!",
   "Describe the image you want to generate...": "Beschreiben Sie das Bild, das Sie generieren möchten...",
-  "appTitle": "KI-Bilderstellung",
-  "copyright": "Copyright © {year}, KI-Bilderstellung",
+  "appTitle": "GeminiGen.AI",
+  "copyright": "Copyright © {year}, GeminiGen.AI",
   "available": "Verfügbar für neue Projekte",
   "notAvailable": "Momentan nicht verfügbar",
   "blog": "Blog",

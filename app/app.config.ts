@@ -32,6 +32,16 @@ export default defineAppConfig({
     colorMode: false,
     links: [
       {
+        'label': 'Privacy',
+        'to': '/privacy',
+        'aria-label': 'Privacy Policy'
+      },
+      {
+        'label': 'Terms',
+        'to': '/terms',
+        'aria-label': 'Terms of Service'
+      },
+      {
         'icon': 'mingcute:voice-line',
         'to': 'https://ttsopenai.com/',
         'target': '_blank',
@@ -54,16 +64,6 @@ export default defineAppConfig({
         'to': 'https://github.com/nuxt/ui',
         'target': '_blank',
         'aria-label': 'Youtube'
-      },
-      {
-        'label': 'Privacy',
-        'to': '/privacy',
-        'aria-label': 'Privacy Policy'
-      },
-      {
-        'label': 'Terms',
-        'to': '/terms',
-        'aria-label': 'Terms of Service'
       }
     ]
   }

@@ -28,8 +28,7 @@ const fields = computed(() => [
     name: 'name',
     type: 'text' as const,
     label: t('auth.name'),
-    placeholder: t('auth.enterName'),
-    value: ''
+    placeholder: t('auth.enterName')
   },
   {
     name: 'email',
@@ -145,6 +144,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <ULink
         to="/terms"
         class="text-primary font-medium"
+        target="_blank"
       >{{
         $t("auth.termsOfService")
       }}</ULink>.
