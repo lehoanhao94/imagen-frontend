@@ -45,6 +45,12 @@ const tabItems = computed(() => [
 // Active tab management
 const activeTab = ref(route.query.tab as string || 'imagen')
 
+// Ensure tab is valid
+const validTabs = ['imagen', 'video', 'speech', 'music']
+if (!validTabs.includes(activeTab.value)) {
+  activeTab.value = 'imagen'
+}
+
 // Update route when tab changes
 const updateRoute = (tabKey: string) => {
   router.push({ query: { ...route.query, tab: tabKey } })
@@ -52,14 +58,25 @@ const updateRoute = (tabKey: string) => {
 
 // Watch for route changes to update active tab
 watch(() => route.query.tab, (newTab) => {
-  if (newTab && typeof newTab === 'string') {
+  if (newTab && typeof newTab === 'string' && validTabs.includes(newTab)) {
     activeTab.value = newTab
+  } else if (newTab && typeof newTab === 'string') {
+    // If invalid tab, redirect to imagen
+    router.push({ query: { ...route.query, tab: 'imagen' } })
   }
 })
 
-// Watch active tab changes to update route
+// Watch active tab changes to update route and reset observer
 watch(activeTab, (newTab) => {
   updateRoute(newTab)
+  // Reset intersection observer when tab changes
+  nextTick(() => {
+    const loadingTrigger = document.getElementById('loading-trigger')
+    if (loadingTrigger && observer) {
+      observer.disconnect()
+      observer.observe(loadingTrigger)
+    }
+  })
 })
 // Mock data for images (existing)
 const imagenInitialData = [
@@ -555,6 +572,36 @@ const checkScrollPosition = debounce(() => {
                   :preset="music.model"
                   :style="music.genre"
                   :resolution="music.duration"
+                />
+              </Motion>
+            </UPageColumns>
+          </div>
+
+          <div v-else>
+            <!-- Default case - show imagen content -->
+            <UPageColumns>
+              <Motion
+                v-for="(image, index) in currentImagenData"
+                :key="`default-${index}`"
+                :initial="{
+                  scale: 1.1,
+                  opacity: 0,
+                  filter: 'blur(20px)'
+                }"
+                :animate="{
+                  scale: 1,
+                  opacity: 1,
+                  filter: 'blur(0px)'
+                }"
+                :transition="{
+                  duration: 0.6,
+                  delay: index * 0.1
+                }"
+              >
+                <AIToolImageLibraryCard
+                  :key="`default-card-${index}`"
+                  orientation="vertical"
+                  v-bind="image"
                 />
               </Motion>
             </UPageColumns>
