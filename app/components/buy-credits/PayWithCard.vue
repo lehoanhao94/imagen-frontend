@@ -1,9 +1,14 @@
 <template>
   <UCard
     class="bg-neutral-50 dark:bg-neutral-800 hover:opacity-80 cursor-pointer"
+    :ui="{
+      body: '!py-3'
+    }"
   >
     <div class="flex flex-col gap-2">
-      <div class="text-lg font-semibold text-center flex items-center justify-center gap-2">
+      <div
+        class="text-base font-semibold text-center flex items-center justify-center gap-2"
+      >
         <UIcon
           name="i-lucide-credit-card"
           class="size-6 text-blue-500"

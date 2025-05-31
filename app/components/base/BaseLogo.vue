@@ -127,8 +127,12 @@ const props = defineProps({
   backface-visibility: hidden;
 }
 
+.circle {
+  border-radius: 100% !important;
+}
+
 .circulate .circle {
-  border-radius: 100%;
+  border-radius: 100% !important;
   background: white;
   /* Enhanced shadow for crystal ball effect */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 20px 60px rgba(0, 0, 0, 0.2),
@@ -208,7 +212,6 @@ const props = defineProps({
       rgba(146, 22, 100, 0.9)
     );
     /* Fallback border animation for Safari */
-    border-image: linear-gradient(45deg, #00cfff, #a600ff, #ff006e, #ff8800) 1;
     /* Increase size slightly when loading */
     width: 7rem !important;
     height: 7rem !important;
@@ -226,11 +229,21 @@ const props = defineProps({
 }
 
 @keyframes border-color-cycle {
-  0% { border-color: #00cfff; }
-  25% { border-color: #a600ff; }
-  50% { border-color: #ff006e; }
-  75% { border-color: #ff8800; }
-  100% { border-color: #00cfff; }
+  0% {
+    border-color: #00cfff;
+  }
+  25% {
+    border-color: #a600ff;
+  }
+  50% {
+    border-color: #ff006e;
+  }
+  75% {
+    border-color: #ff8800;
+  }
+  100% {
+    border-color: #00cfff;
+  }
 }
 
 .circulate .wave {

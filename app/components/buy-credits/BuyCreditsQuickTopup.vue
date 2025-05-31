@@ -23,7 +23,7 @@ const { quickTopUpList, showDrawer } = storeToRefs(creditsStore)
       <BuyCreditsQuickTopupCard
         class="rounded-lg"
         v-bind="item"
-        @click="creditsStore.processBuyCredits"
+        @click="creditsStore.processBuyCredits(item.credits)"
       />
     </UCarousel>
   </div>
