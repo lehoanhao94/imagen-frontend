@@ -100,7 +100,11 @@ export default defineNuxtConfig({
       { code: 'en', name: 'English', file: 'en.json' },
       { code: 'vi', name: 'Tiếng Việt', file: 'vi.json' },
       { code: 'zh_cn', name: '简体中文', file: 'zh.json' },
-      { code: 'ja', name: '日本語', file: 'ja.json' }
+      { code: 'ja', name: '日本語', file: 'ja.json' },
+      { code: 'es', name: 'Español', file: 'es.json' },
+      { code: 'fr', name: 'Français', file: 'fr.json' },
+      { code: 'de', name: 'Deutsch', file: 'de.json' },
+      { code: 'pt', name: 'Português', file: 'pt.json' }
     ],
     strategy: 'no_prefix'
   }

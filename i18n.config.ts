@@ -1,7 +1,11 @@
 import en from './i18n/locales/en.json'
-import zh from './i18n/locales/zh.json'
+import zh_cn from './i18n/locales/zh.json'
 import ja from './i18n/locales/ja.json'
 import vi from './i18n/locales/vi.json'
+import es from './i18n/locales/es.json'
+import fr from './i18n/locales/fr.json'
+import de from './i18n/locales/de.json'
+import pt from './i18n/locales/pt.json'
 
 export default defineI18nConfig(() => ({
   legacy: false,
@@ -12,8 +16,12 @@ export default defineI18nConfig(() => ({
   fallbackWarn: false,
   messages: {
     en,
-    zh,
+    zh_cn,
     ja,
-    vi
+    vi,
+    es,
+    fr,
+    de,
+    pt
   }
 }))

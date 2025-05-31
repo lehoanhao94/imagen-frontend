@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { en, vi, ja, zh_cn } from '@nuxt/ui/locale'
+import { en, vi, ja, zh_cn, es, fr, de, pt } from '@nuxt/ui/locale'
 import { storeToRefs } from 'pinia'
 import { watch } from 'vue'
 
@@ -33,7 +33,7 @@ watch(i18nLocale, (newLocale: string) => {
       <div class="flex gap-2 items-center">
         <ULocaleSelect
           v-model="i18nLocale"
-          :locales="[en, ja, vi, zh_cn]"
+          :locales="[en, ja, vi, zh_cn, es, fr, de, pt]"
           variant="ghost"
           size="xs"
           :ui="{
