@@ -168,7 +168,7 @@
   "switchToDarkMode": "Mudar para modo escuro",
   "profile": "Perfil",
   "buyCredits": {
-    "checkout": "Checkout",
+    "checkout": "Finalizar Compra",
     "checkoutDescription": "Confirme seu pedido e então escolha seu método de pagamento.",
     "orderDetail": "Detalhe do pedido",
     "credits": "Créditos",
