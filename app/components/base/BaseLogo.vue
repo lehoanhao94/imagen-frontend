@@ -74,11 +74,19 @@ const props = defineProps({
 </template>
 
 <style lang="scss" scoped>
-/* Define the gradient angle custom property */
+/* Define the gradient angle custom property with Safari fallback */
 @property --gradient-angle {
   syntax: "<angle>";
   initial-value: 0turn;
   inherits: false;
+}
+
+/* Safari-specific fixes for iOS mobile */
+@supports (-webkit-appearance: none) {
+  .safari-ios-fix {
+    /* Fallback for Safari that doesn't support CSS properties */
+    --gradient-angle: 0deg;
+  }
 }
 
 .circulate {
@@ -91,6 +99,11 @@ const props = defineProps({
   justify-content: center;
   align-items: center;
   background: transparent; /* Đảm bảo nền trong suốt */
+  /* Safari-specific fixes */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Loading state styles for the container */
@@ -127,10 +140,16 @@ const props = defineProps({
   );
   position: relative;
   overflow: hidden;
+  /* Safari-specific fixes for black square issue */
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* Prevent Safari rendering artifacts */
+  isolation: isolate;
 }
 
-/* Adjust for light mode */
+/* Adjust for light mode with Safari compatibility */
 :root:not(.dark) .circulate .circle {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15),
     0 0 80px rgba(142, 45, 226, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.3);
@@ -139,20 +158,22 @@ const props = defineProps({
     rgba(35, 52, 93, 0.8),
     rgba(146, 22, 100, 0.8)
   );
-  /* Glass effect */
+  /* Glass effect with Safari fallbacks */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   /* Add subtle glow */
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
-  /* Add depth with a subtle 3D transform */
-  transform: perspective(800px) rotateX(10deg);
+  /* Simplified 3D transform for Safari compatibility */
+  -webkit-transform: perspective(800px) rotateX(5deg);
+  transform: perspective(800px) rotateX(5deg);
   transition: transform 0.5s ease, border-color 0.3s ease, width 0.5s ease,
     height 0.5s ease;
   /* Default border style */
   border: 2px solid transparent;
 
   &:hover {
-    transform: perspective(800px) rotateX(5deg) scale(1.4);
+    -webkit-transform: perspective(800px) rotateX(2deg) scale(1.4);
+    transform: perspective(800px) rotateX(2deg) scale(1.4);
   }
 
   &::before {
@@ -171,32 +192,45 @@ const props = defineProps({
     border-radius: 100%;
     z-index: 2;
     pointer-events: none;
+    /* Safari-specific fixes */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
 
-  /* Gradient border animation when loading */
+  /* Gradient border animation when loading with Safari compatibility */
   &.loading-rotate {
     animation: 2s gradient-angle infinite linear;
     border: 2px solid transparent;
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-    background-image: linear-gradient(
-        135deg,
-        rgba(35, 52, 93, 0.9),
-        rgba(146, 22, 100, 0.9)
-      ),
-      conic-gradient(
-        from var(--gradient-angle),
-        #00cfff 0%,
-        #a600ff 25%,
-        #ff006e 50%,
-        #ff8800 75%,
-        #00cfff 100%
-      );
+    /* Simplified background layers for Safari */
+    background: linear-gradient(
+      135deg,
+      rgba(35, 52, 93, 0.9),
+      rgba(146, 22, 100, 0.9)
+    );
+    /* Fallback border animation for Safari */
+    border-image: linear-gradient(45deg, #00cfff, #a600ff, #ff006e, #ff8800) 1;
     /* Increase size slightly when loading */
     width: 7rem !important;
     height: 7rem !important;
-    transform: perspective(800px) rotateX(10deg) scale(1.1);
+    -webkit-transform: perspective(800px) rotateX(5deg) scale(1.1);
+    transform: perspective(800px) rotateX(5deg) scale(1.1);
   }
+}
+
+/* Safari-specific gradient border fallback */
+@supports not (background-clip: border-box) {
+  :root:not(.dark) .circulate .circle.loading-rotate {
+    border: 2px solid #00cfff;
+    animation: border-color-cycle 2s infinite linear;
+  }
+}
+
+@keyframes border-color-cycle {
+  0% { border-color: #00cfff; }
+  25% { border-color: #a600ff; }
+  50% { border-color: #ff006e; }
+  75% { border-color: #ff8800; }
+  100% { border-color: #00cfff; }
 }
 
 .circulate .wave {
@@ -487,7 +521,7 @@ const props = defineProps({
   animation-delay: 2.1s;
 }
 
-/* Energy glow effect */
+/* Energy glow effect with Safari compatibility */
 .circulate .energy-glow {
   position: absolute;
   width: 70%;
@@ -506,10 +540,21 @@ const props = defineProps({
   z-index: 1;
   animation: energyPulse 4s infinite alternate;
   filter: blur(5px);
-  mix-blend-mode: screen;
+  /* Replace mix-blend-mode with opacity for Safari compatibility */
+  opacity: 0.7;
+  /* Safari-specific fixes */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
-/* Add a second energy glow for more dynamic effect */
+/* Safari fallback without mix-blend-mode */
+@supports not (mix-blend-mode: screen) {
+  .circulate .energy-glow {
+    opacity: 0.5;
+  }
+}
+
+/* Add a second energy glow for more dynamic effect with Safari compatibility */
 .circulate .energy-glow::after {
   content: "";
   position: absolute;
@@ -527,7 +572,11 @@ const props = defineProps({
   border-radius: 50%;
   animation: energyPulse 5s infinite alternate-reverse;
   filter: blur(4px);
-  mix-blend-mode: screen;
+  /* Replace mix-blend-mode with opacity for Safari compatibility */
+  opacity: 0.6;
+  /* Safari-specific fixes */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Animation keyframes */
