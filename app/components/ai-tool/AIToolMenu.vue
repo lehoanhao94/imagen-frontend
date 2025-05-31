@@ -82,14 +82,13 @@ const items = computed(
     :items="items"
     class=""
     :ui="{
-      root: 'w-full flex-1 justify-center items-center',
+      root: 'w-full flex-1 justify-center sm:justify-start items-center',
       list: 'flex flex-wrap gap-2 w-full !justify-center',
       viewport: 'z[30]',
       content: 'sm:w-auto min-h-[200px]',
       link: 'flex-col sm:flex-row',
       linkTrailingIcon: 'hidden sm:block',
-      linkLeadingIcon: 'size-8 sm:size-6',
-      item: 'flex flex-1'
+      linkLeadingIcon: 'size-8 sm:size-6'
     }"
     :delay-duration="700"
   />
