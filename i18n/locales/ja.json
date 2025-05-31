@@ -170,7 +170,7 @@
   "buyCredits": {
     "checkout": "チェックアウト",
     "checkoutDescription": "注文を確認してから、お支払い方法を選択してください。",
-    "depositDetail": "入金詳細",
+    "orderDetail": "注文詳細",
     "credits": "クレジット",
     "pricePerUnit": "単価",
     "totalCredits": "総クレジット",
