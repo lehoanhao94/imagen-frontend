@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 i18n Documentation
+    url: https://nuxt.com/modules/i18n
+    about: Official Nuxt i18n module documentation
+  - name: 🌐 Translation Guidelines
+    url: https://github.com/AINNATE-IMAGEN/imagen-frontend/wiki/i18n-Guidelines
+    about: Project-specific internationalization guidelines and best practices
+  - name: 🔧 Translation Tools
+    url: https://github.com/AINNATE-IMAGEN/imagen-frontend/wiki/Translation-Tools
+    about: Recommended tools and resources for translation work
+  - name: 💬 General Support
+    url: https://github.com/AINNATE-IMAGEN/imagen-frontend/discussions
+    about: Ask questions and discuss with the community

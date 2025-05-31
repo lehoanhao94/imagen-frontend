@@ -6,10 +6,10 @@
   >
     <template #body>
       <div class="space-y-6 w-full">
-        <!-- Deposit Detail Section -->
+        <!-- Order Detail Section -->
         <div>
           <h3 class="text-base font-semibold mb-4">
-            {{ $t("buyCredits.depositDetail") }}
+            {{ $t("buyCredits.orderDetail") }}
           </h3>
           <div
             class="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 space-y-3"

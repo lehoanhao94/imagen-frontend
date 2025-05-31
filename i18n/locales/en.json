@@ -170,7 +170,7 @@
   "buyCredits": {
     "checkout": "Checkout",
     "checkoutDescription": "Confirm your order then choose your payment method.",
-    "depositDetail": "Deposit detail",
+    "orderDetail": "Order detail",
     "credits": "Credits",
     "pricePerUnit": "Price per unit",
     "totalCredits": "Total credits",
