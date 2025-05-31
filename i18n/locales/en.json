@@ -2,6 +2,7 @@
   "system": "AI Image Generator",
   "helloWorld": "Hello World!",
   "Describe the image you want to generate...": "Describe the image you want to generate...",
+  "Describe the video you want to generate...": "Describe the video you want to generate...",
   "appTitle": "GeminiGen.AI",
   "copyright": "Copyright © {year}, GeminiGen.AI",
   "available": "Available for new projects",
@@ -257,5 +258,36 @@
   "useThisPrompt": "Use This Prompt",
   "model": "Model",
   "duration": "Duration",
-  "Describe the video you want to generate...": "Describe the video you want to generate..."
+  "Describe the video you want to generate...": "Describe the video you want to generate...",
+  "videoTypeSelection": "Select Video Type",
+  "videoTypes": {
+    "advertisingMarketing": {
+      "title": "Advertising & Marketing",
+      "description": "Promote products/services, run Facebook, TikTok, YouTube ads, introduce brands or projects, optimize video marketing production costs"
+    },
+    "socialMediaContent": {
+      "title": "Social Media Content (Short-form Content)",
+      "description": "Short videos for TikTok, Reels, Shorts, storytelling videos, reviews, AI voiceovers, convert text or blogs to videos"
+    },
+    "personalEntertainment": {
+      "title": "Personal Creative Content / Entertainment",
+      "description": "Comedy videos, parodies, memes, storytelling videos, animation, fan-made content, AI-powered short films"
+    },
+    "educationTraining": {
+      "title": "Education & Training",
+      "description": "Teaching videos, e-learning, courses, skill tutorials, knowledge sharing, presentations with AI avatar instructors"
+    },
+    "corporateCommunication": {
+      "title": "Internal Communications & Corporate",
+      "description": "Onboarding videos, process guides, internal video announcements, rapid AI-powered employee training"
+    },
+    "personalizedVideos": {
+      "title": "Personalized Videos",
+      "description": "Birthday wishes, anniversary videos, personalized customer videos (email marketing, customer care), recruitment videos for specific candidates"
+    },
+    "timeCostSavings": {
+      "title": "Time & Cost Savings in Production",
+      "description": "No need for actors, studios, post-production teams, perfect for individuals/small teams creating content quickly, automated video production workflows"
+    }
+  }
 }

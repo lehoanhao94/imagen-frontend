@@ -2,6 +2,7 @@
   "system": "Trình tạo hình ảnh AI",
   "helloWorld": "Xin chào thế giới!",
   "Describe the image you want to generate...": "Mô tả hình ảnh bạn muốn tạo...",
+  "Describe the video you want to generate...": "Mô tả video bạn muốn tạo...",
   "appTitle": "Tạo hình ảnh bằng AI",
   "copyright": "Bản quyền © {year}, Tạo Hình Ảnh AI",
   "available": "Có sẵn cho các dự án mới",
@@ -258,5 +259,36 @@
   "useThisPrompt": "Sử dụng Prompt này",
   "model": "Mô hình",
   "duration": "Thời lượng",
-  "Describe the video you want to generate...": "Mô tả video bạn muốn tạo..."
+  "Describe the video you want to generate...": "Mô tả video bạn muốn tạo...",
+  "videoTypeSelection": "Chọn loại video",
+  "videoTypes": {
+    "advertisingMarketing": {
+      "title": "Quảng cáo & Tiếp thị",
+      "description": "Quảng bá sản phẩm/dịch vụ, chạy quảng cáo Facebook, TikTok, YouTube, giới thiệu thương hiệu hoặc dự án, tối ưu chi phí sản xuất video marketing"
+    },
+    "socialMediaContent": {
+      "title": "Tạo nội dung mạng xã hội (Short-form Content)",
+      "description": "Video ngắn cho TikTok, Reels, Shorts, video kể chuyện, review, voiceover bằng AI, chuyển văn bản hoặc blog thành video"
+    },
+    "personalEntertainment": {
+      "title": "Sáng tạo nội dung cá nhân / giải trí",
+      "description": "Video hài, parody, meme, video kể chuyện (storytelling), animation, fanmade, phim ngắn sử dụng AI"
+    },
+    "educationTraining": {
+      "title": "Giáo dục & Đào tạo",
+      "description": "Video giảng dạy, e-learning, khoá học, hướng dẫn kỹ năng, chia sẻ kiến thức, video thuyết trình có avatar AI đóng vai giảng viên"
+    },
+    "corporateCommunication": {
+      "title": "Truyền thông nội bộ & Doanh nghiệp",
+      "description": "Video onboarding, hướng dẫn quy trình, thông báo nội bộ dạng video, đào tạo nhân viên nhanh chóng bằng AI"
+    },
+    "personalizedVideos": {
+      "title": "Video cá nhân hóa",
+      "description": "Video chúc mừng sinh nhật, lễ kỷ niệm, video cá nhân hóa cho khách hàng (email marketing, chăm sóc khách hàng), video tuyển dụng gửi riêng cho ứng viên"
+    },
+    "timeCostSavings": {
+      "title": "Tiết kiệm thời gian & chi phí sản xuất",
+      "description": "Không cần diễn viên, trường quay, ekip hậu kỳ, phù hợp cho cá nhân/nhóm nhỏ làm content nhanh chóng, tự động hoá quy trình sản xuất video"
+    }
+  }
 }
