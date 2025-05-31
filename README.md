@@ -28,6 +28,7 @@ Locally preview production build:
 pnpm preview
 ```
 
+<<<<<<< HEAD
 ## PR Previews
 
 This repository includes automated PR preview deployments. When you create a pull request targeting the `develop` branch:
@@ -39,3 +40,5 @@ This repository includes automated PR preview deployments. When you create a pul
 
 See [`docs/PR_PREVIEW_SETUP.md`](docs/PR_PREVIEW_SETUP.md) for setup instructions.
 
+=======
+>>>>>>> main
