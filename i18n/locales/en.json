@@ -237,7 +237,7 @@
   },
   "appName": "GeminiGen.AI",
   "quickTopUp": "Quick top up",
-  "customTopUp": "Custom top up", 
+  "customTopUp": "Custom top up",
   "numberOfCredits": "Number of credits",
   "paypal": "PayPal",
   "paypalDescription": "Pay securely with your PayPal account",
@@ -247,7 +247,7 @@
   "cryptoDescription": "Bitcoin, Ethereum, and other cryptocurrencies",
   "profileMenu": {
     "guide": "Guide",
-    "logo": "Logo", 
+    "logo": "Logo",
     "settings": "Settings",
     "components": "Components"
   },

@@ -239,7 +239,7 @@
   "appName": "GeminiGen.AI",
   "quickTopUp": "Nạp nhanh",
   "customTopUp": "Nạp tùy chỉnh",
-  "numberOfCredits": "Số lượng credit", 
+  "numberOfCredits": "Số lượng credit",
   "paypal": "PayPal",
   "paypalDescription": "Thanh toán an toàn bằng tài khoản PayPal của bạn",
   "debitCreditCard": "Thẻ ghi nợ hoặc thẻ tín dụng",
@@ -249,7 +249,7 @@
   "profileMenu": {
     "guide": "Hướng dẫn",
     "logo": "Logo",
-    "settings": "Cài đặt", 
+    "settings": "Cài đặt",
     "components": "Thành phần"
   },
   "loadingMoreItems": "Đang tải thêm mục...",
