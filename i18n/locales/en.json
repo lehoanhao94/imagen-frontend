@@ -252,6 +252,14 @@
     "components": "Components"
   },
   "loadingMoreItems": "Loading more items...",
+  "library": {
+    "tabs": {
+      "imagen": "Imagen",
+      "video": "Video",
+      "speech": "Speech",
+      "music": "Music"
+    }
+  },
   "promptLabel": "Prompt:",
   "videoExamples": "Video Examples",
   "videoExamplesDescription": "Explore these video examples with their prompts and settings. Click on any 'Use This Prompt' button to copy the prompt to your input field.",
