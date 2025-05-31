@@ -291,6 +291,11 @@ const hasMoreDataLeft = ref({
 })
 
 // Get current tab data
+const currentImagenData = computed(() => librariesData.value.imagen)
+const currentVideoData = computed(() => librariesData.value.video)
+const currentSpeechData = computed(() => librariesData.value.speech)
+const currentMusicData = computed(() => librariesData.value.music)
+
 const currentLibraries = computed(() => {
   const tabKey = activeTab.value as keyof typeof librariesData.value
   return librariesData.value[tabKey] || []
@@ -367,8 +372,8 @@ onUnmounted(() => {
   window.removeEventListener('scroll', checkScrollPosition)
 })
 
-// Update observer target when the libraries array changes
-watch(currentLibraries, () => {
+// Update observer target when the active tab or its data changes
+watch([activeTab, currentLibraries], () => {
   nextTick(() => {
     const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
@@ -430,7 +435,7 @@ const checkScrollPosition = debounce(() => {
           <div v-if="item.key === 'imagen'">
             <UPageColumns>
               <Motion
-                v-for="(image, index) in currentLibraries"
+                v-for="(image, index) in currentImagenData"
                 :key="`imagen-${index}`"
                 :initial="{
                   scale: 1.1,
@@ -459,7 +464,7 @@ const checkScrollPosition = debounce(() => {
           <div v-else-if="item.key === 'video'">
             <UPageColumns>
               <Motion
-                v-for="(video, index) in currentLibraries"
+                v-for="(video, index) in currentVideoData"
                 :key="`video-${index}`"
                 :initial="{
                   scale: 1.1,
@@ -479,13 +484,7 @@ const checkScrollPosition = debounce(() => {
                 <VideoPromptCard
                   :key="`video-card-${index}`"
                   orientation="vertical"
-                  :video-url="(video as any).videoUrl"
-                  :thumbnail-url="(video as any).thumbnailUrl"
-                  :title="(video as any).title"
-                  :prompt="(video as any).prompt"
-                  :model="(video as any).model"
-                  :style="(video as any).style"
-                  :duration="(video as any).duration"
+                  v-bind="video"
                 />
               </Motion>
             </UPageColumns>
@@ -494,7 +493,7 @@ const checkScrollPosition = debounce(() => {
           <div v-else-if="item.key === 'speech'">
             <UPageColumns>
               <Motion
-                v-for="(speech, index) in currentLibraries"
+                v-for="(speech, index) in currentSpeechData"
                 :key="`speech-${index}`"
                 :initial="{
                   scale: 1.1,
@@ -515,12 +514,12 @@ const checkScrollPosition = debounce(() => {
                 <AIToolImageLibraryCard
                   :key="`speech-card-${index}`"
                   orientation="vertical"
-                  :image-url="(speech as any).thumbnailUrl"
-                  :title="(speech as any).title"
-                  :prompt="(speech as any).prompt"
-                  :preset="(speech as any).model"
-                  :style="(speech as any).voice"
-                  :resolution="(speech as any).duration"
+                  :image-url="speech.thumbnailUrl"
+                  :title="speech.title"
+                  :prompt="speech.prompt"
+                  :preset="speech.model"
+                  :style="speech.voice"
+                  :resolution="speech.duration"
                 />
               </Motion>
             </UPageColumns>
@@ -529,7 +528,7 @@ const checkScrollPosition = debounce(() => {
           <div v-else-if="item.key === 'music'">
             <UPageColumns>
               <Motion
-                v-for="(music, index) in currentLibraries"
+                v-for="(music, index) in currentMusicData"
                 :key="`music-${index}`"
                 :initial="{
                   scale: 1.1,
@@ -550,12 +549,12 @@ const checkScrollPosition = debounce(() => {
                 <AIToolImageLibraryCard
                   :key="`music-card-${index}`"
                   orientation="vertical"
-                  :image-url="(music as any).thumbnailUrl"
-                  :title="(music as any).title"
-                  :prompt="(music as any).prompt"
-                  :preset="(music as any).model"
-                  :style="(music as any).genre"
-                  :resolution="(music as any).duration"
+                  :image-url="music.thumbnailUrl"
+                  :title="music.title"
+                  :prompt="music.prompt"
+                  :preset="music.model"
+                  :style="music.genre"
+                  :resolution="music.duration"
                 />
               </Motion>
             </UPageColumns>
