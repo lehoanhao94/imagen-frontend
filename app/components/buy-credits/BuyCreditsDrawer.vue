@@ -68,7 +68,7 @@ const { showDrawer, numberOfCreditsWanted, creditUnitPrice, buyCreditProduct }
 
 // Calculate unit price based on how credits are priced
 const unitPrice = computed(() => {
-  return (creditUnitPrice.value / buyCreditProduct.value.base_credit).toFixed(6)
+  return (creditUnitPrice.value / buyCreditProduct.value.base_credit).toFixed(3)
 })
 
 // Calculate total price for the selected credits
