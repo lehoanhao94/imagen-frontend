@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Mode Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: white;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.dark-mode {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        
+        body.dark-mode .container {
+            border-color: #555;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+        }
+        
+        button:hover {
+            background: #0056b3;
+        }
+        
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        
+        body.dark-mode .status {
+            background: #2d3748;
+            border-left-color: #63b3ed;
+        }
+        
+        .info {
+            margin: 10px 0;
+            font-family: monospace;
+            background: #f1f3f4;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        body.dark-mode .info {
+            background: #374151;
+        }
+        
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .test-result.pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .test-result.fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        body.dark-mode .test-result.pass {
+            background: #1e3a2e;
+            color: #a3cfbb;
+            border-color: #2d5a3d;
+        }
+        
+        body.dark-mode .test-result.fail {
+            background: #3a1e1e;
+            color: #cfbb9a;
+            border-color: #5a2d2d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Mode Persistence Test</h1>
+        
+        <div class="status">
+            <strong>Current Theme:</strong> <span id="current-theme">Unknown</span><br>
+            <strong>Stored Preference:</strong> <span id="stored-preference">Unknown</span><br>
+            <strong>System Preference:</strong> <span id="system-preference">Unknown</span>
+        </div>
+        
+        <div>
+            <button onclick="setTheme('light')">Set Light Mode</button>
+            <button onclick="setTheme('dark')">Set Dark Mode</button>
+            <button onclick="setTheme('system')">Set System Mode</button>
+            <button onclick="clearStorage()">Clear Storage</button>
+            <button onclick="location.reload()">Reload Page</button>
+        </div>
+        
+        <div class="info">
+            <strong>Test Instructions:</strong><br>
+            1. Click on different theme buttons<br>
+            2. Check that the UI updates immediately<br>
+            3. Click "Reload Page" to test persistence<br>
+            4. After reload, the theme should remain as selected
+        </div>
+        
+        <div id="test-results"></div>
+        
+        <div class="info">
+            <strong>Storage Info:</strong><br>
+            <div>localStorage['nuxt-color-mode']: <span id="storage-value">Unknown</span></div>
+            <div>HTML class: <span id="html-class">Unknown</span></div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'nuxt-color-mode';
+        
+        function updateStatus() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const htmlClasses = document.documentElement.className;
+            
+            document.getElementById('stored-preference').textContent = stored || 'None';
+            document.getElementById('system-preference').textContent = systemPreference;
+            document.getElementById('storage-value').textContent = stored || 'Not set';
+            document.getElementById('html-class').textContent = htmlClasses || 'None';
+            
+            // Determine current theme
+            let currentTheme = 'light';
+            if (stored === 'dark' || (!stored && systemPreference === 'dark')) {
+                currentTheme = 'dark';
+            } else if (stored === 'system') {
+                currentTheme = systemPreference;
+            }
+            
+            document.getElementById('current-theme').textContent = currentTheme;
+            
+            // Apply theme to body
+            document.body.className = currentTheme === 'dark' ? 'dark-mode' : '';
+            
+            // Apply theme to HTML element (simulating Nuxt behavior)
+            document.documentElement.className = currentTheme + '-mode';
+        }
+        
+        function setTheme(theme) {
+            if (theme === 'system') {
+                // For system theme, we store 'system' and apply the actual system preference
+                localStorage.setItem(STORAGE_KEY, 'system');
+            } else {
+                localStorage.setItem(STORAGE_KEY, theme);
+            }
+            updateStatus();
+            
+            // Add test result
+            addTestResult(`Theme set to: ${theme}`, 'pass');
+        }
+        
+        function clearStorage() {
+            localStorage.removeItem(STORAGE_KEY);
+            updateStatus();
+            addTestResult('Storage cleared', 'pass');
+        }
+        
+        function addTestResult(message, type) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            resultsDiv.appendChild(resultDiv);
+            
+            // Keep only last 10 results
+            while (resultsDiv.children.length > 10) {
+                resultsDiv.removeChild(resultsDiv.firstChild);
+            }
+        }
+        
+        function runTests() {
+            // Test 1: Check if localStorage works
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                addTestResult('localStorage is working', 'pass');
+            } catch (e) {
+                addTestResult('localStorage is not working: ' + e.message, 'fail');
+            }
+            
+            // Test 2: Check system preference detection
+            try {
+                const systemPref = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                addTestResult('System preference detection working', 'pass');
+            } catch (e) {
+                addTestResult('System preference detection failed: ' + e.message, 'fail');
+            }
+            
+            // Test 3: Check if stored preference exists
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                addTestResult(`Found stored preference: ${stored}`, 'pass');
+            } else {
+                addTestResult('No stored preference found (this is OK for first visit)', 'pass');
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStatus();
+            runTests();
+            
+            // Add test result for page load
+            addTestResult('Page loaded, theme persistence test ready', 'pass');
+        });
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            updateStatus();
+            addTestResult(`System preference changed to: ${e.matches ? 'dark' : 'light'}`, 'pass');
+        });
+    </script>
+</body>
+</html>
