@@ -64,7 +64,11 @@
   left: 0;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   background: rgba(0, 0, 0, 0.2);
+=======
+  background: rgba(0, 0, 0, 0.3);
+>>>>>>> 32fc768 (update)
   z-index: 2;
 }
 
