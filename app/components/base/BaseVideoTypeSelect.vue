@@ -22,43 +22,43 @@ const videoTypes: VideoType[] = [
     id: 'advertising-marketing',
     title: t('videoTypes.advertisingMarketing.title'),
     description: t('videoTypes.advertisingMarketing.description'),
-    icon: 'lucide:megaphone'
+    icon: 'i-lucide-megaphone'
   },
   {
     id: 'social-media-content',
     title: t('videoTypes.socialMediaContent.title'),
     description: t('videoTypes.socialMediaContent.description'),
-    icon: 'lucide:smartphone'
+    icon: 'i-lucide-smartphone'
   },
   {
     id: 'personal-entertainment',
     title: t('videoTypes.personalEntertainment.title'),
     description: t('videoTypes.personalEntertainment.description'),
-    icon: 'lucide:clapperboard'
+    icon: 'i-lucide-clapperboard'
   },
   {
     id: 'education-training',
     title: t('videoTypes.educationTraining.title'),
     description: t('videoTypes.educationTraining.description'),
-    icon: 'lucide:graduation-cap'
+    icon: 'i-lucide-graduation-cap'
   },
   {
     id: 'corporate-communication',
     title: t('videoTypes.corporateCommunication.title'),
     description: t('videoTypes.corporateCommunication.description'),
-    icon: 'lucide:building-2'
+    icon: 'i-lucide-building-2'
   },
   {
     id: 'personalized-videos',
     title: t('videoTypes.personalizedVideos.title'),
     description: t('videoTypes.personalizedVideos.description'),
-    icon: 'lucide:user-heart'
+    icon: 'i-lucide-user-heart'
   },
   {
     id: 'time-cost-savings',
     title: t('videoTypes.timeCostSavings.title'),
     description: t('videoTypes.timeCostSavings.description'),
-    icon: 'lucide:clock'
+    icon: 'i-lucide-clock'
   }
 ]
 
@@ -108,7 +108,7 @@ watch(() => props.modelValue, (newValue) => {
         <div class="flex justify-end">
           <UIcon
             v-if="selectedType?.id === type.id"
-            name="lucide:check-circle"
+            name="i-lucide-check-circle"
             class="w-5 h-5 text-primary-500"
           />
         </div>
