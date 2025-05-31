@@ -33,12 +33,17 @@ defineProps<{
           delay: 0.1
         }"
       >
-        <UColorModeAvatar
-          class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
-          :light="global.picture?.light!"
-          :dark="global.picture?.dark!"
-          :alt="global.picture?.alt!"
-        />
+        <ClientOnly>
+          <UColorModeAvatar
+            class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
+            :light="global.picture?.light!"
+            :dark="global.picture?.dark!"
+            :alt="global.picture?.alt!"
+          />
+          <template #fallback>
+            <div class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg) bg-gray-200 rounded-full" />
+          </template>
+        </ClientOnly>
       </Motion>
     </template>
 
