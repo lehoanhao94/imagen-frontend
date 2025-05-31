@@ -14,18 +14,18 @@
             :transformation-duration="3000"
           />
         </div>
-        
+
         <div class="flex flex-wrap gap-4 justify-center">
           <UButton
             v-for="(image, index) in aiImages"
             :key="index"
-            @click="currentImage = image"
             :color="currentImage === image ? 'primary' : 'gray'"
+            @click="currentImage = image"
           >
             {{ $t('magicImageDemo.image') }} {{ index + 1 }}
           </UButton>
         </div>
-        
+
         <div class="prose dark:prose-invert mx-auto">
           <h2>{{ $t('magicImageDemo.aboutTitle') }}</h2>
           <p>
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 // Sample AI-generated images
 const aiImages = [
@@ -58,7 +58,7 @@ const aiImages = [
   'https://images.unsplash.com/photo-1682687982501-1e58ab814714',
   'https://images.unsplash.com/photo-1675351066828-6bbd840a86d5',
   'https://images.unsplash.com/photo-1686591062448-3c2d39e9a2c2'
-];
+]
 
-const currentImage = ref(aiImages[0]);
+const currentImage = ref(aiImages[0])
 </script>

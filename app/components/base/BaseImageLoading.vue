@@ -1,5 +1,8 @@
 <template>
-  <a class="card" href="#">
+  <a
+    class="card"
+    href="#"
+  >
     <p>
       Generating image...
     </p>

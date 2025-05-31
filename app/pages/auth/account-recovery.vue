@@ -85,7 +85,10 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     </UAuthForm>
   </div>
 
-  <div v-else class="text-center space-y-4">
+  <div
+    v-else
+    class="text-center space-y-4"
+  >
     <UIcon
       name="i-lucide-mail-check"
       class="w-16 h-16 mx-auto text-green-500"

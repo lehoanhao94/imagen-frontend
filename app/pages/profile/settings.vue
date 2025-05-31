@@ -137,7 +137,7 @@ const passwordSchema = computed(() =>
         required_error: t('validation.required')
       })
       .min(1, t('validation.required'))
-  }).refine((data) => data.new_password === data.confirm_password, {
+  }).refine(data => data.new_password === data.confirm_password, {
     message: t('validation.passwordsDoNotMatch'),
     path: ['confirm_password']
   })
@@ -156,7 +156,7 @@ async function onPasswordSubmit(payload: FormSubmitEvent<PasswordSchema>) {
       current_password: payload.data.current_password,
       new_password: payload.data.new_password
     })
-    
+
     if (result) {
       passwordChangeSuccess.value = true
       toast.add({
@@ -204,10 +204,10 @@ function deleteAccount() {
       description: t('profile.accountDeletedDescription') || 'Your account has been deleted successfully',
       color: 'info'
     })
-    
+
     // Close modal and redirect to home or login page
     confirmDeleteAccount.value = false
-    
+
     // Log out user after account deletion
     setTimeout(() => {
       authStore.logout()
@@ -219,16 +219,21 @@ function deleteAccount() {
 <template>
   <UPage class="min-h-screen dark:bg-neutral-900/80">
     <ProfileHeader class="px-2" />
-    
+
     <div class="container mx-auto px-4 py-8">
-      <h1 class="text-2xl font-bold mb-8">{{ $t('profile.settings') || 'Profile Settings' }}</h1>
-      
+      <h1 class="text-2xl font-bold mb-8">
+        {{ $t('profile.settings') || 'Profile Settings' }}
+      </h1>
+
       <div class="grid grid-cols-1 gap-8">
         <!-- Profile Information -->
         <UCard class="p-6">
           <template #header>
             <div class="flex items-center space-x-4 mb-4">
-              <UIcon name="i-lucide-user" class="text-primary" />
+              <UIcon
+                name="i-lucide-user"
+                class="text-primary"
+              />
               <h2 class="text-xl font-semibold">
                 {{ $t('profile.personalInformation') || 'Personal Information' }}
               </h2>
@@ -271,7 +276,10 @@ function deleteAccount() {
         <UCard class="p-6">
           <template #header>
             <div class="flex items-center space-x-4 mb-4">
-              <UIcon name="i-lucide-lock" class="text-primary" />
+              <UIcon
+                name="i-lucide-lock"
+                class="text-primary"
+              />
               <h2 class="text-xl font-semibold">
                 {{ $t('profile.changePassword') || 'Change Password' }}
               </h2>
@@ -319,18 +327,21 @@ function deleteAccount() {
             </template>
           </UForm>
         </UCard>
-        
+
         <!-- Notification Preferences -->
         <UCard class="p-6">
           <template #header>
             <div class="flex items-center space-x-4 mb-4">
-              <UIcon name="i-lucide-bell" class="text-primary" />
+              <UIcon
+                name="i-lucide-bell"
+                class="text-primary"
+              />
               <h2 class="text-xl font-semibold">
                 {{ $t('profile.notificationPreferences') || 'Notification Preferences' }}
               </h2>
             </div>
           </template>
-          
+
           <div class="space-y-4">
             <UToggle
               v-model="emailNotifications"
@@ -347,7 +358,7 @@ function deleteAccount() {
               label="Security Alerts"
               color="primary"
             />
-            
+
             <div class="flex justify-end mt-4">
               <UButton
                 color="primary"
@@ -358,18 +369,21 @@ function deleteAccount() {
             </div>
           </div>
         </UCard>
-        
+
         <!-- Language Preferences -->
         <UCard class="p-6">
           <template #header>
             <div class="flex items-center space-x-4 mb-4">
-              <UIcon name="i-lucide-globe" class="text-primary" />
+              <UIcon
+                name="i-lucide-globe"
+                class="text-primary"
+              />
               <h2 class="text-xl font-semibold">
                 {{ $t('profile.languagePreferences') || 'Language Preferences' }}
               </h2>
             </div>
           </template>
-          
+
           <div class="space-y-4">
             <USelect
               v-model="selectedLanguage"
@@ -377,7 +391,7 @@ function deleteAccount() {
               option-attribute="name"
               :placeholder="$t('profile.selectLanguage') || 'Select Language'"
             />
-            
+
             <div class="flex justify-end mt-4">
               <UButton
                 color="primary"
@@ -388,23 +402,26 @@ function deleteAccount() {
             </div>
           </div>
         </UCard>
-        
+
         <!-- Danger Zone -->
         <UCard class="p-6 border-red-300 dark:border-red-700">
           <template #header>
             <div class="flex items-center space-x-4 mb-4">
-              <UIcon name="i-lucide-alert-triangle" class="text-error" />
+              <UIcon
+                name="i-lucide-alert-triangle"
+                class="text-error"
+              />
               <h2 class="text-xl font-semibold text-error">
                 {{ $t('profile.dangerZone') || 'Danger Zone' }}
               </h2>
             </div>
           </template>
-          
+
           <div class="space-y-4">
             <p class="text-gray-600 dark:text-gray-400">
               {{ $t('profile.deleteAccountWarning') || 'Deleting your account is permanent and cannot be undone. All your data will be lost.' }}
             </p>
-            
+
             <UButton
               color="error"
               variant="soft"
@@ -416,23 +433,26 @@ function deleteAccount() {
         </UCard>
       </div>
     </div>
-    
+
     <!-- Delete Account Confirmation Modal -->
     <UModal v-model="confirmDeleteAccount">
       <UCard>
         <template #header>
           <div class="flex items-center space-x-2">
-            <UIcon name="i-lucide-alert-triangle" class="text-error" />
+            <UIcon
+              name="i-lucide-alert-triangle"
+              class="text-error"
+            />
             <h3 class="text-lg font-semibold">
               {{ $t('profile.confirmDeleteAccount') || 'Confirm Account Deletion' }}
             </h3>
           </div>
         </template>
-        
+
         <p class="mb-4">
           {{ $t('profile.deleteAccountConfirmation') || 'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.' }}
         </p>
-        
+
         <div class="mt-4">
           <UInput
             v-model="deleteConfirmText"
@@ -440,7 +460,7 @@ function deleteAccount() {
             class="mb-4"
           />
         </div>
-        
+
         <template #footer>
           <div class="flex justify-between">
             <UButton
@@ -450,7 +470,7 @@ function deleteAccount() {
             >
               {{ $t('profile.cancel') || 'Cancel' }}
             </UButton>
-            
+
             <UButton
               color="error"
               :disabled="deleteConfirmText !== 'DELETE'"

@@ -53,6 +53,6 @@ const handleFileChange = (event: Event) => {
       accept="image/*"
       class="hidden"
       @change="handleFileChange"
-    />
+    >
   </div>
 </template>

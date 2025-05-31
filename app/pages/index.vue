@@ -119,7 +119,11 @@ const onGenerate = () => {
         >
           <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
             <UFormField :label="$t('modelPreset')">
-              <BaseModelSelect v-model="model" :models="models" class="w-full" />
+              <BaseModelSelect
+                v-model="model"
+                :models="models"
+                class="w-full"
+              />
             </UFormField>
             <UFormField
               v-if="model?.options?.includes('style')"

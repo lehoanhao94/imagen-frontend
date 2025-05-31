@@ -42,7 +42,10 @@ onMounted(async () => {
 <template>
   <div class="text-center space-y-4">
     <!-- Loading State -->
-    <div v-if="activationStatus === 'loading'" class="space-y-4">
+    <div
+      v-if="activationStatus === 'loading'"
+      class="space-y-4"
+    >
       <UIcon
         name="i-lucide-loader-2"
         class="w-16 h-16 mx-auto text-primary animate-spin"
@@ -56,7 +59,10 @@ onMounted(async () => {
     </div>
 
     <!-- Success State -->
-    <div v-else-if="activationStatus === 'success'" class="space-y-4">
+    <div
+      v-else-if="activationStatus === 'success'"
+      class="space-y-4"
+    >
       <UIcon
         name="i-lucide-check-circle"
         class="w-16 h-16 mx-auto text-green-500"
@@ -76,7 +82,10 @@ onMounted(async () => {
     </div>
 
     <!-- Error State -->
-    <div v-else class="space-y-4">
+    <div
+      v-else
+      class="space-y-4"
+    >
       <UIcon
         name="i-lucide-x-circle"
         class="w-16 h-16 mx-auto text-red-500"
@@ -95,8 +104,8 @@ onMounted(async () => {
           {{ $t('auth.backToLogin') }}
         </UButton>
         <UButton
-          @click="$router.go(0)"
           variant="outline"
+          @click="$router.go(0)"
         >
           {{ $t('Try again') }}
         </UButton>

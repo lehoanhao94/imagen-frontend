@@ -57,7 +57,7 @@ const schema = computed(() =>
         required_error: t('validation.required')
       })
       .min(1, t('validation.required'))
-  }).refine((data) => data.new_password === data.confirm_password, {
+  }).refine(data => data.new_password === data.confirm_password, {
     message: t('validation.passwordsDoNotMatch'),
     path: ['confirm_password']
   })
@@ -73,7 +73,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     token: token.value,
     new_password: payload.data.new_password
   })
-  
+
   if (result) {
     resetSuccess.value = true
   }
@@ -115,7 +115,10 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
     </UAuthForm>
   </div>
 
-  <div v-else class="text-center space-y-4">
+  <div
+    v-else
+    class="text-center space-y-4"
+  >
     <UIcon
       name="i-lucide-check-circle"
       class="w-16 h-16 mx-auto text-green-500"

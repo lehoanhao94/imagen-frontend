@@ -17,7 +17,9 @@ useSeoMeta({
     />
     <UPageSection>
       <div class="text-center">
-        <h2 class="text-2xl font-bold mb-4">{{ $t('pricing.comingSoon') }}</h2>
+        <h2 class="text-2xl font-bold mb-4">
+          {{ $t('pricing.comingSoon') }}
+        </h2>
         <p class="text-muted-foreground">
           {{ $t('pricing.comingSoonDescription') }}
         </p>
