@@ -89,5 +89,19 @@ export default defineNuxtConfig({
       { code: 'ja', name: '日本語', file: 'ja.json' }
     ],
     strategy: 'no_prefix'
+  },
+
+  // Color mode configuration for proper theme persistence with SSR disabled
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if no system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '-mode',
+    storageKey: 'nuxt-color-mode',
+    storage: 'localStorage', // or 'sessionStorage' or 'cookie'
+    disableTransition: false // enable transition when switching themes
   }
 })

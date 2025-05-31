@@ -165,5 +165,73 @@
   },
   "readArticle": "記事を読む",
   "switchToLightMode": "ライトモードに切り替え",
-  "switchToDarkMode": "ダークモードに切り替え"
+  "switchToDarkMode": "ダークモードに切り替え",
+  "profile": "プロフィール",
+  "buyCredits": {
+    "checkout": "チェックアウト",
+    "checkoutDescription": "注文を確認してから、お支払い方法を選択してください。",
+    "depositDetail": "入金詳細",
+    "credits": "クレジット",
+    "pricePerUnit": "単価",
+    "totalCredits": "総クレジット",
+    "totalPrice": "総価格",
+    "payment": "お支払い",
+    "submit": "送信",
+    "cancel": "キャンセル"
+  },
+  "pricing": {
+    "title": "料金",
+    "description": "画像生成ニーズに最適なプランをお選びください",
+    "comingSoon": "近日公開",
+    "comingSoonDescription": "料金プランを最終調整中です。更新情報については後ほどご確認ください。"
+  },
+  "magicImageDemo": {
+    "title": "AI画像パーティクル効果",
+    "description": "パーティクルをAI生成画像に変換するBaseMagicImageコンポーネントのデモンストレーション",
+    "image": "画像",
+    "aboutTitle": "このコンポーネントについて",
+    "aboutDescription": "BaseMagicImageコンポーネントはThree.jsを使用して、ランダムな位置とAI生成画像の間で変換できるパーティクルシステムを作成します。パーティクルは渦巻きと流れの効果で移動し、魔法のような変換を作り出します。",
+    "featuresTitle": "機能",
+    "features": {
+      "particleRendering": "パーティクルベースの画像レンダリング",
+      "smoothTransitions": "ランダムなパーティクル位置と画像形成間のスムーズな移行",
+      "interactiveControls": "インタラクティブなカメラコントロール（ドラッグで回転、スクロールでズーム）",
+      "customizable": "カスタマイズ可能なパーティクル数とアニメーション時間",
+      "automatic": "自動または手動変換トリガー"
+    },
+    "howItWorksTitle": "動作原理",
+    "howItWorksDescription": "このコンポーネントは画像のピクセルを分析し、各パーティクルがピクセルを表す3Dパーティクルシステムを作成します。明るいピクセルは視聴者により近く配置され、微妙な3D効果を作り出します。パーティクルは最初3D空間にランダムに散らばり、トリガーされると画像を形成するようにアニメーションします。"
+  },
+  "privacy": {
+    "title": "プライバシーポリシー",
+    "description": "プライバシーの保護とデータの取り扱いについて説明します",
+    "informationWeCollect": "収集する情報",
+    "informationWeCollectDescription": "アカウントの作成、サービスの利用、サポートへの連絡の際に、お客様から直接提供される情報を収集します。",
+    "howWeUseInformation": "情報の使用方法",
+    "howWeUseInformationDescription": "収集した情報は、サービスの提供、維持、改善、取引の処理、およびお客様との連絡に使用します。",
+    "informationSharing": "情報の共有",
+    "informationSharingDescription": "本ポリシーに記載されている場合を除き、お客様の同意なしに個人情報を第三者に販売、取引、またはその他の方法で転送することはありません。",
+    "dataSecurity": "データセキュリティ",
+    "dataSecurityDescription": "お客様の個人情報を不正なアクセス、変更、開示、または破壊から保護するため、適切なセキュリティ対策を実施しています。",
+    "contactUs": "お問い合わせ",
+    "contactUsDescription": "このプライバシーポリシーについてご質問がございましたら、サポートチャンネルを通じてお問い合わせください。"
+  },
+  "terms": {
+    "title": "利用規約",
+    "description": "Imagenサービスの利用規約と条件",
+    "acceptanceOfTerms": "1. 規約の同意",
+    "acceptanceOfTermsDescription": "Imagenサービスにアクセスして使用することで、本契約の条項と条件に拘束されることに同意し、同意します。",
+    "useOfService": "2. サービスの使用",
+    "useOfServiceDescription": "お客様は、合法的な目的でのみ、これらの利用規約に従って当社のサービスを使用することに同意します。",
+    "userAccounts": "3. ユーザーアカウント",
+    "userAccountsDescription": "お客様は、アカウントとパスワードの機密性を維持する責任があります。",
+    "intellectualProperty": "4. 知的財産",
+    "intellectualPropertyDescription": "当社のサービスで利用可能なすべてのコンテンツと資料は、知的財産権によって保護されています。",
+    "termination": "5. 終了",
+    "terminationDescription": "当社は、独自の裁量でお客様のアカウントとサービスへのアクセスを終了または停止する場合があります。",
+    "disclaimers": "6. 免責事項",
+    "disclaimersDescription": "サービスは、いかなる種類の保証もなく「現状のまま」提供されます。",
+    "contactUsTerms": "お問い合わせ",
+    "contactUsTermsDescription": "これらの利用規約についてご質問がございましたら、サポートチャンネルを通じてお問い合わせください。"
+  }
 }

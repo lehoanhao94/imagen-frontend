@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useColorMode } from '@vueuse/core'
 
-// Ported from Stefan Gustavson's java implementation
-// http://staffwww.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
-// Read Stefan's excellent paper for details on how this code works.
-//
-// Sean McCullough banksean@gmail.com
-
+// Use the Nuxt color mode instead of VueUse to ensure consistency
 const colorMode = useColorMode()
 
 /**

@@ -1,8 +1,8 @@
 <template>
   <UPage>
     <UPageHero
-      title="AI Image Generator"
-      description="Generate AI images from text prompts with a magical particle transformation effect"
+      :title="$t('AI Image Generator')"
+      :description="$t('Generate AI images from text prompts with a magical particle transformation effect')"
     />
     <UPageSection>
       <div class="grid grid-cols-1 gap-8">
@@ -10,10 +10,10 @@
           <UCard>
             <template #header>
               <div class="flex flex-col space-y-4">
-                <UFormGroup label="Enter your prompt">
+                <UFormGroup :label="$t('Enter your prompt')">
                   <UTextarea
                     v-model="prompt"
-                    placeholder="Describe the image you want to generate..."
+                    :placeholder="$t('Describe the image you want to generate...')"
                     :rows="3"
                     class="w-full"
                   />
@@ -25,7 +25,7 @@
                     :disabled="!prompt || isGenerating"
                     color="primary"
                   >
-                    {{ isGenerating ? 'Generating...' : 'Generate Image' }}
+                    {{ isGenerating ? $t('Generating...') : $t('Generate Image') }}
                   </UButton>
                 </div>
               </div>
@@ -35,7 +35,7 @@
               <div v-if="!currentImage" class="h-full flex items-center justify-center text-gray-400">
                 <div class="text-center">
                   <UIcon name="i-lucide-image" class="text-5xl mb-2" />
-                  <p>Enter a prompt and click "Generate Image" to create an AI image</p>
+                  <p>{{ $t('Enter a prompt and click Generate Image to create an AI image') }}</p>
                 </div>
               </div>
               <BaseMagicImage
@@ -67,17 +67,17 @@
         </div>
 
         <div class="prose dark:prose-invert mx-auto">
-          <h2>How It Works</h2>
+          <h2>{{ $t('How It Works') }}</h2>
           <p>
-            This AI image generator uses a particle-based transformation effect to visualize the creation process. When you enter a prompt and click "Generate", the system:
+            {{ $t('This AI image generator uses a particle-based transformation effect to visualize the creation process. When you enter a prompt and click \'Generate\', the system:') }}
           </p>
           <ol>
-            <li>Sends your prompt to an AI image generation API</li>
-            <li>Creates a particle system with thousands of tiny particles</li>
-            <li>Transforms the random noise particles into the generated image</li>
+            <li>{{ $t('Sends your prompt to an AI image generation API') }}</li>
+            <li>{{ $t('Creates a particle system with thousands of tiny particles') }}</li>
+            <li>{{ $t('Transforms the random noise particles into the generated image') }}</li>
           </ol>
           <p>
-            The particles start in a random noise pattern and then smoothly transform into the final image, creating a magical effect that simulates the AI's creative process.
+            {{ $t('The particles start in a random noise pattern and then smoothly transform into the final image, creating a magical effect that simulates the AI\'s creative process.') }}
           </p>
         </div>
       </div>
