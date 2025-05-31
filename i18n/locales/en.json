@@ -233,5 +233,23 @@
     "disclaimersDescription": "The service is provided 'as is' without any warranties of any kind.",
     "contactUsTerms": "Contact Us",
     "contactUsTermsDescription": "If you have any questions about these Terms of Service, please contact us through our support channels."
-  }
+  },
+  "appName": "GeminiGen.AI",
+  "quickTopUp": "Quick top up",
+  "customTopUp": "Custom top up", 
+  "numberOfCredits": "Number of credits",
+  "paypal": "PayPal",
+  "paypalDescription": "Pay securely with your PayPal account",
+  "debitCreditCard": "Debit or Credit Card",
+  "cardDescription": "Visa, Mastercard, American Express",
+  "payWithCrypto": "Pay with Crypto",
+  "cryptoDescription": "Bitcoin, Ethereum, and other cryptocurrencies",
+  "profileMenu": {
+    "guide": "Guide",
+    "logo": "Logo", 
+    "settings": "Settings",
+    "components": "Components"
+  },
+  "loadingMoreItems": "Loading more items...",
+  "promptLabel": "Prompt:"
 }

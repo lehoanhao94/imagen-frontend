@@ -13,10 +13,10 @@
           name="i-lucide-credit-card"
           class="size-6 text-blue-500"
         />
-        Debit or Credit Card
+        {{ $t('debitCreditCard') }}
       </div>
       <div class="text-sm text-center text-neutral-600 dark:text-neutral-400">
-        Visa, Mastercard, American Express
+        {{ $t('cardDescription') }}
       </div>
     </div>
   </UCard>

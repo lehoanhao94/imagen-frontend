@@ -234,5 +234,23 @@
     "disclaimersDescription": "Dịch vụ được cung cấp 'như hiện tại' mà không có bất kỳ bảo đảm nào.",
     "contactUsTerms": "Liên hệ với chúng tôi",
     "contactUsTermsDescription": "Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản Dịch vụ này, vui lòng liên hệ với chúng tôi qua các kênh hỗ trợ của chúng tôi."
-  }
+  },
+  "appName": "GeminiGen.AI",
+  "quickTopUp": "Nạp nhanh",
+  "customTopUp": "Nạp tùy chỉnh",
+  "numberOfCredits": "Số lượng credit", 
+  "paypal": "PayPal",
+  "paypalDescription": "Thanh toán an toàn bằng tài khoản PayPal của bạn",
+  "debitCreditCard": "Thẻ ghi nợ hoặc thẻ tín dụng",
+  "cardDescription": "Visa, Mastercard, American Express",
+  "payWithCrypto": "Thanh toán bằng Crypto",
+  "cryptoDescription": "Bitcoin, Ethereum và các loại tiền điện tử khác",
+  "profileMenu": {
+    "guide": "Hướng dẫn",
+    "logo": "Logo",
+    "settings": "Cài đặt", 
+    "components": "Thành phần"
+  },
+  "loadingMoreItems": "Đang tải thêm mục...",
+  "promptLabel": "Gợi ý:"
 }

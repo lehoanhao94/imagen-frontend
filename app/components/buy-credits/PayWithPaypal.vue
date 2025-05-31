@@ -13,10 +13,10 @@
           name="i-simple-icons-paypal"
           class="size-6 text-blue-600"
         />
-        PayPal
+        {{ $t('paypal') }}
       </div>
       <div class="text-sm text-center text-neutral-600 dark:text-neutral-400">
-        Pay securely with your PayPal account
+        {{ $t('paypalDescription') }}
       </div>
     </div>
   </UCard>

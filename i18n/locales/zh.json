@@ -233,5 +233,23 @@
     "disclaimersDescription": "服务按\"现状\"提供，不提供任何形式的保证。",
     "contactUsTerms": "联系我们",
     "contactUsTermsDescription": "如果您对这些服务条款有任何疑问，请通过我们的支持渠道联系我们。"
-  }
+  },
+  "appName": "GeminiGen.AI",
+  "quickTopUp": "快速充值",
+  "customTopUp": "自定义充值",
+  "numberOfCredits": "积分数量",
+  "paypal": "PayPal",
+  "paypalDescription": "使用您的PayPal账户安全支付",
+  "debitCreditCard": "借记卡或信用卡",
+  "cardDescription": "Visa, Mastercard, American Express",
+  "payWithCrypto": "使用加密货币支付",
+  "cryptoDescription": "比特币、以太坊和其他加密货币",
+  "profileMenu": {
+    "guide": "指南",
+    "logo": "标志",
+    "settings": "设置",
+    "components": "组件"
+  },
+  "loadingMoreItems": "正在加载更多项目...",
+  "promptLabel": "提示词："
 }

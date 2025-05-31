@@ -4,7 +4,7 @@
 
 <template>
   <h1 class="font-bold gradient-text">
-    GeminiGen.AI
+    {{ $t('appName') }}
   </h1>
 </template>
 
