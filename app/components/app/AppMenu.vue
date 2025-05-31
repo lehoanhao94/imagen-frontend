@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
+const { t } = useI18n()
+
 const items = [
   {
-    label: 'Guide',
+    label: t('profileMenu.guide'),
     icon: 'i-lucide-book-open'
   },
   {
-    label: 'Logo',
+    label: t('profileMenu.logo'),
     slot: 'logo' as const
   },
   {
-    label: 'Components',
+    label: t('profileMenu.components'),
     icon: 'i-lucide-box',
     slot: 'components' as const
   }
