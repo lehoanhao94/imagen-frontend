@@ -17,7 +17,6 @@ const updateModel = (value: any) => {
 <template>
   <USelectMenu
     :model-value="props.modelValue"
-    @update:model-value="updateModel"
     :items="props.models"
     size="sm"
     icon="hugeicons:ai-chip"
@@ -26,5 +25,6 @@ const updateModel = (value: any) => {
       trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
       content: 'w-48'
     }"
+    @update:model-value="updateModel"
   />
 </template>

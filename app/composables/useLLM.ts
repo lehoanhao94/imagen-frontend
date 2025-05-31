@@ -1,8 +1,10 @@
-export function useImageGenModels() {
+export function useLLM() {
   const models = [
+    // 'Imagen 3',
+    // 'Gemini 2.0 Flash'
     {
-      label: 'Imagen 4',
-      value: 'imagen-4.0-generate-preview-05-20',
+      label: 'Imagen 3',
+      value: 'Imagen 3',
       icon: 'hugeicons:ai-chip',
       options: [
         'style',
@@ -11,7 +13,7 @@ export function useImageGenModels() {
     },
     {
       label: 'Gemini 2.0 Flash',
-      value: 'gemini-2.0-flash',
+      value: 'Gemini 2.0 Flash',
       icon: 'hugeicons:ai-chip',
       options: [
         'style',
@@ -19,7 +21,7 @@ export function useImageGenModels() {
       ]
     }
   ]
-  const model = useCookie<any>('image-gen-model', { default: () => models[0] })
+  const model = useCookie<any>('llm-model', { default: () => models[0] })
 
   return {
     models,
