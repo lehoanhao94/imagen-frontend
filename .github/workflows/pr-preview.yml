@@ -50,7 +50,7 @@ jobs:
     - name: Deploy to GitHub Pages (PR Preview)
       uses: peaceiris/actions-gh-pages@v4
       with:
-        github_token: ${{ secrets.NUXT_UI_GITHUB_TOKEN }}
+        personal_token: ${{ secrets.NUXT_UI_GITHUB_TOKEN }}
         publish_dir: ./.output/public
         destination_dir: pr-${{ github.event.number }}
         keep_files: true
