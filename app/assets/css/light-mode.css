@@ -1,0 +1,56 @@
+/* Light mode improvements */
+:root:not(.dark) {
+  /* Background and text colors */
+  --color-bg-primary: #f5f5f7;
+  --color-bg-secondary: #ffffff;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-border: #e1e1e1;
+  
+  /* Soften the shadows and glows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Card and container styles */
+  --card-bg: #ffffff;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Apply to UI components */
+:root:not(.dark) .u-card {
+  background-color: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border-color: var(--color-border);
+}
+
+:root:not(.dark) .u-input {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border);
+}
+
+/* Add a subtle texture to reduce perceived brightness */
+:root:not(.dark) body {
+  background-image: linear-gradient(to right, rgba(236, 236, 241, 0.5) 1px, transparent 1px),
+                   linear-gradient(to bottom, rgba(236, 236, 241, 0.5) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Make buttons more distinct */
+:root:not(.dark) .u-button {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Override harsh white surfaces */
+:root:not(.dark) .bg-white {
+  background-color: var(--card-bg) !important;
+}
+
+/* Make elevated elements softer */
+:root:not(.dark) [class*="shadow"] {
+  box-shadow: var(--card-shadow) !important;
+}

@@ -20,7 +20,7 @@ const translatedNavLinks = computed(() => {
 const colorMode = useColorMode()
 
 const color = computed(() =>
-  colorMode.value === 'dark' ? '#020618' : 'white'
+  colorMode.value === 'dark' ? '#020618' : '#f5f5f7'
 )
 
 useHead({
