@@ -1,8 +1,8 @@
 <template>
   <UPage>
     <UPageHero
-      title="AI Image Particle Effect"
-      description="A demonstration of the BaseMagicImage component that transforms particles into AI-generated images"
+      :title="$t('magicImageDemo.title')"
+      :description="$t('magicImageDemo.description')"
     />
     <UPageSection>
       <div class="grid grid-cols-1 gap-8">
@@ -22,26 +22,26 @@
             @click="currentImage = image"
             :color="currentImage === image ? 'primary' : 'gray'"
           >
-            Image {{ index + 1 }}
+            {{ $t('magicImageDemo.image') }} {{ index + 1 }}
           </UButton>
         </div>
         
         <div class="prose dark:prose-invert mx-auto">
-          <h2>About This Component</h2>
+          <h2>{{ $t('magicImageDemo.aboutTitle') }}</h2>
           <p>
-            The BaseMagicImage component uses Three.js to create a particle system that can transform between random positions and an AI-generated image. The particles move with swirling and flowing effects, creating a magical transformation.
+            {{ $t('magicImageDemo.aboutDescription') }}
           </p>
-          <h3>Features</h3>
+          <h3>{{ $t('magicImageDemo.featuresTitle') }}</h3>
           <ul>
-            <li>Particle-based image rendering</li>
-            <li>Smooth transitions between random particle positions and image formation</li>
-            <li>Interactive camera controls (drag to rotate, scroll to zoom)</li>
-            <li>Customizable particle count and animation duration</li>
-            <li>Automatic or manual transformation triggering</li>
+            <li>{{ $t('magicImageDemo.features.particleRendering') }}</li>
+            <li>{{ $t('magicImageDemo.features.smoothTransitions') }}</li>
+            <li>{{ $t('magicImageDemo.features.interactiveControls') }}</li>
+            <li>{{ $t('magicImageDemo.features.customizable') }}</li>
+            <li>{{ $t('magicImageDemo.features.automatic') }}</li>
           </ul>
-          <h3>How It Works</h3>
+          <h3>{{ $t('magicImageDemo.howItWorksTitle') }}</h3>
           <p>
-            The component analyzes the pixels of an image and creates a 3D particle system where each particle represents a pixel. Brighter pixels are positioned closer to the viewer, creating a subtle 3D effect. The particles are initially scattered randomly in 3D space, then animate to form the image when triggered.
+            {{ $t('magicImageDemo.howItWorksDescription') }}
           </p>
         </div>
       </div>

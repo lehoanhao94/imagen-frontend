@@ -26,7 +26,7 @@
       >
         <!-- Nội dung khác có thể được thêm vào đây -->
         <div class="text-3xl mx-auto">
-          Profile
+          {{ $t('profile') }}
         </div>
       </div>
     </div>

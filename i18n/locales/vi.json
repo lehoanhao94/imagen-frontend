@@ -166,5 +166,73 @@
   },
   "readArticle": "Đọc bài viết",
   "switchToLightMode": "Chuyển sang chế độ sáng",
-  "switchToDarkMode": "Chuyển sang chế độ tối"
+  "switchToDarkMode": "Chuyển sang chế độ tối",
+  "profile": "Hồ sơ",
+  "buyCredits": {
+    "checkout": "Thanh toán",
+    "checkoutDescription": "Xác nhận đơn hàng của bạn sau đó chọn phương thức thanh toán.",
+    "depositDetail": "Chi tiết gửi tiền",
+    "credits": "Tín dụng",
+    "pricePerUnit": "Giá mỗi đơn vị",
+    "totalCredits": "Tổng tín dụng",
+    "totalPrice": "Tổng giá",
+    "payment": "Thanh toán",
+    "submit": "Gửi",
+    "cancel": "Hủy"
+  },
+  "pricing": {
+    "title": "Bảng giá",
+    "description": "Chọn gói hoàn hảo cho nhu cầu tạo hình ảnh của bạn",
+    "comingSoon": "Sắp ra mắt",
+    "comingSoonDescription": "Các gói giá của chúng tôi đang được hoàn thiện. Hãy quay lại sớm để cập nhật."
+  },
+  "magicImageDemo": {
+    "title": "Hiệu ứng hạt hình ảnh AI",
+    "description": "Minh họa về thành phần BaseMagicImage biến đổi các hạt thành hình ảnh được tạo bởi AI",
+    "image": "Hình ảnh",
+    "aboutTitle": "Về Thành Phần Này",
+    "aboutDescription": "Thành phần BaseMagicImage sử dụng Three.js để tạo hệ thống hạt có thể biến đổi giữa các vị trí ngẫu nhiên và hình ảnh được tạo bởi AI. Các hạt di chuyển với hiệu ứng xoay và chảy, tạo ra sự biến đổi ma thuật.",
+    "featuresTitle": "Tính năng",
+    "features": {
+      "particleRendering": "Kết xuất hình ảnh dựa trên hạt",
+      "smoothTransitions": "Chuyển đổi mượt mà giữa vị trí hạt ngẫu nhiên và hình thành hình ảnh",
+      "interactiveControls": "Điều khiển camera tương tác (kéo để xoay, cuộn để phóng to)",
+      "customizable": "Số lượng hạt và thời gian hoạt hình có thể tùy chỉnh",
+      "automatic": "Kích hoạt biến đổi tự động hoặc thủ công"
+    },
+    "howItWorksTitle": "Cách Hoạt Động",
+    "howItWorksDescription": "Thành phần phân tích các pixel của hình ảnh và tạo hệ thống hạt 3D trong đó mỗi hạt đại diện cho một pixel. Các pixel sáng hơn được định vị gần người xem hơn, tạo hiệu ứng 3D tinh tế. Các hạt ban đầu được phân tán ngẫu nhiên trong không gian 3D, sau đó hoạt hình để tạo thành hình ảnh khi được kích hoạt."
+  },
+  "privacy": {
+    "title": "Chính sách bảo mật",
+    "description": "Tìm hiểu cách chúng tôi bảo vệ quyền riêng tư và xử lý dữ liệu của bạn",
+    "informationWeCollect": "Thông tin chúng tôi thu thập",
+    "informationWeCollectDescription": "Chúng tôi thu thập thông tin bạn cung cấp trực tiếp cho chúng tôi, chẳng hạn như khi bạn tạo tài khoản, sử dụng dịch vụ của chúng tôi hoặc liên hệ với chúng tôi để được hỗ trợ.",
+    "howWeUseInformation": "Cách chúng tôi sử dụng thông tin của bạn",
+    "howWeUseInformationDescription": "Chúng tôi sử dụng thông tin thu thập được để cung cấp, duy trì và cải thiện dịch vụ của mình, xử lý giao dịch và liên lạc với bạn.",
+    "informationSharing": "Chia sẻ thông tin",
+    "informationSharingDescription": "Chúng tôi không bán, trao đổi hoặc chuyển giao thông tin cá nhân của bạn cho bên thứ ba mà không có sự đồng ý của bạn, trừ những trường hợp được mô tả trong chính sách này.",
+    "dataSecurity": "Bảo mật dữ liệu",
+    "dataSecurityDescription": "Chúng tôi thực hiện các biện pháp bảo mật thích hợp để bảo vệ thông tin cá nhân của bạn khỏi truy cập, thay đổi, tiết lộ hoặc phá hủy trái phép.",
+    "contactUs": "Liên hệ với chúng tôi",
+    "contactUsDescription": "Nếu bạn có bất kỳ câu hỏi nào về Chính sách Bảo mật này, vui lòng liên hệ với chúng tôi qua các kênh hỗ trợ của chúng tôi."
+  },
+  "terms": {
+    "title": "Điều khoản dịch vụ",
+    "description": "Các điều khoản và điều kiện sử dụng dịch vụ Imagen",
+    "acceptanceOfTerms": "1. Chấp nhận điều khoản",
+    "acceptanceOfTermsDescription": "Bằng cách truy cập và sử dụng dịch vụ Imagen, bạn chấp nhận và đồng ý bị ràng buộc bởi các điều khoản và điều kiện của thỏa thuận này.",
+    "useOfService": "2. Sử dụng dịch vụ",
+    "useOfServiceDescription": "Bạn đồng ý chỉ sử dụng dịch vụ của chúng tôi cho các mục đích hợp pháp và theo các Điều khoản Dịch vụ này.",
+    "userAccounts": "3. Tài khoản người dùng",
+    "userAccountsDescription": "Bạn có trách nhiệm duy trì tính bảo mật của tài khoản và mật khẩu của mình.",
+    "intellectualProperty": "4. Sở hữu trí tuệ",
+    "intellectualPropertyDescription": "Tất cả nội dung và tài liệu có sẵn trên dịch vụ của chúng tôi đều được bảo vệ bởi quyền sở hữu trí tuệ.",
+    "termination": "5. Chấm dứt",
+    "terminationDescription": "Chúng tôi có thể chấm dứt hoặc tạm ngừng tài khoản và quyền truy cập dịch vụ của bạn theo quyết định riêng của chúng tôi.",
+    "disclaimers": "6. Tuyên bố từ chối",
+    "disclaimersDescription": "Dịch vụ được cung cấp 'như hiện tại' mà không có bất kỳ bảo đảm nào.",
+    "contactUsTerms": "Liên hệ với chúng tôi",
+    "contactUsTermsDescription": "Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản Dịch vụ này, vui lòng liên hệ với chúng tôi qua các kênh hỗ trợ của chúng tôi."
+  }
 }
