@@ -44,10 +44,15 @@ watch(i18nLocale, (newLocale: string) => {
           orientation="vertical"
           class="h-4"
         />
-        <UColorModeSelect
-          size="xs"
-          variant="ghost"
-        />
+        <ClientOnly>
+          <UColorModeSelect
+            size="xs"
+            variant="ghost"
+          />
+          <template #fallback>
+            <div class="w-8 h-6" />
+          </template>
+        </ClientOnly>
         <USeparator
           orientation="vertical"
           class="h-4"
