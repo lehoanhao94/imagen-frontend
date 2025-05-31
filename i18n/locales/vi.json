@@ -253,6 +253,14 @@
     "components": "Thành phần"
   },
   "loadingMoreItems": "Đang tải thêm mục...",
+  "library": {
+    "tabs": {
+      "imagen": "Imagen",
+      "video": "Video",
+      "speech": "Giọng nói",
+      "music": "Nhạc"
+    }
+  },
   "promptLabel": "Gợi ý:",
   "videoExamples": "Ví dụ Video",
   "videoExamplesDescription": "Khám phá các ví dụ video với prompt và cài đặt của chúng. Nhấp vào nút 'Sử dụng Prompt này' để sao chép prompt vào ô nhập liệu của bạn.",
