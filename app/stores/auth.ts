@@ -268,6 +268,46 @@ export const useAuthStore = defineStore('authStore', {
       } finally {
         this.loading = false
       }
+    },
+    
+    async changePassword(payload: { current_password: string, new_password: string }) {
+      this.loading = true
+      this.error = null
+
+      try {
+        const { apiService } = useAPI()
+        const response = await apiService.put('/change-password', payload)
+        return response.data
+      } catch (error: any) {
+        console.log('🚀 ~ changePassword error:', error)
+        this.error = error.response?.data?.detail || error.message
+        return null
+      } finally {
+        this.loading = false
+      }
+    },
+
+    async updateProfile(payload: { full_name: string }) {
+      this.loading = true
+      this.error = null
+
+      try {
+        const { apiService } = useAPI()
+        const response = await apiService.put('/update-profile', payload)
+        
+        // Update user information in store
+        if (response.data && this.user) {
+          this.user.full_name = payload.full_name
+        }
+        
+        return response.data
+      } catch (error: any) {
+        console.log('🚀 ~ updateProfile error:', error)
+        this.error = error.response?.data?.detail || error.message
+        return null
+      } finally {
+        this.loading = false
+      }
     }
   }
 })
