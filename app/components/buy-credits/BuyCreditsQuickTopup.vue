@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const creditsStore = useCreditsStore()
-const { quickTopUpList, showDrawer } = storeToRefs(creditsStore)
+const { quickTopUpList } = storeToRefs(creditsStore)
 </script>
 
 <template>
   <div class="">
     <div>
       <h2 class="text-xl font-bold mb-4">
-        Quick top up
+        {{ $t('quickTopUp') }}
       </h2>
     </div>
     <UCarousel

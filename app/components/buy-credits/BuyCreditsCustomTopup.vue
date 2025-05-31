@@ -16,12 +16,12 @@ const estimatedPrice = computed(() => {
   <div class="">
     <div>
       <h2 class="text-xl font-bold mb-4">
-        {{ $t("Custom top up") }}
+        {{ $t('customTopUp') }}
       </h2>
     </div>
     <div class="flex flex-col gap-2 justify-center items-center">
       <UFormField
-        :label="$t('Number of credits')"
+        :label="$t('numberOfCredits')"
         :help="`~ ${estimatedPrice} $`"
       >
         <UInputNumber

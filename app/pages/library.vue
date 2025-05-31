@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
+import { ref, watch, nextTick, onMounted, onUnmounted } from 'vue'
 
 /**
  * Library page with infinite scroll functionality
- * 
+ *
  * Features:
  * - Loads initial set of items
  * - Detects when user scrolls to bottom of page
@@ -62,7 +62,7 @@ const initialData = [
     style: 'Dynamic',
     resolution: '832x1472'
   }
-];
+]
 
 // More sample data for pagination
 const moreData = [
@@ -116,112 +116,112 @@ const moreData = [
     style: 'Dynamic',
     resolution: '832x1472'
   }
-];
+]
 
 // Reactive state
-const libraries = ref(initialData);
-const page = ref(1);
-const isLoading = ref(false);
-const hasMoreData = ref(true);
+const libraries = ref(initialData)
+const page = ref(1)
+const isLoading = ref(false)
+const hasMoreData = ref(true)
 
 // Mock API fetch function
 const fetchMoreLibraryItems = async () => {
-  if (!hasMoreData.value || isLoading.value) return;
-  
-  isLoading.value = true;
-  
+  if (!hasMoreData.value || isLoading.value) return
+
+  isLoading.value = true
+
   try {
     // Simulate API call with delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
     // In a real implementation, you would fetch from your API with pagination:
     // const response = await fetch(`/api/library?page=${page.value}&limit=10`);
     // const newData = await response.json();
-    
+
     // Mock response based on page
     if (page.value === 1) {
       // Append new data to existing data (preserving order)
-      libraries.value = [...libraries.value, ...moreData];
-      page.value++;
+      libraries.value = [...libraries.value, ...moreData]
+      page.value++
     } else {
       // For demo purposes, we'll stop loading after second page
-      hasMoreData.value = false;
+      hasMoreData.value = false
     }
-    
+
     // In a real implementation, you would check if there's more data available:
     // if (newData.length < limit) {
     //   hasMoreData.value = false;
     // }
   } catch (error) {
-    console.error('Error fetching more library items:', error);
+    console.error('Error fetching more library items:', error)
     // Show error to user
-    alert('Failed to load more items. Please try again.');
+    alert('Failed to load more items. Please try again.')
   } finally {
-    isLoading.value = false;
+    isLoading.value = false
   }
-};
+}
 
 // Intersection observer for infinite scroll
-let observer: IntersectionObserver | null = null;
+let observer: IntersectionObserver | null = null
 
 const observeLastElement = (entries: IntersectionObserverEntry[]) => {
-  const entry = entries[0];
+  const entry = entries[0]
   if (entry && entry.isIntersecting && !isLoading.value) {
-    fetchMoreLibraryItems();
+    fetchMoreLibraryItems()
   }
-};
+}
 
 // Setup scroll observer on component mount
 onMounted(() => {
   observer = new IntersectionObserver(observeLastElement, {
     threshold: 0.5,
     rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
-  });
-  
+  })
+
   // Setup scroll event for fallback
-  window.addEventListener('scroll', checkScrollPosition);
-});
+  window.addEventListener('scroll', checkScrollPosition)
+})
 
 // Clean up on unmount
 onUnmounted(() => {
   if (observer) {
-    observer.disconnect();
+    observer.disconnect()
   }
-  window.removeEventListener('scroll', checkScrollPosition);
-});
+  window.removeEventListener('scroll', checkScrollPosition)
+})
 
 // Update observer target when the libraries array changes
 watch(libraries, () => {
   nextTick(() => {
-    const loadingTrigger = document.getElementById('loading-trigger');
+    const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
-      observer.disconnect();
-      observer.observe(loadingTrigger);
+      observer.disconnect()
+      observer.observe(loadingTrigger)
     }
-  });
-});
+  })
+})
 
 // Debounce function to improve scroll performance
 const debounce = (fn: Function, delay: number) => {
-  let timeoutId: NodeJS.Timeout;
-  return function(...args: any[]) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), delay);
-  };
-};
+  let timeoutId: NodeJS.Timeout
+  return function (...args: any[]) {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
 
 // Fallback scroll detection with debouncing
 const checkScrollPosition = debounce(() => {
-  if (isLoading.value || !hasMoreData.value) return;
-  
-  const scrollPosition = window.scrollY + window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
-  
+  if (isLoading.value || !hasMoreData.value) return
+
+  const scrollPosition = window.scrollY + window.innerHeight
+  const documentHeight = document.documentElement.scrollHeight
+
   // Load more when user scrolls to 90% of the page
   if (scrollPosition >= documentHeight * 0.9) {
-    fetchMoreLibraryItems();
+    fetchMoreLibraryItems()
   }
-}, 200); // 200ms debounce;
+}, 200) // 200ms debounce;
 </script>
 
 <template>
@@ -253,23 +253,32 @@ const checkScrollPosition = debounce(() => {
           />
         </Motion>
       </UPageColumns>
-      
+
       <!-- Loading indicator -->
-      <div v-if="isLoading" class="flex justify-center items-center py-10">
-        <UIcon name="i-lucide-loader" class="animate-spin text-primary h-8 w-8 mr-2" />
-        <span class="text-primary">Loading more items...</span>
+      <div
+        v-if="isLoading"
+        class="flex justify-center items-center py-10"
+      >
+        <UIcon
+          name="i-lucide-loader"
+          class="animate-spin text-primary h-8 w-8 mr-2"
+        />
+        <span class="text-primary">{{ $t('loadingMoreItems') }}</span>
       </div>
-      
+
       <!-- End of list indicator for intersection observer -->
-      <div 
-        id="loading-trigger" 
-        class="h-1 w-full" 
+      <div
         v-if="hasMoreData && !isLoading"
+        id="loading-trigger"
+        class="h-1 w-full"
         aria-hidden="true"
-      ></div>
-      
+      />
+
       <!-- End message when all data is loaded -->
-      <div v-if="!hasMoreData" class="text-center py-8 text-gray-500">
+      <div
+        v-if="!hasMoreData"
+        class="text-center py-8 text-gray-500"
+      >
         You've reached the end of the library
       </div>
     </UContainer>

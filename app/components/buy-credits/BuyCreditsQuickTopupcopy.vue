@@ -7,7 +7,7 @@ const { quickTopUpList } = storeToRefs(creditsStore)
   <div class="">
     <div>
       <h2 class="text-xl font-bold mb-4">
-        Quick top up
+        {{ $t('quickTopUp') }}
       </h2>
     </div>
     <UCarousel

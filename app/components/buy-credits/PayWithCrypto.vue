@@ -11,10 +11,10 @@
           name="i-lucide-bitcoin"
           class="size-6 text-amber-500"
         />
-        Pay with Crypto
+        {{ $t('payWithCrypto') }}
       </div>
       <div class="text-sm text-center text-neutral-600 dark:text-neutral-400">
-        Bitcoin, Ethereum, and other cryptocurrencies
+        {{ $t('cryptoDescription') }}
       </div>
     </div>
   </UCard>
