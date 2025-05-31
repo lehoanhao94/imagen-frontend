@@ -1,0 +1,22 @@
+<template>
+  <UCard
+    class="bg-neutral-50 dark:bg-neutral-800 hover:opacity-80 cursor-pointer"
+  >
+    <div class="flex flex-col gap-2">
+      <div class="text-lg font-semibold text-center flex items-center justify-center gap-2">
+        <UIcon
+          name="i-lucide-credit-card"
+          class="size-6 text-blue-500"
+        />
+        Debit or Credit Card
+      </div>
+      <div class="text-sm text-center text-neutral-600 dark:text-neutral-400">
+        Visa, Mastercard, American Express
+      </div>
+    </div>
+  </UCard>
+</template>
+
+<script setup lang="ts">
+// Component for card payment option
+</script>
