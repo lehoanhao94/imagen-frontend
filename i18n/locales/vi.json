@@ -169,15 +169,15 @@
   "switchToDarkMode": "Chuyển sang chế độ tối",
   "profile": "Hồ sơ",
   "buyCredits": {
-    "checkout": "Thanh toán",
+    "checkout": "Đặt hàng",
     "checkoutDescription": "Xác nhận đơn hàng của bạn sau đó chọn phương thức thanh toán.",
     "orderDetail": "Chi tiết đơn hàng",
-    "credits": "Tín dụng",
-    "pricePerUnit": "Giá mỗi đơn vị",
-    "totalCredits": "Tổng tín dụng",
-    "totalPrice": "Tổng giá",
+    "credits": "Credit",
+    "pricePerUnit": "Đơn giá",
+    "totalCredits": "Tổng credit",
+    "totalPrice": "Tổng tiền",
     "payment": "Thanh toán",
-    "submit": "Gửi",
+    "submit": "Hoàn tất",
     "cancel": "Hủy"
   },
   "pricing": {
