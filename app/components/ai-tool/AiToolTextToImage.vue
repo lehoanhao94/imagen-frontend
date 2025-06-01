@@ -121,7 +121,10 @@ const onGenerate = () => {
             v-if="model?.options?.includes('style')"
             :label="$t('style')"
           >
-            <BaseStyleSelect class="w-full" />
+            <BaseImageStyleSelect
+              v-model="style"
+              class="w-full"
+            />
           </UFormField>
           <UFormField
             v-if="model?.options?.includes('imageDimensions')"
