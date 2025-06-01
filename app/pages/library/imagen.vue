@@ -61,6 +61,72 @@ const imagenInitialData = [
   }
 ]
 
+// Mock data for videos
+const videoInitialData = [
+  {
+    videoUrl: '#',
+    thumbnailUrl: 'https://cdn.leonardo.ai/users/ae43823c-9b34-43ec-89d8-a561b2d817cf/generations/09b9108b-e6c3-4300-a31d-4a5a6012e2e1/Leonardo_Phoenix_10_create_an_illustration_of_A_woman_wearing_2.jpg?w=512',
+    title: 'Create a cinematic video of a woman dancing',
+    prompt: 'A beautiful woman with flowing hair dancing gracefully in a sunlit meadow, slow motion, cinematic lighting, golden hour',
+    model: 'Veo 2',
+    style: 'Cinematic',
+    duration: '5s'
+  },
+  {
+    videoUrl: '#',
+    thumbnailUrl: 'https://cdn.leonardo.ai/users/b6c8b211-6345-4cc4-a86b-efa3673506e3/generations/022ef9ef-7435-4580-ada9-bfc39ee325c3/Leonardo_Phoenix_10_A_sophisticated_lady_in_a_forest_green_tea_0.jpg?w=512',
+    title: 'Abstract geometric animation',
+    prompt: 'Abstract geometric shapes morphing and transforming in space, vibrant colors, modern art style',
+    model: 'Veo 3',
+    style: 'Abstract',
+    duration: '8s'
+  }
+]
+
+// Mock data for speech
+const speechInitialData = [
+  {
+    audioUrl: '#',
+    thumbnailUrl: 'https://cdn.leonardo.ai/users/846c2e73-4c2d-4138-afa2-c2f6feecf304/generations/240454cc-405d-4c9d-89bf-8e265324a9cf/Leonardo_Phoenix_10_An_illustration_of_a_graceful_female_figur_0.jpg?w=512',
+    title: 'Motivational Speech Generation',
+    prompt: 'Generate an inspiring motivational speech about overcoming challenges and achieving dreams',
+    model: 'Gemini 2.5 Pro',
+    voice: 'Professional',
+    duration: '2m 30s'
+  },
+  {
+    audioUrl: '#',
+    thumbnailUrl: 'https://cdn.leonardo.ai/users/c675554b-c126-47eb-936a-7ee76290f5e3/generations/27d15640-a5a9-4dbc-a9bc-40fd28f82d10/Leonardo_Phoenix_10_Create_an_image_of_a_majestic_tortoise_in_3.jpg?w=512',
+    title: 'Storytelling Voice Generation',
+    prompt: 'Create a storytelling voice for a children\'s fairy tale with a warm and gentle tone',
+    model: 'Gemini 2.5 Flash',
+    voice: 'Gentle',
+    duration: '1m 45s'
+  }
+]
+
+// Mock data for music
+const musicInitialData = [
+  {
+    audioUrl: '#',
+    thumbnailUrl: 'https://cdn.leonardo.ai/users/dc4608ba-6fc1-415e-ad8f-8dde28127c66/generations/6313bb9e-0ba2-4e65-a72d-561b348e2100/Leonardo_Phoenix_10_Vibrant_and_highly_detailed_photograph_of_2.jpg?w=512',
+    title: 'Upbeat Electronic Music',
+    prompt: 'Create an upbeat electronic dance music track with synthesizers and a strong bass line',
+    model: 'Music Gen Pro',
+    genre: 'Electronic',
+    duration: '3m 15s'
+  },
+  {
+    audioUrl: '#',
+    thumbnailUrl: 'https://cdn.leonardo.ai/users/f33d9042-22f3-4fbb-96ef-923567ea1ed9/generations/50b0bcd7-58f9-4a2c-a8c7-6a5a356bd852/Leonardo_Phoenix_10_Create_a_minimalist_and_elegant_vintageins_2.jpg?w=512',
+    title: 'Relaxing Ambient Music',
+    prompt: 'Generate a peaceful ambient music track with nature sounds and soft melodies for meditation',
+    model: 'Music Gen Standard',
+    genre: 'Ambient',
+    duration: '5m 20s'
+  }
+]
+
 // More sample data for pagination
 const imagenMoreData = [
   {
@@ -97,6 +163,7 @@ const hasMoreData = computed(() => hasMoreDataLeft.value)
 
 // Mock API fetch function
 const fetchMoreLibraryItems = async () => {
+  const currentTabKey = activeTab.value as keyof typeof dataMap
   if (!hasMoreData.value || isLoading.value) return
 
   isLoadingData.value = true
@@ -249,28 +316,72 @@ const checkScrollPosition = debounce(() => {
             orientation="vertical"
             v-bind="image"
           />
-        </Motion>
-      </UPageColumns>
+          {{ item.label }}
+        </motion>
+      </upagecolumns>
+    </ucontainer>
+  </upage>
+</template>
 
-      <!-- Loading indicator -->
-      <div
-        v-if="isLoading"
-        class="flex justify-center items-center py-10"
-      >
-        <UIcon
-          name="i-lucide-loader"
-          class="animate-spin text-primary h-8 w-8 mr-2"
-        />
-        <span class="text-primary">{{ $t('loadingMoreItems') }}</span>
-      </div>
+        <template #content="{ item }">
+          <!-- Content for each tab -->
+          <div v-if="item.key === 'imagen'">
+            <UPageColumns>
+              <Motion
+                v-for="(image, index) in currentImagenData"
+                :key="`imagen-${index}`"
+                :initial="{
+                  scale: 1.1,
+                  opacity: 0,
+                  filter: 'blur(20px)'
+                }"
+                :animate="{
+                  scale: 1,
+                  opacity: 1,
+                  filter: 'blur(0px)'
+                }"
+                :transition="{
+                  duration: 0.6,
+                  delay: index * 0.1
+                }"
+              >
+                <AIToolImageLibraryCard
+                  :key="`imagen-card-${index}`"
+                  orientation="vertical"
+                  v-bind="image"
+                />
+              </Motion>
+            </UPageColumns>
+          </div>
 
-      <!-- End of list indicator for intersection observer -->
-      <div
-        v-if="hasMoreData && !isLoading"
-        id="loading-trigger"
-        class="h-1 w-full"
-        aria-hidden="true"
-      />
+          <div v-else-if="item.key === 'video'">
+            <UPageColumns>
+              <Motion
+                v-for="(video, index) in currentVideoData"
+                :key="`video-${index}`"
+                :initial="{
+                  scale: 1.1,
+                  opacity: 0,
+                  filter: 'blur(20px)'
+                }"
+                :animate="{
+                  scale: 1,
+                  opacity: 1,
+                  filter: 'blur(0px)'
+                }"
+                :transition="{
+                  duration: 0.6,
+                  delay: index * 0.1
+                }"
+              >
+                <VideoPromptCard
+                  :key="`video-card-${index}`"
+                  orientation="vertical"
+                  v-bind="video"
+                />
+              </Motion>
+            </UPageColumns>
+          </div>
 
       <!-- End message when all data is loaded -->
       <div

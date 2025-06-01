@@ -233,5 +233,129 @@
     "disclaimersDescription": "サービスは、いかなる種類の保証もなく「現状のまま」提供されます。",
     "contactUsTerms": "お問い合わせ",
     "contactUsTermsDescription": "これらの利用規約についてご質問がございましたら、サポートチャンネルを通じてお問い合わせください。"
+  },
+  "Describe the video you want to generate...": "生成したいビデオを説明してください。",
+  "cancel": "キャンセル",
+  "confirm": "確認",
+  "imageStyles": {
+    "selectImageStyle": "画像スタイルを選択",
+    "chooseStyle": "スタイルを選択",
+    "examples": "例",
+    "selectStyleToSeeExamples": "スタイルを選択して例を表示してください。",
+    "3d-render": {
+      "description": "フォトリアリスティックな3Dレンダリング画像を適切な照明と素材で作成する"
+    },
+    "acrylic": {
+      "description": "鮮やかなアクリル絵画スタイルで、力強い筆致と豊かな色彩。"
+    },
+    "anime-general": {
+      "description": "日本のアニメとマンガのスタイルは、表情豊かなキャラクターと詳細な背景が特徴です。"
+    },
+    "creative": {
+      "description": "芸術的で革新的なスタイルに、創造的な解釈と独自の構成。"
+    },
+    "dynamic": {
+      "description": "動きと劇的な角度、力強い構図を備えたハイエナジーなスタイル"
+    },
+    "fashion": {
+      "description": "プロフェッショナルなファッションフォトグラフィースタイルに、エレガントなスタイリングとラグジュアリーな美学を取り入れて"
+    },
+    "game-concept": {
+      "description": "ビデオゲームのコンセプトアートスタイルでは、詳細なキャラクターと環境が描かれています。"
+    },
+    "graphic-design-3d": {
+      "description": "現代的な3Dグラフィックデザインは、クリーンなラインと現代的な美学を持っています。"
+    },
+    "illustration": {
+      "description": "伝統的なイラストスタイルと詳細なアートワークおよび芸術的技法"
+    },
+    "none": {
+      "description": "特定のスタイルは適用されず、自然なAIの解釈が可能です。"
+    },
+    "portrait": {
+      "description": "顔の特徴や表情に焦点を当てたプロフェッショナルなポートレートスタイル"
+    },
+    "portrait-cinematic": {
+      "description": "映画のようなクオリティで劇的な照明が特徴のシネマティックなポートレートスタイル"
+    },
+    "portrait-fashion": {
+      "description": "エレガンスとプロの撮影技術を組み合わせたファッションポートレートスタイル"
+    },
+    "ray-traced": {
+      "description": "高度にリアルな反射と照明を備えたレイトレーシングレンダリング"
+    },
+    "stock-photo": {
+      "description": "商業的なストックフォトのスタイルで、クリーンでプロフェッショナルな印象"
+    },
+    "watercolor": {
+      "description": "柔らかな水彩画のスタイルで、流れるような色彩と芸術的な筆効果があります。"
+    }
+  },
+  "appName": "ジェミニジェン・エーアイ",
+  "quickTopUp": "クイックチャージ",
+  "customTopUp": "カスタムチャージ",
+  "numberOfCredits": "単位数",
+  "paypal": "ペイパル",
+  "paypalDescription": "PayPalアカウントで安全に支払う",
+  "debitCreditCard": "デビットカードまたはクレジットカード",
+  "cardDescription": "ビザ、マスターカード、アメリカン・エキスプレス",
+  "payWithCrypto": "暗号通貨で支払う",
+  "cryptoDescription": "ビットコイン、イーサリアム、その他の暗号通貨",
+  "profileMenu": {
+    "guide": "ガイド",
+    "logo": "ロゴ",
+    "settings": "設定",
+    "components": "コンポーネント"
+  },
+  "loadingMoreItems": "アイテムをさらに読み込んでいます...",
+  "library": {
+    "tabs": {
+      "imagen": "イマゲン",
+      "video": "ビデオ",
+      "speech": "スピーチ",
+      "music": "音楽"
+    }
+  },
+  "promptLabel": "プロンプト：",
+  "videoExamples": "ビデオの例",
+  "videoExamplesDescription": "これらのビデオ例とそれらのプロンプトおよび設定を調べてください。「このプロンプトを使用」ボタンをクリックすると、プロンプトを入力欄にコピーできます。",
+  "useThisPrompt": "このプロンプトを使用してください。",
+  "model": "モデル",
+  "duration": "期間",
+  "videoTypeSelection": "ビデオタイプを選択",
+  "videoTypes": {
+    "selectVideoType": "ビデオタイプを選択",
+    "searchPlaceholder": "ビデオタイプを検索…",
+    "chooseType": "種類を選択",
+    "examples": "例",
+    "selectTypeToSeeExamples": "タイプを選択して例を表示してください。",
+    "advertisingMarketing": {
+      "title": "広告とマーケティング",
+      "description": "製品やサービスを宣伝し、Facebook、TikTok、YouTube広告を運用し、ブランドやプロジェクトを紹介し、ビデオマーケティングの制作コストを最適化する。"
+    },
+    "socialMediaContent": {
+      "title": "ソーシャルメディアコンテンツ（短尺コンテンツ）",
+      "description": "TikTok、リール、ショート動画、ストーリーテリング動画、レビュー、AIボイスオーバー、テキストやブログを動画に変換"
+    },
+    "personalEntertainment": {
+      "title": "個人の創造的コンテンツ／エンターテインメント",
+      "description": "コメディ動画、パロディ、ミーム、ストーリーテリング動画、アニメーション、ファンメイドコンテンツ、AIを駆使した短編映画"
+    },
+    "educationTraining": {
+      "title": "教育と訓練",
+      "description": "教育ビデオ、eラーニング、コース、スキルトレーニング、知識共有、AIアバターインストラクターによるプレゼンテーション"
+    },
+    "corporateCommunication": {
+      "title": "内部コミュニケーションと企業",
+      "description": "オンボーディングビデオ、プロセスガイド、社内ビデオ発表、迅速なAIを活用した従業員トレーニング"
+    },
+    "personalizedVideos": {
+      "title": "パーソナライズされたビデオ",
+      "description": "誕生日メッセージ、記念日動画、パーソナライズされた顧客向け動画（メールマーケティング、カスタマーケア）、特定の候補者向け採用動画"
+    },
+    "timeCostSavings": {
+      "title": "生産における時間とコストの節約",
+      "description": "俳優やスタジオ、ポストプロダクションチームは不要で、個人や小規模チームが迅速にコンテンツを作成するのに最適な、動画制作の自動化ワークフロー。"
+    }
   }
 }

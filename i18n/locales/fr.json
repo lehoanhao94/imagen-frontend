@@ -233,5 +233,129 @@
     "disclaimersDescription": "Le service est fourni 'tel quel' sans aucune garantie d'aucune sorte.",
     "contactUsTerms": "Contactez-Nous",
     "contactUsTermsDescription": "Si vous avez des questions sur ces Conditions de Service, veuillez nous contacter via nos canaux de support."
+  },
+  "Describe the video you want to generate...": "Décrivez la vidéo que vous souhaitez générer...",
+  "cancel": "Annuler",
+  "confirm": "Confirmer",
+  "imageStyles": {
+    "selectImageStyle": "Sélectionner le style d'image",
+    "chooseStyle": "Choisir le style",
+    "examples": "Exemples",
+    "selectStyleToSeeExamples": "Sélectionnez un style pour voir des exemples.",
+    "3d-render": {
+      "description": "Créer des images 3D photoréalistes rendues avec un éclairage et des matériaux appropriés."
+    },
+    "acrylic": {
+      "description": "Style de peinture acrylique vibrant avec des coups de pinceau audacieux et des couleurs riches."
+    },
+    "anime-general": {
+      "description": "Style d'anime et de manga japonais avec des personnages expressifs et des arrière-plans détaillés."
+    },
+    "creative": {
+      "description": "Style artistique et innovant avec des interprétations créatives et des compositions uniques"
+    },
+    "dynamic": {
+      "description": "Style énergique avec mouvement, angles dramatiques et compositions puissantes."
+    },
+    "fashion": {
+      "description": "Style de photographie de mode professionnelle avec une mise en scène élégante et une esthétique de luxe."
+    },
+    "game-concept": {
+      "description": "Style de concept art de jeu vidéo avec des personnages et des environnements détaillés"
+    },
+    "graphic-design-3d": {
+      "description": "Conception graphique 3D moderne avec des lignes épurées et un esthétisme contemporain."
+    },
+    "illustration": {
+      "description": "Style d'illustration traditionnel avec des œuvres d'art détaillées et des techniques artistiques."
+    },
+    "none": {
+      "description": "Aucun style spécifique appliqué, permettant une interprétation naturelle de l'IA."
+    },
+    "portrait": {
+      "description": "Style de portrait professionnel avec un accent sur les traits du visage et les expressions"
+    },
+    "portrait-cinematic": {
+      "description": "Style de portrait cinématographique avec un éclairage dramatique et une qualité digne d'un film"
+    },
+    "portrait-fashion": {
+      "description": "Style de portrait de mode alliant élégance et techniques professionnelles de photographie."
+    },
+    "ray-traced": {
+      "description": "Rendu avancé par lancer de rayons avec des reflets et un éclairage réalistes."
+    },
+    "stock-photo": {
+      "description": "Style de photographie de stock commercial avec une apparence propre et professionnelle."
+    },
+    "watercolor": {
+      "description": "Style de peinture aquarelle douce avec des couleurs fluides et des effets de pinceaux artistiques"
+    }
+  },
+  "appName": "GeminiGen.AI",
+  "quickTopUp": "Recharge rapide",
+  "customTopUp": "Recharge personnalisée",
+  "numberOfCredits": "Nombre de crédits",
+  "paypal": "PayPal",
+  "paypalDescription": "Payez en toute sécurité avec votre compte PayPal.",
+  "debitCreditCard": "Carte de débit ou de crédit",
+  "cardDescription": "Visa, Mastercard, American Express",
+  "payWithCrypto": "Payer avec des cryptos",
+  "cryptoDescription": "Bitcoin, Ethereum et autres cryptomonnaies",
+  "profileMenu": {
+    "guide": "Guide",
+    "logo": "Logo",
+    "settings": "Paramètres",
+    "components": "Composants"
+  },
+  "loadingMoreItems": "Chargement de plus d'articles...",
+  "library": {
+    "tabs": {
+      "imagen": "Image",
+      "video": "Vidéo",
+      "speech": "Discours",
+      "music": "Musique"
+    }
+  },
+  "promptLabel": "Demande :",
+  "videoExamples": "Exemples vidéo",
+  "videoExamplesDescription": "Explorez ces exemples vidéo avec leurs invites et paramètres. Cliquez sur n'importe quel bouton 'Utiliser cette invite' pour copier l'invite dans votre champ de saisie.",
+  "useThisPrompt": "Utilisez cette invite",
+  "model": "Modèle",
+  "duration": "Durée",
+  "videoTypeSelection": "Sélectionner le type de vidéo",
+  "videoTypes": {
+    "selectVideoType": "Sélectionner le type de vidéo",
+    "searchPlaceholder": "Rechercher des types de vidéos...",
+    "chooseType": "Choisir le type",
+    "examples": "Exemples",
+    "selectTypeToSeeExamples": "Sélectionnez un type pour voir des exemples.",
+    "advertisingMarketing": {
+      "title": "Publicité et Marketing",
+      "description": "Promouvoir des produits/services, gérer des publicités sur Facebook, TikTok, YouTube, introduire des marques ou des projets, optimiser les coûts de production du marketing vidéo."
+    },
+    "socialMediaContent": {
+      "title": "Contenu des réseaux sociaux (contenu court)",
+      "description": "Courtes vidéos pour TikTok, Reels, Shorts, vidéos de narration, critiques, voix off par IA, conversion de texte ou de blogs en vidéos"
+    },
+    "personalEntertainment": {
+      "title": "Contenu créatif personnel / Divertissement",
+      "description": "Vidéos comiques, parodies, mèmes, vidéos de narration, animation, contenu créé par les fans, courts métrages alimentés par l'IA"
+    },
+    "educationTraining": {
+      "title": "Éducation et formation",
+      "description": "Vidéos pédagogiques, apprentissage en ligne, cours, tutoriels de compétences, partage de connaissances, présentations avec des instructeurs avatar IA"
+    },
+    "corporateCommunication": {
+      "title": "Communications internes et entreprise",
+      "description": "Vidéos d'intégration, guides de processus, annonces vidéo internes, formation rapide des employés par IA"
+    },
+    "personalizedVideos": {
+      "title": "Vidéos personnalisées",
+      "description": "Souhaits d'anniversaire, vidéos d'anniversaire, vidéos personnalisées pour les clients (email marketing, service client), vidéos de recrutement pour des candidats spécifiques"
+    },
+    "timeCostSavings": {
+      "title": "Économies de temps et de coûts en production",
+      "description": "Pas besoin d'acteurs, de studios, d'équipes de post-production, parfait pour les individus/petites équipes créant du contenu rapidement, flux de production vidéo automatisés."
+    }
   }
 }

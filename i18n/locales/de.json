@@ -233,5 +233,129 @@
     "disclaimersDescription": "Der Dienst wird 'wie er ist' ohne jegliche Garantien bereitgestellt.",
     "contactUsTerms": "Kontaktieren Sie uns",
     "contactUsTermsDescription": "Wenn Sie Fragen zu diesen Nutzungsbedingungen haben, kontaktieren Sie uns bitte über unsere Support-Kanäle."
+  },
+  "Describe the video you want to generate...": "Beschreiben Sie das Video, das Sie erstellen möchten...",
+  "cancel": "Stornieren",
+  "confirm": "Bestätigen",
+  "imageStyles": {
+    "selectImageStyle": "Bildstil auswählen",
+    "chooseStyle": "Stil wählen",
+    "examples": "Beispiele",
+    "selectStyleToSeeExamples": "Wählen Sie einen Stil, um Beispiele zu sehen",
+    "3d-render": {
+      "description": "Erstellen Sie fotorealistische 3D gerenderte Bilder mit richtiger Beleuchtung und Materialien."
+    },
+    "acrylic": {
+      "description": "Lebendiger Acrylmalstil mit kräftigen Pinselstrichen und satten Farben"
+    },
+    "anime-general": {
+      "description": "Japanischer Anime- und Manga-Stil mit ausdrucksstarken Charakteren und detaillierten Hintergründen"
+    },
+    "creative": {
+      "description": "Künstlerischer und innovativer Stil mit kreativen Interpretationen und einzigartigen Kompositionen"
+    },
+    "dynamic": {
+      "description": "Energiegeladener Stil mit Bewegung, dramatischen Winkeln und kraftvollen Kompositionen"
+    },
+    "fashion": {
+      "description": "Professioneller Modestil in der Fotografie mit elegantem Styling und luxuriöser Ästhetik"
+    },
+    "game-concept": {
+      "description": "Videospiel-Konzeptkunststil mit detaillierten Charakteren und Umgebungen"
+    },
+    "graphic-design-3d": {
+      "description": "Moderne 3D-Grafikgestaltung mit klaren Linien und zeitgenössischer Ästhetik"
+    },
+    "illustration": {
+      "description": "Traditioneller Illustrationsstil mit detaillierten Kunstwerken und künstlerischen Techniken"
+    },
+    "none": {
+      "description": "Kein spezifischer Stil angewendet, was eine natürliche KI-Interpretation ermöglicht."
+    },
+    "portrait": {
+      "description": "Professioneller Porträtstil mit Fokus auf Gesichtszüge und Ausdrücke"
+    },
+    "portrait-cinematic": {
+      "description": "Kinematischer Porträtstil mit dramatischer Beleuchtung und filmähnlicher Qualität"
+    },
+    "portrait-fashion": {
+      "description": "Modeporträtstil, der Eleganz mit professionellen Fototechniken kombiniert."
+    },
+    "ray-traced": {
+      "description": "Fortschrittliches raytracing-basiertes Rendering mit realistischen Reflexionen und Beleuchtungen"
+    },
+    "stock-photo": {
+      "description": "Kommerzieller Stockfotografie-Stil mit sauberem, professionellem Erscheinungsbild"
+    },
+    "watercolor": {
+      "description": "Weicher Aquarellmalstil mit fließenden Farben und künstlerischen Pinseleffekten"
+    }
+  },
+  "appName": "GeminiGen.AI",
+  "quickTopUp": "Schnelles Aufladen",
+  "customTopUp": "Benutzerdefinierte Aufladung",
+  "numberOfCredits": "Anzahl der Credits",
+  "paypal": "PayPal",
+  "paypalDescription": "Sicher mit Ihrem PayPal-Konto bezahlen",
+  "debitCreditCard": "Debit- oder Kreditkarte",
+  "cardDescription": "Visa, Mastercard, American Express",
+  "payWithCrypto": "Mit Krypto bezahlen",
+  "cryptoDescription": "Bitcoin, Ethereum und andere Kryptowährungen",
+  "profileMenu": {
+    "guide": "Führung",
+    "logo": "Logo",
+    "settings": "Einstellungen",
+    "components": "Komponenten"
+  },
+  "loadingMoreItems": "Weitere Artikel werden geladen...",
+  "library": {
+    "tabs": {
+      "imagen": "Bild",
+      "video": "Video",
+      "speech": "Sprache",
+      "music": "Musik"
+    }
+  },
+  "promptLabel": "Aufforderung:",
+  "videoExamples": "Videobeispiele",
+  "videoExamplesDescription": "Erkunden Sie diese Video-Beispiele mit ihren Eingaben und Einstellungen. Klicken Sie auf eine beliebige Schaltfläche 'Diesen Prompt verwenden', um den Prompt in Ihr Eingabefeld zu kopieren.",
+  "useThisPrompt": "Verwende diesen Hinweis",
+  "model": "Modell",
+  "duration": "Dauer",
+  "videoTypeSelection": "Videotyp auswählen",
+  "videoTypes": {
+    "selectVideoType": "Videotyp auswählen",
+    "searchPlaceholder": "Videotypen suchen...",
+    "chooseType": "Typ wählen",
+    "examples": "Beispiele",
+    "selectTypeToSeeExamples": "Wählen Sie einen Typ aus, um Beispiele anzuzeigen",
+    "advertisingMarketing": {
+      "title": "Werbung & Marketing",
+      "description": "Produkte/Dienstleistungen bewerben, Facebook-, TikTok-, YouTube-Anzeigen schalten, Marken oder Projekte vorstellen, Produktionskosten für Videomarketing optimieren"
+    },
+    "socialMediaContent": {
+      "title": "Soziale Medien Inhalte (Kurzform-Inhalt)",
+      "description": "Kurze Videos für TikTok, Reels, Shorts, Erzählvideos, Rezensionen, KI-Voiceovers, Text oder Blogs in Videos umwandeln"
+    },
+    "personalEntertainment": {
+      "title": "Persönliche kreative Inhalte / Unterhaltung",
+      "description": "Comedy-Videos, Parodien, Memes, Erzählvideos, Animation, von Fans erstellte Inhalte, KI-gestützte Kurzfilme"
+    },
+    "educationTraining": {
+      "title": "Bildung und Ausbildung",
+      "description": "Lehrvideos, E-Learning, Kurse, Kompetenz-Tutorials, Wissensaustausch, Präsentationen mit KI-Avatar-Instruktoren"
+    },
+    "corporateCommunication": {
+      "title": "Interne Kommunikation & Unternehmen",
+      "description": "Onboarding-Videos, Prozessanleitungen, interne Videoankündigungen, schnelle KI-gestützte Mitarbeiterschulungen"
+    },
+    "personalizedVideos": {
+      "title": "Personalisierte Videos",
+      "description": "Geburtstagswünsche, Jubiläumsvideos, personalisierte Kundenvideos (E-Mail-Marketing, Kundenbetreuung), Rekrutierungsvideos für bestimmte Kandidaten"
+    },
+    "timeCostSavings": {
+      "title": "Zeit- und Kosteneinsparungen in der Produktion",
+      "description": "Keine Notwendigkeit für Schauspieler, Studios, Postproduktionsteams, ideal für Einzelpersonen/kleine Teams zur schnellen Erstellung von Inhalten, automatisierte Video-Produktions-Workflows."
+    }
   }
 }

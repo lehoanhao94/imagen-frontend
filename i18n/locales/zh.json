@@ -251,5 +251,111 @@
     "components": "组件"
   },
   "loadingMoreItems": "正在加载更多项目...",
-  "promptLabel": "提示词："
+  "promptLabel": "提示词：",
+  "Describe the video you want to generate...": "描述您想生成的视频...",
+  "cancel": "取消",
+  "confirm": "确认",
+  "imageStyles": {
+    "selectImageStyle": "选择图像样式",
+    "chooseStyle": "选择样式",
+    "examples": "例子",
+    "selectStyleToSeeExamples": "选择一种风格查看示例",
+    "3d-render": {
+      "description": "创建具有适当光照和材质的照片级逼真3D渲染图像"
+    },
+    "acrylic": {
+      "description": "活力的丙烯画风格，具有大胆的笔触和丰富的色彩。"
+    },
+    "anime-general": {
+      "description": "日本动漫和漫画风格，具有富有表现力的角色和详细的背景"
+    },
+    "creative": {
+      "description": "艺术创新风格，富有创意的诠释和独特的构图"
+    },
+    "dynamic": {
+      "description": "充满活力的风格，富有动感、戏剧性的角度以及强有力的构图"
+    },
+    "fashion": {
+      "description": "专业时尚摄影风格，结合优雅造型和奢华美学"
+    },
+    "game-concept": {
+      "description": "电子游戏概念艺术风格，具有详细的角色和环境"
+    },
+    "graphic-design-3d": {
+      "description": "现代3D图形设计具有简洁的线条和当代美学"
+    },
+    "illustration": {
+      "description": "传统插画风格，具有细致的艺术作品和艺术技巧。"
+    },
+    "none": {
+      "description": "未应用特定风格，允许自然的AI解读"
+    },
+    "portrait": {
+      "description": "专业的人像风格，注重面部特征和表情"
+    },
+    "portrait-cinematic": {
+      "description": "电影肖像风格，具有戏剧性的灯光和电影般的品质。"
+    },
+    "portrait-fashion": {
+      "description": "结合优雅与专业摄影技巧的时尚人像风格"
+    },
+    "ray-traced": {
+      "description": "高级光线追踪渲染与真实反射和照明"
+    },
+    "stock-photo": {
+      "description": "商业图库风格，干净而专业的外观"
+    },
+    "watercolor": {
+      "description": "柔和的水彩画风格，色彩流动且具有艺术画笔效果。"
+    }
+  },
+  "library": {
+    "tabs": {
+      "imagen": "图像",
+      "video": "视频",
+      "speech": "演讲",
+      "music": "音乐"
+    }
+  },
+  "videoExamples": "视频示例",
+  "videoExamplesDescription": "探索这些视频示例及其提示和设置。点击任意“使用此提示”按钮即可将提示复制到您的输入字段。",
+  "useThisPrompt": "使用此提示",
+  "model": "模型",
+  "duration": "持续时间",
+  "videoTypeSelection": "选择视频类型",
+  "videoTypes": {
+    "selectVideoType": "选择视频类型",
+    "searchPlaceholder": "搜索视频类型...",
+    "chooseType": "选择类型",
+    "examples": "例子",
+    "selectTypeToSeeExamples": "选择一种类型以查看示例",
+    "advertisingMarketing": {
+      "title": "广告与营销",
+      "description": "推广产品/服务，投放Facebook、TikTok、YouTube广告，介绍品牌或项目，优化视频营销制作成本"
+    },
+    "socialMediaContent": {
+      "title": "社交媒体内容（短视频内容）",
+      "description": "TikTok短视频、Reels、Shorts、故事视频、评论、AI配音、将文本或博客转换为视频。"
+    },
+    "personalEntertainment": {
+      "title": "个人创意内容 / 娱乐",
+      "description": "喜剧视频，恶搞，表情包，叙述视频，动画，粉丝创作内容，AI驱动的短片"
+    },
+    "educationTraining": {
+      "title": "教育与培训",
+      "description": "教学视频，网络学习，课程，技能教程，知识分享，AI虚拟形象讲师的演示文稿"
+    },
+    "corporateCommunication": {
+      "title": "内部通信与企业事务",
+      "description": "入职培训视频、流程指南、内部视频公告、快速AI驱动的员工培训"
+    },
+    "personalizedVideos": {
+      "title": "个性化视频",
+      "description": "生日祝福、周年纪念视频、个性化客户视频（邮件营销、客户服务）、针对特定候选人的招聘视频"
+    },
+    "timeCostSavings": {
+      "title": "生产中的时间和成本节约",
+      "description": "不需要演员、工作室、后期制作团队，非常适合个人/小团队快速制作内容，自动化视频制作工作流程。"
+    }
+  }
 }

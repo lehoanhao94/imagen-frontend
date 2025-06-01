@@ -233,5 +233,129 @@
     "disclaimersDescription": "El servicio se proporciona 'como está' sin garantías de ningún tipo.",
     "contactUsTerms": "Contáctanos",
     "contactUsTermsDescription": "Si tienes alguna pregunta sobre estos Términos de Servicio, por favor contáctanos a través de nuestros canales de soporte."
+  },
+  "Describe the video you want to generate...": "Describe el video que deseas generar...",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "imageStyles": {
+    "selectImageStyle": "Seleccionar estilo de imagen",
+    "chooseStyle": "Elegir estilo",
+    "examples": "Ejemplos",
+    "selectStyleToSeeExamples": "Seleccione un estilo para ver ejemplos",
+    "3d-render": {
+      "description": "Crear imágenes 3D renderizadas fotorrealistas con iluminación y materiales adecuados"
+    },
+    "acrylic": {
+      "description": "Estilo de pintura acrílica vibrante con pinceladas audaces y colores intensos"
+    },
+    "anime-general": {
+      "description": "Estilo de anime y manga japonés con personajes expresivos y fondos detallados"
+    },
+    "creative": {
+      "description": "Estilo artístico e innovador con interpretaciones creativas y composiciones únicas"
+    },
+    "dynamic": {
+      "description": "Estilo de alta energía con movimiento, ángulos dramáticos y composiciones poderosas."
+    },
+    "fashion": {
+      "description": "Estilo de fotografía de moda profesional con estilismo elegante y estética de lujo."
+    },
+    "game-concept": {
+      "description": "Estilo de arte conceptual de videojuegos con personajes y entornos detallados"
+    },
+    "graphic-design-3d": {
+      "description": "Diseño gráfico 3D moderno con líneas limpias y estética contemporánea"
+    },
+    "illustration": {
+      "description": "Estilo de ilustración tradicional con obras de arte detalladas y técnicas artísticas"
+    },
+    "none": {
+      "description": "No se aplicó un estilo específico, permitiendo la interpretación natural de la IA."
+    },
+    "portrait": {
+      "description": "Estilo de retrato profesional con enfoque en rasgos faciales y expresiones."
+    },
+    "portrait-cinematic": {
+      "description": "Estilo de retrato cinematográfico con iluminación dramática y calidad de película"
+    },
+    "portrait-fashion": {
+      "description": "Estilo de retrato de moda que combina elegancia con técnicas de fotografía profesional"
+    },
+    "ray-traced": {
+      "description": "Renderizado avanzado con trazado de rayos con reflexiones y luces realistas."
+    },
+    "stock-photo": {
+      "description": "Estilo de fotografía comercial de archivo con apariencia limpia y profesional"
+    },
+    "watercolor": {
+      "description": "Estilo de pintura en acuarela suave con colores fluidos y efectos artísticos de pincel."
+    }
+  },
+  "appName": "GeminiGen.AI",
+  "quickTopUp": "Recarga rápida",
+  "customTopUp": "Recarga personalizada",
+  "numberOfCredits": "Número de créditos",
+  "paypal": "PayPal",
+  "paypalDescription": "Pague de manera segura con su cuenta de PayPal",
+  "debitCreditCard": "Tarjeta de débito o crédito",
+  "cardDescription": "Visa, Mastercard, American Express",
+  "payWithCrypto": "Paga con Cripto",
+  "cryptoDescription": "Bitcoin, Ethereum y otras criptomonedas",
+  "profileMenu": {
+    "guide": "Guía",
+    "logo": "Logotipo",
+    "settings": "Configuración",
+    "components": "Componentes"
+  },
+  "loadingMoreItems": "Cargando más elementos...",
+  "library": {
+    "tabs": {
+      "imagen": "Imagen",
+      "video": "Video",
+      "speech": "Discurso",
+      "music": "Música"
+    }
+  },
+  "promptLabel": "Pronta:",
+  "videoExamples": "Ejemplos de video",
+  "videoExamplesDescription": "Explora estos ejemplos de video con sus indicaciones y configuraciones. Haz clic en cualquier botón de 'Usar este mensaje' para copiar el mensaje a tu campo de entrada.",
+  "useThisPrompt": "Usa este aviso",
+  "model": "Modelo",
+  "duration": "Duración",
+  "videoTypeSelection": "Seleccionar tipo de video",
+  "videoTypes": {
+    "selectVideoType": "Seleccionar tipo de video",
+    "searchPlaceholder": "Buscar tipos de videos...",
+    "chooseType": "Elegir tipo",
+    "examples": "Ejemplos",
+    "selectTypeToSeeExamples": "Seleccione un tipo para ver ejemplos",
+    "advertisingMarketing": {
+      "title": "Publicidad y Marketing",
+      "description": "Promociona productos/servicios, gestiona anuncios en Facebook, TikTok, YouTube, presenta marcas o proyectos, optimiza los costos de producción de marketing en video."
+    },
+    "socialMediaContent": {
+      "title": "Contenido de redes sociales (Contenido de formato corto)",
+      "description": "Videos cortos para TikTok, Reels, Shorts, videos de narración, reseñas, locuciones con IA, convertir texto o blogs a videos"
+    },
+    "personalEntertainment": {
+      "title": "Contenido Creativo Personal / Entretenimiento",
+      "description": "Videos de comedia, parodias, memes, videos de narración, animación, contenido hecho por fanáticos, cortometrajes impulsados por IA"
+    },
+    "educationTraining": {
+      "title": "Educación y formación",
+      "description": "Videos de enseñanza, aprendizaje en línea, cursos, tutoriales de habilidades, intercambio de conocimientos, presentaciones con instructores avatar de IA"
+    },
+    "corporateCommunication": {
+      "title": "Comunicación Interna y Corporativa",
+      "description": "Videos de incorporación, guías de procesos, anuncios internos en video, capacitación rápida para empleados impulsada por IA"
+    },
+    "personalizedVideos": {
+      "title": "Videos Personalizados",
+      "description": "Deseos de cumpleaños, videos de aniversario, videos personalizados para clientes (email marketing, atención al cliente), videos de reclutamiento para candidatos específicos."
+    },
+    "timeCostSavings": {
+      "title": "Ahorro de Tiempo y Costos en la Producción",
+      "description": "No hay necesidad de actores, estudios, equipos de postproducción, perfecto para individuos/pequeños equipos que crean contenido rápidamente, flujos de trabajo de producción de video automatizados."
+    }
   }
 }

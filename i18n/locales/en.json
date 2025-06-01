@@ -136,6 +136,60 @@
     "selectedImage": "Selected image",
     "removeImage": "Remove image"
   },
+  "imageStyles": {
+    "selectImageStyle": "Select Image Style",
+    "chooseStyle": "Choose Style",
+    "examples": "Examples",
+    "selectStyleToSeeExamples": "Select a style to see examples",
+    "3d-render": {
+      "description": "Create photorealistic 3D rendered images with proper lighting and materials"
+    },
+    "acrylic": {
+      "description": "Vibrant acrylic painting style with bold brushstrokes and rich colors"
+    },
+    "anime-general": {
+      "description": "Japanese anime and manga style with expressive characters and detailed backgrounds"
+    },
+    "creative": {
+      "description": "Artistic and innovative style with creative interpretations and unique compositions"
+    },
+    "dynamic": {
+      "description": "High-energy style with motion, dramatic angles, and powerful compositions"
+    },
+    "fashion": {
+      "description": "Professional fashion photography style with elegant styling and luxury aesthetics"
+    },
+    "game-concept": {
+      "description": "Video game concept art style with detailed characters and environments"
+    },
+    "graphic-design-3d": {
+      "description": "Modern 3D graphic design with clean lines and contemporary aesthetics"
+    },
+    "illustration": {
+      "description": "Traditional illustration style with detailed artwork and artistic techniques"
+    },
+    "none": {
+      "description": "No specific style applied, allowing natural AI interpretation"
+    },
+    "portrait": {
+      "description": "Professional portrait style with focus on facial features and expressions"
+    },
+    "portrait-cinematic": {
+      "description": "Cinematic portrait style with dramatic lighting and movie-like quality"
+    },
+    "portrait-fashion": {
+      "description": "Fashion portrait style combining elegance with professional photography techniques"
+    },
+    "ray-traced": {
+      "description": "Advanced ray-traced rendering with realistic reflections and lighting"
+    },
+    "stock-photo": {
+      "description": "Commercial stock photography style with clean, professional appearance"
+    },
+    "watercolor": {
+      "description": "Soft watercolor painting style with flowing colors and artistic brush effects"
+    }
+  },
   "pixelReveal": {
     "loading": "Loading image...",
     "processing": "Processing image...",
