@@ -1,0 +1,149 @@
+name: Full Repository Sync to GEMINIGEN
+
+on:
+  workflow_dispatch:
+    inputs:
+      sync_all_branches:
+        description: 'Sync all branches (not just develop)'
+        required: false
+        default: false
+        type: boolean
+      sync_releases:
+        description: 'Sync release tags and branches'
+        required: false
+        default: true
+        type: boolean
+      force_push:
+        description: 'Force push (use with caution)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "full-sync-geminigen"
+  cancel-in-progress: false
+
+jobs:
+  full-sync:
+    name: Full Repository Sync
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+      - name: Add target repository as remote
+        run: |
+          git remote add target https://${{ secrets.GEMINIGEN_SYNC_TOKEN }}@github.com/AINNATE-GEMINIGEN/imagen-frontend.git
+
+      - name: Fetch all branches and tags
+        run: |
+          git fetch --all
+          git fetch target --prune
+
+      - name: Sync develop branch (primary)
+        run: |
+          echo "Syncing develop branch..."
+          if [ "${{ github.event.inputs.force_push }}" = "true" ]; then
+            git push target develop:develop --force
+          else
+            git push target develop:develop --force-with-lease
+          fi
+          echo "✅ Develop branch synced"
+
+      - name: Sync all branches
+        if: github.event.inputs.sync_all_branches == 'true'
+        run: |
+          echo "Syncing all branches..."
+          
+          # Get list of all remote branches (excluding HEAD)
+          BRANCHES=$(git branch -r --format='%(refname:short)' | grep -v 'origin/HEAD' | sed 's/origin\///')
+          
+          for branch in $BRANCHES; do
+            echo "Syncing branch: $branch"
+            git checkout -B $branch origin/$branch
+            
+            if [ "${{ github.event.inputs.force_push }}" = "true" ]; then
+              git push target $branch:$branch --force
+            else
+              git push target $branch:$branch --force-with-lease || echo "⚠️ Failed to sync $branch (may not exist on target)"
+            fi
+          done
+          
+          echo "✅ All branches synced"
+
+      - name: Sync tags and releases
+        if: github.event.inputs.sync_releases == 'true'
+        run: |
+          echo "Syncing tags..."
+          
+          if [ "${{ github.event.inputs.force_push }}" = "true" ]; then
+            git push target --tags --force
+          else
+            git push target --tags --force-with-lease
+          fi
+          
+          echo "✅ Tags synced"
+
+      - name: Create comprehensive sync report
+        if: always()
+        run: |
+          echo "## Full Repository Sync Report" >> $GITHUB_STEP_SUMMARY
+          echo "- **Source:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target:** AINNATE-GEMINIGEN/imagen-frontend" >> $GITHUB_STEP_SUMMARY
+          echo "- **Sync Type:** Full Repository Sync" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Sync Options" >> $GITHUB_STEP_SUMMARY
+          echo "- **All Branches:** ${{ github.event.inputs.sync_all_branches }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Releases/Tags:** ${{ github.event.inputs.sync_releases }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Force Push:** ${{ github.event.inputs.force_push }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # Get branch count
+          BRANCH_COUNT=$(git branch -r | grep -v 'origin/HEAD' | wc -l)
+          TAG_COUNT=$(git tag | wc -l)
+          
+          echo "### Repository Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Branches:** $BRANCH_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- **Total Tags:** $TAG_COUNT" >> $GITHUB_STEP_SUMMARY
+          echo "- **Latest Commit:** $(git rev-parse --short HEAD)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Verify sync integrity
+        run: |
+          echo "Verifying sync integrity..."
+          
+          # Check if develop branch exists on target
+          if git ls-remote --heads target develop | grep -q develop; then
+            TARGET_DEVELOP=$(git ls-remote target develop | cut -f1)
+            SOURCE_DEVELOP=$(git rev-parse HEAD)
+            
+            if [ "$TARGET_DEVELOP" = "$SOURCE_DEVELOP" ]; then
+              echo "✅ Develop branch sync verified"
+            else
+              echo "⚠️ Develop branch sync verification failed"
+              echo "Source: $SOURCE_DEVELOP"
+              echo "Target: $TARGET_DEVELOP"
+            fi
+          else
+            echo "❌ Develop branch not found on target repository"
+            exit 1
+          fi
+
+      - name: Cleanup
+        if: always()
+        run: |
+          git remote remove target || true
+          echo "Cleanup completed"

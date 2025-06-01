@@ -1,0 +1,118 @@
+name: Sync to GEMINIGEN Repository
+
+on:
+  push:
+    branches: ["develop"]
+  workflow_dispatch:
+    inputs:
+      force_sync:
+        description: 'Force sync even if no changes detected'
+        required: false
+        default: false
+        type: boolean
+
+# Permissions needed for the workflow
+permissions:
+  contents: read
+
+# Prevent concurrent syncs
+concurrency:
+  group: "sync-geminigen"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync Code to GEMINIGEN
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for proper sync
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+      - name: Add target repository as remote
+        run: |
+          git remote add target https://${{ secrets.GEMINIGEN_SYNC_TOKEN }}@github.com/AINNATE-GEMINIGEN/imagen-frontend.git
+
+      - name: Fetch target repository
+        run: |
+          git fetch target
+
+      - name: Check if sync is needed
+        id: check_changes
+        run: |
+          # Get the latest commit hash from source develop branch
+          SOURCE_COMMIT=$(git rev-parse HEAD)
+          echo "source_commit=$SOURCE_COMMIT" >> $GITHUB_OUTPUT
+          
+          # Get the latest commit hash from target develop branch (if exists)
+          if git ls-remote --heads target develop | grep -q develop; then
+            TARGET_COMMIT=$(git ls-remote target develop | cut -f1)
+            echo "target_commit=$TARGET_COMMIT" >> $GITHUB_OUTPUT
+            
+            if [ "$SOURCE_COMMIT" = "$TARGET_COMMIT" ]; then
+              echo "sync_needed=false" >> $GITHUB_OUTPUT
+              echo "No changes detected. Repositories are in sync."
+            else
+              echo "sync_needed=true" >> $GITHUB_OUTPUT
+              echo "Changes detected. Sync needed."
+            fi
+          else
+            echo "sync_needed=true" >> $GITHUB_OUTPUT
+            echo "Target develop branch doesn't exist. Initial sync needed."
+            echo "target_commit=none" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Sync to target repository
+        if: steps.check_changes.outputs.sync_needed == 'true' || github.event.inputs.force_sync == 'true'
+        run: |
+          echo "Starting sync process..."
+          
+          # Push develop branch to target repository
+          git push target develop:develop --force-with-lease
+          
+          echo "✅ Successfully synced develop branch to target repository"
+
+      - name: Sync tags (optional)
+        if: steps.check_changes.outputs.sync_needed == 'true' || github.event.inputs.force_sync == 'true'
+        run: |
+          echo "Syncing tags..."
+          
+          # Push all tags to target repository
+          git push target --tags --force-with-lease
+          
+          echo "✅ Successfully synced tags to target repository"
+
+      - name: Create sync summary
+        if: always()
+        run: |
+          echo "## Sync Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Source Repository:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target Repository:** AINNATE-GEMINIGEN/imagen-frontend" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** develop" >> $GITHUB_STEP_SUMMARY
+          echo "- **Source Commit:** ${{ steps.check_changes.outputs.source_commit }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target Commit (before):** ${{ steps.check_changes.outputs.target_commit }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Sync Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.check_changes.outputs.sync_needed }}" = "true" ] || [ "${{ github.event.inputs.force_sync }}" = "true" ]; then
+            echo "- **Action:** Code synced successfully" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Action:** No sync needed (repositories already in sync)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Sync failed. Please check the logs and ensure:"
+          echo "1. GEMINIGEN_SYNC_TOKEN secret is properly configured"
+          echo "2. Token has write access to target repository"
+          echo "3. Target repository exists and is accessible"
+          echo "4. No conflicts exist between repositories"

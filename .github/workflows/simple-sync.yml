@@ -1,0 +1,39 @@
+name: Simple Sync to GEMINIGEN
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to sync'
+        required: true
+        default: 'develop'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  simple-sync:
+    name: Simple Branch Sync
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Sync to GEMINIGEN
+        run: |
+          git remote add target https://${{ secrets.GEMINIGEN_SYNC_TOKEN }}@github.com/AINNATE-GEMINIGEN/imagen-frontend.git
+          git push target ${{ github.event.inputs.branch }}:${{ github.event.inputs.branch }} --force-with-lease
+
+      - name: Summary
+        run: |
+          echo "✅ Successfully synced branch '${{ github.event.inputs.branch }}' to GEMINIGEN repository"
