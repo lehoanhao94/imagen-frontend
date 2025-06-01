@@ -2,83 +2,12 @@
 import { ref, watch, nextTick, onMounted, onUnmounted, computed } from 'vue'
 
 const { t } = useI18n()
-const route = useRoute()
-const router = useRouter()
 
 /**
- * Library page with tabs and infinite scroll functionality
- *
- * Features:
- * - Tabs for different content types (Imagen, Video, Speech, Music)
- * - Route query parameter to maintain active tab on reload
- * - Loads initial set of items for each tab
- * - Detects when user scrolls to bottom of page
- * - Loads additional items and appends to existing list
- * - Shows loading indicator while fetching
- * - Maintains original data order (old data first, new data appended)
+ * Imagen Library page with infinite scroll functionality
  */
 
-// Tab definitions
-const tabItems = computed(() => [
-  {
-    key: 'imagen',
-    label: t('library.tabs.imagen'),
-    icon: 'hugeicons:ai-image'
-  },
-  {
-    key: 'video',
-    label: t('library.tabs.video'),
-    icon: 'hugeicons:ai-video'
-  },
-  {
-    key: 'speech',
-    label: t('library.tabs.speech'),
-    icon: 'hugeicons:ai-voice'
-  },
-  {
-    key: 'music',
-    label: t('library.tabs.music'),
-    icon: 'ri:music-ai-fill'
-  }
-])
-
-// Active tab management
-const activeTab = ref(route.query.tab as string || 'imagen')
-
-// Ensure tab is valid
-const validTabs = ['imagen', 'video', 'speech', 'music']
-if (!validTabs.includes(activeTab.value)) {
-  activeTab.value = 'imagen'
-}
-
-// Update route when tab changes
-const updateRoute = (tabKey: string) => {
-  router.push({ query: { ...route.query, tab: tabKey } })
-}
-
-// Watch for route changes to update active tab
-watch(() => route.query.tab, (newTab) => {
-  if (newTab && typeof newTab === 'string' && validTabs.includes(newTab)) {
-    activeTab.value = newTab
-  } else if (newTab && typeof newTab === 'string') {
-    // If invalid tab, redirect to imagen
-    router.push({ query: { ...route.query, tab: 'imagen' } })
-  }
-})
-
-// Watch active tab changes to update route and reset observer
-watch(activeTab, (newTab) => {
-  updateRoute(newTab)
-  // Reset intersection observer when tab changes
-  nextTick(() => {
-    const loadingTrigger = document.getElementById('loading-trigger')
-    if (loadingTrigger && observer) {
-      observer.disconnect()
-      observer.observe(loadingTrigger)
-    }
-  })
-})
-// Mock data for images (existing)
+// Mock data for images (extracted from original library.vue)
 const imagenInitialData = [
   {
     imageUrl:
@@ -222,141 +151,42 @@ const imagenMoreData = [
   }
 ]
 
-const videoMoreData = [
-  {
-    videoUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/4315e00c-057a-48d6-908a-01aa2c0bd0ad/generations/aa62988f-090e-49bb-9cda-b5b31476e22c/Leonardo_Phoenix_10_depict_water_color_style_semi_anime_japan_3.jpg?w=512',
-    title: 'Watercolor animation style',
-    prompt: 'A watercolor style animation of cherry blossoms falling in a Japanese garden',
-    model: 'Veo 2',
-    style: 'Watercolor',
-    duration: '6s'
-  }
-]
+// Reactive state for imagen content
+const librariesData = ref([...imagenInitialData])
+const pageData = ref(1)
+const isLoadingData = ref(false)
+const hasMoreDataLeft = ref(true)
 
-const speechMoreData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/75e44a4e-fca9-4a82-9199-1be4ff04737f/generations/0cd41ddd-aa9d-43aa-acac-92bee7d0e84f/segments/3:3:1/Leonardo_Phoenix_10_3D_cartoonstyle_image_of_a_printed_photogr_0.jpg?w=512',
-    title: 'Educational narration',
-    prompt: 'Generate an educational narration about space exploration with an authoritative yet engaging tone',
-    model: 'Gemini 2.5 Pro',
-    voice: 'Authoritative',
-    duration: '3m 12s'
-  }
-]
-
-const musicMoreData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/9a6d696b-3a81-4d92-bc5c-7a17fa079e18/generations/d4e3a995-ef53-4bc0-941a-7f0c9ef5d21f/Leonardo_Phoenix_10_A_weathered_rusty_old_train_its_carriages_3.jpg?w=512',
-    title: 'Jazz instrumental',
-    prompt: 'Create a smooth jazz instrumental piece with saxophone and piano',
-    model: 'Music Gen Pro',
-    genre: 'Jazz',
-    duration: '4m 30s'
-  }
-]
-
-// Data management per tab
-const dataMap = {
-  imagen: {
-    initial: imagenInitialData,
-    more: imagenMoreData
-  },
-  video: {
-    initial: videoInitialData,
-    more: videoMoreData
-  },
-  speech: {
-    initial: speechInitialData,
-    more: speechMoreData
-  },
-  music: {
-    initial: musicInitialData,
-    more: musicMoreData
-  }
-}
-
-// Reactive state for each tab
-const librariesData = ref({
-  imagen: [...imagenInitialData],
-  video: [...videoInitialData],
-  speech: [...speechInitialData],
-  music: [...musicInitialData]
-})
-
-const pageData = ref({
-  imagen: 1,
-  video: 1,
-  speech: 1,
-  music: 1
-})
-
-const isLoadingData = ref({
-  imagen: false,
-  video: false,
-  speech: false,
-  music: false
-})
-
-const hasMoreDataLeft = ref({
-  imagen: true,
-  video: true,
-  speech: true,
-  music: true
-})
-
-// Get current tab data
-const currentImagenData = computed(() => librariesData.value.imagen)
-const currentVideoData = computed(() => librariesData.value.video)
-const currentSpeechData = computed(() => librariesData.value.speech)
-const currentMusicData = computed(() => librariesData.value.music)
-
-const currentLibraries = computed(() => {
-  const tabKey = activeTab.value as keyof typeof librariesData.value
-  return librariesData.value[tabKey] || []
-})
-const currentPage = computed(() => pageData.value[activeTab.value as keyof typeof pageData.value] || 1)
-const isLoading = computed(() => isLoadingData.value[activeTab.value as keyof typeof isLoadingData.value] || false)
-const hasMoreData = computed(() => hasMoreDataLeft.value[activeTab.value as keyof typeof hasMoreDataLeft.value] || false)
+// Computed properties
+const isLoading = computed(() => isLoadingData.value)
+const hasMoreData = computed(() => hasMoreDataLeft.value)
 
 // Mock API fetch function
 const fetchMoreLibraryItems = async () => {
   const currentTabKey = activeTab.value as keyof typeof dataMap
   if (!hasMoreData.value || isLoading.value) return
 
-  isLoadingData.value[currentTabKey] = true
+  isLoadingData.value = true
 
   try {
     // Simulate API call with delay
     await new Promise(resolve => setTimeout(resolve, 1000))
 
-    // In a real implementation, you would fetch from your API with pagination:
-    // const response = await fetch(`/api/library/${currentTabKey}?page=${pageData.value[currentTabKey]}&limit=10`);
-    // const newData = await response.json();
-
     // Mock response based on page
-    if (pageData.value[currentTabKey] === 1) {
+    if (pageData.value === 1) {
       // Append new data to existing data (preserving order)
-      const moreData = dataMap[currentTabKey].more
-      librariesData.value[currentTabKey] = [...librariesData.value[currentTabKey], ...moreData]
-      pageData.value[currentTabKey]++
+      librariesData.value = [...librariesData.value, ...imagenMoreData]
+      pageData.value++
     } else {
       // For demo purposes, we'll stop loading after second page
-      hasMoreDataLeft.value[currentTabKey] = false
+      hasMoreDataLeft.value = false
     }
-
-    // In a real implementation, you would check if there's more data available:
-    // if (newData.length < limit) {
-    //   hasMoreDataLeft.value[currentTabKey] = false;
-    // }
   } catch (error) {
     console.error('Error fetching more library items:', error)
     // Show error to user
     alert('Failed to load more items. Please try again.')
   } finally {
-    isLoadingData.value[currentTabKey] = false
+    isLoadingData.value = false
   }
 }
 
@@ -389,8 +219,8 @@ onUnmounted(() => {
   window.removeEventListener('scroll', checkScrollPosition)
 })
 
-// Update observer target when the active tab or its data changes
-watch([activeTab, currentLibraries], () => {
+// Update observer target when data changes
+watch(librariesData, () => {
   nextTick(() => {
     const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
@@ -401,7 +231,7 @@ watch([activeTab, currentLibraries], () => {
 })
 
 // Debounce function to improve scroll performance
-const debounce = (fn: Function, delay: number) => {
+const debounce = (fn: (...args: any[]) => void, delay: number) => {
   let timeoutId: NodeJS.Timeout
   return function (...args: any[]) {
     clearTimeout(timeoutId)
@@ -420,32 +250,78 @@ const checkScrollPosition = debounce(() => {
   if (scrollPosition >= documentHeight * 0.9) {
     fetchMoreLibraryItems()
   }
-}, 200) // 200ms debounce;
+}, 200) // 200ms debounce
 </script>
 
 <template>
   <UPage>
     <UContainer class="pt-30">
-      <!-- Tabs Navigation -->
-      <UTabs
-        v-model="activeTab"
-        :items="tabItems"
-        orientation="horizontal"
-        :ui="{
-          root: 'w-full',
-          list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0 mb-8',
-          indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-elevated/60',
-          trigger: 'px-4 py-3 rounded-lg hover:bg-muted/50 data-[state=active]:text-highlighted data-[state=inactive]:text-muted flex items-center gap-2',
-          label: 'truncate'
-        }"
+      <UPageHero
+        :title="t('library.tabs.imagen')"
+        description="Browse your AI-generated images and artwork"
+      />
+
+      <!-- Navigation breadcrumb -->
+      <nav
+        class="flex mb-8"
+        aria-label="Breadcrumb"
       >
-        <template #trigger="{ item }">
-          <UIcon
-            :name="item.icon"
-            class="w-5 h-5"
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+          <li class="inline-flex items-center">
+            <NuxtLink
+              to="/library"
+              class="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
+            >
+              <UIcon
+                name="i-lucide-library"
+                class="w-4 h-4 mr-2"
+              />
+              Library
+            </NuxtLink>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <UIcon
+                name="i-lucide-chevron-right"
+                class="w-4 h-4 text-muted-foreground"
+              />
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">Imagen</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Content -->
+      <UPageColumns>
+        <Motion
+          v-for="(image, index) in librariesData"
+          :key="`imagen-${index}`"
+          :initial="{
+            scale: 1.1,
+            opacity: 0,
+            filter: 'blur(20px)'
+          }"
+          :animate="{
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)'
+          }"
+          :transition="{
+            duration: 0.6,
+            delay: index * 0.1
+          }"
+        >
+          <AIToolImageLibraryCard
+            :key="`imagen-card-${index}`"
+            orientation="vertical"
+            v-bind="image"
           />
           {{ item.label }}
-        </template>
+        </motion>
+      </upagecolumns>
+    </ucontainer>
+  </upage>
+</template>
 
         <template #content="{ item }">
           <!-- Content for each tab -->
@@ -507,135 +383,13 @@ const checkScrollPosition = debounce(() => {
             </UPageColumns>
           </div>
 
-          <div v-else-if="item.key === 'speech'">
-            <UPageColumns>
-              <Motion
-                v-for="(speech, index) in currentSpeechData"
-                :key="`speech-${index}`"
-                :initial="{
-                  scale: 1.1,
-                  opacity: 0,
-                  filter: 'blur(20px)'
-                }"
-                :animate="{
-                  scale: 1,
-                  opacity: 1,
-                  filter: 'blur(0px)'
-                }"
-                :transition="{
-                  duration: 0.6,
-                  delay: index * 0.1
-                }"
-              >
-                <!-- For now, reuse image card component with audio data -->
-                <AIToolImageLibraryCard
-                  :key="`speech-card-${index}`"
-                  orientation="vertical"
-                  :image-url="speech.thumbnailUrl"
-                  :title="speech.title"
-                  :prompt="speech.prompt"
-                  :preset="speech.model"
-                  :style="speech.voice"
-                  :resolution="speech.duration"
-                />
-              </Motion>
-            </UPageColumns>
-          </div>
-
-          <div v-else-if="item.key === 'music'">
-            <UPageColumns>
-              <Motion
-                v-for="(music, index) in currentMusicData"
-                :key="`music-${index}`"
-                :initial="{
-                  scale: 1.1,
-                  opacity: 0,
-                  filter: 'blur(20px)'
-                }"
-                :animate="{
-                  scale: 1,
-                  opacity: 1,
-                  filter: 'blur(0px)'
-                }"
-                :transition="{
-                  duration: 0.6,
-                  delay: index * 0.1
-                }"
-              >
-                <!-- For now, reuse image card component with music data -->
-                <AIToolImageLibraryCard
-                  :key="`music-card-${index}`"
-                  orientation="vertical"
-                  :image-url="music.thumbnailUrl"
-                  :title="music.title"
-                  :prompt="music.prompt"
-                  :preset="music.model"
-                  :style="music.genre"
-                  :resolution="music.duration"
-                />
-              </Motion>
-            </UPageColumns>
-          </div>
-
-          <div v-else>
-            <!-- Default case - show imagen content -->
-            <UPageColumns>
-              <Motion
-                v-for="(image, index) in currentImagenData"
-                :key="`default-${index}`"
-                :initial="{
-                  scale: 1.1,
-                  opacity: 0,
-                  filter: 'blur(20px)'
-                }"
-                :animate="{
-                  scale: 1,
-                  opacity: 1,
-                  filter: 'blur(0px)'
-                }"
-                :transition="{
-                  duration: 0.6,
-                  delay: index * 0.1
-                }"
-              >
-                <AIToolImageLibraryCard
-                  :key="`default-card-${index}`"
-                  orientation="vertical"
-                  v-bind="image"
-                />
-              </Motion>
-            </UPageColumns>
-          </div>
-
-          <!-- Loading indicator -->
-          <div
-            v-if="isLoading"
-            class="flex justify-center items-center py-10"
-          >
-            <UIcon
-              name="i-lucide-loader"
-              class="animate-spin text-primary h-8 w-8 mr-2"
-            />
-            <span class="text-primary">{{ $t('loadingMoreItems') }}</span>
-          </div>
-
-          <!-- End of list indicator for intersection observer -->
-          <div
-            v-if="hasMoreData && !isLoading"
-            id="loading-trigger"
-            class="h-1 w-full"
-            aria-hidden="true"
-          />
-
-          <!-- End message when all data is loaded -->
-          <div
-            v-if="!hasMoreData"
-            class="text-center py-8 text-gray-500"
-          >
-            You've reached the end of the library
-          </div>
-        </template>
-      </UTabs>
+      <!-- End message when all data is loaded -->
+      <div
+        v-if="!hasMoreData"
+        class="text-center py-8 text-gray-500"
+      >
+        You've reached the end of the imagen library
+      </div>
     </UContainer>
   </UPage>
 </template>
