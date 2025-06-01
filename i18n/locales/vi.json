@@ -137,6 +137,60 @@
     "selectedImage": "Hình ảnh đã chọn",
     "removeImage": "Xóa hình ảnh"
   },
+  "imageStyles": {
+    "selectImageStyle": "Chọn phong cách hình ảnh",
+    "chooseStyle": "Chọn phong cách",
+    "examples": "Ví dụ",
+    "selectStyleToSeeExamples": "Chọn một phong cách để xem ví dụ",
+    "3d-render": {
+      "description": "Tạo hình ảnh 3D chân thực với ánh sáng và vật liệu phù hợp"
+    },
+    "acrylic": {
+      "description": "Phong cách tranh acrylic sống động với nét vẽ đậm và màu sắc phong phú"
+    },
+    "anime-general": {
+      "description": "Phong cách anime và manga Nhật Bản với nhân vật biểu cảm và nền chi tiết"
+    },
+    "creative": {
+      "description": "Phong cách nghệ thuật và sáng tạo với cách diễn giải độc đáo"
+    },
+    "dynamic": {
+      "description": "Phong cách năng động với chuyển động và góc nhìn mạnh mẽ"
+    },
+    "fashion": {
+      "description": "Phong cách chụp ảnh thời trang chuyên nghiệp với thẩm mỹ sang trọng"
+    },
+    "game-concept": {
+      "description": "Phong cách concept art game với nhân vật và môi trường chi tiết"
+    },
+    "graphic-design-3d": {
+      "description": "Thiết kế đồ họa 3D hiện đại với đường nét sạch và thẩm mỹ đương đại"
+    },
+    "illustration": {
+      "description": "Phong cách minh họa truyền thống với nghệ thuật chi tiết và kỹ thuật nghệ thuật"
+    },
+    "none": {
+      "description": "Không áp dụng phong cách cụ thể, cho phép AI tự diễn giải tự nhiên"
+    },
+    "portrait": {
+      "description": "Phong cách chân dung chuyên nghiệp tập trung vào đặc điểm khuôn mặt"
+    },
+    "portrait-cinematic": {
+      "description": "Phong cách chân dung điện ảnh với ánh sáng và chất lượng như phim"
+    },
+    "portrait-fashion": {
+      "description": "Phong cách chân dung thời trang kết hợp elegance với kỹ thuật nhiếp ảnh chuyên nghiệp"
+    },
+    "ray-traced": {
+      "description": "Kết xuất ray-traced tiên tiến với phản chiếu và ánh sáng chân thực"
+    },
+    "stock-photo": {
+      "description": "Phong cách nhiếp ảnh stock thương mại với vẻ ngoài sạch và chuyên nghiệp"
+    },
+    "watercolor": {
+      "description": "Phong cách tranh màu nước mềm mại với màu sắc chảy và hiệu ứng cọ nghệ thuật"
+    }
+  },
   "pixelReveal": {
     "loading": "Đang tải hình ảnh...",
     "processing": "Đang xử lý hình ảnh...",

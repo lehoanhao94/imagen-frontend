@@ -188,7 +188,7 @@ const musicInitialData = [
     duration: '3m 15s'
   },
   {
-    audioUrl: '#', 
+    audioUrl: '#',
     thumbnailUrl: 'https://cdn.leonardo.ai/users/f33d9042-22f3-4fbb-96ef-923567ea1ed9/generations/50b0bcd7-58f9-4a2c-a8c7-6a5a356bd852/Leonardo_Phoenix_10_Create_a_minimalist_and_elegant_vintageins_2.jpg?w=512',
     title: 'Relaxing Ambient Music',
     prompt: 'Generate a peaceful ambient music track with nature sounds and soft melodies for meditation',
