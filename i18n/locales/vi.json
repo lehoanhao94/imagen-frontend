@@ -131,7 +131,6 @@
     "required": "Trường này là bắt buộc",
     "passwordsDoNotMatch": "Mật khẩu không khớp"
   },
-
   "imageSelect": {
     "pleaseSelectImageFile": "Vui lòng chọn một tệp hình ảnh",
     "selectedImage": "Hình ảnh đã chọn",
