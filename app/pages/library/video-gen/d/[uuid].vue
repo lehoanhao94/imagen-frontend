@@ -59,7 +59,7 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
             color="neutral"
             @click="goBack"
           >
-            {{ t('backToLibrary') || 'Back to Library' }}
+            {{ $t('libraryPages.backToLibrary') }}
           </UButton>
         </div>
       </div>
@@ -78,13 +78,13 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
             class="w-12 h-12 text-red-500 mx-auto mb-4"
           />
           <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-2">
-            {{ t('errorLoadingVideo') || 'Error Loading Video' }}
+            {{ $t('libraryPages.errorLoadingVideo') }}
           </h3>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
-            {{ t('videoNotFound') || 'The video you are looking for could not be found or loaded.' }}
+            {{ $t('libraryPages.videoNotFound') }}
           </p>
           <UButton @click="goBack">
-            {{ t('backToLibrary') || 'Back to Library' }}
+            {{ $t('libraryPages.backToLibrary') }}
           </UButton>
         </div>
       </div>
@@ -99,7 +99,7 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
             name="i-lucide-loader"
             class="animate-spin text-primary h-8 w-8 mr-2"
           />
-          <span class="text-primary">{{ t('loadingVideoDetails') || 'Loading video details...' }}</span>
+          <span class="text-primary">{{ $t('libraryPages.loadingVideoDetails') }}</span>
         </div>
       </div>
 
@@ -114,7 +114,7 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
             <!-- Video title and prompt -->
             <div class="mb-6 text-center">
               <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                {{ historyDetail.name || t('videoDetails') || 'Video Details' }}
+                {{ historyDetail.name || $t('libraryPages.videoDetails') }}
               </h1>
               <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto line-clamp-2">
                 {{ historyDetail.input_text }}
@@ -185,7 +185,7 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
                   name="i-lucide-info"
                   class="w-5 h-5 mr-2"
                 />
-                Video Information
+                {{ $t('libraryPages.videoInformation') }}
               </h2>
 
               <div class="space-y-6">

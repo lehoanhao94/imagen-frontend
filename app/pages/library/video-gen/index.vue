@@ -128,7 +128,7 @@ const checkScrollPosition = debounce(() => {
     <UContainer class="pt-30">
       <UPageHero
         :title="t('library.tabs.video')"
-        description="Browse your AI-generated videos and animations"
+        :description="t('libraryPages.videoDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -146,7 +146,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-library"
                 class="w-4 h-4 mr-2"
               />
-              Library
+              {{ $t('library.tabs.library') }}
             </NuxtLink>
           </li>
           <li>
@@ -155,7 +155,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">Video Generation</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.videoBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
@@ -192,10 +192,10 @@ const checkScrollPosition = debounce(() => {
           class="w-16 h-16 text-gray-400 mx-auto mb-4"
         />
         <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
-          {{ $t('noVideosFound') || 'No videos found' }}
+          {{ $t('libraryPages.noVideosFound') }}
         </h3>
         <p class="text-gray-500 dark:text-gray-400">
-          {{ $t('noVideosFoundDescription') || 'Start generating videos to see them here.' }}
+          {{ $t('libraryPages.noVideosFoundDescription') }}
         </p>
       </div>
 
@@ -252,7 +252,7 @@ const checkScrollPosition = debounce(() => {
         v-if="!hasMoreData"
         class="text-center py-8 text-gray-500"
       >
-        You've reached the end of the video library
+        {{ $t('libraryPages.endOfVideoLibrary') }}
       </div>
     </UContainer>
   </UPage>
