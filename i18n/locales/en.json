@@ -224,6 +224,11 @@
   "switchToLightMode": "Switch to light mode",
   "switchToDarkMode": "Switch to dark mode",
   "profile": "Profile",
+  "profileSettings": {
+    "emailNotifications": "Email Notifications",
+    "marketingEmails": "Marketing Emails",
+    "securityAlerts": "Security Alerts"
+  },
   "buyCredits": {
     "checkout": "Checkout",
     "checkoutDescription": "Confirm your order then choose your payment method.",
@@ -418,6 +423,8 @@
     "loadingVideoDetails": "Loading video details...",
     "videoDetails": "Video Details",
     "videoInformation": "Video Information",
-    "videoNotFound": "The video you are looking for could not be found or loaded."
+    "videoNotFound": "The video you are looking for could not be found or loaded.",
+    "aiContentLibraryTitle": "AI Content Library",
+    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
   }
 }

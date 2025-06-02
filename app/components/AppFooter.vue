@@ -18,10 +18,10 @@ watch(i18nLocale, (newLocale: string) => {
 // Compute translated footer links
 const translatedFooterLinks = computed(() => {
   if (!footer?.links) return []
-  
-  return footer.links.map(link => {
-    let translatedLink = { ...link }
-    
+
+  return footer.links.map((link) => {
+    const translatedLink = { ...link }
+
     // Translate labels based on the key
     if (link.label === 'Privacy') {
       translatedLink.label = t('footer.privacy')
@@ -41,7 +41,7 @@ const translatedFooterLinks = computed(() => {
         translatedLink['aria-label'] = t('footer.youtube')
       }
     }
-    
+
     return translatedLink
   })
 })
