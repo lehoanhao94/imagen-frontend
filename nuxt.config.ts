@@ -57,6 +57,9 @@ export default defineNuxtConfig({
       NUXT_GOOGLE_CLIENT_ID:
         process.env.NUXT_GOOGLE_CLIENT_ID
         || '309877442422-22t81sfdbm47ah0fi8e9ggedh0ih2jc8.apps.googleusercontent.com',
+      NUXT_PUBLIC_SUPABASE_URL: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
+      NUXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || '',
+      NUXT_NOTIFICATION_TABLE: process.env.NUXT_NOTIFICATION_TABLE || 'notifications',
       features: {
         paymentWithCrypto: process.env.FEATURE_PAYMENT_WITH_CRYPTO === 'true'
       }

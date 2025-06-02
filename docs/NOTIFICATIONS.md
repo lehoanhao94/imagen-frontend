@@ -35,6 +35,34 @@ onUnmounted(() => {
 
 ### 2. Display Notifications
 
+#### Using NotificationBell Component (Recommended)
+
+```vue
+<template>
+  <!-- Complete notification system with bell and slideover -->
+  <NotificationBell />
+</template>
+```
+
+#### Using NotificationSlideover Directly
+
+```vue
+<template>
+  <!-- Manual slideover integration -->
+  <UButton @click="appStore.isNotificationsSlideoverOpen = true">
+    Show Notifications
+  </UButton>
+  
+  <NotificationSlideover />
+</template>
+
+<script setup lang="ts">
+const appStore = useAppStore()
+</script>
+```
+
+#### Custom Implementation
+
 ```vue
 <template>
   <!-- Show notification bell with unread indicator -->
@@ -148,3 +176,79 @@ onMounted(() => {
 4. **Navigation**: Automatic routing based on notification types
 5. **State Management**: Centralized state with Pinia
 6. **Type Safety**: Full TypeScript support
+
+## Components
+
+### NotificationBell
+
+A complete notification bell component that includes:
+- Unread notification indicator
+- Click handler to open slideover
+- Automatic initialization and cleanup
+- Real-time subscription management
+
+```vue
+<template>
+  <NotificationBell />
+</template>
+```
+
+### NotificationSlideover
+
+A comprehensive slideover component that displays:
+- Notification list with proper formatting
+- Loading states and empty states
+- Mark as read functionality
+- Pagination support
+- Error handling
+- Internationalization support
+
+Features:
+- Auto-closes and marks all as read when closed
+- Click on notifications to navigate and mark as read
+- Responsive design with proper icons and styling
+- Real-time updates
+
+```vue
+<template>
+  <NotificationSlideover />
+</template>
+```
+
+## Internationalization
+
+The components include full i18n support for multiple languages. Translation keys:
+
+```json
+{
+  "notifications": {
+    "title": "Notifications",
+    "description": "Your recent notifications and updates",
+    "totalCount": "{count} notifications",
+    "markAllRead": "Mark all as read",
+    "loadMore": "Load more",
+    "close": "Close",
+    "empty": {
+      "title": "No notifications",
+      "description": "You're all caught up! No new notifications to show."
+    },
+    "error": {
+      "title": "Error loading notifications"
+    },
+    "types": {
+      "ttsHistory": {
+        "title": "Audio Generation Complete",
+        "description": "Your text-to-speech audio has been generated successfully"
+      },
+      "voiceTraining": {
+        "title": "Voice Training Complete", 
+        "description": "Your custom voice model training has finished"
+      },
+      "default": {
+        "title": "Notification",
+        "description": "You have a new notification"
+      }
+    }
+  }
+}
+```

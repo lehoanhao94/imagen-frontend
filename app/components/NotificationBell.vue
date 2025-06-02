@@ -13,8 +13,8 @@
     />
   </UChip>
 
-  <!-- Example slideover component would go here -->
-  <!-- <NotificationsSlideover ... /> -->
+  <!-- Notification Slideover -->
+  <NotificationSlideover />
 </template>
 
 <script setup lang="ts">
@@ -45,13 +45,6 @@ onUnmounted(() => {
 const onOpenNotificationSlideover = () => {
   isNotificationsSlideoverOpen.value = true
 }
-
-// Watch for slideover close to mark all as read
-watch(isNotificationsSlideoverOpen, (value) => {
-  if (!value) {
-    notificationsStore.markAllAsRead()
-  }
-})
 
 // Example usage (these would be used in a real implementation):
 // - notificationsStore.handleNotificationDetail(notification)

@@ -357,5 +357,34 @@
       "title": "Time & Cost Savings in Production",
       "description": "No need for actors, studios, post-production teams, perfect for individuals/small teams creating content quickly, automated video production workflows"
     }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Your recent notifications and updates",
+    "totalCount": "{count} notifications",
+    "markAllRead": "Mark all as read",
+    "loadMore": "Load more",
+    "close": "Close",
+    "empty": {
+      "title": "No notifications",
+      "description": "You're all caught up! No new notifications to show."
+    },
+    "error": {
+      "title": "Error loading notifications"
+    },
+    "types": {
+      "ttsHistory": {
+        "title": "Audio Generation Complete",
+        "description": "Your text-to-speech audio has been generated successfully"
+      },
+      "voiceTraining": {
+        "title": "Voice Training Complete",
+        "description": "Your custom voice model training has finished"
+      },
+      "default": {
+        "title": "Notification",
+        "description": "You have a new notification"
+      }
+    }
   }
 }
