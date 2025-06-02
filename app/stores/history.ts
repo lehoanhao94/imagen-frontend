@@ -44,7 +44,7 @@ interface HistoryDetail {
 }
 
 interface HistoriesResponse {
-  data: HistoryDetail[]
+  result: HistoryDetail[]
   total: number
   current_page: number
   per_page: number
@@ -116,10 +116,10 @@ export const useHistoryStore = defineStore('historyStore', {
 
         if (append) {
           // Append new data for infinite scroll
-          this.histories = [...this.histories, ...data.data]
+          this.histories = [...this.histories, ...data.result]
         } else {
           // Replace data for initial load or refresh
-          this.histories = data.data
+          this.histories = data.result
         }
 
         this.historiesTotal = data.total

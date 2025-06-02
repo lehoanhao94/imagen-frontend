@@ -2,21 +2,9 @@ export function useVideoGenModels() {
   const models = [
     {
       label: 'Veo 2',
-      value: 'Veo 2',
+      value: 'veo-2.0-generate-001',
       icon: 'hugeicons:ai-chip',
-      options: [
-        'style',
-        'videoDimensions'
-      ]
-    },
-    {
-      label: 'RunwayML Gen-3',
-      value: 'RunwayML Gen-3',
-      icon: 'hugeicons:ai-chip',
-      options: [
-        'style',
-        'duration'
-      ]
+      options: ['style', 'videoDimensions']
     }
   ]
   const model = useCookie<any>('video-gen-model', { default: () => models[0] })

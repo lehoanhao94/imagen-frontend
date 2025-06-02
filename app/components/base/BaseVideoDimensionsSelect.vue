@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const { imageDimensions, imageDimension } = useImageDimensions()
+const { videoDimensions, videoDimension } = useVideoDimensions()
 </script>
 
 <template>
   <URadioGroup
-    v-model="imageDimension"
+    v-model="videoDimension"
     indicator="hidden"
     variant="card"
-    :items="imageDimensions"
+    :items="videoDimensions"
     size="xs"
     :ui="{
       fieldset: 'flex flex-wrap gap-2 flex-row',
@@ -33,7 +33,7 @@ const { imageDimensions, imageDimension } = useImageDimensions()
               class="flex items-center justify-center rounded-md border border-white/20 bg-muted/50"
             >
               <UIcon
-                name="ion:image"
+                name="tabler:video-filled"
                 class="w-6 h-6 text-gray-500"
               />
             </div>
