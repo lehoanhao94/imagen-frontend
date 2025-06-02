@@ -88,6 +88,7 @@ dependencies:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   .:
     dependencies:
       '@iconify-json/lucide':
@@ -189,6 +190,8 @@ dependencies:
 >>>>>>> 0a4c06a (resolver)
 =======
 >>>>>>> c4471ec (resolver)
+=======
+>>>>>>> fa89487 (update)
 devDependencies:
   '@nuxt/eslint':
     specifier: ^1.3.0
@@ -211,6 +214,7 @@ devDependencies:
   vue-tsc:
     specifier: ^2.2.10
     version: 2.2.10(typescript@5.8.3)
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> fa89487 (update)
 =======
@@ -345,6 +349,8 @@ devDependencies:
 >>>>>>> fa89487 (update)
 >>>>>>> b08094d (resolver)
 >>>>>>> c4471ec (resolver)
+=======
+>>>>>>> fa89487 (update)
 
 packages:
 
@@ -387,6 +393,7 @@ packages:
     peerDependenciesMeta:
       vue:
         optional: true
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -6798,6 +6805,8 @@ snapshots:
 >>>>>>> fa89487 (update)
 >>>>>>> b08094d (resolver)
 >>>>>>> c4471ec (resolver)
+=======
+>>>>>>> fa89487 (update)
     dependencies:
       '@ai-sdk/provider-utils': 2.2.8(zod@3.25.47)
       '@ai-sdk/ui-utils': 1.2.11(zod@3.25.47)
@@ -10230,6 +10239,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   '@types/crypto-js@4.2.2': {}
 
   '@types/debug@4.1.12':
@@ -10238,12 +10248,15 @@ snapshots:
 >>>>>>> 0a4c06a (resolver)
 =======
 >>>>>>> c4471ec (resolver)
+=======
+>>>>>>> fa89487 (update)
   /@types/crypto-js@4.2.2:
     resolution: {integrity: sha512-sDOLlVbHhXpAUAL0YHDUUwDZf3iN4Bwi4W6a0W0b+QcAezUbRtH4FVb+9J4h+XFPW7l/gQ9F8qC7P+Ec4k8QVQ==}
     dev: true
 
   /@types/debug@4.1.12:
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> fa89487 (update)
 =======
@@ -10269,6 +10282,8 @@ snapshots:
 >>>>>>> fa89487 (update)
 >>>>>>> b08094d (resolver)
 >>>>>>> c4471ec (resolver)
+=======
+>>>>>>> fa89487 (update)
     dependencies:
       '@types/ms': 2.1.0
     dev: false
@@ -11941,6 +11956,7 @@ snapshots:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   crypto-js@4.2.0: {}
 
   css-background-parser@0.1.0: {}
@@ -11983,6 +11999,20 @@ snapshots:
     resolution: {integrity: sha512-9jaqR6e7Ohds+aWwmhe6wILJ99xYQbfmK9QQB9CcMjDbTxPZjwEmUQpU91OG05Xgm8BahT5fW+svbsQGjS/zPg==}
     dev: false
 
+=======
+  /crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
+    dev: false
+
+  /css-background-parser@0.1.0:
+    resolution: {integrity: sha512-2EZLisiZQ+7m4wwur/qiYJRniHX4K5Tc9w93MT3AS0WS1u5kaZ4FKXlOTBhOjc+CgEgPiGY+fX1yWD8UwpEqUA==}
+    dev: false
+
+  /css-box-shadow@1.0.0-3:
+    resolution: {integrity: sha512-9jaqR6e7Ohds+aWwmhe6wILJ99xYQbfmK9QQB9CcMjDbTxPZjwEmUQpU91OG05Xgm8BahT5fW+svbsQGjS/zPg==}
+    dev: false
+
+>>>>>>> fa89487 (update)
   /css-color-keywords@1.0.0:
     resolution: {integrity: sha512-FyyrDHZKEjXDpNJYvVsV960FiqQyXc/LlYmsxl2BcdMb2WPx0OGRVgTg55rPSyLSNMqP52R9r8geSp7apN3Ofg==}
     engines: {node: '>=4'}
