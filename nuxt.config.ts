@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    'nuxt-vue3-google-signin'
+    'nuxt-vue3-google-signin',
+    '@nuxtjs/supabase'
   ],
   plugins: [{ src: '~/plugins/vue-number-animation', ssr: false }],
   ssr: false,
@@ -107,5 +108,12 @@ export default defineNuxtConfig({
       { code: 'pt', name: 'Português', file: 'pt.json' }
     ],
     strategy: 'no_prefix'
+  },
+  supabase: {
+    redirect: false,
+    url: process.env.SUPABASE_URL || 'https://realtime-dev.ttsopenai.com',
+    key:
+      process.env.SUPABASE_KEY
+      || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzI0MDAwNDAwLAogICJleHAiOiA0MDkwODMyNDQzCn0.2jwTXghgcYZRJz38_dDpIPIhRfHq1ZtgRHAHkxHpBcg'
   }
 })

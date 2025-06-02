@@ -22,32 +22,26 @@ export const useTextToVideoStore = defineStore('textToVideoStore', {
     async textToVideo(payload: {
       prompt: string
       model: string
-      style: string
-      dimensions: string
+      aspect_ratio: string
+      person_generation?: string
+      number_of_videos?: number
+      enhance_prompt?: boolean
     }) {
       const appStore = useAppStore()
       this.textToVideoResult = null
       appStore.loading = true
       const toast = useToast()
-
       try {
         this.loadings.textToVideo = true
         this.errors.textToVideo = null
         // Make the actual API call to the signup endpoint
         const { apiService } = useAPI()
         // Call the signup API endpoint
-        const response = await apiService.post('/create_image', payload)
-
+        const response = await apiService.post('/video-gen/veo', payload)
         return response
       } catch (error: any) {
-        const { $i18n } = useNuxtApp()
-        const t = $i18n.t
-        toast.add({
-          id: 'error',
-          title: t('Error') || 'Error',
-          description: error.response?.data?.detail || error.message,
-          color: 'error'
-        })
+        console.log('🚀 ~ error:', error)
+
         this.errors.textToVideo = error
         return null
       } finally {

@@ -2,7 +2,7 @@
 const { model, models } = useVideoGenModels()
 
 const appStore = useAppStore()
-
+const toast = useToast()
 const { loading } = storeToRefs(appStore)
 
 const _aiPhotos = [
@@ -13,21 +13,33 @@ const _aiPhotos = [
   'https://cdn.leonardo.ai/users/684d2cf2-484a-44d8-bf86-4fac5fe47a59/generations/78afd409-dccb-4508-b4bc-5c2b625171e9/Leonardo_Phoenix_10_A_pair_of_enchanting_fantasy_birds_perched_0.jpg?w=512'
 ]
 
-const textToImageStore = useTextToImageStore()
+const textToVideoStore = useTextToVideoStore()
 const {
-  textToImageResult: _textToImageResult,
+  textToVideoResult: _textToVideoResult,
   aiToolImageCardRef: _aiToolImageCardRef,
   prompt
-} = storeToRefs(textToImageStore)
+} = storeToRefs(textToVideoStore)
 
 // Video type selection
 const selectedVideoType = ref(null)
 
-const onGenerate = () => {
-  textToImageStore.textToImage({
+const onGenerate = async () => {
+  const result = await textToVideoStore.textToVideo({
     prompt: prompt.value,
-    model: 'imagen-3'
+    model: 'veo-2.0-generate-001',
+    aspect_ratio: '16:9',
+    person_generation: 'dont_allow',
+    number_of_videos: 1,
+    enhance_prompt: true
   })
+  if (result) {
+    toast.add({
+      id: 'success',
+      title: 'Video Generated',
+      description: 'Your video is being generated. Please check back later.',
+      color: 'success'
+    })
+  }
 }
 
 const onUsePrompt = (newPrompt: string) => {
@@ -61,7 +73,7 @@ const onUsePrompt = (newPrompt: string) => {
       >
         <UChatPromptSubmit
           color="primary"
-          :label="$t('generate')"
+          :label="$t('generateVideo')"
           class="bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 cursor-pointer"
           icon="mingcute:ai-fill"
           :loading="loading"
