@@ -95,29 +95,6 @@ const onUsePrompt = (newPrompt: string) => {
       }"
       :transition="{
         duration: 0.6,
-        delay: 0.4
-      }"
-    >
-      <UFormField
-        :label="$t('videoTypeSelection')"
-        class="mt-6"
-      >
-        <BaseVideoTypeSelect v-model="selectedVideoType" />
-      </UFormField>
-    </Motion>
-    <Motion
-      :initial="{
-        scale: 1.1,
-        opacity: 0,
-        filter: 'blur(20px)'
-      }"
-      :animate="{
-        scale: 1,
-        opacity: 1,
-        filter: 'blur(0px)'
-      }"
-      :transition="{
-        duration: 0.6,
         delay: 0.5
       }"
     >
@@ -129,17 +106,15 @@ const onUsePrompt = (newPrompt: string) => {
             class="w-full"
           />
         </UFormField>
-        <UFormField
-          v-if="model?.options?.includes('style')"
-          :label="$t('style')"
-        >
-          <BaseStyleSelect class="w-full" />
+        <UFormField :label="$t('videoTypeSelection')">
+          <BaseVideoTypeSelect
+            v-model="selectedVideoType"
+            size="sm"
+          />
         </UFormField>
-        <UFormField
-          v-if="model?.options?.includes('imageDimensions')"
-          :label="$t('imageDimensions')"
-        >
-          <BaseImageDimensionsSelect />
+
+        <UFormField :label="$t('videoDimensions')">
+          <BaseVideoDimensionsSelect />
         </UFormField>
         <div
           v-if="model?.options?.includes('yourImage')"

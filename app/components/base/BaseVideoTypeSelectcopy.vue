@@ -63,7 +63,13 @@ const videoTypes: VideoType[] = [
     id: 'personalized-videos',
     title: t('videoTypes.personalizedVideos.title'),
     description: t('videoTypes.personalizedVideos.description'),
-    icon: 'material-symbols:personal-injury'
+    icon: 'lucide:user-heart'
+  },
+  {
+    id: 'time-cost-savings',
+    title: t('videoTypes.timeCostSavings.title'),
+    description: t('videoTypes.timeCostSavings.description'),
+    icon: 'lucide:clock'
   }
 ]
 
@@ -82,6 +88,19 @@ const videoExamplesByType: Record<string, VideoExample[]> = {
       model: 'Veo 2',
       style: 'Commercial',
       duration: '5s'
+    },
+    {
+      id: '2',
+      title: 'Brand Story Video',
+      prompt:
+        'Corporate brand storytelling with emotional narrative, lifestyle shots, inspiring music, professional cinematography',
+      videoUrl:
+        'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Cinematic',
+      duration: '8s'
     }
   ],
   'social-media-content': [
@@ -97,6 +116,19 @@ const videoExamplesByType: Record<string, VideoExample[]> = {
       model: 'RunwayML Gen-3',
       style: 'Dynamic',
       duration: '3s'
+    },
+    {
+      id: '4',
+      title: 'Instagram Reel',
+      prompt:
+        'Lifestyle content with aesthetic visuals, smooth transitions, trendy effects, engaging storytelling',
+      videoUrl:
+        'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
+      thumbnailUrl:
+        'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop',
+      model: 'Veo 2',
+      style: 'Aesthetic',
+      duration: '4s'
     }
   ],
   'personal-entertainment': [
@@ -226,134 +258,130 @@ watch(
       color="neutral"
       variant="outline"
       trailing-icon="lucide:chevron-down"
-      class="justify-between"
-      v-bind="$attrs"
+      class="w-full justify-between"
       @click="openModal"
     />
 
     <!-- Video Type Selection Modal -->
     <UModal
       v-model:open="isModalOpen"
+      fullscreen
       :title="t('videoTypes.selectVideoType')"
-      :ui="{ footer: 'justify-end', content: 'max-w-6xl', body: '!p-0' }"
+      :ui="{ footer: 'justify-end' }"
     >
       <template #body>
-        <div class="h-full grid grid-cols-12 gap-4">
-          <div
-            class="flex flex-col p-4 gap-4 col-span-12 lg:col-span-7 h-[50vh] sm:h-full overflow-y-auto sm:overflow-visible"
-          >
-            <UCard
-              v-for="type in videoTypes"
-              :key="type.id"
-              class="cursor-pointer transition-all duration-200 hover:shadow-md"
-              :class="{
-                'ring-1 ring-primary-500 bg-primary-50 dark:bg-primary-950':
-                  tempSelectedType?.id === type.id,
-                'hover:bg-gray-50 dark:hover:bg-gray-800':
-                  tempSelectedType?.id !== type.id
-              }"
-              @click="selectTempType(type)"
+        <!-- Two Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+          <!-- Left Column: Video Types -->
+          <div class="">
+            <div class="space-y-3 overflow-y-auto p-1 max-h-full">
+              <UCard
+                v-for="type in videoTypes"
+                :key="type.id"
+                class="cursor-pointer transition-all duration-200 hover:shadow-md"
+                :class="{
+                  'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-950':
+                    tempSelectedType?.id === type.id,
+                  'hover:bg-gray-50 dark:hover:bg-gray-800':
+                    tempSelectedType?.id !== type.id
+                }"
+                @click="selectTempType(type)"
+              >
+                <div class="flex items-start gap-3">
+                  <UIcon
+                    :name="type.icon"
+                    class="w-6 h-6 text-primary-500 mt-1 flex-shrink-0"
+                  />
+                  <div class="flex-1 min-w-0">
+                    <h5
+                      class="font-medium text-sm text-gray-900 dark:text-white line-clamp-2"
+                    >
+                      {{ type.title }}
+                    </h5>
+                    <p
+                      class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2"
+                    >
+                      {{ type.description }}
+                    </p>
+                  </div>
+                  <UIcon
+                    v-if="tempSelectedType?.id === type.id"
+                    name="lucide:check-circle"
+                    class="w-5 h-5 text-primary-500 flex-shrink-0"
+                  />
+                </div>
+              </UCard>
+            </div>
+          </div>
+
+          <!-- Right Column: Video Examples -->
+          <div class="space-y-4">
+            <h4 class="text-lg font-medium text-gray-900 dark:text-white">
+              {{ t("videoTypes.examples") }}
+            </h4>
+            <div
+              v-if="tempSelectedType"
+              class="space-y-4 overflow-y-auto"
             >
-              <div class="flex items-start gap-3">
-                <UIcon
-                  :name="type.icon"
-                  class="w-6 h-6 text-primary-500 mt-1 flex-shrink-0"
-                />
-                <div class="flex-1 min-w-0">
-                  <h5
-                    class="font-medium text-sm text-gray-900 dark:text-white line-clamp-2"
+              <div
+                v-for="example in currentVideoExamples"
+                :key="example.id"
+                class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+              >
+                <!-- Video Thumbnail -->
+                <div class="relative aspect-video bg-gray-100 dark:bg-gray-800">
+                  <img
+                    :src="example.thumbnailUrl"
+                    :alt="example.title"
+                    class="w-full h-full object-cover"
                   >
-                    {{ type.title }}
-                  </h5>
+                  <div
+                    class="absolute inset-0 flex items-center justify-center"
+                  >
+                    <UButton
+                      icon="lucide:play"
+                      color="primary"
+                      variant="solid"
+                      size="lg"
+                      class="rounded-full shadow-lg"
+                    />
+                  </div>
+                </div>
+
+                <!-- Video Info -->
+                <div class="p-3">
+                  <h6 class="font-medium text-sm text-gray-900 dark:text-white">
+                    {{ example.title }}
+                  </h6>
                   <p
                     class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2"
                   >
-                    {{ type.description }}
+                    {{ example.prompt }}
                   </p>
-                </div>
-                <UIcon
-                  v-if="tempSelectedType?.id === type.id"
-                  name="lucide:check-circle"
-                  class="w-5 h-5 text-primary-500 flex-shrink-0"
-                />
-              </div>
-            </UCard>
-          </div>
-          <div class="col-span-12 lg:col-span-5 relative dark:bg-slate-950 p-4 px-6">
-            <div class="sticky top-4 sm:h-[70vh">
-              <div class="space-y-4">
-                <h4 class="text-lg font-medium text-gray-900 dark:text-white">
-                  {{ t("videoTypes.examples") }}
-                </h4>
-                <div
-                  v-if="tempSelectedType"
-                  class="space-y-4 overflow-y-auto"
-                >
                   <div
-                    v-for="example in currentVideoExamples"
-                    :key="example.id"
-                    class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+                    class="flex items-center gap-2 mt-2 text-xs text-gray-500"
                   >
-                    <!-- Video Thumbnail -->
-                    <div
-                      class="relative aspect-video bg-gray-100 dark:bg-gray-800"
-                    >
-                      <img
-                        :src="example.thumbnailUrl"
-                        :alt="example.title"
-                        class="w-full h-full object-cover"
-                      >
-                      <div
-                        class="absolute inset-0 flex items-center justify-center"
-                      >
-                        <UButton
-                          icon="lucide:play"
-                          color="primary"
-                          variant="solid"
-                          size="lg"
-                          class="rounded-full shadow-lg"
-                        />
-                      </div>
-                    </div>
-
-                    <!-- Video Info -->
-                    <div class="p-3">
-                      <h6
-                        class="font-medium text-sm text-gray-900 dark:text-white"
-                      >
-                        {{ example.title }}
-                      </h6>
-                      <p
-                        class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2"
-                      >
-                        {{ example.prompt }}
-                      </p>
-                      <div
-                        class="flex items-center gap-2 mt-2 text-xs text-gray-500"
-                      >
-                        <span>{{ example.model }}</span>
-                        <span>•</span>
-                        <span>{{ example.style }}</span>
-                        <span>•</span>
-                        <span>{{ example.duration }}</span>
-                      </div>
-                    </div>
+                    <span>{{ example.model }}</span>
+                    <span>•</span>
+                    <span>{{ example.style }}</span>
+                    <span>•</span>
+                    <span>{{ example.duration }}</span>
                   </div>
                 </div>
-                <div
-                  v-else
-                  class="flex items-center justify-center h-[60vh] text-gray-500"
-                >
-                  <div class="text-center">
-                    <UIcon
-                      name="lucide:video"
-                      class="w-12 h-12 mx-auto mb-2 opacity-50"
-                    />
-                    <p class="text-sm">
-                      {{ t("videoTypes.selectTypeToSeeExamples") }}
-                    </p>
-                  </div>
-                </div>
+              </div>
+            </div>
+            <div
+              v-else
+              class="flex items-center justify-center h-[200px] text-gray-500"
+            >
+              <div class="text-center">
+                <UIcon
+                  name="lucide:video"
+                  class="w-12 h-12 mx-auto mb-2 opacity-50"
+                />
+                <p class="text-sm">
+                  {{ t("videoTypes.selectTypeToSeeExamples") }}
+                </p>
               </div>
             </div>
           </div>
