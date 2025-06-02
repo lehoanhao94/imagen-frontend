@@ -1,14 +1,15 @@
 <template>
   <UChip
     inset
-    :show="notificationsStore.hasUnreadNotifications"
+    :show="hasUnreadNotifications"
   >
     <UButton
       icon="i-fa-bell"
-      size="lg"
-      color="gray"
+      size="sm"
+      color="neutral"
       square
-      variant="ghost"
+      variant="soft"
+      class="rounded-full"
       @click="onOpenNotificationSlideover"
     />
   </UChip>
@@ -24,6 +25,7 @@
  */
 
 const notificationsStore = useNotificationsStore()
+const { hasUnreadNotifications } = storeToRefs(notificationsStore)
 const appStore = useAppStore()
 const { isNotificationsSlideoverOpen } = storeToRefs(appStore)
 

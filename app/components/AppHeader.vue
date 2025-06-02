@@ -24,13 +24,14 @@ const { user } = storeToRefs(authStore)
       }"
     >
       <template #auth="{ item }">
-        <div class="">
+        <div class="flex flex-row gap-2 items-center">
           <AppUserMenu v-if="user" />
           <span v-else>
             <ULink to="/auth/login">
               {{ item.label }}
             </ULink>
           </span>
+          <NotificationBell v-if="user" />
         </div>
       </template>
     </UNavigationMenu>

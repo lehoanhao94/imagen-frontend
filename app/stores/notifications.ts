@@ -60,6 +60,7 @@ export const useNotificationsStore = defineStore('notificationsStore', {
     parseNotificationData(notification: any, userEmail: string): Notification {
       const key = md5(userEmail)
       const decrypt = aesDecrypt(notification?.data, key.toString())
+      console.log('🚀 ~ parseNotificationData ~ decrypt:', parseJson(decrypt?.history))
 
       return {
         ...notification,

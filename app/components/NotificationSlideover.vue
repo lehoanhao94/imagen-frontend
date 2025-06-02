@@ -9,7 +9,11 @@
         <!-- Header Actions -->
         <div class="flex justify-between items-center">
           <span class="text-sm text-gray-500 dark:text-gray-400">
-            {{ $t('notifications.totalCount', { count: notificationsStore.totalCount }) }}
+            {{
+              $t("notifications.totalCount", {
+                count: notificationsStore.totalCount
+              })
+            }}
           </span>
           <UButton
             v-if="notificationsStore.hasUnreadNotifications"
@@ -21,27 +25,41 @@
         </div>
 
         <!-- Loading State -->
-        <div v-if="notificationsStore.loading" class="space-y-3">
-          <div v-for="i in 3" :key="i" class="animate-pulse">
+        <div
+          v-if="notificationsStore.loading"
+          class="space-y-3"
+        >
+          <div
+            v-for="i in 3"
+            :key="i"
+            class="animate-pulse"
+          >
             <div class="flex space-x-3">
-              <div class="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+              <div
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full"
+              />
               <div class="flex-1 space-y-2">
-                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+                <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
               </div>
             </div>
           </div>
         </div>
 
         <!-- Notifications List -->
-        <div v-else-if="notificationsStore.notifications.length > 0" class="space-y-2">
+        <div
+          v-else-if="notificationsStore.notifications.length > 0"
+          class="space-y-2"
+        >
           <div
             v-for="notification in notificationsStore.notifications"
             :key="notification.id"
             class="p-3 rounded-lg border hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
             :class="{
-              'bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800': !notification.seen,
-              'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700': notification.seen
+              'bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800':
+                !notification.seen,
+              'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700':
+                notification.seen
             }"
             @click="handleNotificationClick(notification)"
           >
@@ -51,18 +69,28 @@
                 <div
                   class="w-8 h-8 rounded-full flex items-center justify-center"
                   :class="{
-                    'bg-blue-100 dark:bg-blue-900': notification.event_type === 'tts_history',
-                    'bg-green-100 dark:bg-green-900': notification.event_type === 'voice_training',
-                    'bg-gray-100 dark:bg-gray-800': !['tts_history', 'voice_training'].includes(notification.event_type)
+                    'bg-blue-100 dark:bg-blue-900':
+                      notification.event_type === 'tts_history',
+                    'bg-green-100 dark:bg-green-900':
+                      notification.event_type === 'voice_training',
+                    'bg-gray-100 dark:bg-gray-800': ![
+                      'tts_history',
+                      'voice_training'
+                    ].includes(notification.event_type)
                   }"
                 >
                   <UIcon
                     :name="getNotificationIcon(notification.event_type)"
                     class="w-4 h-4"
                     :class="{
-                      'text-blue-600 dark:text-blue-400': notification.event_type === 'tts_history',
-                      'text-green-600 dark:text-green-400': notification.event_type === 'voice_training',
-                      'text-gray-600 dark:text-gray-400': !['tts_history', 'voice_training'].includes(notification.event_type)
+                      'text-blue-600 dark:text-blue-400':
+                        notification.event_type === 'tts_history',
+                      'text-green-600 dark:text-green-400':
+                        notification.event_type === 'voice_training',
+                      'text-gray-600 dark:text-gray-400': ![
+                        'tts_history',
+                        'voice_training'
+                      ].includes(notification.event_type)
                     }"
                   />
                 </div>
@@ -71,7 +99,9 @@
               <!-- Notification Content -->
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between">
-                  <p class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                  <p
+                    class="text-sm font-medium text-gray-900 dark:text-gray-100 truncate"
+                  >
                     {{ getNotificationTitle(notification) }}
                   </p>
                   <div class="flex items-center space-x-2">
@@ -81,7 +111,7 @@
                     <div
                       v-if="!notification.seen"
                       class="w-2 h-2 bg-blue-500 rounded-full"
-                    ></div>
+                    />
                   </div>
                 </div>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -92,7 +122,10 @@
           </div>
 
           <!-- Load More Button -->
-          <div v-if="notificationsStore.showFetchNext" class="pt-4">
+          <div
+            v-if="notificationsStore.showFetchNext"
+            class="pt-4"
+          >
             <UButton
               :loading="notificationsStore.isFetching"
               :label="$t('notifications.loadMore')"
@@ -104,23 +137,35 @@
         </div>
 
         <!-- Empty State -->
-        <div v-else class="text-center py-8">
-          <UIcon name="i-fa-bell-slash" class="w-12 h-12 text-gray-400 mx-auto mb-4" />
+        <div
+          v-else
+          class="text-center py-8"
+        >
+          <UIcon
+            name="i-fa-bell-slash"
+            class="w-12 h-12 text-gray-400 mx-auto mb-4"
+          />
           <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1">
-            {{ $t('notifications.empty.title') }}
+            {{ $t("notifications.empty.title") }}
           </h3>
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            {{ $t('notifications.empty.description') }}
+            {{ $t("notifications.empty.description") }}
           </p>
         </div>
 
         <!-- Error State -->
-        <div v-if="notificationsStore.error" class="p-4 bg-red-50 dark:bg-red-950 rounded-lg">
+        <div
+          v-if="notificationsStore.error"
+          class="p-4 bg-red-50 dark:bg-red-950 rounded-lg"
+        >
           <div class="flex">
-            <UIcon name="i-fa-exclamation-triangle" class="w-5 h-5 text-red-400" />
+            <UIcon
+              name="i-fa-exclamation-triangle"
+              class="w-5 h-5 text-red-400"
+            />
             <div class="ml-3">
               <h3 class="text-sm font-medium text-red-800 dark:text-red-200">
-                {{ $t('notifications.error.title') }}
+                {{ $t("notifications.error.title") }}
               </h3>
               <p class="text-sm text-red-700 dark:text-red-300 mt-1">
                 {{ notificationsStore.error }}
@@ -148,7 +193,7 @@
 // Composables and stores
 const notificationsStore = useNotificationsStore()
 const appStore = useAppStore()
-const { $t } = useNuxtApp()
+const { t: $t } = useI18n()
 
 // Reactive slideover state
 const isOpen = computed({
@@ -225,6 +270,10 @@ const formatNotificationDate = (dateString: string): string => {
 watch(isOpen, (value) => {
   if (!value && notificationsStore.hasUnreadNotifications) {
     notificationsStore.markAllAsRead()
+  }
+  // reload data when slideover opens
+  if (value) {
+    notificationsStore.fetchNotifications()
   }
 })
 </script>

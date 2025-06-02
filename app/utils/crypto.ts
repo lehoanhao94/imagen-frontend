@@ -6,16 +6,32 @@ import CryptoJS from 'crypto-js'
  * @param key - The decryption key
  * @returns Decrypted object or null if decryption fails
  */
-export const aesDecrypt = (encryptedData: string, key: string): any => {
+export const aesDecrypt = (encryptedMessage: string, key: string): any => {
   try {
-    if (!encryptedData || !key) {
-      return null
-    }
+    // Decode the Base64 encoded message
+    const encryptedData = CryptoJS.enc.Base64.parse(encryptedMessage)
 
-    const bytes = CryptoJS.AES.decrypt(encryptedData, key)
-    const decryptedData = bytes.toString(CryptoJS.enc.Utf8)
+    // Extract the IV (first 16 bytes)
+    const iv = CryptoJS.lib.WordArray.create(encryptedData.words.slice(0, 4))
 
-    return JSON.parse(decryptedData)
+    // Extract the ciphertext
+    const ciphertext = CryptoJS.lib.WordArray.create(
+      encryptedData.words.slice(4)
+    )
+
+    // Decrypt using AES-256-CBC
+    const decrypted = CryptoJS.AES.decrypt(
+      { ciphertext: ciphertext },
+      CryptoJS.enc.Utf8.parse(key),
+      {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      }
+    )
+
+    // Convert the decrypted WordArray to a UTF-8 string
+    return JSON.parse(CryptoJS.enc.Utf8.stringify(decrypted))
   } catch (error) {
     console.error('AES decryption failed:', error)
     return null
