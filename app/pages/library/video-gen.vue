@@ -10,6 +10,7 @@ const { t } = useI18n()
 // Mock data for videos (extracted from original library.vue)
 const videoInitialData = [
   {
+    uuid: '079a36a8-3f62-11f0-a443-eefa84aae753',
     videoUrl: '#',
     thumbnailUrl: 'https://cdn.leonardo.ai/users/ae43823c-9b34-43ec-89d8-a561b2d817cf/generations/09b9108b-e6c3-4300-a31d-4a5a6012e2e1/Leonardo_Phoenix_10_create_an_illustration_of_A_woman_wearing_2.jpg?w=512',
     title: 'Create a cinematic video of a woman dancing',
@@ -19,6 +20,7 @@ const videoInitialData = [
     duration: '5s'
   },
   {
+    uuid: '123e4567-e89b-12d3-a456-426614174000',
     videoUrl: '#',
     thumbnailUrl: 'https://cdn.leonardo.ai/users/b6c8b211-6345-4cc4-a86b-efa3673506e3/generations/022ef9ef-7435-4580-ada9-bfc39ee325c3/Leonardo_Phoenix_10_A_sophisticated_lady_in_a_forest_green_tea_0.jpg?w=512',
     title: 'Abstract geometric animation',
@@ -31,6 +33,7 @@ const videoInitialData = [
 
 const videoMoreData = [
   {
+    uuid: '456e7890-e89b-12d3-a456-426614174001',
     videoUrl: '#',
     thumbnailUrl: 'https://cdn.leonardo.ai/users/4315e00c-057a-48d6-908a-01aa2c0bd0ad/generations/aa62988f-090e-49bb-9cda-b5b31476e22c/Leonardo_Phoenix_10_depict_water_color_style_semi_anime_japan_3.jpg?w=512',
     title: 'Watercolor animation style',

@@ -33,6 +33,10 @@ const props = defineProps({
   duration: {
     type: String,
     default: '5s'
+  },
+  uuid: {
+    type: String,
+    default: ''
   }
 })
 
@@ -44,7 +48,12 @@ const isFullScreenOpen = ref(false)
 const isVideoPlaying = ref(false)
 
 const openFullScreen = () => {
-  isFullScreenOpen.value = true
+  // If uuid is provided, navigate to detail page instead of opening fullscreen
+  if (props.uuid) {
+    navigateTo(`/library/video-gen/d/${props.uuid}`)
+  } else {
+    isFullScreenOpen.value = true
+  }
 }
 
 const onUsePrompt = () => {
@@ -127,6 +136,15 @@ const onUsePrompt = () => {
         class="cursor-pointer mt-4 w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
         icon="mingcute:ai-fill"
         @click="onUsePrompt"
+      />
+      <UButton
+        v-if="uuid"
+        color="neutral"
+        variant="outline"
+        :label="$t('viewDetails') || 'View Details'"
+        class="cursor-pointer mt-2 w-full justify-center"
+        icon="i-lucide-eye"
+        @click="openFullScreen"
       />
     </template>
   </UPageCard>
