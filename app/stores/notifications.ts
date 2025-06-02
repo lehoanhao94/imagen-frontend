@@ -44,7 +44,9 @@ export const useNotificationsStore = defineStore('notificationsStore', {
   getters: {
     hasUnreadNotifications: (state) => {
       return state.notifications
-        .filter(notification => ['tts_history', 'voice_training'].includes(notification.event_type))
+        .filter(notification =>
+          ['tts_history', 'voice_training'].includes(notification.event_type)
+        )
         .some(n => !n.seen)
     },
 
@@ -60,7 +62,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
     parseNotificationData(notification: any, userEmail: string): Notification {
       const key = md5(userEmail)
       const decrypt = aesDecrypt(notification?.data, key.toString())
-      console.log('🚀 ~ parseNotificationData ~ decrypt:', parseJson(decrypt?.history))
+      console.log(
+        '🚀 ~ parseNotificationData ~ decrypt:',
+        parseJson(decrypt?.history)
+      )
 
       return {
         ...notification,
@@ -100,9 +105,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
           .order('created_at', { ascending: false })
           .range(this.range.from, this.range.to)
 
-        this.notifications = data?.map((n: any) =>
-          this.parseNotificationData(n, user.value!.email)
-        ) || []
+        this.notifications
+          = data?.map((n: any) =>
+            this.parseNotificationData(n, user.value!.email)
+          ) || []
 
         // Fetch total count
         const { count } = await client
@@ -152,9 +158,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
           .order('created_at', { ascending: false })
           .range(this.range.from, this.range.to)
 
-        const parsedData = data?.map((n: any) =>
-          this.parseNotificationData(n, user.value!.email)
-        ) || []
+        const parsedData
+          = data?.map((n: any) =>
+            this.parseNotificationData(n, user.value!.email)
+          ) || []
 
         this.notifications = [...this.notifications, ...parsedData]
       } catch (error: any) {
@@ -176,7 +183,9 @@ export const useNotificationsStore = defineStore('notificationsStore', {
         )
 
         // Update on server
-        await useAPI().apiService.put(`/user/read-notification/${notificationId}`)
+        await useAPI().apiService.put(
+          `/user/read-notification/${notificationId}`
+        )
       } catch (error: any) {
         console.error('Failed to mark notification as read:', error)
         this.error = error.message
@@ -189,7 +198,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
     async markAllAsRead() {
       try {
         // Update local state immediately
-        this.notifications = this.notifications.map(n => ({ ...n, seen: true }))
+        this.notifications = this.notifications.map(n => ({
+          ...n,
+          seen: true
+        }))
 
         // Update on server
         await useAPI().apiService.put('/user/read-all-notifications')
@@ -210,7 +222,9 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       const notificationsTable = runtimeConfig.public.NUXT_NOTIFICATION_TABLE
 
       if (!user.value?.uuid) {
-        console.warn('Cannot setup realtime subscription: user not authenticated')
+        console.warn(
+          'Cannot setup realtime subscription: user not authenticated'
+        )
         return
       }
 
@@ -224,10 +238,15 @@ export const useNotificationsStore = defineStore('notificationsStore', {
         },
         (payload: any) => {
           if (payload?.new && payload?.new?.user_uuid === user.value?.uuid) {
-            const parsedNotification = this.parseNotificationData(payload.new, user.value!.email)
+            const parsedNotification = this.parseNotificationData(
+              payload.new,
+              user.value!.email
+            )
 
             // Check if notification already exists
-            const existingIndex = this.notifications.findIndex(n => n.id === payload.new.id)
+            const existingIndex = this.notifications.findIndex(
+              n => n.id === payload.new.id
+            )
 
             if (existingIndex !== -1) {
               // Update existing notification
@@ -253,8 +272,13 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       const router = useRouter()
 
       // Handle payment notifications
-      if (['2', '8'].includes(String(notification?.status)) && notification?.platform === 'CRYPTOMUS') {
-        router.push(`/profile/thank-you?payment=success&id=${notification?.external_order_id}`)
+      if (
+        ['2', '8'].includes(String(notification?.status))
+        && notification?.platform === 'CRYPTOMUS'
+      ) {
+        router.push(
+          `/profile/thank-you?payment=success&id=${notification?.external_order_id}`
+        )
       }
 
       // For other side effects, emit events that components can listen to
@@ -265,6 +289,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
      * Handle notification click/detail view
      */
     async handleNotificationDetail(notification: Notification) {
+      console.log(
+        '🚀 ~ handleNotificationDetail ~ notification:',
+        notification
+      )
       const router = useRouter()
       const appStore = useAppStore()
 
@@ -272,17 +300,26 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       appStore.isNotificationsSlideoverOpen = false
 
       // Navigate based on notification type
-      switch (notification.event_type) {
-        case 'tts_history':
-          router.push({ name: 'history', query: { id: notification.history_uuid } })
+      switch (notification.type) {
+        case 'video':
+          router.push({
+            name: 'library-video-gen-d-uuid',
+            params: { uuid: notification.uuid }
+          })
           break
         case 'voice_training': {
           // Navigate to voice library - simplified version without store dependency
-          router.push({ name: 'voice-library', query: { id: notification.history_uuid } })
+          router.push({
+            name: 'voice-library',
+            query: { id: notification.history_uuid }
+          })
           break
         }
         default:
-          router.push({ name: 'history', query: { id: notification.history_uuid } })
+          router.push({
+            name: 'history',
+            query: { id: notification.history_uuid }
+          })
           break
       }
 
