@@ -357,5 +357,34 @@
       "title": "Tiết kiệm thời gian & chi phí sản xuất",
       "description": "Không cần diễn viên, trường quay, ekip hậu kỳ, phù hợp cho cá nhân/nhóm nhỏ làm content nhanh chóng, tự động hoá quy trình sản xuất video"
     }
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "description": "Thông báo và cập nhật gần đây của bạn",
+    "totalCount": "{count} thông báo",
+    "markAllRead": "Đánh dấu tất cả đã đọc",
+    "loadMore": "Tải thêm",
+    "close": "Đóng",
+    "empty": {
+      "title": "Không có thông báo",
+      "description": "Bạn đã cập nhật hết! Không có thông báo mới để hiển thị."
+    },
+    "error": {
+      "title": "Lỗi khi tải thông báo"
+    },
+    "types": {
+      "ttsHistory": {
+        "title": "Tạo âm thanh hoàn tất",
+        "description": "Âm thanh chuyển văn bản thành giọng nói của bạn đã được tạo thành công"
+      },
+      "voiceTraining": {
+        "title": "Huấn luyện giọng nói hoàn tất",
+        "description": "Việc huấn luyện mô hình giọng nói tùy chỉnh của bạn đã hoàn thành"
+      },
+      "default": {
+        "title": "Thông báo",
+        "description": "Bạn có một thông báo mới"
+      }
+    }
   }
 }

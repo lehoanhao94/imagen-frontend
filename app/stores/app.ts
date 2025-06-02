@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 export const useAppStore = defineStore('appStore', {
   state: () => ({
     locale: 'en',
-    loading: false
+    loading: false,
+    isNotificationsSlideoverOpen: false
   }),
   persist: [
     {
