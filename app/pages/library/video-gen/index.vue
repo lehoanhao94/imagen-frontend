@@ -7,79 +7,54 @@ const { t } = useI18n()
  * Video Generation Library page with infinite scroll functionality
  */
 
-// Mock data for videos (extracted from original library.vue)
-const videoInitialData = [
-  {
-    uuid: '079a36a8-3f62-11f0-a443-eefa84aae753',
-    videoUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/ae43823c-9b34-43ec-89d8-a561b2d817cf/generations/09b9108b-e6c3-4300-a31d-4a5a6012e2e1/Leonardo_Phoenix_10_create_an_illustration_of_A_woman_wearing_2.jpg?w=512',
-    title: 'Create a cinematic video of a woman dancing',
-    prompt: 'A beautiful woman with flowing hair dancing gracefully in a sunlit meadow, slow motion, cinematic lighting, golden hour',
-    model: 'Veo 2',
-    style: 'Cinematic',
-    duration: '5s'
-  },
-  {
-    uuid: '123e4567-e89b-12d3-a456-426614174000',
-    videoUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/b6c8b211-6345-4cc4-a86b-efa3673506e3/generations/022ef9ef-7435-4580-ada9-bfc39ee325c3/Leonardo_Phoenix_10_A_sophisticated_lady_in_a_forest_green_tea_0.jpg?w=512',
-    title: 'Abstract geometric animation',
-    prompt: 'Abstract geometric shapes morphing and transforming in space, vibrant colors, modern art style',
-    model: 'Veo 3',
-    style: 'Abstract',
-    duration: '8s'
-  }
-]
+// Use history store for fetching video data
+const historyStore = useHistoryStore()
 
-const videoMoreData = [
-  {
-    uuid: '456e7890-e89b-12d3-a456-426614174001',
-    videoUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/4315e00c-057a-48d6-908a-01aa2c0bd0ad/generations/aa62988f-090e-49bb-9cda-b5b31476e22c/Leonardo_Phoenix_10_depict_water_color_style_semi_anime_japan_3.jpg?w=512',
-    title: 'Watercolor animation style',
-    prompt: 'A watercolor style animation of cherry blossoms falling in a Japanese garden',
-    model: 'Veo 2',
-    style: 'Watercolor',
-    duration: '6s'
-  }
-]
+// Filter parameters for the API
+const filterParams = ref({
+  filter_by: 'all',
+  items_per_page: 10
+})
 
-// Reactive state for video content
-const librariesData = ref([...videoInitialData])
-const pageData = ref(1)
-const isLoadingData = ref(false)
-const hasMoreDataLeft = ref(true)
+// Computed properties from store
+const librariesData = computed(() => historyStore.histories)
+const isLoading = computed(() => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories)
+const hasMoreData = computed(() => historyStore.hasMoreHistories)
 
-// Computed properties
-const isLoading = computed(() => isLoadingData.value)
-const hasMoreData = computed(() => hasMoreDataLeft.value)
+// Error handling from store
+const hasError = computed(() => !!historyStore.errors.fetchHistories)
+const errorMessage = computed(() => {
+  const error = historyStore.errors.fetchHistories
+  return error?.response?.data?.message || error?.message || 'Failed to load video library. Please try again.'
+})
 
-// Mock API fetch function
+// Map history data to video card props
+const mappedVideoData = computed(() => {
+  return librariesData.value.map(history => ({
+    uuid: history.uuid,
+    videoUrl: history.media_url || '#',
+    thumbnailUrl: history.media_url || 'https://via.placeholder.com/512x288?text=Video',
+    title: history.name || 'Generated Video',
+    prompt: history.input_text || history.custom_prompt || 'No prompt available',
+    model: history.model_name || history.model || 'Video Model',
+    style: 'Video Generation', // Default style since not in history data
+    duration: '5s' // Default duration since not in history data
+  }))
+})
+
+// Initial data fetch
+const fetchInitialData = async () => {
+  await historyStore.fetchHistories({
+    ...filterParams.value,
+    page: 1
+  })
+}
+
+// Fetch more data for infinite scroll
 const fetchMoreLibraryItems = async () => {
   if (!hasMoreData.value || isLoading.value) return
 
-  isLoadingData.value = true
-
-  try {
-    // Simulate API call with delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // Mock response based on page
-    if (pageData.value === 1) {
-      // Append new data to existing data (preserving order)
-      librariesData.value = [...librariesData.value, ...videoMoreData]
-      pageData.value++
-    } else {
-      // For demo purposes, we'll stop loading after second page
-      hasMoreDataLeft.value = false
-    }
-  } catch (error) {
-    console.error('Error fetching more library items:', error)
-    // Show error to user
-    alert('Failed to load more items. Please try again.')
-  } finally {
-    isLoadingData.value = false
-  }
+  await historyStore.fetchMoreHistories(filterParams.value)
 }
 
 // Intersection observer for infinite scroll
@@ -93,7 +68,10 @@ const observeLastElement = (entries: IntersectionObserverEntry[]) => {
 }
 
 // Setup scroll observer on component mount
-onMounted(() => {
+onMounted(async () => {
+  // Fetch initial data
+  await fetchInitialData()
+
   observer = new IntersectionObserver(observeLastElement, {
     threshold: 0.5,
     rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
@@ -183,11 +161,49 @@ const checkScrollPosition = debounce(() => {
         </ol>
       </nav>
 
+      <!-- Error message -->
+      <div
+        v-if="hasError"
+        class="text-center py-8"
+      >
+        <UAlert
+          color="red"
+          variant="soft"
+          :title="$t('error') || 'Error'"
+          :description="errorMessage"
+        />
+        <UButton
+          color="primary"
+          variant="outline"
+          class="mt-4"
+          @click="fetchInitialData"
+        >
+          {{ $t('tryAgain') || 'Try Again' }}
+        </UButton>
+      </div>
+
+      <!-- Empty state -->
+      <div
+        v-if="!hasError && !isLoading && mappedVideoData.length === 0"
+        class="text-center py-16"
+      >
+        <UIcon
+          name="i-lucide-video"
+          class="w-16 h-16 text-gray-400 mx-auto mb-4"
+        />
+        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
+          {{ $t('noVideosFound') || 'No videos found' }}
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400">
+          {{ $t('noVideosFoundDescription') || 'Start generating videos to see them here.' }}
+        </p>
+      </div>
+
       <!-- Content -->
-      <UPageColumns>
+      <UPageColumns v-if="!hasError && mappedVideoData.length > 0">
         <Motion
-          v-for="(video, index) in librariesData"
-          :key="`video-${index}`"
+          v-for="(video, index) in mappedVideoData"
+          :key="`video-${video.uuid}-${index}`"
           :initial="{
             scale: 1.1,
             opacity: 0,
@@ -204,7 +220,7 @@ const checkScrollPosition = debounce(() => {
           }"
         >
           <VideoPromptCard
-            :key="`video-card-${index}`"
+            :key="`video-card-${video.uuid}`"
             orientation="vertical"
             v-bind="video"
           />

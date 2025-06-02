@@ -43,16 +43,37 @@ interface HistoryDetail {
   accent: string
 }
 
+interface HistoriesResponse {
+  data: HistoryDetail[]
+  total: number
+  current_page: number
+  per_page: number
+  last_page: number
+}
+
+interface FetchHistoriesParams {
+  filter_by?: string | null
+  items_per_page?: number | null
+  page?: number | null
+}
+
 export const useHistoryStore = defineStore('historyStore', {
   state: () => ({
     historyDetail: null as HistoryDetail | null,
+    histories: [] as HistoryDetail[],
+    historiesTotal: 0,
+    currentPage: 1,
+    hasMoreHistories: true,
 
     loadings: {
-      fetchHistoryDetail: false
+      fetchHistoryDetail: false,
+      fetchHistories: false,
+      fetchMoreHistories: false
     } as Record<string, boolean>,
 
     errors: {
-      fetchHistoryDetail: null
+      fetchHistoryDetail: null,
+      fetchHistories: null
     } as Record<string, any>
   }),
 
@@ -74,6 +95,53 @@ export const useHistoryStore = defineStore('historyStore', {
       } finally {
         this.loadings.fetchHistoryDetail = false
       }
+    },
+
+    async fetchHistories(params: FetchHistoriesParams = {}, append = false) {
+      try {
+        const loadingKey = append ? 'fetchMoreHistories' : 'fetchHistories'
+        this.loadings[loadingKey] = true
+        this.errors.fetchHistories = null
+
+        const { apiService } = useAPI()
+
+        // Build query parameters with defaults
+        const queryParams = new URLSearchParams()
+        if (params.filter_by !== undefined) queryParams.append('filter_by', params.filter_by || 'all')
+        if (params.items_per_page !== undefined) queryParams.append('items_per_page', String(params.items_per_page || 10))
+        if (params.page !== undefined) queryParams.append('page', String(params.page || 1))
+
+        const response = await apiService.get(`/histories?${queryParams.toString()}`)
+        const data: HistoriesResponse = response.body || response.data
+
+        if (append) {
+          // Append new data for infinite scroll
+          this.histories = [...this.histories, ...data.data]
+        } else {
+          // Replace data for initial load or refresh
+          this.histories = data.data
+        }
+
+        this.historiesTotal = data.total
+        this.currentPage = data.current_page
+        this.hasMoreHistories = data.current_page < data.last_page
+
+        return data
+      } catch (error: any) {
+        console.error('🚀 ~ fetchHistories error:', error)
+        this.errors.fetchHistories = error
+        return null
+      } finally {
+        this.loadings.fetchHistories = false
+        this.loadings.fetchMoreHistories = false
+      }
+    },
+
+    async fetchMoreHistories(params: FetchHistoriesParams = {}) {
+      if (!this.hasMoreHistories || this.loadings.fetchMoreHistories) return null
+
+      const nextPage = this.currentPage + 1
+      return await this.fetchHistories({ ...params, page: nextPage }, true)
     }
   }
 })
