@@ -65,8 +65,8 @@ export const useHistoryStore = defineStore('historyStore', {
         const { apiService } = useAPI()
         const response = await apiService.get(`/api/v1/history/${uuid}`)
 
-        this.historyDetail = response.body
-        return response.body
+        this.historyDetail = response.body || response.data
+        return response.body || response.data
       } catch (error: any) {
         console.error('🚀 ~ fetchHistoryDetail error:', error)
         this.errors.fetchHistoryDetail = error
