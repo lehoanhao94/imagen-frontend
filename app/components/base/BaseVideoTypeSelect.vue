@@ -179,6 +179,7 @@ const videoExamplesByType: Record<string, VideoExample[]> = {
 const selectedType = ref<VideoType | null>(props.modelValue || null)
 const isModalOpen = ref(false)
 const tempSelectedType = ref<VideoType | null>(null)
+const playingVideos = ref<Set<string>>(new Set())
 
 const openModal = () => {
   tempSelectedType.value = selectedType.value
@@ -206,6 +207,18 @@ const currentVideoExamples = computed(() => {
   if (!tempSelectedType.value) return []
   return videoExamplesByType[tempSelectedType.value.id] || []
 })
+
+const playVideo = (exampleId: string) => {
+  playingVideos.value.add(exampleId)
+}
+
+const pauseVideo = (exampleId: string) => {
+  playingVideos.value.delete(exampleId)
+}
+
+const isVideoPlaying = (exampleId: string) => {
+  return playingVideos.value.has(exampleId)
+}
 
 watch(
   () => props.modelValue,
@@ -298,22 +311,36 @@ watch(
                     <div
                       class="relative aspect-video bg-gray-100 dark:bg-gray-800"
                     >
-                      <img
-                        :src="example.thumbnailUrl"
-                        :alt="example.title"
+                      <!-- Video Element (when playing) -->
+                      <video
+                        v-if="isVideoPlaying(example.id)"
+                        :src="example.videoUrl"
+                        autoplay
+                        controls
                         class="w-full h-full object-cover"
-                      >
-                      <div
-                        class="absolute inset-0 flex items-center justify-center"
-                      >
-                        <UButton
-                          icon="lucide:play"
-                          color="primary"
-                          variant="solid"
-                          size="lg"
-                          class="rounded-full shadow-lg"
-                        />
-                      </div>
+                        @ended="pauseVideo(example.id)"
+                        @pause="pauseVideo(example.id)"
+                      />
+                      <!-- Thumbnail Image (when not playing) -->
+                      <template v-else>
+                        <img
+                          :src="example.thumbnailUrl"
+                          :alt="example.title"
+                          class="w-full h-full object-cover"
+                        >
+                        <div
+                          class="absolute inset-0 flex items-center justify-center"
+                        >
+                          <UButton
+                            icon="lucide:play"
+                            color="primary"
+                            variant="solid"
+                            size="lg"
+                            class="rounded-full shadow-lg"
+                            @click="playVideo(example.id)"
+                          />
+                        </div>
+                      </template>
                     </div>
 
                     <!-- Video Info -->
