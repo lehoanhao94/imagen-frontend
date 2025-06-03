@@ -224,6 +224,11 @@
   "switchToLightMode": "Switch to light mode",
   "switchToDarkMode": "Switch to dark mode",
   "profile": "Profile",
+  "profileSettings": {
+    "emailNotifications": "Email Notifications",
+    "marketingEmails": "Marketing Emails",
+    "securityAlerts": "Security Alerts"
+  },
   "buyCredits": {
     "checkout": "Checkout",
     "checkoutDescription": "Confirm your order then choose your payment method.",
@@ -313,7 +318,8 @@
       "imagen": "Imagen",
       "video": "Video",
       "speech": "Speech",
-      "music": "Music"
+      "music": "Music",
+      "library": "Library"
     }
   },
   "promptLabel": "Prompt:",
@@ -386,5 +392,39 @@
         "description": "You have a new notification"
       }
     }
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "textToSpeechOpenAI": "Text To Speech OpenAI",
+    "doctransGPT": "DoctransGPT",
+    "nuxtUIOnDiscord": "Nuxt UI on Discord",
+    "youtube": "Youtube"
+  },
+  "libraryPages": {
+    "imagenDescription": "Browse your AI-generated images and artwork",
+    "musicDescription": "Browse your AI-generated music and audio content",
+    "speechDescription": "Browse your AI-generated speech and voice content",
+    "videoDescription": "Browse your AI-generated videos and animations",
+    "imagenBreadcrumb": "Imagen",
+    "musicBreadcrumb": "Music",
+    "speechBreadcrumb": "Speech",
+    "videoBreadcrumb": "Video Generation",
+    "endOfImagesLibrary": "You've reached the end of the images library",
+    "endOfMusicLibrary": "You've reached the end of the music library",
+    "endOfSpeechLibrary": "You've reached the end of the speech library",
+    "endOfVideoLibrary": "You've reached the end of the video library",
+    "noVideosFound": "No videos found",
+    "noVideosFoundDescription": "Start generating videos to see them here.",
+    "backToLibrary": "Back to Library",
+    "errorLoadingVideo": "Error Loading Video",
+    "loadingVideoDetails": "Loading video details...",
+    "videoDetails": "Video Details",
+    "videoInformation": "Video Information",
+    "videoNotFound": "The video you are looking for could not be found or loaded.",
+    "aiContentLibraryTitle": "AI Content Library",
+    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
   }
 }

@@ -38,8 +38,8 @@ const libraryCategories = computed(() => [
   <UPage>
     <UContainer class="pt-30">
       <UPageHero
-        title="AI Content Library"
-        description="Browse and manage your AI-generated content across different categories"
+        :title="$t('libraryPages.aiContentLibraryTitle')"
+        :description="$t('libraryPages.aiContentLibraryDescription')"
       />
 
       <UPageSection>

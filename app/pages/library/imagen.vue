@@ -258,7 +258,7 @@ const checkScrollPosition = debounce(() => {
     <UContainer class="pt-30">
       <UPageHero
         :title="t('library.tabs.imagen')"
-        description="Browse your AI-generated images and artwork"
+        :description="t('libraryPages.imagenDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -276,7 +276,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-library"
                 class="w-4 h-4 mr-2"
               />
-              Library
+              {{ $t('library.tabs.library') }}
             </NuxtLink>
           </li>
           <li>
@@ -285,7 +285,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">Imagen</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.imagenBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
@@ -316,9 +316,36 @@ const checkScrollPosition = debounce(() => {
             orientation="vertical"
             v-bind="image"
           />
-          {{ item.label }}
-        </motion>
-      </upagecolumns>
-    </ucontainer>
-  </upage>
+        </Motion>
+      </UPageColumns>
+
+      <!-- Loading indicator -->
+      <div
+        v-if="isLoading"
+        class="flex justify-center items-center py-10"
+      >
+        <UIcon
+          name="i-lucide-loader"
+          class="animate-spin text-primary h-8 w-8 mr-2"
+        />
+        <span class="text-primary">{{ $t('loadingMoreItems') }}</span>
+      </div>
+
+      <!-- End of list indicator for intersection observer -->
+      <div
+        v-if="hasMoreData && !isLoading"
+        id="loading-trigger"
+        class="h-1 w-full"
+        aria-hidden="true"
+      />
+
+      <!-- End message when all data is loaded -->
+      <div
+        v-if="!hasMoreData"
+        class="text-center py-8 text-gray-500"
+      >
+        {{ $t('libraryPages.endOfImagesLibrary') }}
+      </div>
+    </UContainer>
+  </UPage>
 </template>

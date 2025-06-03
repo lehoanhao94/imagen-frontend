@@ -313,7 +313,8 @@
       "imagen": "Imagen",
       "video": "Video",
       "speech": "Giọng nói",
-      "music": "Nhạc"
+      "music": "Nhạc",
+      "library": "Thư viện"
     }
   },
   "promptLabel": "Gợi ý:",
@@ -386,5 +387,44 @@
         "description": "Bạn có một thông báo mới"
       }
     }
+  },
+  "footer": {
+    "privacy": "Quyền riêng tư",
+    "terms": "Điều khoản",
+    "privacyPolicy": "Chính sách quyền riêng tư",
+    "termsOfService": "Điều khoản dịch vụ",
+    "textToSpeechOpenAI": "Text To Speech OpenAI",
+    "doctransGPT": "DoctransGPT",
+    "nuxtUIOnDiscord": "Nuxt UI trên Discord",
+    "youtube": "Youtube"
+  },
+  "libraryPages": {
+    "imagenDescription": "Duyệt qua các hình ảnh và tác phẩm nghệ thuật được tạo bằng AI của bạn",
+    "musicDescription": "Duyệt qua nội dung âm nhạc và âm thanh được tạo bằng AI của bạn",
+    "speechDescription": "Duyệt qua nội dung giọng nói và voice được tạo bằng AI của bạn",
+    "videoDescription": "Duyệt qua các video và hoạt hình được tạo bằng AI của bạn",
+    "imagenBreadcrumb": "Imagen",
+    "musicBreadcrumb": "Âm nhạc",
+    "speechBreadcrumb": "Giọng nói",
+    "videoBreadcrumb": "Tạo video",
+    "endOfImagesLibrary": "Bạn đã xem hết thư viện hình ảnh",
+    "endOfMusicLibrary": "Bạn đã xem hết thư viện âm nhạc",
+    "endOfSpeechLibrary": "Bạn đã xem hết thư viện giọng nói",
+    "endOfVideoLibrary": "Bạn đã xem hết thư viện video",
+    "noVideosFound": "Không tìm thấy video",
+    "noVideosFoundDescription": "Bắt đầu tạo video để xem chúng ở đây.",
+    "backToLibrary": "Quay lại thư viện",
+    "errorLoadingVideo": "Lỗi tải video",
+    "loadingVideoDetails": "Đang tải thông tin video...",
+    "videoDetails": "Thông tin video",
+    "videoInformation": "Thông tin video",
+    "videoNotFound": "Video bạn đang tìm kiếm không thể tìm thấy hoặc tải được.",
+    "aiContentLibraryTitle": "AI Content Library",
+    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
+  },
+  "profileSettings": {
+    "emailNotifications": "Email Notifications",
+    "marketingEmails": "Marketing Emails",
+    "securityAlerts": "Security Alerts"
   }
 }

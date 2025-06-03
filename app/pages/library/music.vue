@@ -147,7 +147,7 @@ const checkScrollPosition = debounce(() => {
     <UContainer class="pt-30">
       <UPageHero
         :title="t('library.tabs.music')"
-        description="Browse your AI-generated music and audio content"
+        :description="t('libraryPages.musicDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -165,7 +165,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-library"
                 class="w-4 h-4 mr-2"
               />
-              Library
+              {{ $t('library.tabs.library') }}
             </NuxtLink>
           </li>
           <li>
@@ -174,7 +174,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">Music</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.musicBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
@@ -239,7 +239,7 @@ const checkScrollPosition = debounce(() => {
         v-if="!hasMoreData"
         class="text-center py-8 text-gray-500"
       >
-        You've reached the end of the music library
+        {{ $t('libraryPages.endOfMusicLibrary') }}
       </div>
     </UContainer>
   </UPage>

@@ -345,17 +345,17 @@ function deleteAccount() {
           <div class="space-y-4">
             <UToggle
               v-model="emailNotifications"
-              label="Email Notifications"
+              :label="$t('profileSettings.emailNotifications')"
               color="primary"
             />
             <UToggle
               v-model="marketingEmails"
-              label="Marketing Emails"
+              :label="$t('profileSettings.marketingEmails')"
               color="primary"
             />
             <UToggle
               v-model="securityAlerts"
-              label="Security Alerts"
+              :label="$t('profileSettings.securityAlerts')"
               color="primary"
             />
 

@@ -8,11 +8,42 @@ const { locale, localeForI18n } = storeToRefs(appStore)
 
 const { footer } = useAppConfig()
 
-const { locale: i18nLocale, setLocale } = useI18n()
+const { locale: i18nLocale, setLocale, t } = useI18n()
 watch(i18nLocale, (newLocale: string) => {
   // zh-CN -> zh_cn
   locale.value = newLocale
   setLocale(localeForI18n.value)
+})
+
+// Compute translated footer links
+const translatedFooterLinks = computed(() => {
+  if (!footer?.links) return []
+
+  return footer.links.map((link) => {
+    const translatedLink = { ...link }
+
+    // Translate labels based on the key
+    if (link.label === 'Privacy') {
+      translatedLink.label = t('footer.privacy')
+      translatedLink['aria-label'] = t('footer.privacyPolicy')
+    } else if (link.label === 'Terms') {
+      translatedLink.label = t('footer.terms')
+      translatedLink['aria-label'] = t('footer.termsOfService')
+    } else if (link['aria-label']) {
+      // Translate aria-labels for icon-only links
+      if (link['aria-label'] === 'Text To Speech OpenAI') {
+        translatedLink['aria-label'] = t('footer.textToSpeechOpenAI')
+      } else if (link['aria-label'] === 'DoctransGPT') {
+        translatedLink['aria-label'] = t('footer.doctransGPT')
+      } else if (link['aria-label'] === 'Nuxt UI on Discord') {
+        translatedLink['aria-label'] = t('footer.nuxtUIOnDiscord')
+      } else if (link['aria-label'] === 'Youtube') {
+        translatedLink['aria-label'] = t('footer.youtube')
+      }
+    }
+
+    return translatedLink
+  })
 })
 </script>
 
@@ -60,9 +91,9 @@ watch(i18nLocale, (newLocale: string) => {
           />
         </div>
         <div class="flex gap-1 items-center">
-          <template v-if="footer?.links">
+          <template v-if="translatedFooterLinks.length">
             <UButton
-              v-for="(link, index) of footer?.links"
+              v-for="(link, index) of translatedFooterLinks"
               :key="index"
               v-bind="{
                 size: 'xs',
