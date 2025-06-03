@@ -30,7 +30,9 @@ const { styles } = useStyles()
 const imageStyles: ImageStyle[] = styles.map(style => ({
   id: style.toLowerCase().replace(/\s+/g, '-'),
   name: style,
-  description: t(`imageStyles.${style.toLowerCase().replace(/\s+/g, '-')}.description`),
+  description: t(
+    `imageStyles.${style.toLowerCase().replace(/\s+/g, '-')}.description`
+  ),
   icon: 'lucide:palette'
 }))
 
@@ -40,15 +42,10 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
     {
       id: '1',
       title: '3D Character',
-      prompt: 'A futuristic robot character with metallic textures, rendered in high-quality 3D with realistic lighting and shadows',
-      imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&h=500&fit=crop',
-      style: '3D Render'
-    },
-    {
-      id: '2',
-      title: '3D Architecture',
-      prompt: 'Modern architectural building with glass and steel, photorealistic 3D rendering with environment lighting',
-      imageUrl: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=500&h=500&fit=crop',
+      prompt:
+        'A charming miniature restaurant interior, rendered with ultra-realistic details and soft morning light. An AI-anthropomorphized orange kitten with a plump round face and expressive eyes shines brightly. The kitten is wearing a white long-sleeved hoodie under pale blue overalls, with its tail peeking out from under the clothes. The kitten has entered a restaurant and is eating udon noodles with chopsticks. He is seated. The noodles are topped with seaweed and spring onion. Style: Handmade miniature diorama, soft and shallow depth of field, Studio Ghibli-inspired aesthetic, warm country atmosphere, 8K resolution, slow motion, close-up, only the face and the udon noodles are visible',
+      imageUrl:
+        'https://cdn.leonardo.ai/users/79aca543-3693-400d-bb1f-f15c57de4225/generations/0c1c1d3b-0d85-4a51-885f-ceb0eab4a3b1/Leonardo_Phoenix_10_A_charming_miniature_restaurant_interior_r_6.jpg?w=512',
       style: '3D Render'
     }
   ],
@@ -56,15 +53,10 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
     {
       id: '3',
       title: 'Acrylic Landscape',
-      prompt: 'Mountain landscape painted in vibrant acrylic colors with bold brushstrokes and texture',
-      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop',
-      style: 'Acrylic'
-    },
-    {
-      id: '4',
-      title: 'Acrylic Portrait',
-      prompt: 'Colorful portrait in acrylic painting style with expressive brushwork and vivid colors',
-      imageUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=500&fit=crop',
+      prompt:
+        'Mountain landscape painted in vibrant acrylic colors with bold brushstrokes and texture',
+      imageUrl:
+        'https://cdn.leonardo.ai/users/954c4d2e-803e-4306-93b4-74d452bd6e60/generations/f75e2e50-2664-44ab-b5fd-8ec4a25d3825/Leonardo_Phoenix_10_Crystal_lagoon_at_sunrise_split_view_with_3.jpg?w=512',
       style: 'Acrylic'
     }
   ],
@@ -72,15 +64,10 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
     {
       id: '5',
       title: 'Anime Character',
-      prompt: 'Anime style character with large expressive eyes, colorful hair, and detailed clothing',
-      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=500&fit=crop',
-      style: 'Anime General'
-    },
-    {
-      id: '6',
-      title: 'Anime Landscape',
-      prompt: 'Beautiful anime-style landscape with cherry blossoms, traditional architecture, and soft lighting',
-      imageUrl: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=500&h=500&fit=crop',
+      prompt:
+        'Anime style character with large expressive eyes, colorful hair, and detailed clothing',
+      imageUrl:
+        'https://cdn.leonardo.ai/users/5fc68b74-7ce5-42c3-96e2-8f1239bef207/generations/c640e125-7a5f-4236-bd8f-2bc5fe4270e3/segments/4:4:1/Leonardo_Phoenix_10_A_powerful_martial_artist_stands_confident_0.jpg?w=512',
       style: 'Anime General'
     }
   ],
@@ -88,15 +75,10 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
     {
       id: '7',
       title: 'Creative Abstract',
-      prompt: 'Abstract creative artwork with flowing colors, dynamic composition, and artistic interpretation',
-      imageUrl: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=500&h=500&fit=crop',
-      style: 'Creative'
-    },
-    {
-      id: '8',
-      title: 'Creative Portrait',
-      prompt: 'Artistic portrait with creative lighting effects, unusual angles, and innovative composition',
-      imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop',
+      prompt:
+        'Abstract creative artwork with flowing colors, dynamic composition, and artistic interpretation',
+      imageUrl:
+        'https://cdn.leonardo.ai/users/6f04321b-e9c7-4ebc-bef5-c50a26de2bbb/generations/fa26cacc-ce5d-46aa-8d08-919ff995f993/Leonardo_Phoenix_10_a_vibrant_and_whimsical_cityscape_at_dusk_3.jpg?w=512',
       style: 'Creative'
     }
   ],
@@ -104,15 +86,10 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
     {
       id: '9',
       title: 'Dynamic Action',
-      prompt: 'High-energy action scene with motion blur, dramatic lighting, and dynamic composition',
-      imageUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&h=500&fit=crop',
-      style: 'Dynamic'
-    },
-    {
-      id: '10',
-      title: 'Dynamic Architecture',
-      prompt: 'Modern building with dynamic angles, bold geometric shapes, and dramatic perspective',
-      imageUrl: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=500&h=500&fit=crop',
+      prompt:
+        'High-energy action scene with motion blur, dramatic lighting, and dynamic composition',
+      imageUrl:
+        'https://cdn.leonardo.ai/users/d0703f94-2c47-4575-9bb9-ed6629e7e170/generations/3381b72f-ce9f-4a83-85d8-e28bda3f54a4/segments/1:2:2/Leonardo_Phoenix_10_A_majestic_cityscape_at_night_featuring_a_1.jpg?w=512',
       style: 'Dynamic'
     }
   ],
@@ -120,15 +97,10 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
     {
       id: '11',
       title: 'Fashion Portrait',
-      prompt: 'High-fashion portrait with elegant styling, professional lighting, and luxury aesthetic',
-      imageUrl: 'https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=500&h=500&fit=crop',
-      style: 'Fashion'
-    },
-    {
-      id: '12',
-      title: 'Fashion Photography',
-      prompt: 'Editorial fashion shoot with avant-garde clothing, dramatic poses, and studio lighting',
-      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=500&fit=crop',
+      prompt:
+        'High-fashion portrait with elegant styling, professional lighting, and luxury aesthetic',
+      imageUrl:
+        'https://cdn.leonardo.ai/users/40e59c8d-885d-45a2-8bfa-c7365d463da9/generations/58ed6961-04af-4f15-8c81-6dca7c700d57/Leonardo_Phoenix_10_vibrant_colorful_Aquatint_print_of_a_warri_3.jpg?w=512',
       style: 'Fashion'
     }
   ]
@@ -143,7 +115,8 @@ styles.forEach((style) => {
         id: `default-${styleId}-1`,
         title: `${style} Example`,
         prompt: `Example image in ${style} style with professional quality and artistic composition`,
-        imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop',
+        imageUrl:
+          'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=500&fit=crop',
         style: style
       }
     ]
@@ -184,12 +157,17 @@ const currentImageExamples = computed(() => {
 
 const selectedStyleObject = computed(() => {
   if (!selectedStyle.value) return null
-  return imageStyles.find(style => style.name === selectedStyle.value) || null
+  return (
+    imageStyles.find(style => style.name === selectedStyle.value) || null
+  )
 })
 
-watch(() => props.modelValue, (newValue) => {
-  selectedStyle.value = newValue || null
-})
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    selectedStyle.value = newValue || null
+  }
+)
 </script>
 
 <template>
@@ -254,11 +232,13 @@ watch(() => props.modelValue, (newValue) => {
               </div>
             </UCard>
           </div>
-          <div class="col-span-12 lg:col-span-5 relative dark:bg-slate-950 p-4 px-6">
+          <div
+            class="col-span-12 lg:col-span-5 relative dark:bg-slate-950 p-4 px-6"
+          >
             <div class="sticky top-4 sm:h-[70vh">
               <div class="space-y-4">
                 <h4 class="text-lg font-medium text-gray-900 dark:text-white">
-                  {{ t('imageStyles.examples') }}
+                  {{ t("imageStyles.examples") }}
                 </h4>
                 <div
                   v-if="tempSelectedStyle"
@@ -272,13 +252,17 @@ watch(() => props.modelValue, (newValue) => {
                     <img
                       :src="example.imageUrl"
                       :alt="example.title"
-                      class="w-full h-32 object-cover"
+                      class="w-full h-[55vh] object-cover"
                     >
                     <div class="p-3">
-                      <h6 class="font-medium text-sm text-gray-900 dark:text-white">
+                      <h6
+                        class="font-medium text-sm text-gray-900 dark:text-white"
+                      >
                         {{ example.title }}
                       </h6>
-                      <p class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
+                      <p
+                        class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2"
+                      >
                         {{ example.prompt }}
                       </p>
                     </div>
@@ -294,7 +278,7 @@ watch(() => props.modelValue, (newValue) => {
                       class="w-12 h-12 mx-auto mb-2 opacity-50"
                     />
                     <p class="text-sm">
-                      {{ t('imageStyles.selectStyleToSeeExamples') }}
+                      {{ t("imageStyles.selectStyleToSeeExamples") }}
                     </p>
                   </div>
                 </div>

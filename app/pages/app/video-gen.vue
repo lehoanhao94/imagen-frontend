@@ -145,7 +145,10 @@ const onUsePrompt = (newPrompt: string) => {
         delay: 0.7
       }"
     >
-      <VideoPromptGallery @use-prompt="onUsePrompt" />
+      <VideoPromptGallery
+        class="mt-8"
+        @use-prompt="onUsePrompt"
+      />
     </Motion>
   </UContainer>
 </template>

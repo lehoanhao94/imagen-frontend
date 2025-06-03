@@ -97,6 +97,7 @@ const onGenerate = () => {
           <BaseImageStyleSelect
             v-model="style"
             class="w-full"
+            size="sm"
           />
         </UFormField>
         <UFormField

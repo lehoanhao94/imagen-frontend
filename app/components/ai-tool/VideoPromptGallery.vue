@@ -68,12 +68,12 @@ const onUsePrompt = (prompt: string) => {
     :title="$t('videoExamples')"
     :description="$t('videoExamplesDescription')"
     :ui="{
-      container: 'px-0 !pt-6 sm:gap-6 lg:gap-8',
+      container: '!px-0 !pt-6 sm:gap-6 lg:gap-8',
       title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
       description: 'text-left mt-2 text-sm sm:text-md lg:text-sm text-muted'
     }"
   >
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
       <Motion
         v-for="(video, index) in videoExamples"
         :key="video.id"
