@@ -201,129 +201,122 @@ watch(() => props.modelValue, (newValue) => {
       color="neutral"
       variant="outline"
       trailing-icon="lucide:chevron-down"
-      class="w-full justify-between"
+      class="justify-between"
+      v-bind="$attrs"
       @click="openModal"
     />
 
     <!-- Image Style Selection Modal -->
     <UModal
       v-model:open="isModalOpen"
-      :ui="{
-        content: 'max-w-6xl'
-      }"
+      :title="t('imageStyles.selectImageStyle')"
+      :ui="{ footer: 'justify-end', content: 'max-w-6xl', body: '!p-0' }"
     >
-      <template #content>
-        <div class="p-6">
-          <!-- Header -->
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-semibold">
-              {{ t('imageStyles.selectImageStyle') }}
-            </h3>
-            <UButton
-              icon="lucide:x"
-              color="neutral"
-              variant="ghost"
-              size="sm"
-              @click="cancelSelection"
-            />
+      <template #body>
+        <div class="h-full grid grid-cols-12 gap-4">
+          <div
+            class="flex flex-col p-4 gap-4 col-span-12 lg:col-span-7 h-[50vh] sm:h-full overflow-y-auto sm:overflow-visible"
+          >
+            <UCard
+              v-for="style in imageStyles"
+              :key="style.id"
+              class="cursor-pointer transition-all duration-200 hover:shadow-md"
+              :class="{
+                'ring-1 ring-primary-500 bg-primary-50 dark:bg-primary-950':
+                  tempSelectedStyle === style.name,
+                'hover:bg-gray-50 dark:hover:bg-gray-800':
+                  tempSelectedStyle !== style.name
+              }"
+              @click="selectTempStyle(style.name)"
+            >
+              <div class="flex items-start gap-3">
+                <UIcon
+                  :name="style.icon"
+                  class="w-6 h-6 text-primary-500 mt-1 flex-shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <h5
+                    class="font-medium text-sm text-gray-900 dark:text-white line-clamp-2"
+                  >
+                    {{ style.name }}
+                  </h5>
+                  <p
+                    class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2"
+                  >
+                    {{ style.description }}
+                  </p>
+                </div>
+                <UIcon
+                  v-if="tempSelectedStyle === style.name"
+                  name="lucide:check-circle"
+                  class="w-5 h-5 text-primary-500 flex-shrink-0"
+                />
+              </div>
+            </UCard>
           </div>
-
-          <!-- Two Column Layout -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[500px]">
-            <!-- Left Column: Image Styles -->
-            <div class="space-y-4">
-              <h4 class="text-lg font-medium text-gray-900 dark:text-white">
-                {{ t('imageStyles.chooseStyle') }}
-              </h4>
-              <div class="space-y-2 max-h-[400px] overflow-y-auto">
-                <button
-                  v-for="style in imageStyles"
-                  :key="style.id"
-                  class="w-full p-4 text-left border rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
-                  :class="{
-                    'border-primary-500 bg-primary-50 dark:bg-primary-900/20': tempSelectedStyle === style.name,
-                    'border-gray-200 dark:border-gray-700': tempSelectedStyle !== style.name
-                  }"
-                  @click="selectTempStyle(style.name)"
+          <div class="col-span-12 lg:col-span-5 relative dark:bg-slate-950 p-4 px-6">
+            <div class="sticky top-4 sm:h-[70vh">
+              <div class="space-y-4">
+                <h4 class="text-lg font-medium text-gray-900 dark:text-white">
+                  {{ t('imageStyles.examples') }}
+                </h4>
+                <div
+                  v-if="tempSelectedStyle"
+                  class="space-y-4 overflow-y-auto"
                 >
-                  <div class="flex items-start gap-3">
-                    <UIcon
-                      :name="style.icon"
-                      class="w-5 h-5 mt-1 text-gray-600 dark:text-gray-400"
-                    />
-                    <div class="flex-1">
-                      <h5 class="font-medium text-gray-900 dark:text-white">
-                        {{ style.name }}
-                      </h5>
-                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                        {{ style.description }}
+                  <div
+                    v-for="example in currentImageExamples"
+                    :key="example.id"
+                    class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
+                  >
+                    <img
+                      :src="example.imageUrl"
+                      :alt="example.title"
+                      class="w-full h-32 object-cover"
+                    >
+                    <div class="p-3">
+                      <h6 class="font-medium text-sm text-gray-900 dark:text-white">
+                        {{ example.title }}
+                      </h6>
+                      <p class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
+                        {{ example.prompt }}
                       </p>
                     </div>
                   </div>
-                </button>
-              </div>
-            </div>
-
-            <!-- Right Column: Examples -->
-            <div class="space-y-4">
-              <h4 class="text-lg font-medium text-gray-900 dark:text-white">
-                {{ t('imageStyles.examples') }}
-              </h4>
-              <div
-                v-if="tempSelectedStyle"
-                class="space-y-4 max-h-[400px] overflow-y-auto"
-              >
+                </div>
                 <div
-                  v-for="example in currentImageExamples"
-                  :key="example.id"
-                  class="border rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+                  v-else
+                  class="flex items-center justify-center h-[60vh] text-gray-500"
                 >
-                  <img
-                    :src="example.imageUrl"
-                    :alt="example.title"
-                    class="w-full h-32 object-cover"
-                  >
-                  <div class="p-3">
-                    <h6 class="font-medium text-sm text-gray-900 dark:text-white">
-                      {{ example.title }}
-                    </h6>
-                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                      {{ example.prompt }}
+                  <div class="text-center">
+                    <UIcon
+                      name="lucide:palette"
+                      class="w-12 h-12 mx-auto mb-2 opacity-50"
+                    />
+                    <p class="text-sm">
+                      {{ t('imageStyles.selectStyleToSeeExamples') }}
                     </p>
                   </div>
                 </div>
               </div>
-              <div
-                v-else
-                class="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400"
-              >
-                <div class="text-center">
-                  <UIcon
-                    name="lucide:palette"
-                    class="w-12 h-12 mx-auto mb-3 opacity-50"
-                  />
-                  <p>{{ t('imageStyles.selectStyleToSeeExamples') }}</p>
-                </div>
-              </div>
             </div>
           </div>
-
-          <!-- Footer Actions -->
-          <div class="flex justify-end gap-3 mt-6 pt-6 border-t">
-            <UButton
-              :label="t('cancel')"
-              color="neutral"
-              variant="outline"
-              @click="cancelSelection"
-            />
-            <UButton
-              :label="t('confirm')"
-              color="primary"
-              :disabled="!tempSelectedStyle"
-              @click="confirmSelection"
-            />
-          </div>
         </div>
+      </template>
+
+      <template #footer>
+        <UButton
+          :label="t('cancel')"
+          color="neutral"
+          variant="outline"
+          @click="cancelSelection"
+        />
+        <UButton
+          :label="t('confirm')"
+          color="primary"
+          :disabled="!tempSelectedStyle"
+          @click="confirmSelection"
+        />
       </template>
     </UModal>
   </div>
