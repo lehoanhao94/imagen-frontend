@@ -1,5 +1,4 @@
 def getEnvCode(def _git_branch){
-<<<<<<< HEAD
     if (_git_branch == "develop") {
         env_code = "dev"
     }
@@ -7,9 +6,6 @@ def getEnvCode(def _git_branch){
         env_code = "stg"
     }
     else if (_git_branch == "main") {
-=======
-    if (_git_branch == "main") {
->>>>>>> main
         env_code = "prod"
     }
     return env_code
@@ -23,15 +19,9 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: '30')
     }
     environment {
-<<<<<<< HEAD
         SERVICE_NAME    = 'frontend-geminigen-service'
         currentVersion  = "v1.0"
         PAGES_PROJECT_NAME = "frontend-geminigen"
-=======
-        SERVICE_NAME    = 'frontend-imagenpro-service'
-        currentVersion  = "v1.0"
-        PAGES_PROJECT_NAME = "frontend-imagenpro"
->>>>>>> main
         SHORT_COMMIT = "${GIT_COMMIT[0..7]}"
     }
     parameters {
@@ -45,17 +35,11 @@ pipeline {
             when{
                 anyOf{
                     changeset "**"
-<<<<<<< HEAD
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'develop'
                     branch 'staging'
-=======
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
-                }
-                anyOf {
->>>>>>> main
                     branch 'main'
                 }
             }
@@ -77,17 +61,11 @@ pipeline {
             when{
                 anyOf{
                     changeset "**"
-<<<<<<< HEAD
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'develop'
                     branch 'staging'
-=======
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
-                }
-                anyOf {
->>>>>>> main
                     branch 'main'
                 }
             }
@@ -113,17 +91,11 @@ pipeline {
             when {
                 anyOf{
                     changeset "**"
-<<<<<<< HEAD
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'develop'
                     branch 'staging'
-=======
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
-                }
-                anyOf {
->>>>>>> main
                     branch 'main'
                 }
             }
@@ -147,17 +119,11 @@ pipeline {
             when {
                 anyOf{
                     changeset "**"
-<<<<<<< HEAD
                     expression { params.BUILD_MANUAL == 'frontend-geminigen' }
                 }
                 anyOf {
                     branch 'develop'
                     branch 'staging'
-=======
-                    expression { params.BUILD_MANUAL == 'frontend-imagenpro' }
-                }
-                anyOf {
->>>>>>> main
                     branch 'main'
                 }
             }
