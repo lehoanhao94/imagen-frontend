@@ -1,6 +1,8 @@
 <template>
   <div class="p-4 space-y-4">
-    <h2 class="text-xl font-bold">Notification Examples</h2>
+    <h2 class="text-xl font-bold">
+      Notification Examples
+    </h2>
 
     <!-- Example notifications -->
     <div class="space-y-2">
@@ -23,14 +25,20 @@
 
         <!-- Content -->
         <div class="flex-1">
-          <h3 class="font-medium">{{ getNotificationTitle(notification) }}</h3>
-          <p class="text-sm text-gray-600">{{ getNotificationDescription(notification) }}</p>
+          <h3 class="font-medium">
+            {{ getNotificationTitle(notification) }}
+          </h3>
+          <p class="text-sm text-gray-600">
+            {{ getNotificationDescription(notification) }}
+          </p>
           <span class="text-xs text-gray-500">{{ formatNotificationDate(notification.created_at) }}</span>
         </div>
 
         <!-- Status badge -->
-        <span class="text-xs px-2 py-1 rounded-full"
-              :class="getNotificationColors(notification.type, notification.status).bgColor">
+        <span
+          class="text-xs px-2 py-1 rounded-full"
+          :class="getNotificationColors(notification.type, notification.status).bgColor"
+        >
           {{ notification.type }}_{{ notification.status }}
         </span>
       </div>

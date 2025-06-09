@@ -39,15 +39,15 @@ export const useVideoGenOptions = () => {
     // Duration
     duration,
     durationOptions,
-    
+
     // Person generation
     personGeneration,
     personGenerationOptions,
-    
+
     // Aspect ratio
     aspectRatio,
     aspectRatioOptions,
-    
+
     // Enhance prompt
     enhancePrompt
   }

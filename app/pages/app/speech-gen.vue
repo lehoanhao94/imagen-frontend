@@ -1,29 +1,27 @@
 <script setup lang="ts">
-const { model, models } = useSpeechGenModels()
+const { model, models, speed, outputFormat, outputChannel } = useSpeechGenModels()
+const { selectedVoice } = useSpeechVoices()
+const { selectedEmotion } = useSpeechEmotions()
+
 definePageMeta({
   middleware: 'auth'
 })
 
 const appStore = useAppStore()
+const textToSpeechStore = useTextToSpeechStore()
 
 const { loading } = storeToRefs(appStore)
-
-const aiPhotos = [
-  'https://cdn.leonardo.ai/users/c593f6db-e19b-43f4-b0ce-f5757ff82907/generations/27ceb2db-a6c1-4533-a1bc-35375113bf45/segments/5:8:1/Leonardo_Phoenix_10_A_Clean_Shaven_Strangely_Odd_Unorthodox_Av_0.jpg?w=512',
-  'https://cdn.leonardo.ai/users/daeb794a-c999-4c7c-a7bd-1b22321efa4e/generations/1e0d2e32-d948-47c3-891a-7ea47ce900d8/Leonardo_Phoenix_10_HD_animestyle_couple_walking_along_a_narro_1.jpg?w=512',
-  'https://cdn.leonardo.ai/users/dae3edd9-f7aa-4aef-adc1-63cb53d7d8b8/generations/d2236476-d02a-4d4c-8369-b1671b64ca6b/variations/alchemyrefiner_alchemymagic_3_d2236476-d02a-4d4c-8369-b1671b64ca6b_0.jpg?w=512',
-  'https://cdn.leonardo.ai/users/818a38be-6136-4eba-9b0e-9ec156e41811/generations/b0ec8580-6a5a-4e6c-a203-cd7dfe27b9b1/Leonardo_Phoenix_10_A_large_reddishgolden_colored_cartoon_cat_3.jpg?w=512',
-  'https://cdn.leonardo.ai/users/684d2cf2-484a-44d8-bf86-4fac5fe47a59/generations/78afd409-dccb-4508-b4bc-5c2b625171e9/Leonardo_Phoenix_10_A_pair_of_enchanting_fantasy_birds_perched_0.jpg?w=512'
-]
-
-const textToImageStore = useTextToImageStore()
-const { textToImageResult, aiToolImageCardRef, prompt }
-  = storeToRefs(textToImageStore)
+const { prompt } = storeToRefs(textToSpeechStore)
 
 const onGenerate = () => {
-  textToImageStore.textToImage({
+  textToSpeechStore.textToSpeech({
     prompt: prompt.value,
-    model: 'imagen-3'
+    model: model.value.value,
+    voice_id: selectedVoice.value?.id,
+    emotion: selectedEmotion.value?.emotion_key,
+    speed: speed.value,
+    output_format: outputFormat.value,
+    output_channel: outputChannel.value
   })
 }
 </script>
@@ -79,7 +77,8 @@ const onGenerate = () => {
         delay: 0.5
       }"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
+      <div class="flex flex-col gap-4 mt-4">
+        <!-- Model Selection Row -->
         <UFormField :label="$t('modelPreset')">
           <BaseModelSelect
             v-model="model"
@@ -87,26 +86,47 @@ const onGenerate = () => {
             class="w-full"
           />
         </UFormField>
-        <UFormField
-          v-if="model?.options?.includes('style')"
-          :label="$t('style')"
-        >
-          <BaseStyleSelect class="w-full" />
-        </UFormField>
-        <UFormField
-          v-if="model?.options?.includes('imageDimensions')"
-          :label="$t('imageDimensions')"
-        >
-          <BaseImageDimensionsSelect />
-        </UFormField>
-        <div
-          v-if="model?.options?.includes('yourImage')"
-          class="flex flex-row gap-3 items-end"
-        >
-          <UFormField :label="$t('yourImage')">
-            <BaseImageSelect />
+
+        <!-- Voice and Emotion Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <UFormField
+            v-if="model?.options?.includes('voice')"
+            :label="$t('voice')"
+          >
+            <BaseSpeechVoiceSelect />
           </UFormField>
-          <BaseImageSelectedList />
+
+          <UFormField
+            v-if="model?.options?.includes('emotion')"
+            :label="$t('emotion')"
+          >
+            <BaseSpeechEmotionSelect />
+          </UFormField>
+        </div>
+
+        <!-- Speed Control -->
+        <UFormField
+          v-if="model?.options?.includes('speed')"
+          :label="$t('speed')"
+        >
+          <BaseSpeechSpeedSelect />
+        </UFormField>
+
+        <!-- Output Settings Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <UFormField
+            v-if="model?.options?.includes('outputFormat')"
+            :label="$t('outputFormat')"
+          >
+            <BaseSpeechFormatSelect />
+          </UFormField>
+
+          <UFormField
+            v-if="model?.options?.includes('outputChannel')"
+            :label="$t('outputChannel')"
+          >
+            <BaseSpeechChannelSelect />
+          </UFormField>
         </div>
       </div>
     </Motion>
