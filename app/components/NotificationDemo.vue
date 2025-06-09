@@ -55,8 +55,10 @@
               {{ getNotificationDescription(demo) }}
             </p>
             <div class="mt-2 flex items-center space-x-2">
-              <span class="text-xs px-2 py-1 rounded-full"
-                    :class="getNotificationColors(demo.event_type, demo.status).bgColor">
+              <span
+                class="text-xs px-2 py-1 rounded-full"
+                :class="getNotificationColors(demo.event_type, demo.status).bgColor"
+              >
                 {{ demo.event_type }}_{{ demo.status }}
               </span>
               <span class="text-xs text-gray-500">
@@ -85,7 +87,10 @@
             class="w-4 h-4"
             :class="config.textColor"
           />
-          <span class="text-xs font-medium" :class="config.textColor">
+          <span
+            class="text-xs font-medium"
+            :class="config.textColor"
+          >
             {{ key }}
           </span>
         </div>

@@ -46,6 +46,20 @@
   "Ray Traced": "Ray Traced",
   "Stock Photo": "Ảnh stock",
   "Watercolor": "Màu nước",
+  "voice": "Giọng nói",
+  "emotion": "Cảm xúc",
+  "speed": "Tốc độ",
+  "outputFormat": "Định dạng xuất",
+  "outputChannel": "Kênh xuất",
+  "selectVoice": "Chọn giọng nói",
+  "selectEmotion": "Chọn cảm xúc",
+  "selectFormat": "Chọn định dạng",
+  "selectChannel": "Chọn kênh",
+  "noVoicesAvailable": "Không có giọng nói nào",
+  "noEmotionsAvailable": "Không có cảm xúc nào",
+  "Speech Generation Complete": "Tạo giọng nói hoàn thành",
+  "Your speech has been generated successfully": "Giọng nói của bạn đã được tạo thành công",
+  "Describe the speech you want to generate...": "Mô tả giọng nói bạn muốn tạo...",
   "AI Image Generator": "Trình tạo hình ảnh AI",
   "Generate AI images from text prompts with a magical particle transformation effect": "Tạo hình ảnh AI từ gợi ý văn bản với hiệu ứng biến đổi hạt ma thuật",
   "Enter your prompt": "Nhập gợi ý của bạn",
@@ -465,6 +479,18 @@
       "music_3": {
         "title": "Tạo nhạc thất bại",
         "description": "Tạo nhạc đã thất bại"
+      },
+      "speech_1": {
+        "title": "Tạo giọng nói đang chờ",
+        "description": "Yêu cầu tạo giọng nói đang chờ được xử lý"
+      },
+      "speech_2": {
+        "title": "Tạo giọng nói hoàn thành",
+        "description": "Giọng nói đã được tạo thành công"
+      },
+      "speech_3": {
+        "title": "Tạo giọng nói thất bại",
+        "description": "Tạo giọng nói đã thất bại. Vui lòng thử lại"
       },
       "default": {
         "title": "Thông báo",
