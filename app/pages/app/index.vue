@@ -1,5 +1,13 @@
 <script setup lang="ts">
+interface ImageFile {
+  src: string
+  alt: string
+  file: File
+}
+
 const { model, models } = useImageGenModels()
+const { style } = useStyles()
+const { imageDimension } = useImageDimensions()
 
 const appStore = useAppStore()
 
@@ -21,12 +29,22 @@ const textToImageStore = useTextToImageStore()
 const { textToImageResult, aiToolImageCardRef, prompt }
   = storeToRefs(textToImageStore)
 
+// Local state for selected images
+const selectedImages = ref<ImageFile[]>([])
+
+// Handle image selection
+const handleImagesSelected = (images: ImageFile[]) => {
+  selectedImages.value = images
+  // Also update store for backward compatibility
+  textToImageStore.selectedImages = images
+}
+
 const onGenerate = () => {
   textToImageStore.textToImage({
     prompt: prompt.value,
-    model: 'gemini-2.0-flash-exp-image-generation',
-    style: 'Portrait',
-    dimensions: '1:1'
+    model: model.value?.value || 'gemini-2.0-flash-exp-image-generation',
+    style: style.value || 'Portrait',
+    dimensions: imageDimension.value || '1:1'
   })
 }
 </script>
@@ -111,9 +129,15 @@ const onGenerate = () => {
           class="flex flex-row gap-3 items-end"
         >
           <UFormField :label="$t('yourImage')">
-            <BaseImageSelect />
+            <BaseImageSelect
+              v-model="selectedImages"
+              @update:model-value="handleImagesSelected"
+            />
           </UFormField>
-          <BaseImageSelectedList />
+          <BaseImageSelectedList
+            v-model="selectedImages"
+            @update:model-value="handleImagesSelected"
+          />
         </div>
       </div>
     </Motion>

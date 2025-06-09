@@ -9,23 +9,27 @@ defineProps({
   },
   imageUrl: {
     type: String,
-    default: 'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512'
+    default: ''
+  },
+  imageBase64: {
+    type: String,
+    default: ''
   },
   title: {
     type: String,
-    default: 'A warm and vibrant image of a happy woman with a bright and radiant smile'
+    default: ''
   },
   prompt: {
     type: String,
-    default: 'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.'
+    default: ''
   },
   preset: {
     type: String,
-    default: 'Imagen 3'
+    default: 'Unknown'
   },
   style: {
     type: String,
-    default: 'Dynamic'
+    default: 'Unknown'
   },
   resolution: {
     type: String,

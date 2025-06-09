@@ -37,7 +37,36 @@ export const useTextToImageStore = defineStore('textToImageStore', {
         const { apiService } = useAPI()
         // Call the signup API endpoint
         const response = await apiService.post('/create_image', payload)
+        const imageBase64 = response.data?.result.find(
+          (item: any) => item.base_64_str
+        )?.base_64_str
+        const prompt = response.data?.result.find(
+          (item: any) => item.text
+        )?.text
+        // create url from base64
+        const imageUrl = `data:image/jpeg;base64,${imageBase64}`
+        this.textToImageResult = {
+          imageBase64,
+          imageUrl,
+          title: payload.prompt,
+          prompt: prompt,
+          preset: payload.model,
+          style: payload.style,
+          resolution: payload.dimensions
+        }
 
+        // scroll to image card
+        nextTick(() => {
+          // scroll to image card after 0.5s
+          setTimeout(() => {
+            // scroll to image card center
+            this.aiToolImageCardRef?.$el.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+              inline: 'center'
+            })
+          }, 300)
+        })
         return response
       } catch (error: any) {
         const { $i18n } = useNuxtApp()

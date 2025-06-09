@@ -60,19 +60,19 @@ const items = computed(
             description: t('aiToolMenu.gemini25FlashDescription')
           }
         ]
-      },
-      {
-        label: t('aiToolMenu.musicGen'),
-        icon: 'ri:music-ai-fill',
-        slot: 'components' as const,
-        to: '/app/music-gen',
-        children: [
-          {
-            label: t('aiToolMenu.link'),
-            description: t('aiToolMenu.linkDescription')
-          }
-        ]
       }
+      // {
+      //   label: t('aiToolMenu.musicGen'),
+      //   icon: 'ri:music-ai-fill',
+      //   slot: 'components' as const,
+      //   to: '/app/music-gen',
+      //   children: [
+      //     {
+      //       label: t('aiToolMenu.link'),
+      //       description: t('aiToolMenu.linkDescription')
+      //     }
+      //   ]
+      // }
     ] satisfies NavigationMenuItem[]
 )
 </script>
