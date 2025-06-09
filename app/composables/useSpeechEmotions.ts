@@ -18,7 +18,7 @@ export function useSpeechEmotions() {
 
     try {
       const { apiService } = useAPI()
-      const response = await apiService.get('/speech/emotions')
+      const response = await apiService.get('/emotions')
       emotions.value = response?.data || response || []
 
       // Set default emotion if none selected
@@ -42,7 +42,7 @@ export function useSpeechEmotions() {
 
   // Filter functions
   const enabledEmotions = computed(() =>
-    emotions.value.filter(emotion => emotion.is_enabled)
+    emotions.value?.filter(emotion => emotion.is_enabled)
   )
 
   const getEmotionByKey = (key: string) => {

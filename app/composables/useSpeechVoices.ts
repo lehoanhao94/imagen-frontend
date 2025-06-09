@@ -34,7 +34,7 @@ export function useSpeechVoices() {
 
     try {
       const { apiService } = useAPI()
-      const response = await apiService.get('/speech/voices')
+      const response = await apiService.get('/voice-library/all')
       voices.value = response?.data || response || []
 
       // Set default voice if none selected
