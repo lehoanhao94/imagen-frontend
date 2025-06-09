@@ -9,10 +9,12 @@ export const useTextToVideoStore = defineStore('textToVideoStore', {
     selectedImages: [] as any[],
 
     loadings: {
+      textToVideo: false,
       textToVideo: false
     } as Record<string, boolean>,
 
     errors: {
+      textToVideo: false,
       textToVideo: false
     } as Record<string, any>,
     prompt: ''
@@ -24,23 +26,65 @@ export const useTextToVideoStore = defineStore('textToVideoStore', {
       model: string
       aspect_ratio: string
       person_generation?: string
-      number_of_videos?: number
       enhance_prompt?: boolean
+      duration?: number
+      files: File[]
     }) {
       const appStore = useAppStore()
       this.textToVideoResult = null
       appStore.loading = true
       const toast = useToast()
+
       try {
         this.loadings.textToVideo = true
         this.errors.textToVideo = null
-        // Make the actual API call to the signup endpoint
+
+        // Create FormData for multipart/form-data
+        const formData = new FormData()
+
+        // Add text fields
+        formData.append('prompt', payload.prompt)
+        formData.append('model', payload.model)
+        formData.append('aspect_ratio', payload.aspect_ratio)
+
+        if (payload.person_generation) {
+          formData.append('person_generation', payload.person_generation)
+        }
+
+        if (payload.enhance_prompt !== undefined) {
+          formData.append('enhance_prompt', payload.enhance_prompt.toString())
+        }
+
+        if (payload.duration) {
+          formData.append('duration', payload.duration.toString())
+        }
+
+        // Add files
+        payload.files.forEach((file) => {
+          formData.append('files', file)
+        })
+
+        // Make the API call
         const { apiService } = useAPI()
-        // Call the signup API endpoint
-        const response = await apiService.post('/video-gen/veo', payload)
+        const response = await apiService.post('/video-gen/veo', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+
+        this.textToVideoResult = response
         return response
       } catch (error: any) {
-        console.log('🚀 ~ error:', error)
+        console.log('🚀 ~ textToVideo error:', error)
+
+        const { $i18n } = useNuxtApp()
+        const t = $i18n.t
+        toast.add({
+          id: 'error',
+          title: t('Error') || 'Error',
+          description: error.response?.data?.detail || error.message,
+          color: 'error'
+        })
 
         this.errors.textToVideo = error
         return null

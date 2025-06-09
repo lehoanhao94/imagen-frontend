@@ -26,7 +26,7 @@
   "confirm": "Xác nhận",
   "nav": {
     "aitool": "Công cụ AI",
-    "library": "Thư viện",
+    "history": "Lịch sử",
     "api": "API",
     "login": "Đăng nhập"
   },
@@ -308,13 +308,13 @@
     "components": "Thành phần"
   },
   "loadingMoreItems": "Đang tải thêm mục...",
-  "library": {
+  "history": {
     "tabs": {
       "imagen": "Imagen",
       "video": "Video",
       "speech": "Giọng nói",
       "music": "Nhạc",
-      "library": "Thư viện"
+      "history": "Lịch sử"
     }
   },
   "promptLabel": "Gợi ý:",
@@ -373,14 +373,98 @@
     "error": {
       "title": "Lỗi khi tải thông báo"
     },
-    "types": {
-      "ttsHistory": {
-        "title": "Tạo âm thanh hoàn tất",
-        "description": "Âm thanh chuyển văn bản thành giọng nói của bạn đã được tạo thành công"
+    "time": {
+      "justNow": "Vừa xong",
+      "minutesAgo": "{minutes} phút trước",
+      "hoursAgo": "{hours} giờ trước",
+      "yesterday": "Hôm qua"
+    },
+    "status": {
+      "processing": {
+        "title": "Đang xử lý",
+        "description": "Yêu cầu của bạn đang được xử lý"
       },
-      "voiceTraining": {
+      "success": {
+        "title": "Hoàn thành",
+        "description": "Đã hoàn thành thành công"
+      },
+      "failed": {
+        "title": "Thất bại",
+        "description": "Đã xảy ra lỗi trong quá trình xử lý"
+      },
+      "warning": {
+        "title": "Cảnh báo",
+        "description": "Hoàn thành với cảnh báo"
+      },
+      "pending": {
+        "title": "Đang chờ",
+        "description": "Đang chờ được xử lý"
+      },
+      "cancelled": {
+        "title": "Đã hủy",
+        "description": "Yêu cầu đã bị hủy"
+      }
+    },
+    "types": {
+      "video_1": {
+        "title": "Tạo video đang chờ",
+        "description": "Tạo video đang chờ được xử lý"
+      },
+      "video_2": {
+        "title": "Tạo video hoàn tất",
+        "description": "Video đã được tạo thành công"
+      },
+      "video_3": {
+        "title": "Tạo video thất bại",
+        "description": "Tạo video đã thất bại"
+      },
+      "image_1": {
+        "title": "Tạo hình ảnh đang chờ",
+        "description": "Tạo hình ảnh đang chờ được xử lý"
+      },
+      "image_2": {
+        "title": "Tạo hình ảnh hoàn tất",
+        "description": "Hình ảnh đã được tạo thành công"
+      },
+      "image_3": {
+        "title": "Tạo hình ảnh thất bại",
+        "description": "Tạo hình ảnh đã thất bại"
+      },
+      "tts_history_1": {
+        "title": "Tạo âm thanh đang chờ",
+        "description": "Chuyển văn bản thành giọng nói đang chờ được xử lý"
+      },
+      "tts_history_2": {
+        "title": "Tạo âm thanh hoàn tất",
+        "description": "Âm thanh chuyển văn bản thành giọng nói đã được tạo thành công"
+      },
+      "tts_history_3": {
+        "title": "Tạo âm thanh thất bại",
+        "description": "Chuyển văn bản thành giọng nói đã thất bại"
+      },
+      "voice_training_1": {
+        "title": "Huấn luyện giọng nói đang chờ",
+        "description": "Huấn luyện giọng nói đang chờ được xử lý"
+      },
+      "voice_training_2": {
         "title": "Huấn luyện giọng nói hoàn tất",
-        "description": "Việc huấn luyện mô hình giọng nói tùy chỉnh của bạn đã hoàn thành"
+        "description": "Huấn luyện mô hình giọng nói tùy chỉnh đã hoàn thành thành công"
+      },
+      "voice_training_3": {
+        "title": "Huấn luyện giọng nói thất bại",
+        "description": "Huấn luyện giọng nói đã thất bại"
+      },
+      "music_1": {
+        "title": "Tạo nhạc đang chờ",
+        "description": "Tạo nhạc đang chờ được xử lý"
+      },
+      "music_2": {
+        "title": "Tạo nhạc hoàn tất",
+        "description": "Nhạc AI đã được tạo thành công"
+      },
+      "music_3": {
+        "title": "Tạo nhạc thất bại",
+        "description": "Tạo nhạc đã thất bại"
       },
       "default": {
         "title": "Thông báo",
@@ -398,7 +482,7 @@
     "nuxtUIOnDiscord": "Nuxt UI trên Discord",
     "youtube": "Youtube"
   },
-  "libraryPages": {
+  "historyPages": {
     "imagenDescription": "Duyệt qua các hình ảnh và tác phẩm nghệ thuật được tạo bằng AI của bạn",
     "musicDescription": "Duyệt qua nội dung âm nhạc và âm thanh được tạo bằng AI của bạn",
     "speechDescription": "Duyệt qua nội dung giọng nói và voice được tạo bằng AI của bạn",
@@ -407,20 +491,20 @@
     "musicBreadcrumb": "Âm nhạc",
     "speechBreadcrumb": "Giọng nói",
     "videoBreadcrumb": "Tạo video",
-    "endOfImagesLibrary": "Bạn đã xem hết thư viện hình ảnh",
-    "endOfMusicLibrary": "Bạn đã xem hết thư viện âm nhạc",
-    "endOfSpeechLibrary": "Bạn đã xem hết thư viện giọng nói",
-    "endOfVideoLibrary": "Bạn đã xem hết thư viện video",
+    "endOfImagesHistory": "Bạn đã xem hết lịch sử hình ảnh",
+    "endOfMusicHistory": "Bạn đã xem hết lịch sử âm nhạc",
+    "endOfSpeechHistory": "Bạn đã xem hết lịch sử giọng nói",
+    "endOfVideoHistory": "Bạn đã xem hết lịch sử video",
     "noVideosFound": "Không tìm thấy video",
     "noVideosFoundDescription": "Bắt đầu tạo video để xem chúng ở đây.",
-    "backToLibrary": "Quay lại thư viện",
+    "backToHistory": "Quay lại lịch sử",
     "errorLoadingVideo": "Lỗi tải video",
     "loadingVideoDetails": "Đang tải thông tin video...",
     "videoDetails": "Thông tin video",
     "videoInformation": "Thông tin video",
     "videoNotFound": "Video bạn đang tìm kiếm không thể tìm thấy hoặc tải được.",
-    "aiContentLibraryTitle": "AI Content Library",
-    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
+    "aiContentHistoryTitle": "AI Content History",
+    "aiContentHistoryDescription": "Browse and manage your AI-generated content across different categories"
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",

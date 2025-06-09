@@ -303,7 +303,7 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       switch (notification.type) {
         case 'video':
           router.push({
-            name: 'library-video-gen-d-uuid',
+            name: 'history-video-gen-d-uuid',
             params: { uuid: notification.uuid }
           })
           break

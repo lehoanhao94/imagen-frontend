@@ -1,34 +1,34 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-// Library categories with routing
-const libraryCategories = computed(() => [
+// History categories with routing
+const historyCategories = computed(() => [
   {
     key: 'imagen',
-    label: t('library.tabs.imagen'),
+    label: t('history.tabs.imagen'),
     icon: 'hugeicons:ai-image',
-    route: '/library/imagen',
+    route: '/history/imagen',
     description: 'AI-generated images and artwork'
   },
   {
     key: 'video-gen',
-    label: t('library.tabs.video'),
+    label: t('history.tabs.video'),
     icon: 'hugeicons:ai-video',
-    route: '/library/video-gen',
+    route: '/history/video-gen',
     description: 'AI-generated videos and animations'
   },
   {
     key: 'speech',
-    label: t('library.tabs.speech'),
+    label: t('history.tabs.speech'),
     icon: 'hugeicons:ai-voice',
-    route: '/library/speech',
+    route: '/history/speech',
     description: 'AI-generated speech and voice content'
   },
   {
     key: 'music',
-    label: t('library.tabs.music'),
+    label: t('history.tabs.music'),
     icon: 'ri:music-ai-fill',
-    route: '/library/music',
+    route: '/history/music',
     description: 'AI-generated music and audio'
   }
 ])
@@ -38,14 +38,14 @@ const libraryCategories = computed(() => [
   <UPage>
     <UContainer class="pt-30">
       <UPageHero
-        :title="$t('libraryPages.aiContentLibraryTitle')"
-        :description="$t('libraryPages.aiContentLibraryDescription')"
+        :title="$t('historyPages.aiContentHistoryTitle')"
+        :description="$t('historyPages.aiContentHistoryDescription')"
       />
 
       <UPageSection>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Motion
-            v-for="(category, index) in libraryCategories"
+            v-for="(category, index) in historyCategories"
             :key="category.key"
             :initial="{
               scale: 1.1,

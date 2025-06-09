@@ -23,7 +23,7 @@
   "generate": "生成",
   "nav": {
     "aitool": "AI工具",
-    "library": "图书馆",
+    "history": "历史",
     "api": "API",
     "login": "登录"
   },
@@ -309,13 +309,13 @@
       "description": "柔和的水彩画风格，色彩流动且具有艺术画笔效果。"
     }
   },
-  "library": {
+  "history": {
     "tabs": {
       "imagen": "图像",
       "video": "视频",
       "speech": "演讲",
       "music": "音乐",
-      "library": "Library"
+      "history": "历史"
     }
   },
   "videoExamples": "视频示例",
@@ -398,7 +398,7 @@
     "nuxtUIOnDiscord": "Nuxt UI on Discord",
     "youtube": "Youtube"
   },
-  "libraryPages": {
+  "historyPages": {
     "imagenDescription": "Browse your AI-generated images and artwork",
     "musicDescription": "Browse your AI-generated music and audio content",
     "speechDescription": "Browse your AI-generated speech and voice content",
@@ -407,20 +407,20 @@
     "musicBreadcrumb": "Music",
     "speechBreadcrumb": "Speech",
     "videoBreadcrumb": "Video Generation",
-    "endOfImagesLibrary": "You've reached the end of the images library",
-    "endOfMusicLibrary": "You've reached the end of the music library",
-    "endOfSpeechLibrary": "You've reached the end of the speech library",
-    "endOfVideoLibrary": "You've reached the end of the video library",
+    "endOfImagesHistory": "You've reached the end of the images history",
+    "endOfMusicHistory": "You've reached the end of the music history",
+    "endOfSpeechHistory": "You've reached the end of the speech history",
+    "endOfVideoHistory": "You've reached the end of the video history",
     "noVideosFound": "No videos found",
     "noVideosFoundDescription": "Start generating videos to see them here.",
-    "backToLibrary": "Back to Library",
+    "backToHistory": "Back to History",
     "errorLoadingVideo": "Error Loading Video",
     "loadingVideoDetails": "Loading video details...",
     "videoDetails": "Video Details",
     "videoInformation": "Video Information",
     "videoNotFound": "The video you are looking for could not be found or loaded.",
-    "aiContentLibraryTitle": "AI Content Library",
-    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
+    "aiContentHistoryTitle": "AI Content History",
+    "aiContentHistoryDescription": "Browse and manage your AI-generated content across different categories"
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",

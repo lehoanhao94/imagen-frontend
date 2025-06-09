@@ -50,7 +50,7 @@ const isVideoPlaying = ref(false)
 const openFullScreen = () => {
   // If uuid is provided, navigate to detail page instead of opening fullscreen
   if (props.uuid) {
-    navigateTo(`/library/video-gen/d/${props.uuid}`)
+    navigateTo(`/history/video-gen/d/${props.uuid}`)
   } else {
     isFullScreenOpen.value = true
   }

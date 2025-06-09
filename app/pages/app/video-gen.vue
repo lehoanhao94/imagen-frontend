@@ -1,17 +1,24 @@
 <script setup lang="ts">
+interface ImageFile {
+  src: string
+  alt: string
+  file: File
+}
+
 const { model, models } = useVideoGenModels()
+const {
+  duration,
+  durationOptions,
+  personGeneration,
+  personGenerationOptions,
+  aspectRatio,
+  aspectRatioOptions,
+  enhancePrompt
+} = useVideoGenOptions()
 
 const appStore = useAppStore()
 const toast = useToast()
 const { loading } = storeToRefs(appStore)
-
-const _aiPhotos = [
-  'https://cdn.leonardo.ai/users/c593f6db-e19b-43f4-b0ce-f5757ff82907/generations/27ceb2db-a6c1-4533-a1bc-35375113bf45/segments/5:8:1/Leonardo_Phoenix_10_A_Clean_Shaven_Strangely_Odd_Unorthodox_Av_0.jpg?w=512',
-  'https://cdn.leonardo.ai/users/daeb794a-c999-4c7c-a7bd-1b22321efa4e/generations/1e0d2e32-d948-47c3-891a-7ea47ce900d8/Leonardo_Phoenix_10_HD_animestyle_couple_walking_along_a_narro_1.jpg?w=512',
-  'https://cdn.leonardo.ai/users/dae3edd9-f7aa-4aef-adc1-63cb53d7d8b8/generations/d2236476-d02a-4d4c-8369-b1671b64ca6b/variations/alchemyrefiner_alchemymagic_3_d2236476-d02a-4d4c-8369-b1671b64ca6b_0.jpg?w=512',
-  'https://cdn.leonardo.ai/users/818a38be-6136-4eba-9b0e-9ec156e41811/generations/b0ec8580-6a5a-4e6c-a203-cd7dfe27b9b1/Leonardo_Phoenix_10_A_large_reddishgolden_colored_cartoon_cat_3.jpg?w=512',
-  'https://cdn.leonardo.ai/users/684d2cf2-484a-44d8-bf86-4fac5fe47a59/generations/78afd409-dccb-4508-b4bc-5c2b625171e9/Leonardo_Phoenix_10_A_pair_of_enchanting_fantasy_birds_perched_0.jpg?w=512'
-]
 
 const textToVideoStore = useTextToVideoStore()
 const {
@@ -23,19 +30,36 @@ const {
 // Video type selection
 const selectedVideoType = ref(null)
 
+// Local state for selected images
+const selectedImages = ref<ImageFile[]>([])
+
+// Handle image selection
+const handleImagesSelected = (images: ImageFile[]) => {
+  selectedImages.value = images
+  // Also update store for backward compatibility
+  textToVideoStore.selectedImages = images
+}
+
 const onGenerate = async () => {
+  // Extract File objects from selectedImages
+  const files = selectedImages.value.map(img => img.file)
+
   const result = await textToVideoStore.textToVideo({
     prompt: prompt.value,
-    model: 'veo-2.0-generate-001',
-    aspect_ratio: '16:9',
-    person_generation: 'dont_allow',
-    number_of_videos: 1,
-    enhance_prompt: true
+    model: model.value?.value,
+    aspect_ratio: aspectRatio.value,
+    person_generation: personGeneration.value,
+    enhance_prompt: enhancePrompt.value,
+    duration: duration.value,
+    files: files
   })
+
   if (result) {
+    const generationType
+      = selectedImages.value.length > 0 ? 'Image-to-Video' : 'Text-to-Video'
     toast.add({
       id: 'success',
-      title: 'Video Generated',
+      title: `${generationType} Generated`,
       description: 'Your video is being generated. Please check back later.',
       color: 'success'
     })
@@ -98,32 +122,76 @@ const onUsePrompt = (newPrompt: string) => {
         delay: 0.5
       }"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
-        <UFormField :label="$t('modelPreset')">
-          <BaseModelSelect
-            v-model="model"
-            :models="models"
-            class="w-full"
-          />
-        </UFormField>
-        <UFormField :label="$t('videoTypeSelection')">
-          <BaseVideoTypeSelect
-            v-model="selectedVideoType"
-            size="sm"
-          />
-        </UFormField>
-
-        <UFormField :label="$t('videoDimensions')">
-          <BaseVideoDimensionsSelect />
-        </UFormField>
-        <div
-          v-if="model?.options?.includes('yourImage')"
-          class="flex flex-row gap-3 items-end"
-        >
-          <UFormField :label="$t('yourImage')">
-            <BaseImageSelect />
+      <div class="flex flex-col gap-4 mt-4">
+        <!-- First row: Model and Video Type -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <UFormField :label="$t('modelPreset')">
+            <BaseModelSelect
+              v-model="model"
+              :models="models"
+              class="w-full"
+            />
           </UFormField>
-          <BaseImageSelectedList />
+          <UFormField :label="$t('videoTypeSelection')">
+            <BaseVideoTypeSelect
+              v-model="selectedVideoType"
+              size="sm"
+            />
+          </UFormField>
+        </div>
+
+        <!-- Second row: Video Options -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <UFormField :label="$t('aspectRatio')">
+            <USelectMenu
+              v-model="aspectRatio"
+              :options="aspectRatioOptions"
+              option-attribute="label"
+              value-attribute="value"
+              class="w-full"
+            />
+          </UFormField>
+          <UFormField :label="$t('duration')">
+            <USelectMenu
+              v-model="duration"
+              :options="durationOptions"
+              option-attribute="label"
+              value-attribute="value"
+              class="w-full"
+            />
+          </UFormField>
+          <UFormField :label="$t('personGeneration')">
+            <USelectMenu
+              v-model="personGeneration"
+              :options="personGenerationOptions"
+              option-attribute="label"
+              value-attribute="value"
+              class="w-full"
+            />
+          </UFormField>
+        </div>
+
+        <!-- Third row: Image Upload and Options -->
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <div class="flex flex-row gap-3 items-end">
+            <UFormField :label="$t('yourImage')">
+              <BaseImageSelect
+                v-model="selectedImages"
+                :multiple="true"
+                @update:model-value="handleImagesSelected"
+              />
+            </UFormField>
+            <BaseImageSelectedList
+              v-model="selectedImages"
+              @update:model-value="handleImagesSelected"
+            />
+          </div>
+          <UFormField :label="$t('enhancePrompt')">
+            <UToggle
+              v-model="enhancePrompt"
+              :label="enhancePrompt ? $t('enabled') : $t('disabled')"
+            />
+          </UFormField>
         </div>
       </div>
     </Motion>

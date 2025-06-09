@@ -4,7 +4,7 @@ import { ref, watch, nextTick, onMounted, onUnmounted, computed } from 'vue'
 const { t } = useI18n()
 
 /**
- * Video Generation Library page with infinite scroll functionality
+ * Video Generation History page with infinite scroll functionality
  */
 
 // Use history store for fetching video data
@@ -17,7 +17,7 @@ const filterParams = ref({
 })
 
 // Computed properties from store
-const librariesData = computed(() => historyStore.histories)
+const historiesData = computed(() => historyStore.histories)
 const isLoading = computed(() => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories)
 const hasMoreData = computed(() => historyStore.hasMoreHistories)
 
@@ -25,12 +25,12 @@ const hasMoreData = computed(() => historyStore.hasMoreHistories)
 const hasError = computed(() => !!historyStore.errors.fetchHistories)
 const errorMessage = computed(() => {
   const error = historyStore.errors.fetchHistories
-  return error?.response?.data?.message || error?.message || 'Failed to load video library. Please try again.'
+  return error?.response?.data?.message || error?.message || 'Failed to load video history. Please try again.'
 })
 
 // Map history data to video card props
 const mappedVideoData = computed(() => {
-  return librariesData.value.map(history => ({
+  return historiesData.value.map(history => ({
     uuid: history.uuid,
     videoUrl: history.media_url || '#',
     thumbnailUrl: history.media_url || 'https://via.placeholder.com/512x288?text=Video',
@@ -51,7 +51,7 @@ const fetchInitialData = async () => {
 }
 
 // Fetch more data for infinite scroll
-const fetchMoreLibraryItems = async () => {
+const fetchMoreHistoryItems = async () => {
   if (!hasMoreData.value || isLoading.value) return
 
   await historyStore.fetchMoreHistories(filterParams.value)
@@ -63,7 +63,7 @@ let observer: IntersectionObserver | null = null
 const observeLastElement = (entries: IntersectionObserverEntry[]) => {
   const entry = entries[0]
   if (entry && entry.isIntersecting && !isLoading.value) {
-    fetchMoreLibraryItems()
+    fetchMoreHistoryItems()
   }
 }
 

@@ -4,7 +4,7 @@ import { ref, watch, nextTick, onMounted, onUnmounted, computed } from 'vue'
 const { t } = useI18n()
 
 /**
- * Imagen Library page with infinite scroll functionality
+ * Imagen History page with infinite scroll functionality
  */
 
 // Mock data for images (extracted from original library.vue)
@@ -269,14 +269,14 @@ const checkScrollPosition = debounce(() => {
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
             <NuxtLink
-              to="/library"
+              to="/history"
               class="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
             >
               <UIcon
-                name="i-lucide-library"
+                name="i-lucide-history"
                 class="w-4 h-4 mr-2"
               />
-              {{ $t('library.tabs.library') }}
+              {{ $t('history.tabs.history') }}
             </NuxtLink>
           </li>
           <li>

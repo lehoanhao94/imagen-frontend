@@ -1,7 +1,26 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const textToImageStore = useTextToImageStore()
+interface ImageFile {
+  src: string
+  alt: string
+  file: File
+}
+
+interface Props {
+  modelValue?: ImageFile[]
+  multiple?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: () => [],
+  multiple: false
+})
+
+const emit = defineEmits<{
+  'update:modelValue': [value: ImageFile[]]
+}>()
+
 const { t } = useI18n()
 const fileInput = ref<HTMLInputElement | null>(null)
 
@@ -14,25 +33,39 @@ const handleFileChange = (event: Event) => {
   const files = target.files
 
   if (files && files.length > 0) {
-    const file = files[0]
+    const newImages: ImageFile[] = []
+    const filesToProcess = props.multiple ? Array.from(files) : [files[0]]
 
-    // Only accept image files
-    if (file && file.type.startsWith('image/')) {
-      // Create a URL for the image
-      const imageUrl = URL.createObjectURL(file)
+    for (const file of filesToProcess) {
+      // Only accept image files
+      if (file && file.type.startsWith('image/')) {
+        // Create a URL for the image
+        const imageUrl = URL.createObjectURL(file)
 
-      // Add the image to the store
-      textToImageStore.addImage({
-        src: imageUrl,
-        alt: file.name,
-        file: file
-      })
+        const imageFile: ImageFile = {
+          src: imageUrl,
+          alt: file.name,
+          file: file
+        }
 
-      // Reset the input so the same file can be selected again
-      target.value = ''
-    } else {
-      alert(t('imageSelect.pleaseSelectImageFile'))
+        newImages.push(imageFile)
+      } else {
+        alert(t('imageSelect.pleaseSelectImageFile'))
+        return
+      }
     }
+
+    // Emit the updated value
+    if (newImages.length > 0) {
+      const updatedValue = props.multiple
+        ? [...props.modelValue, ...newImages]
+        : newImages
+
+      emit('update:modelValue', updatedValue)
+    }
+
+    // Reset the input so the same file can be selected again
+    target.value = ''
   }
 }
 </script>
@@ -44,13 +77,14 @@ const handleFileChange = (event: Event) => {
       size="sm"
       color="neutral"
       variant="outline"
-      :label="$t('addImage')"
+      :label="multiple ? $t('addImages') : $t('addImage')"
       @click="handleClick"
     />
     <input
       ref="fileInput"
       type="file"
       accept="image/*"
+      :multiple="multiple"
       class="hidden"
       @change="handleFileChange"
     >

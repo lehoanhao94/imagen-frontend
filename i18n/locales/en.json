@@ -26,7 +26,7 @@
   "confirm": "Confirm",
   "nav": {
     "aitool": "AI Tool",
-    "library": "Library",
+    "history": "History",
     "api": "API",
     "login": "Login"
   },
@@ -313,13 +313,13 @@
     "components": "Components"
   },
   "loadingMoreItems": "Loading more items...",
-  "library": {
+  "history": {
     "tabs": {
       "imagen": "Imagen",
       "video": "Video",
       "speech": "Speech",
       "music": "Music",
-      "library": "Library"
+      "history": "History"
     }
   },
   "promptLabel": "Prompt:",
@@ -378,14 +378,98 @@
     "error": {
       "title": "Error loading notifications"
     },
-    "types": {
-      "ttsHistory": {
-        "title": "Audio Generation Complete",
-        "description": "Your text-to-speech audio has been generated successfully"
+    "time": {
+      "justNow": "Just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "yesterday": "Yesterday"
+    },
+    "status": {
+      "processing": {
+        "title": "Processing",
+        "description": "Your request is being processed"
       },
-      "voiceTraining": {
+      "success": {
+        "title": "Completed",
+        "description": "Successfully completed"
+      },
+      "failed": {
+        "title": "Failed",
+        "description": "An error occurred during processing"
+      },
+      "warning": {
+        "title": "Warning",
+        "description": "Completed with warnings"
+      },
+      "pending": {
+        "title": "Pending",
+        "description": "Waiting to be processed"
+      },
+      "cancelled": {
+        "title": "Cancelled",
+        "description": "Request was cancelled"
+      }
+    },
+    "types": {
+      "video_1": {
+        "title": "Video Generation Pending",
+        "description": "Video generation is waiting to be processed"
+      },
+      "video_2": {
+        "title": "Video Generation Complete",
+        "description": "Video has been generated successfully"
+      },
+      "video_3": {
+        "title": "Video Generation Failed",
+        "description": "Video generation failed"
+      },
+      "image_1": {
+        "title": "Image Generation Pending",
+        "description": "Image generation is waiting to be processed"
+      },
+      "image_2": {
+        "title": "Image Generation Complete",
+        "description": "Image has been generated successfully"
+      },
+      "image_3": {
+        "title": "Image Generation Failed",
+        "description": "Image generation failed"
+      },
+      "tts_history_1": {
+        "title": "Audio Generation Pending",
+        "description": "Text-to-speech is waiting to be processed"
+      },
+      "tts_history_2": {
+        "title": "Audio Generation Complete",
+        "description": "Text-to-speech audio has been generated successfully"
+      },
+      "tts_history_3": {
+        "title": "Audio Generation Failed",
+        "description": "Text-to-speech generation failed"
+      },
+      "voice_training_1": {
+        "title": "Voice Training Pending",
+        "description": "Voice training is waiting to be processed"
+      },
+      "voice_training_2": {
         "title": "Voice Training Complete",
-        "description": "Your custom voice model training has finished"
+        "description": "Custom voice model training has finished successfully"
+      },
+      "voice_training_3": {
+        "title": "Voice Training Failed",
+        "description": "Voice training failed"
+      },
+      "music_1": {
+        "title": "Music Generation Pending",
+        "description": "Music generation is waiting to be processed"
+      },
+      "music_2": {
+        "title": "Music Generation Complete",
+        "description": "AI music has been generated successfully"
+      },
+      "music_3": {
+        "title": "Music Generation Failed",
+        "description": "Music generation failed"
       },
       "default": {
         "title": "Notification",
@@ -403,7 +487,7 @@
     "nuxtUIOnDiscord": "Nuxt UI on Discord",
     "youtube": "Youtube"
   },
-  "libraryPages": {
+  "historyPages": {
     "imagenDescription": "Browse your AI-generated images and artwork",
     "musicDescription": "Browse your AI-generated music and audio content",
     "speechDescription": "Browse your AI-generated speech and voice content",
@@ -412,10 +496,10 @@
     "musicBreadcrumb": "Music",
     "speechBreadcrumb": "Speech",
     "videoBreadcrumb": "Video Generation",
-    "endOfImagesLibrary": "You've reached the end of the images library",
-    "endOfMusicLibrary": "You've reached the end of the music library",
-    "endOfSpeechLibrary": "You've reached the end of the speech library",
-    "endOfVideoLibrary": "You've reached the end of the video library",
+    "endOfImagesHistory": "You've reached the end of the images history",
+    "endOfMusicHistory": "You've reached the end of the music history",
+    "endOfSpeechHistory": "You've reached the end of the speech history",
+    "endOfVideoHistory": "You've reached the end of the video history",
     "noVideosFound": "No videos found",
     "noVideosFoundDescription": "Start generating videos to see them here.",
     "backToLibrary": "Back to Library",
@@ -426,5 +510,12 @@
     "videoNotFound": "The video you are looking for could not be found or loaded.",
     "aiContentLibraryTitle": "AI Content Library",
     "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
+  },
+  "demo": {
+    "notifications": {
+      "title": "Notification Types & Status Demo",
+      "description": "Examples of different notification types with various status states",
+      "statusLegend": "Status Legend"
+    }
   }
 }

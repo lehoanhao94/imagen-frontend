@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import type { IndexCollectionItem } from '@nuxt/content'
 
-const { model, models } = useImageGenModels()
+interface ImageFile {
+  src: string
+  alt: string
+  file: File
+}
 
-const { footer, global } = useAppConfig()
+const { model, models } = useImageGenModels()
 
 const appStore = useAppStore()
 
@@ -22,10 +26,25 @@ const aiPhotos = [
 ]
 
 const textToImageStore = useTextToImageStore()
-const { textToImageResult, aiToolImageCardRef } = storeToRefs(textToImageStore)
+const { textToImageResult, aiToolImageCardRef, prompt } = storeToRefs(textToImageStore)
+
+// Local state for selected images
+const selectedImages = ref<ImageFile[]>([])
+
+// Handle image selection
+const handleImagesSelected = (images: ImageFile[]) => {
+  selectedImages.value = images
+  // Also update store for backward compatibility
+  textToImageStore.selectedImages = images
+}
 
 const onGenerate = () => {
-  textToImageStore.textToImage()
+  textToImageStore.textToImage({
+    prompt: prompt.value,
+    model: model.value?.value || 'imagen-3',
+    style: 'photographic',
+    dimensions: '1024x1024'
+  })
 }
 </script>
 
@@ -84,6 +103,7 @@ const onGenerate = () => {
           <AIToolMenu />
         </div>
         <UChatPrompt
+          v-model="prompt"
           class="[view-transition-name:chat-prompt]"
           variant="subtle"
           :placeholder="$t('Describe the image you want to generate...')"
@@ -141,9 +161,15 @@ const onGenerate = () => {
             class="flex flex-row gap-3 items-end"
           >
             <UFormField :label="$t('yourImage')">
-              <BaseImageSelect />
+              <BaseImageSelect
+                v-model="selectedImages"
+                @update:model-value="handleImagesSelected"
+              />
             </UFormField>
-            <BaseImageSelectedList />
+            <BaseImageSelectedList
+              v-model="selectedImages"
+              @update:model-value="handleImagesSelected"
+            />
           </div>
         </div>
       </Motion>

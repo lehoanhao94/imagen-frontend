@@ -42,7 +42,7 @@ const musicMoreData = [
 ]
 
 // Reactive state for music content
-const librariesData = ref([...musicInitialData])
+const historiesData = ref([...musicInitialData])
 const pageData = ref(1)
 const isLoadingData = ref(false)
 const hasMoreDataLeft = ref(true)
@@ -52,7 +52,7 @@ const isLoading = computed(() => isLoadingData.value)
 const hasMoreData = computed(() => hasMoreDataLeft.value)
 
 // Mock API fetch function
-const fetchMoreLibraryItems = async () => {
+const fetchMoreHistoryItems = async () => {
   if (!hasMoreData.value || isLoading.value) return
 
   isLoadingData.value = true
@@ -64,14 +64,14 @@ const fetchMoreLibraryItems = async () => {
     // Mock response based on page
     if (pageData.value === 1) {
       // Append new data to existing data (preserving order)
-      librariesData.value = [...librariesData.value, ...musicMoreData]
+      historiesData.value = [...historiesData.value, ...musicMoreData]
       pageData.value++
     } else {
       // For demo purposes, we'll stop loading after second page
       hasMoreDataLeft.value = false
     }
   } catch (error) {
-    console.error('Error fetching more library items:', error)
+    console.error('Error fetching more history items:', error)
     // Show error to user
     alert('Failed to load more items. Please try again.')
   } finally {
@@ -109,7 +109,7 @@ onUnmounted(() => {
 })
 
 // Update observer target when data changes
-watch(librariesData, () => {
+watch(historiesData, () => {
   nextTick(() => {
     const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
@@ -183,7 +183,7 @@ const checkScrollPosition = debounce(() => {
       <!-- Content -->
       <UPageColumns>
         <Motion
-          v-for="(music, index) in librariesData"
+          v-for="(music, index) in historiesData"
           :key="`music-${index}`"
           :initial="{
             scale: 1.1,

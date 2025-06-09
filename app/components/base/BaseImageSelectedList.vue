@@ -1,8 +1,25 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const textToImageStore = useTextToImageStore()
-const { selectedImages } = storeToRefs(textToImageStore)
+interface ImageFile {
+  src: string
+  alt: string
+  file: File
+}
+
+interface Props {
+  modelValue?: ImageFile[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  modelValue: () => []
+})
+
+const emit = defineEmits<{
+  'update:modelValue': [value: ImageFile[]]
+  'remove': [src: string]
+}>()
+
 const { t } = useI18n()
 
 // Track which avatar is being hovered or tapped
@@ -34,14 +51,16 @@ const handleTap = (index: number) => {
 }
 
 const removeImage = (src: string) => {
-  textToImageStore.removeImage(src)
+  const updatedImages = props.modelValue.filter(image => image.src !== src)
+  emit('update:modelValue', updatedImages)
+  emit('remove', src)
 }
 </script>
 
 <template>
-  <UAvatarGroup v-if="selectedImages.length > 0">
+  <UAvatarGroup v-if="modelValue.length > 0">
     <UPopover
-      v-for="(image, index) in selectedImages"
+      v-for="(image, index) in modelValue"
       :key="index"
       mode="hover"
       :open-delay="300"
