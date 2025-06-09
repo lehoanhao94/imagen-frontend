@@ -485,6 +485,18 @@
         "title": "Music Generation Failed",
         "description": "Music generation failed"
       },
+      "speech_1": {
+        "title": "Speech Generation Pending",
+        "description": "Your speech generation request is waiting to be processed"
+      },
+      "speech_2": {
+        "title": "Speech Generation Complete",
+        "description": "Your speech has been generated successfully"
+      },
+      "speech_3": {
+        "title": "Speech Generation Failed",
+        "description": "Your speech generation failed. Please try again"
+      },
       "default": {
         "title": "Notification",
         "description": "You have a new notification"

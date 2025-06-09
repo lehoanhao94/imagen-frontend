@@ -89,6 +89,8 @@
 </template>
 
 <script setup lang="ts">
+import type { SpeechVoice } from '~/composables/useSpeechVoices'
+
 const {
   voices,
   selectedVoice,
@@ -100,13 +102,13 @@ const {
 
 // Load voices on component mount
 onMounted(() => {
-  if (voices.length === 0) {
+  if (voices.value.length === 0) {
     loadVoices()
   }
 })
 
 const voiceOptions = computed(() =>
-  voices.map(voice => ({
+  voices.value.map((voice: SpeechVoice) => ({
     label: `${voice.speaker_name} (${voice.gender})`,
     value: voice,
     ...voice

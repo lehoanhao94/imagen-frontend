@@ -24,7 +24,9 @@ export function useSpeechEmotions() {
       // Set default emotion if none selected
       if (!selectedEmotion.value && emotions.value.length > 0) {
         const defaultEmotion = emotions.value.find(e => e.emotion_key === 'casual') || emotions.value[0]
-        selectedEmotion.value = defaultEmotion
+        if (defaultEmotion) {
+          selectedEmotion.value = defaultEmotion
+        }
       }
     } catch (err: any) {
       console.error('Failed to load speech emotions:', err)

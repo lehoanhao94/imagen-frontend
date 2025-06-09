@@ -176,6 +176,36 @@ export const useNotifications = () => {
       textColor: 'text-red-600 dark:text-red-400'
     },
 
+    // Speech Generation - Status 1 (Pending)
+    speech_1: {
+      icon: 'i-fa-clock',
+      title: t('notifications.types.speech_1.title'),
+      description: t('notifications.types.speech_1.description'),
+      color: 'gray',
+      bgColor: 'bg-gray-100 dark:bg-gray-800',
+      textColor: 'text-gray-600 dark:text-gray-400'
+    },
+
+    // Speech Generation - Status 2 (Success)
+    speech_2: {
+      icon: 'i-fa-check-circle',
+      title: t('notifications.types.speech_2.title'),
+      description: t('notifications.types.speech_2.description'),
+      color: 'teal',
+      bgColor: 'bg-teal-100 dark:bg-teal-900',
+      textColor: 'text-teal-600 dark:text-teal-400'
+    },
+
+    // Speech Generation - Status 3 (Failed)
+    speech_3: {
+      icon: 'i-fa-times-circle',
+      title: t('notifications.types.speech_3.title'),
+      description: t('notifications.types.speech_3.description'),
+      color: 'red',
+      bgColor: 'bg-red-100 dark:bg-red-900',
+      textColor: 'text-red-600 dark:text-red-400'
+    },
+
     // Default fallback
     default: {
       icon: 'i-fa-bell',

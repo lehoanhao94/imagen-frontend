@@ -70,6 +70,8 @@
 </template>
 
 <script setup lang="ts">
+import type { SpeechEmotion } from '~/composables/useSpeechEmotions'
+
 const {
   emotions,
   selectedEmotion,
@@ -81,13 +83,13 @@ const {
 
 // Load emotions on component mount
 onMounted(() => {
-  if (emotions.length === 0) {
+  if (emotions.value.length === 0) {
     loadEmotions()
   }
 })
 
 const emotionOptions = computed(() =>
-  enabledEmotions.map(emotion => ({
+  enabledEmotions.value.map((emotion: SpeechEmotion) => ({
     label: emotion.emotion.charAt(0).toUpperCase() + emotion.emotion.slice(1),
     value: emotion,
     ...emotion
