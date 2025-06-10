@@ -13,6 +13,7 @@
   "clickToClose": "どこでもクリックするかESCを押して閉じてください。",
   "promptDetails": "プロンプトの詳細",
   "generateWithPrompt": "このプロンプトで生成する",
+  "generateWithSettings": "これらの設定で生成する",
   "preset": "プリセット",
   "style": "スタイル",
   "resolution": "解像度",

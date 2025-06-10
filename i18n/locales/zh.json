@@ -13,6 +13,7 @@
   "clickToClose": "单击任意位置或按ESC关闭",
   "promptDetails": "提示详情",
   "generateWithPrompt": "生成此提示",
+  "generateWithSettings": "使用这些设置生成",
   "preset": "预设",
   "style": "风格",
   "resolution": "决议",

@@ -80,8 +80,19 @@ const onGenerateWithSettings = () => {
   // Set the style
   currentStyle.value = props.style
 
+  // Convert resolution format (e.g., "1024x1024" to "1:1")
+  const convertResolutionToAspectRatio = (resolution: string) => {
+    const [width, height] = resolution.split('x').map(Number)
+    if (width && height) {
+      const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b)
+      const divisor = gcd(width, height)
+      return `${width / divisor}:${height / divisor}`
+    }
+    return '1:1' // fallback
+  }
+
   // Set the resolution (convert format if needed)
-  imageDimension.value = props.resolution
+  imageDimension.value = convertResolutionToAspectRatio(props.resolution)
 
   // Set the prompt in the store
   textToImageStore.prompt = props.prompt
