@@ -93,14 +93,14 @@ const onGenerate = () => {
             v-if="model?.options?.includes('voice')"
             :label="$t('voice')"
           >
-            <BaseSpeechVoiceSelectModal />
+            <BaseSpeechVoiceSelect />
           </UFormField>
 
           <UFormField
             v-if="model?.options?.includes('emotion')"
             :label="$t('emotion')"
           >
-            <BaseSpeechEmotionSelectModal />
+            <BaseSpeechEmotionSelect />
           </UFormField>
         </div>
 
