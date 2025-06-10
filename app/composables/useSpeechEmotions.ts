@@ -19,7 +19,7 @@ export function useSpeechEmotions() {
     try {
       const { apiService } = useAPI()
       const response = await apiService.get('/emotions')
-      emotions.value = response?.data || response || []
+      emotions.value = response?.data?.result || []
 
       // Set default emotion if none selected
       if (!selectedEmotion.value && emotions.value.length > 0) {

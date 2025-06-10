@@ -1,26 +1,15 @@
 export function useSpeechGenModels() {
   const models = [
     {
-      label: 'ElevenLabs Turbo',
-      value: 'ElevenLabs Turbo',
-      icon: 'hugeicons:ai-chip',
-      options: [
-        'voice',
-        'speed',
-        'emotion',
-        'outputFormat',
-        'outputChannel'
-      ]
-    },
-    {
-      label: 'OpenAI TTS-1',
-      value: 'OpenAI TTS-1',
+      label: 'Gemini 2.5 Flash',
+      value: 'tts-flash',
       icon: 'hugeicons:ai-chip',
       options: [
         'voice',
         'speed',
         'outputFormat',
-        'outputChannel'
+        'outputChannel',
+        'emotion'
       ]
     }
   ]

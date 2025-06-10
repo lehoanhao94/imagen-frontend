@@ -84,7 +84,8 @@ const onGenerateWithSettings = () => {
   const convertResolutionToAspectRatio = (resolution: string) => {
     const [width, height] = resolution.split('x').map(Number)
     if (width && height) {
-      const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b)
+      const gcd = (a: number, b: number): number =>
+        b === 0 ? a : gcd(b, a % b)
       const divisor = gcd(width, height)
       return `${width / divisor}:${height / divisor}`
     }
@@ -105,7 +106,9 @@ const onGenerateWithSettings = () => {
     // Try to focus the prompt input after scrolling
     setTimeout(() => {
       // Look for the prompt input (UChatPrompt component)
-      const promptInput = document.querySelector('[class*="chat-prompt"] textarea, [class*="chat-prompt"] input')
+      const promptInput = document.querySelector(
+        '[class*="chat-prompt"] textarea, [class*="chat-prompt"] input'
+      )
       if (promptInput && promptInput instanceof HTMLElement) {
         promptInput.focus()
       }
@@ -137,13 +140,17 @@ const onGenerateWithSettings = () => {
       @loaded="onImageLoaded"
       @processing="onImageProcessing"
     />
-
+    <template #title>
+      <div class="line-clamp-2">
+        {{ title }}
+      </div>
+    </template>
     <template #description>
       <div class="text-xs mt-2">
-        <div class="font-bold">
+        <div class="font-bold line-clamp-2">
           <div>{{ $t("promptDetails") }}</div>
         </div>
-        <div class="font-light p-2 bg-muted mt-1 rounded-lg line-clamp-2">
+        <div class="font-light p-2 bg-muted mt-1 rounded-lg">
           {{ prompt }}
         </div>
       </div>
@@ -213,7 +220,7 @@ const onGenerateWithSettings = () => {
           @click="isFullScreenOpen = false"
         />
         <div class="absolute bottom-4 text-white/70 text-sm">
-          {{ $t('clickToClose') }}
+          {{ $t("clickToClose") }}
         </div>
       </div>
     </template>

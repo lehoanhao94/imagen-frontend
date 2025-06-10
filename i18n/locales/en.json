@@ -51,6 +51,13 @@
   "voice": "Voice",
   "emotion": "Emotion",
   "speed": "Speed",
+  "speed_settings": "Speed Settings",
+  "speed_value": "Speed Value",
+  "speed_slider": "Speed Slider",
+  "apply": "Apply",
+  "speech_settings": "Speech Settings",
+  "current_speed": "Current Speed",
+  "reset_defaults": "Reset to Defaults",
   "outputFormat": "Output Format",
   "outputChannel": "Output Channel",
   "selectVoice": "Select Voice",
@@ -550,5 +557,6 @@
       "description": "Examples of different notification types with various status states",
       "statusLegend": "Status Legend"
     }
-  }
+  },
+  "settings": "Settings"
 }

@@ -1,9 +1,7 @@
 <template>
-  <USelect
+  <USelectMenu
     v-model="outputFormat"
-    :options="outputFormats"
-    option-attribute="label"
-    value-attribute="value"
+    :items="outputFormats"
     :placeholder="$t('selectFormat')"
   />
 </template>

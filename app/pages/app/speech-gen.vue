@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { model, models, speed, outputFormat, outputChannel } = useSpeechGenModels()
-const { selectedVoice } = useSpeechVoices()
+const { selectedVoice, loadVoices } = useSpeechVoices()
 const { selectedEmotion } = useSpeechEmotions()
 
 definePageMeta({
@@ -24,6 +24,10 @@ const onGenerate = () => {
     output_channel: outputChannel.value
   })
 }
+
+onMounted(() => {
+  loadVoices()
+})
 </script>
 
 <template>
@@ -77,7 +81,7 @@ const onGenerate = () => {
         delay: 0.5
       }"
     >
-      <div class="flex flex-col gap-4 mt-4">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
         <!-- Model Selection Row -->
         <UFormField :label="$t('modelPreset')">
           <BaseModelSelect
@@ -88,46 +92,29 @@ const onGenerate = () => {
         </UFormField>
 
         <!-- Voice and Emotion Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <UFormField
-            v-if="model?.options?.includes('voice')"
-            :label="$t('voice')"
-          >
-            <BaseSpeechVoiceSelectModal />
-          </UFormField>
-
-          <UFormField
-            v-if="model?.options?.includes('emotion')"
-            :label="$t('emotion')"
-          >
-            <BaseSpeechEmotionSelectModal />
-          </UFormField>
-        </div>
-
-        <!-- Speed Control -->
         <UFormField
-          v-if="model?.options?.includes('speed')"
-          :label="$t('speed')"
+          v-if="model?.options?.includes('voice')"
+          :label="$t('voice')"
         >
-          <BaseSpeechSpeedSelect />
+          <BaseSpeechVoiceSelectModal
+            v-model="selectedVoice"
+            size="sm"
+          />
         </UFormField>
 
-        <!-- Output Settings Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <UFormField
-            v-if="model?.options?.includes('outputFormat')"
-            :label="$t('outputFormat')"
-          >
-            <BaseSpeechFormatSelect />
-          </UFormField>
-
-          <UFormField
-            v-if="model?.options?.includes('outputChannel')"
-            :label="$t('outputChannel')"
-          >
-            <BaseSpeechChannelSelect />
-          </UFormField>
-        </div>
+        <UFormField
+          v-if="model?.options?.includes('emotion')"
+          :label="$t('emotion')"
+        >
+          <BaseSpeechEmotionSelectModal size="sm" />
+        </UFormField>
+        <!-- Speech Settings -->
+        <UFormField
+          v-if="model?.options?.some((option: string) => ['speed', 'outputFormat', 'outputChannel'].includes(option))"
+          :label="$t('settings')"
+        >
+          <BaseSpeechSettingsModal />
+        </UFormField>
       </div>
     </Motion>
   </UContainer>

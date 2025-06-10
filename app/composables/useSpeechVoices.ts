@@ -24,7 +24,9 @@ export interface SpeechVoice {
 
 export function useSpeechVoices() {
   const voices = ref<SpeechVoice[]>([])
-  const selectedVoice = useCookie<SpeechVoice | null>('speech-selected-voice', { default: () => null })
+  const selectedVoice = useCookie<SpeechVoice | null>('speech-selected-voice', {
+    default: () => null
+  })
   const loading = ref(false)
   const error = ref<string | null>(null)
 
@@ -35,7 +37,7 @@ export function useSpeechVoices() {
     try {
       const { apiService } = useAPI()
       const response = await apiService.get('/voice-library/all')
-      voices.value = response?.data || response || []
+      voices.value = response.data?.result || []
 
       // Set default voice if none selected
       if (!selectedVoice.value && voices.value.length > 0) {

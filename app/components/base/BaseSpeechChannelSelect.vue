@@ -1,10 +1,9 @@
 <template>
-  <USelect
+  <USelectMenu
     v-model="outputChannel"
-    :options="outputChannels"
-    option-attribute="label"
-    value-attribute="value"
+    :items="outputChannels"
     :placeholder="$t('selectChannel')"
+    :search-input="false"
   />
 </template>
 
