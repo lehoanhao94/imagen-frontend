@@ -17,6 +17,7 @@
       v-model:open="isModalOpen"
       :title="$t('selectVoice')"
       :ui="{ footer: 'justify-end', content: 'max-w-4xl', body: '!p-0' }"
+      prevent-close
     >
       <template #body>
         <div class="flex flex-col h-[70vh]">
@@ -88,25 +89,28 @@
               <UCard
                 v-for="voice in filteredVoices"
                 :key="voice.id"
-                class="cursor-pointer transition-all duration-200 hover:shadow-md"
+                class="cursor-pointer transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-primary-500 focus:outline-none"
                 :class="{
                   'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-950':
                     tempSelectedVoice?.id === voice.id,
                   'hover:bg-gray-50 dark:hover:bg-gray-800':
                     tempSelectedVoice?.id !== voice.id
                 }"
+                tabindex="0"
                 @click="selectTempVoice(voice)"
+                @keydown.enter="selectTempVoice(voice)"
+                @keydown.space.prevent="selectTempVoice(voice)"
               >
                 <div class="flex items-center gap-4">
                   <!-- Avatar -->
                   <UAvatar
                     :alt="voice.speaker_name"
                     size="lg"
-                    :ui="{ background: voice.gender === 'male' ? 'bg-blue-500' : 'bg-pink-500' }"
+                    :ui="{ background: voice.gender === 'male' ? 'bg-blue-500' : voice.gender === 'female' ? 'bg-pink-500' : 'bg-gray-500' }"
                   >
                     <template #default>
                       <UIcon
-                        :name="voice.gender === 'male' ? 'lucide:user' : 'lucide:user'"
+                        :name="voice.gender === 'male' ? 'lucide:user' : voice.gender === 'female' ? 'lucide:user-heart' : 'lucide:user'"
                         class="w-6 h-6 text-white"
                       />
                     </template>
@@ -146,6 +150,7 @@
                       variant="ghost"
                       :icon="voice.is_favorite ? 'lucide:heart' : 'lucide:heart'"
                       :color="voice.is_favorite ? 'red' : 'gray'"
+                      :class="{ 'text-red-500': voice.is_favorite }"
                       @click.stop="toggleFavorite(voice.id)"
                     />
 
@@ -156,7 +161,17 @@
                       variant="ghost"
                       :icon="playingVoices.has(voice.id) ? 'lucide:square' : 'lucide:play'"
                       color="primary"
+                      :disabled="!voice.sample_audio_path"
                       @click.stop="togglePlayPreview(voice)"
+                    />
+                    <UButton
+                      v-else
+                      size="sm"
+                      variant="ghost"
+                      icon="lucide:volume-x"
+                      color="gray"
+                      disabled
+                      :title="$t('noAudioSample')"
                     />
                   </div>
                 </div>
@@ -188,17 +203,17 @@
 import type { SpeechVoice } from '~/composables/useSpeechVoices'
 
 interface BaseSpeechVoiceSelectModalProps {
-  modelValue?: SpeechVoice | null
+  // No modelValue needed - we'll use composable state directly
 }
 
 const props = defineProps<BaseSpeechVoiceSelectModalProps>()
-const emit = defineEmits<{
-  'update:modelValue': [value: SpeechVoice | null]
-}>()
+
+// No emit needed - using composable state directly
 
 const { t } = useI18n()
 const {
   voices,
+  selectedVoice,
   loading,
   error,
   loadVoices,
@@ -211,9 +226,6 @@ const tempSelectedVoice = ref<SpeechVoice | null>(null)
 const searchQuery = ref('')
 const playingVoices = ref<Set<string>>(new Set())
 const currentAudio = ref<HTMLAudioElement | null>(null)
-
-// Selected voice from props
-const selectedVoice = computed(() => props.modelValue)
 
 // Filtered voices based on search
 const filteredVoices = computed(() => {
@@ -247,7 +259,10 @@ const cancelSelection = () => {
 }
 
 const confirmSelection = () => {
-  emit('update:modelValue', tempSelectedVoice.value)
+  if (tempSelectedVoice.value) {
+    // Update the composable state directly
+    selectedVoice.value = tempSelectedVoice.value
+  }
   isModalOpen.value = false
   stopAllAudio()
 }

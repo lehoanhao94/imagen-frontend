@@ -17,6 +17,7 @@
       v-model:open="isModalOpen"
       :title="$t('selectEmotion')"
       :ui="{ footer: 'justify-end', content: 'max-w-4xl', body: '!p-0' }"
+      prevent-close
     >
       <template #body>
         <div class="flex flex-col h-[70vh]">
@@ -88,14 +89,17 @@
               <UCard
                 v-for="emotion in filteredEmotions"
                 :key="emotion.emotion_key"
-                class="cursor-pointer transition-all duration-200 hover:shadow-md"
+                class="cursor-pointer transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-primary-500 focus:outline-none"
                 :class="{
                   'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-950':
                     tempSelectedEmotion?.emotion_key === emotion.emotion_key,
                   'hover:bg-gray-50 dark:hover:bg-gray-800':
                     tempSelectedEmotion?.emotion_key !== emotion.emotion_key
                 }"
+                tabindex="0"
                 @click="selectTempEmotion(emotion)"
+                @keydown.enter="selectTempEmotion(emotion)"
+                @keydown.space.prevent="selectTempEmotion(emotion)"
               >
                 <div class="flex items-center gap-4">
                   <!-- Avatar/Icon -->
@@ -140,6 +144,15 @@
                       color="primary"
                       @click.stop="togglePlayPreview(emotion)"
                     />
+                    <UButton
+                      v-else
+                      size="sm"
+                      variant="ghost"
+                      icon="lucide:volume-x"
+                      color="gray"
+                      disabled
+                      :title="$t('noAudioSample')"
+                    />
                   </div>
                 </div>
               </UCard>
@@ -170,17 +183,17 @@
 import type { SpeechEmotion } from '~/composables/useSpeechEmotions'
 
 interface BaseSpeechEmotionSelectModalProps {
-  modelValue?: SpeechEmotion | null
+  // No modelValue needed - we'll use composable state directly
 }
 
 const props = defineProps<BaseSpeechEmotionSelectModalProps>()
-const emit = defineEmits<{
-  'update:modelValue': [value: SpeechEmotion | null]
-}>()
+
+// No emit needed - using composable state directly
 
 const { t } = useI18n()
 const {
   emotions,
+  selectedEmotion,
   loading,
   error,
   loadEmotions,
@@ -193,9 +206,6 @@ const tempSelectedEmotion = ref<SpeechEmotion | null>(null)
 const searchQuery = ref('')
 const playingEmotions = ref<Set<string>>(new Set())
 const currentAudio = ref<HTMLAudioElement | null>(null)
-
-// Selected emotion from props
-const selectedEmotion = computed(() => props.modelValue)
 
 // Filtered emotions based on search
 const filteredEmotions = computed(() => {
@@ -262,7 +272,10 @@ const cancelSelection = () => {
 }
 
 const confirmSelection = () => {
-  emit('update:modelValue', tempSelectedEmotion.value)
+  if (tempSelectedEmotion.value) {
+    // Update the composable state directly
+    selectedEmotion.value = tempSelectedEmotion.value
+  }
   isModalOpen.value = false
   stopAllAudio()
 }

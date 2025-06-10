@@ -62,6 +62,7 @@
   "noVoicesFound": "Không tìm thấy giọng nói",
   "noEmotionsFound": "Không tìm thấy cảm xúc",
   "retry": "Thử lại",
+  "noAudioSample": "Không có mẫu âm thanh",
   "Speech Generation Complete": "Tạo giọng nói hoàn thành",
   "Your speech has been generated successfully": "Giọng nói của bạn đã được tạo thành công",
   "Describe the speech you want to generate...": "Mô tả giọng nói bạn muốn tạo...",
