@@ -14,6 +14,7 @@
   "clickToClose": "Nhấp vào bất kỳ đâu hoặc nhấn ESC để đóng lại",
   "promptDetails": "Chi tiết gợi ý",
   "generateWithPrompt": "Tạo ảnh với gợi ý này",
+  "generateWithSettings": "Generate với bộ cài đặt này",
   "preset": "Cài đặt sẵn",
   "style": "Phong cách",
   "resolution": "Độ phân giải",

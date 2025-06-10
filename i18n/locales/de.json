@@ -13,6 +13,7 @@
   "clickToClose": "Klicken Sie irgendwo oder drücken Sie ESC zum Schließen",
   "promptDetails": "Prompt-Details",
   "generateWithPrompt": "Mit diesem Prompt generieren",
+  "generateWithSettings": "Mit diesen Einstellungen generieren",
   "preset": "Voreinstellung",
   "style": "Stil",
   "resolution": "Auflösung",

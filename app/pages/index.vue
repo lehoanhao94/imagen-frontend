@@ -2,6 +2,8 @@
 import type { IndexCollectionItem } from '@nuxt/content'
 
 const { model, models } = useImageGenModels()
+const { style } = useStyles()
+const { imageDimension } = useImageDimensions()
 
 const { footer, global } = useAppConfig()
 
@@ -22,10 +24,15 @@ const aiPhotos = [
 ]
 
 const textToImageStore = useTextToImageStore()
-const { textToImageResult, aiToolImageCardRef } = storeToRefs(textToImageStore)
+const { textToImageResult, aiToolImageCardRef, prompt } = storeToRefs(textToImageStore)
 
 const onGenerate = () => {
-  textToImageStore.textToImage()
+  textToImageStore.textToImage({
+    prompt: prompt.value,
+    model: model.value?.value || 'imagen-3',
+    style: style.value || 'Dynamic',
+    dimensions: imageDimension.value || '1:1'
+  })
 }
 </script>
 

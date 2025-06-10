@@ -13,6 +13,7 @@
   "clickToClose": "Clique em qualquer lugar ou pressione ESC para fechar",
   "promptDetails": "Detalhes do prompt",
   "generateWithPrompt": "Gerar com este prompt",
+  "generateWithSettings": "Gerar com estas configurações",
   "preset": "Predefinição",
   "style": "Estilo",
   "resolution": "Resolução",

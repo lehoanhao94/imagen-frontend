@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import BasePixelRevealImage from '~/components/base/BasePixelRevealImage.vue'
 
-defineProps({
+const props = defineProps({
   orientation: {
     type: String as () => 'horizontal' | 'vertical',
     default: 'horizontal'
@@ -37,8 +37,19 @@ defineProps({
   }
 })
 
+const { models, model } = useImageGenModels()
+const { style: currentStyle } = useStyles()
+const { imageDimension } = useImageDimensions()
+const textToImageStore = useTextToImageStore()
+
 const isFullScreenOpen = ref(false)
 const isImageRevealed = ref(false)
+
+// Find the corresponding model label for the preset value
+const presetLabel = computed(() => {
+  const modelFound = models.find(m => m.value === props.preset)
+  return modelFound ? modelFound.label : props.preset
+})
 
 const openFullScreen = () => {
   isFullScreenOpen.value = true
@@ -55,6 +66,51 @@ const onImageLoaded = (event: any) => {
 
 const onImageProcessing = (event: any) => {
   console.log(event?.message || 'Processing image')
+}
+
+const onGenerateWithSettings = () => {
+  // Copy the settings from this card to the current form state
+
+  // Find and set the model
+  const modelFound = models.find(m => m.value === props.preset)
+  if (modelFound) {
+    model.value = modelFound
+  }
+
+  // Set the style
+  currentStyle.value = props.style
+
+  // Convert resolution format (e.g., "1024x1024" to "1:1")
+  const convertResolutionToAspectRatio = (resolution: string) => {
+    const [width, height] = resolution.split('x').map(Number)
+    if (width && height) {
+      const gcd = (a: number, b: number): number => b === 0 ? a : gcd(b, a % b)
+      const divisor = gcd(width, height)
+      return `${width / divisor}:${height / divisor}`
+    }
+    return '1:1' // fallback
+  }
+
+  // Set the resolution (convert format if needed)
+  imageDimension.value = convertResolutionToAspectRatio(props.resolution)
+
+  // Set the prompt in the store
+  textToImageStore.prompt = props.prompt
+
+  // Scroll to the top of the page and focus the prompt input
+  nextTick(() => {
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+
+    // Try to focus the prompt input after scrolling
+    setTimeout(() => {
+      // Look for the prompt input (UChatPrompt component)
+      const promptInput = document.querySelector('[class*="chat-prompt"] textarea, [class*="chat-prompt"] input')
+      if (promptInput && promptInput instanceof HTMLElement) {
+        promptInput.focus()
+      }
+    }, 500)
+  })
 }
 </script>
 
@@ -87,7 +143,7 @@ const onImageProcessing = (event: any) => {
         <div class="font-bold">
           <div>{{ $t("promptDetails") }}</div>
         </div>
-        <div class="font-light p-2 bg-muted mt-1 rounded-lg">
+        <div class="font-light p-2 bg-muted mt-1 rounded-lg line-clamp-2">
           {{ prompt }}
         </div>
       </div>
@@ -98,7 +154,7 @@ const onImageProcessing = (event: any) => {
             {{ $t("preset") }}
           </div>
           <div class="text-xs">
-            {{ preset }}
+            {{ presetLabel }}
           </div>
         </div>
         <div>
@@ -120,9 +176,10 @@ const onImageProcessing = (event: any) => {
       </div>
       <UChatPromptSubmit
         color="primary"
-        :label="$t('generateWithPrompt')"
+        :label="$t('generateWithSettings')"
         class="cursor-pointer mt-4 w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
         icon="mingcute:ai-fill"
+        @click="onGenerateWithSettings"
       />
     </template>
   </UPageCard>
