@@ -40,11 +40,15 @@ const handleImagesSelected = (images: ImageFile[]) => {
 }
 
 const onGenerate = () => {
+  // Extract File objects from selected images
+  const files = selectedImages.value.map(img => img.file).filter(Boolean)
+  
   textToImageStore.textToImage({
     prompt: prompt.value,
     model: model.value?.value || 'gemini-2.0-flash-exp-image-generation',
     style: style.value || 'Portrait',
-    dimensions: imageDimension.value || '1:1'
+    aspect_ratio: imageDimension.value || '1:1',
+    files: files
   })
 }
 </script>

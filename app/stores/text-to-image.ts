@@ -22,8 +22,9 @@ export const useTextToImageStore = defineStore('textToImageStore', {
     async textToImage(payload: {
       prompt: string
       model: string
-      style: string
-      dimensions: string
+      style?: string
+      aspect_ratio?: string
+      files?: File[]
     }) {
       const appStore = useAppStore()
       this.textToImageResult = null
@@ -33,26 +34,75 @@ export const useTextToImageStore = defineStore('textToImageStore', {
       try {
         this.loadings.textToImage = true
         this.errors.textToImage = null
-        // Make the actual API call to the signup endpoint
+
+        // Create FormData for multipart/form-data
+        const formData = new FormData()
+
+        // Add required fields
+        formData.append('prompt', payload.prompt)
+        formData.append('model', payload.model)
+
+        // Add optional fields
+        if (payload.aspect_ratio) {
+          formData.append('aspect_ratio', payload.aspect_ratio)
+        }
+
+        if (payload.style) {
+          formData.append('style', payload.style)
+        }
+
+        // Add files if provided
+        if (payload.files && payload.files.length > 0) {
+          payload.files.forEach((file) => {
+            formData.append('files', file)
+          })
+        }
+
+        // Make the actual API call to the generate_image endpoint
         const { apiService } = useAPI()
-        // Call the signup API endpoint
-        const response = await apiService.post('/create_image', payload)
-        const imageBase64 = response.data?.result.find(
-          (item: any) => item.base_64_str
-        )?.base_64_str
-        const prompt = response.data?.result.find(
+        // Call the generate_image API endpoint
+        const response = await apiService.post('/generate_image', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+
+        // Handle the new response format
+        const responseData = response.data
+        let imageUrl = ''
+        let imageBase64 = ''
+
+        // Check if response has generated_image array with image data
+        if (responseData.generated_image && responseData.generated_image.length > 0) {
+          const firstImage = responseData.generated_image[0]
+          if (firstImage.image_url) {
+            imageUrl = firstImage.image_url
+          }
+        }
+
+        // Fallback: try to extract from old format if needed
+        if (!imageUrl) {
+          const imageFromResult = responseData?.result?.find(
+            (item: any) => item.base_64_str
+          )?.base_64_str
+          if (imageFromResult) {
+            imageBase64 = imageFromResult
+            imageUrl = `data:image/jpeg;base64,${imageBase64}`
+          }
+        }
+
+        const prompt = responseData.input_text || responseData?.result?.find(
           (item: any) => item.text
-        )?.text
-        // create url from base64
-        const imageUrl = `data:image/jpeg;base64,${imageBase64}`
+        )?.text || payload.prompt
+
         this.textToImageResult = {
           imageBase64,
           imageUrl,
           title: payload.prompt,
           prompt: prompt,
           preset: payload.model,
-          style: payload.style,
-          resolution: payload.dimensions
+          style: payload.style || '',
+          resolution: payload.aspect_ratio || ''
         }
 
         // scroll to image card

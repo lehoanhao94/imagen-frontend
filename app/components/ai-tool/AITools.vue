@@ -8,6 +8,7 @@ interface ImageFile {
 }
 
 const { model, models } = useImageGenModels()
+const { imageDimension } = useImageDimensions()
 
 const appStore = useAppStore()
 
@@ -39,11 +40,15 @@ const handleImagesSelected = (images: ImageFile[]) => {
 }
 
 const onGenerate = () => {
+  // Extract File objects from selected images
+  const files = selectedImages.value.map(img => img.file).filter(Boolean)
+  
   textToImageStore.textToImage({
     prompt: prompt.value,
     model: model.value?.value || 'imagen-3',
     style: 'photographic',
-    dimensions: '1024x1024'
+    aspect_ratio: imageDimension.value,
+    files: files
   })
 }
 </script>
