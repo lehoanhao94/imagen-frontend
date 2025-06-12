@@ -330,6 +330,8 @@
   "numberOfCredits": "Number of credits",
   "paypal": "PayPal",
   "paypalDescription": "Pay securely with your PayPal account",
+  "stripe": "Stripe",
+  "stripeDescription": "Pay securely with Stripe",
   "debitCreditCard": "Debit or Credit Card",
   "cardDescription": "Visa, Mastercard, American Express",
   "payWithCrypto": "Pay with Crypto",

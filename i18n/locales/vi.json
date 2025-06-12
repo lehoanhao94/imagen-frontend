@@ -325,6 +325,8 @@
   "numberOfCredits": "Số lượng credit",
   "paypal": "PayPal",
   "paypalDescription": "Thanh toán an toàn bằng tài khoản PayPal của bạn",
+  "stripe": "Stripe",
+  "stripeDescription": "Thanh toán an toàn bằng Stripe",
   "debitCreditCard": "Thẻ ghi nợ hoặc thẻ tín dụng",
   "cardDescription": "Visa, Mastercard, American Express",
   "payWithCrypto": "Thanh toán bằng Crypto",
