@@ -139,14 +139,14 @@ const checkScrollPosition = debounce(() => {
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
             <NuxtLink
-              to="/library"
+              to="/history"
               class="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
             >
               <UIcon
                 name="i-lucide-library"
                 class="w-4 h-4 mr-2"
               />
-              {{ $t('library.tabs.library') }}
+              {{ $t('history.tabs.history') }}
             </NuxtLink>
           </li>
           <li>

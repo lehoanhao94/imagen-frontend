@@ -37,9 +37,9 @@ const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleString()
 }
 
-// Navigation back to library
+// Navigation back to history
 const goBack = () => {
-  router.push('/library/video-gen')
+  router.push('/history/video-gen')
 }
 
 // Handle error state
@@ -59,7 +59,7 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
             color="neutral"
             @click="goBack"
           >
-            {{ $t('libraryPages.backToLibrary') }}
+            {{ $t('historyPages.backToHistory') }}
           </UButton>
         </div>
       </div>
@@ -84,7 +84,7 @@ const isLoading = computed(() => loadings.value.fetchHistoryDetail)
             {{ $t('libraryPages.videoNotFound') }}
           </p>
           <UButton @click="goBack">
-            {{ $t('libraryPages.backToLibrary') }}
+            {{ $t('historyPages.backToHistory') }}
           </UButton>
         </div>
       </div>
