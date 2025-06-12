@@ -298,6 +298,8 @@
   "numberOfCredits": "Número de créditos",
   "paypal": "PayPal",
   "paypalDescription": "Pague de manera segura con su cuenta de PayPal",
+  "stripe": "Stripe",
+  "stripeDescription": "Pague de manera segura con Stripe",
   "debitCreditCard": "Tarjeta de débito o crédito",
   "cardDescription": "Visa, Mastercard, American Express",
   "payWithCrypto": "Paga con Cripto",
