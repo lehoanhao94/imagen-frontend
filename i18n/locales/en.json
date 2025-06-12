@@ -558,5 +558,43 @@
       "statusLegend": "Status Legend"
     }
   },
-  "settings": "Settings"
+  "settings": "Settings",
+  "userMenu": {
+    "profile": "Profile",
+    "buyCredits": "Buy Credits",
+    "settings": "Settings",
+    "api": "API",
+    "logout": "Logout",
+    "greeting": "Hi, {name}"
+  },
+  "models": {
+    "imagen3": "Imagen 3",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "sunoAI": "Suno AI",
+    "udio": "Udio",
+    "veo2": "Veo 2",
+    "veo3": "Veo 3",
+    "imagen4": "Imagen 4"
+  },
+  "formats": {
+    "mp3": "MP3",
+    "wav": "WAV"
+  },
+  "channels": {
+    "mono": "Mono",
+    "stereo": "Stereo"
+  },
+  "options": {
+    "allow": "Allow",
+    "dontAllow": "Don't Allow",
+    "voices": "Voices",
+    "pickVoice": "Pick a voice"
+  },
+  "demo": {
+    "speechVoiceSelect": {
+      "title": "Speech Voice Select Demo",
+      "description": "Demonstrating the reusable BaseSpeechVoiceSelectModal component with modelValue props"
+    }
+  }
 }

@@ -550,5 +550,49 @@
     "emailNotifications": "Email Notifications",
     "marketingEmails": "Marketing Emails",
     "securityAlerts": "Security Alerts"
+  },
+  "settings": "Cài đặt",
+  "userMenu": {
+    "profile": "Hồ sơ",
+    "buyCredits": "Mua tín dụng",
+    "settings": "Cài đặt",
+    "api": "API",
+    "logout": "Đăng xuất",
+    "greeting": "Xin chào, {name}"
+  },
+  "models": {
+    "imagen3": "Imagen 3",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "sunoAI": "Suno AI",
+    "udio": "Udio",
+    "veo2": "Veo 2",
+    "veo3": "Veo 3",
+    "imagen4": "Imagen 4"
+  },
+  "formats": {
+    "mp3": "MP3",
+    "wav": "WAV"
+  },
+  "channels": {
+    "mono": "Mono",
+    "stereo": "Stereo"
+  },
+  "options": {
+    "allow": "Cho phép",
+    "dontAllow": "Không cho phép",
+    "voices": "Giọng nói",
+    "pickVoice": "Chọn giọng nói"
+  },
+  "demo": {
+    "speechVoiceSelect": {
+      "title": "Demo Chọn Giọng Nói",
+      "description": "Demonstrating component BaseSpeechVoiceSelectModal với modelValue props"
+    }
+  },
+  "historyPages": {
+    "backToLibrary": "Quay lại thư viện",
+    "aiContentLibraryTitle": "Thư viện nội dung AI",
+    "aiContentLibraryDescription": "Khám phá thư viện nội dung AI được tạo ra"
   }
 }
