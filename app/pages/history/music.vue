@@ -4,79 +4,57 @@ import { ref, watch, nextTick, onMounted, onUnmounted, computed } from 'vue'
 const { t } = useI18n()
 
 /**
- * Music Generation Library page with infinite scroll functionality
+ * Music History page with infinite scroll functionality
  */
 
-// Mock data for music (extracted from original library.vue)
-const musicInitialData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/dc4608ba-6fc1-415e-ad8f-8dde28127c66/generations/6313bb9e-0ba2-4e65-a72d-561b348e2100/Leonardo_Phoenix_10_Vibrant_and_highly_detailed_photograph_of_2.jpg?w=512',
-    title: 'Upbeat Electronic Music',
-    prompt: 'Create an upbeat electronic dance music track with synthesizers and a strong bass line',
-    model: 'Music Gen Pro',
-    genre: 'Electronic',
-    duration: '3m 15s'
-  },
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/f33d9042-22f3-4fbb-96ef-923567ea1ed9/generations/50b0bcd7-58f9-4a2c-a8c7-6a5a356bd852/Leonardo_Phoenix_10_Create_a_minimalist_and_elegant_vintageins_2.jpg?w=512',
-    title: 'Relaxing Ambient Music',
-    prompt: 'Generate a peaceful ambient music track with nature sounds and soft melodies for meditation',
-    model: 'Music Gen Standard',
-    genre: 'Ambient',
-    duration: '5m 20s'
-  }
-]
+// Use history store for fetching music data
+const historyStore = useHistoryStore()
 
-const musicMoreData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/9a6d696b-3a81-4d92-bc5c-7a17fa079e18/generations/d4e3a995-ef53-4bc0-941a-7f0c9ef5d21f/Leonardo_Phoenix_10_A_weathered_rusty_old_train_its_carriages_3.jpg?w=512',
-    title: 'Jazz instrumental',
-    prompt: 'Create a smooth jazz instrumental piece with saxophone and piano',
-    model: 'Music Gen Pro',
-    genre: 'Jazz',
-    duration: '4m 30s'
-  }
-]
+// Filter parameters for the API
+const filterParams = ref({
+  filter_by: 'music', // Filter for music generation type
+  items_per_page: 10
+})
 
-// Reactive state for music content
-const historiesData = ref([...musicInitialData])
-const pageData = ref(1)
-const isLoadingData = ref(false)
-const hasMoreDataLeft = ref(true)
+// Computed properties from store
+const historiesDataFromStore = computed(() => historyStore.histories)
+const isLoading = computed(() => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories)
+const hasMoreData = computed(() => historyStore.hasMoreHistories)
 
-// Computed properties
-const isLoading = computed(() => isLoadingData.value)
-const hasMoreData = computed(() => hasMoreDataLeft.value)
+// Error handling from store
+const hasError = computed(() => !!historyStore.errors.fetchHistories)
+const errorMessage = computed(() => {
+  const error = historyStore.errors.fetchHistories
+  return error?.response?.data?.message || error?.message || 'Failed to load music history. Please try again.'
+})
 
-// Mock API fetch function
+// Map history data to music card props
+const historiesData = computed(() => {
+  return historiesDataFromStore.value.map(history => ({
+    uuid: history.uuid,
+    audioUrl: history.media_url || '#',
+    thumbnailUrl: 'https://via.placeholder.com/512x288?text=Audio',
+    title: history.name || 'Generated Music',
+    prompt: history.input_text || history.custom_prompt || 'No prompt available',
+    model: history.model_name || history.model || 'Music Model',
+    genre: 'AI Generated', // Default genre since not in history data
+    duration: '3m 15s' // Default duration since not in history data
+  }))
+})
+
+// Initial data fetch
+const fetchInitialData = async () => {
+  await historyStore.fetchHistories({
+    ...filterParams.value,
+    page: 1
+  })
+}
+
+// Fetch more data for infinite scroll
 const fetchMoreHistoryItems = async () => {
   if (!hasMoreData.value || isLoading.value) return
 
-  isLoadingData.value = true
-
-  try {
-    // Simulate API call with delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // Mock response based on page
-    if (pageData.value === 1) {
-      // Append new data to existing data (preserving order)
-      historiesData.value = [...historiesData.value, ...musicMoreData]
-      pageData.value++
-    } else {
-      // For demo purposes, we'll stop loading after second page
-      hasMoreDataLeft.value = false
-    }
-  } catch (error) {
-    console.error('Error fetching more history items:', error)
-    // Show error to user
-    alert('Failed to load more items. Please try again.')
-  } finally {
-    isLoadingData.value = false
-  }
+  await historyStore.fetchMoreHistories(filterParams.value)
 }
 
 // Intersection observer for infinite scroll
@@ -90,7 +68,10 @@ const observeLastElement = (entries: IntersectionObserverEntry[]) => {
 }
 
 // Setup scroll observer on component mount
-onMounted(() => {
+onMounted(async () => {
+  // Fetch initial data
+  await fetchInitialData()
+
   observer = new IntersectionObserver(observeLastElement, {
     threshold: 0.5,
     rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
@@ -146,8 +127,8 @@ const checkScrollPosition = debounce(() => {
   <UPage>
     <UContainer class="pt-30">
       <UPageHero
-        :title="t('library.tabs.music')"
-        :description="t('libraryPages.musicDescription')"
+        :title="t('history.tabs.music')"
+        :description="t('historyPages.musicDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -174,11 +155,25 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.musicBreadcrumb') }}</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('historyPages.musicBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
       </nav>
+
+      <!-- Error message -->
+      <div
+        v-if="hasError"
+        class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8"
+      >
+        <div class="flex items-center">
+          <UIcon
+            name="i-lucide-alert-triangle"
+            class="w-5 h-5 text-red-500 mr-2"
+          />
+          <p class="text-red-700">{{ errorMessage }}</p>
+        </div>
+      </div>
 
       <!-- Content -->
       <UPageColumns>
@@ -239,7 +234,7 @@ const checkScrollPosition = debounce(() => {
         v-if="!hasMoreData"
         class="text-center py-8 text-gray-500"
       >
-        {{ $t('libraryPages.endOfMusicLibrary') }}
+        {{ $t('historyPages.endOfMusicHistory') }}
       </div>
     </UContainer>
   </UPage>

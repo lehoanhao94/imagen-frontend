@@ -127,8 +127,8 @@ const checkScrollPosition = debounce(() => {
   <UPage>
     <UContainer class="pt-30">
       <UPageHero
-        :title="t('library.tabs.video')"
-        :description="t('libraryPages.videoDescription')"
+        :title="t('history.tabs.video')"
+        :description="t('historyPages.videoDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -155,7 +155,7 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.videoBreadcrumb') }}</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('historyPages.videoBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
