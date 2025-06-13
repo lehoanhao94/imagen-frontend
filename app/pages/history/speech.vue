@@ -4,79 +4,57 @@ import { ref, watch, nextTick, onMounted, onUnmounted, computed } from 'vue'
 const { t } = useI18n()
 
 /**
- * Speech Generation Library page with infinite scroll functionality
+ * Speech History page with infinite scroll functionality
  */
 
-// Mock data for speech (extracted from original library.vue)
-const speechInitialData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/846c2e73-4c2d-4138-afa2-c2f6feecf304/generations/240454cc-405d-4c9d-89bf-8e265324a9cf/Leonardo_Phoenix_10_An_illustration_of_a_graceful_female_figur_0.jpg?w=512',
-    title: 'Motivational Speech Generation',
-    prompt: 'Generate an inspiring motivational speech about overcoming challenges and achieving dreams',
-    model: 'Gemini 2.5 Pro',
-    voice: 'Professional',
-    duration: '2m 30s'
-  },
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/c675554b-c126-47eb-936a-7ee76290f5e3/generations/27d15640-a5a9-4dbc-a9bc-40fd28f82d10/Leonardo_Phoenix_10_Create_an_image_of_a_majestic_tortoise_in_3.jpg?w=512',
-    title: 'Storytelling Voice Generation',
-    prompt: 'Create a storytelling voice for a children\'s fairy tale with a warm and gentle tone',
-    model: 'Gemini 2.5 Flash',
-    voice: 'Gentle',
-    duration: '1m 45s'
-  }
-]
+// Use history store for fetching speech data
+const historyStore = useHistoryStore()
 
-const speechMoreData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/75e44a4e-fca9-4a82-9199-1be4ff04737f/generations/0cd41ddd-aa9d-43aa-acac-92bee7d0e84f/segments/3:3:1/Leonardo_Phoenix_10_3D_cartoonstyle_image_of_a_printed_photogr_0.jpg?w=512',
-    title: 'Educational narration',
-    prompt: 'Generate an educational narration about space exploration with an authoritative yet engaging tone',
-    model: 'Gemini 2.5 Pro',
-    voice: 'Authoritative',
-    duration: '3m 12s'
-  }
-]
+// Filter parameters for the API
+const filterParams = ref({
+  filter_by: 'speech', // Filter for speech generation type
+  items_per_page: 10
+})
 
-// Reactive state for speech content
-const librariesData = ref([...speechInitialData])
-const pageData = ref(1)
-const isLoadingData = ref(false)
-const hasMoreDataLeft = ref(true)
+// Computed properties from store
+const historiesData = computed(() => historyStore.histories)
+const isLoading = computed(() => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories)
+const hasMoreData = computed(() => historyStore.hasMoreHistories)
 
-// Computed properties
-const isLoading = computed(() => isLoadingData.value)
-const hasMoreData = computed(() => hasMoreDataLeft.value)
+// Error handling from store
+const hasError = computed(() => !!historyStore.errors.fetchHistories)
+const errorMessage = computed(() => {
+  const error = historyStore.errors.fetchHistories
+  return error?.response?.data?.message || error?.message || 'Failed to load speech history. Please try again.'
+})
 
-// Mock API fetch function
+// Map history data to speech card props
+const librariesData = computed(() => {
+  return historiesData.value.map(history => ({
+    uuid: history.uuid,
+    audioUrl: history.media_url || '#',
+    thumbnailUrl: 'https://via.placeholder.com/512x288?text=Audio',
+    title: history.name || 'Generated Speech',
+    prompt: history.input_text || history.custom_prompt || 'No prompt available',
+    model: history.model_name || history.model || 'Speech Model',
+    voice: history.voice || 'Default Voice',
+    duration: '2m 30s' // Default duration since not in history data
+  }))
+})
+
+// Initial data fetch
+const fetchInitialData = async () => {
+  await historyStore.fetchHistories({
+    ...filterParams.value,
+    page: 1
+  })
+}
+
+// Fetch more data for infinite scroll
 const fetchMoreLibraryItems = async () => {
   if (!hasMoreData.value || isLoading.value) return
 
-  isLoadingData.value = true
-
-  try {
-    // Simulate API call with delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // Mock response based on page
-    if (pageData.value === 1) {
-      // Append new data to existing data (preserving order)
-      librariesData.value = [...librariesData.value, ...speechMoreData]
-      pageData.value++
-    } else {
-      // For demo purposes, we'll stop loading after second page
-      hasMoreDataLeft.value = false
-    }
-  } catch (error) {
-    console.error('Error fetching more library items:', error)
-    // Show error to user
-    alert('Failed to load more items. Please try again.')
-  } finally {
-    isLoadingData.value = false
-  }
+  await historyStore.fetchMoreHistories(filterParams.value)
 }
 
 // Intersection observer for infinite scroll
@@ -90,7 +68,10 @@ const observeLastElement = (entries: IntersectionObserverEntry[]) => {
 }
 
 // Setup scroll observer on component mount
-onMounted(() => {
+onMounted(async () => {
+  // Fetch initial data
+  await fetchInitialData()
+
   observer = new IntersectionObserver(observeLastElement, {
     threshold: 0.5,
     rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
@@ -146,8 +127,8 @@ const checkScrollPosition = debounce(() => {
   <UPage>
     <UContainer class="pt-30">
       <UPageHero
-        :title="t('library.tabs.speech')"
-        :description="t('libraryPages.speechDescription')"
+        :title="t('history.tabs.speech')"
+        :description="t('historyPages.speechDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -158,14 +139,14 @@ const checkScrollPosition = debounce(() => {
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
             <NuxtLink
-              to="/library"
+              to="/history"
               class="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
             >
               <UIcon
                 name="i-lucide-library"
                 class="w-4 h-4 mr-2"
               />
-              {{ $t('library.tabs.library') }}
+              {{ $t('history.tabs.history') }}
             </NuxtLink>
           </li>
           <li>
@@ -174,11 +155,25 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.speechBreadcrumb') }}</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('historyPages.speechBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
       </nav>
+
+      <!-- Error message -->
+      <div
+        v-if="hasError"
+        class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8"
+      >
+        <div class="flex items-center">
+          <UIcon
+            name="i-lucide-alert-triangle"
+            class="w-5 h-5 text-red-500 mr-2"
+          />
+          <p class="text-red-700">{{ errorMessage }}</p>
+        </div>
+      </div>
 
       <!-- Content -->
       <UPageColumns>
@@ -239,7 +234,7 @@ const checkScrollPosition = debounce(() => {
         v-if="!hasMoreData"
         class="text-center py-8 text-gray-500"
       >
-        {{ $t('libraryPages.endOfSpeechLibrary') }}
+        {{ $t('historyPages.endOfSpeechHistory') }}
       </div>
     </UContainer>
   </UPage>

@@ -427,5 +427,28 @@
     "emailNotifications": "Email Notifications",
     "marketingEmails": "Marketing Emails",
     "securityAlerts": "Security Alerts"
+  },
+  "settings": "Configurações",
+  "userMenu": {
+    "profile": "Perfil",
+    "buyCredits": "Comprar créditos",
+    "settings": "Configurações",
+    "api": "API",
+    "logout": "Sair",
+    "greeting": "Olá, {name}"
+  },
+  "formats": {
+    "mp3": "MP3",
+    "wav": "WAV"
+  },
+  "channels": {
+    "mono": "Mono",
+    "stereo": "Estéreo"
+  },
+  "options": {
+    "allow": "Permitir",
+    "dontAllow": "Não permitir",
+    "voices": "Vozes",
+    "pickVoice": "Escolher voz"
   }
 }

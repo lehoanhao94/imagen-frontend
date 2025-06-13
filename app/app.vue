@@ -1,21 +1,14 @@
 <script setup lang="ts">
 import * as locales from '@nuxt/ui-pro/locale'
-import { navLinks } from '~/utils/links'
+import { useNavLinks } from '~/utils/links'
 
 const authStore = useAuthStore()
 const appStore = useAppStore()
 const { locale, localeForI18n } = storeToRefs(appStore)
-const { locale: i18nLocale, t } = useI18n()
+const { locale: i18nLocale } = useI18n()
 
-// Create a computed property for the translated navLinks
-const translatedNavLinks = computed(() => {
-  return navLinks.map(link => ({
-    ...link,
-    label: link.label
-      ? t(`nav.${link.label.toLowerCase().replace(/\s+/g, '')}`)
-      : ''
-  }))
-})
+// Use the new i18n-aware nav links composable
+const translatedNavLinks = useNavLinks()
 
 const colorMode = useColorMode()
 

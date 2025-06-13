@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { navLinks } from '~/utils/links'
+import { useNavLinks } from '~/utils/links'
 import type { NuxtError } from '#app'
 
 defineProps({
@@ -21,15 +21,10 @@ useSeoMeta({
   description: 'We are sorry but this page could not be found.'
 })
 
-const { t } = useI18n()
+const { _t } = useI18n()
 
-// Create a computed property for the translated navLinks
-const translatedNavLinks = computed(() => {
-  return navLinks.map(link => ({
-    ...link,
-    label: link.label ? t(`nav.${link.label.toLowerCase().replace(/\s+/g, '')}`) : ''
-  }))
-})
+// Use the new i18n-aware nav links composable
+const translatedNavLinks = useNavLinks()
 
 const [{ data: navigation }, { data: files }] = await Promise.all([
   useAsyncData('navigation', () => {

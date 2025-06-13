@@ -1,15 +1,6 @@
 export const useVideoGenOptions = () => {
-  // Duration options for video generation
-  const durationOptions = [
-    { label: '2 seconds', value: 2 },
-    { label: '3 seconds', value: 3 },
-    { label: '5 seconds', value: 5 },
-    { label: '8 seconds', value: 8 },
-    { label: '10 seconds', value: 10 }
-  ]
-
-  // Default duration
-  const duration = ref(5)
+  // Fixed duration at 8 seconds (no options needed)
+  const duration = ref(8)
 
   // Person generation options
   const personGenerationOptions = [
@@ -20,7 +11,7 @@ export const useVideoGenOptions = () => {
   // Default person generation
   const personGeneration = ref('dont_allow')
 
-  // Aspect ratio options
+  // Aspect ratio options (kept for backward compatibility, but use videoDimensions instead)
   const aspectRatioOptions = [
     { label: '16:9 (Landscape)', value: '16:9' },
     { label: '9:16 (Portrait)', value: '9:16' },
@@ -36,15 +27,14 @@ export const useVideoGenOptions = () => {
   const enhancePrompt = ref(true)
 
   return {
-    // Duration
+    // Duration (fixed at 8 seconds)
     duration,
-    durationOptions,
 
     // Person generation
     personGeneration,
     personGenerationOptions,
 
-    // Aspect ratio
+    // Aspect ratio (backward compatibility)
     aspectRatio,
     aspectRatioOptions,
 

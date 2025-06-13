@@ -31,7 +31,7 @@ const onGenerate = () => {
     prompt: prompt.value,
     model: model.value?.value || 'imagen-3',
     style: style.value || 'Dynamic',
-    dimensions: imageDimension.value || '1:1'
+    aspect_ratio: imageDimension.value || '1:1'
   })
 }
 </script>

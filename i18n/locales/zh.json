@@ -427,5 +427,28 @@
     "emailNotifications": "Email Notifications",
     "marketingEmails": "Marketing Emails",
     "securityAlerts": "Security Alerts"
+  },
+  "settings": "设置",
+  "userMenu": {
+    "profile": "个人资料",
+    "buyCredits": "购买积分",
+    "settings": "设置",
+    "api": "API",
+    "logout": "退出登录",
+    "greeting": "你好，{name}"
+  },
+  "formats": {
+    "mp3": "MP3",
+    "wav": "WAV"
+  },
+  "channels": {
+    "mono": "单声道",
+    "stereo": "立体声"
+  },
+  "options": {
+    "allow": "允许",
+    "dontAllow": "不允许",
+    "voices": "语音",
+    "pickVoice": "选择语音"
   }
 }

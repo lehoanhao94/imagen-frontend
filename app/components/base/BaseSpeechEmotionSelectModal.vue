@@ -210,13 +210,13 @@ const currentAudio = ref<HTMLAudioElement | null>(null)
 // Filtered emotions based on search
 const filteredEmotions = computed(() => {
   const emotionsToFilter = enabledEmotions.value
-  
+
   if (!searchQuery.value) return emotionsToFilter
 
   const query = searchQuery.value.toLowerCase()
   return emotionsToFilter.filter(emotion =>
-    emotion.emotion.toLowerCase().includes(query) ||
-    emotion.emotion_long?.toLowerCase().includes(query)
+    emotion.emotion.toLowerCase().includes(query)
+    || emotion.emotion_long?.toLowerCase().includes(query)
   )
 })
 
@@ -258,7 +258,7 @@ const openModal = () => {
   tempSelectedEmotion.value = selectedEmotion.value
   isModalOpen.value = true
   searchQuery.value = ''
-  
+
   // Load emotions if not loaded
   if (emotions.value.length === 0) {
     loadEmotions()
