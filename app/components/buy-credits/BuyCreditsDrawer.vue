@@ -49,6 +49,7 @@
             <PayWithCrypto />
             <PayWithCard />
             <PayWithPaypal />
+            <PayWithStripe />
           </div>
         </div>
       </div>
