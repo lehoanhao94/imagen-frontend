@@ -141,7 +141,7 @@ export const useAuthStore = defineStore('authStore', {
       this.user = null
       this.access_token = null
       this.refresh_token = null
-      navigateTo('/auth/login')
+      // navigateTo('/auth/login')
     },
 
     async userMe() {
