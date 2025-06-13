@@ -2,7 +2,7 @@
   <UCard
     class="bg-neutral-50 dark:bg-neutral-800 hover:opacity-80 cursor-pointer"
     :ui="{
-      body: '!py-3'
+      body: '!py-3',
     }"
     @click="handleStripePayment"
   >
@@ -11,22 +11,22 @@
         class="text-base font-semibold text-center flex items-center justify-center gap-2"
       >
         <UIcon
-          name="i-simple-icons-stripe"
+          :name="loadings['createStripeOrder'] ? 'eos-icons:loading' : 'i-simple-icons-stripe'"
           class="size-6 text-blue-600"
         />
-        {{ $t('stripe') }}
+        {{ $t("stripe") }}
       </div>
       <div class="text-sm text-center text-neutral-600 dark:text-neutral-400">
-        {{ $t('stripeDescription') }}
+        {{ $t("stripeDescription") }}
       </div>
     </div>
   </UCard>
 </template>
 
 <script setup lang="ts">
-const creditsStore = useCreditsStore()
-
+const creditsStore = useCreditsStore();
+const { loadings } = storeToRefs(creditsStore);
 const handleStripePayment = () => {
-  creditsStore.processStripePayment()
-}
+  creditsStore.processStripePayment();
+};
 </script>

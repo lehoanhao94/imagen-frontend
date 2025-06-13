@@ -47,8 +47,8 @@
           </h3>
           <div class="space-y-3">
             <PayWithCrypto />
-            <PayWithCard />
-            <PayWithPaypal />
+            <!-- <PayWithCard /> -->
+            <!-- <PayWithPaypal /> -->
             <PayWithStripe />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useProductStore } from "~/stores/product";
 
 interface CryptomusOrderResponse {
   success: boolean;
@@ -12,25 +13,25 @@ interface CryptomusOrderResponse {
 export const useCreditsStore = defineStore("creditsStore", {
   state: () => ({
     locale: "en",
-    creditUnitPrice: 8,
     showDrawer: false,
     numberOfCreditsWanted: 0,
     isLoading: false,
+    loadings: {} as Record<string, boolean>,
   }),
   getters: {
-    buyCreditProduct: () => {
-      return {
-        base_credit: 1000,
-      };
+    buyCreditProduct() {
+      const product = useProductStore().buyCreditProduct;
+      return product || {};
+    },
+    creditUnitPrice(): number {
+      return this.buyCreditProduct.price_divide_100;
     },
     quickTopUpList(): any {
-      return [1, 2, 5, 7, 10, 12, 15, 17, 20].map((num) => {
-        return {
-          credits: num * this.buyCreditProduct.base_credit,
-          price: num * this.creditUnitPrice,
-          quantity: num,
-        };
-      });
+      return [1, 2, 5, 7, 10, 12, 15, 17, 20].map((num) => ({
+        credits: num * this.buyCreditProduct.base_credit,
+        price: num * this.creditUnitPrice,
+        quantity: num,
+      }));
     },
   },
 
@@ -42,6 +43,7 @@ export const useCreditsStore = defineStore("creditsStore", {
 
     async processStripePayment() {
       try {
+        this.loadings.createStripeOrder = true;
         const { apiService } = useAPI();
         const toast = useToast();
 
@@ -50,10 +52,9 @@ export const useCreditsStore = defineStore("creditsStore", {
           this.numberOfCreditsWanted / this.buyCreditProduct.base_credit
         );
 
-        const requestPayload = {
-          product_id: "credit_package", // Default product ID for credits
-          quantity: quantity,
-        };
+        // use the selected credit product ID
+        const product = this.buyCreditProduct;
+        const requestPayload = { product_id: product.id, quantity };
 
         const response = await apiService.post(
           "/order/stripe/create",
@@ -62,7 +63,21 @@ export const useCreditsStore = defineStore("creditsStore", {
 
         if (response.data.success && response.data.approval_url) {
           // Open approval URL in new window
-          window.open(response.data.approval_url, "_blank");
+          // window.open(response.data.approval_url, "_blank");
+          const newWindow = popupCenter(600, 700, response.data.approval_url);
+
+          if (window.focus) newWindow?.focus();
+
+          const interval = setInterval(() => {
+            if (newWindow?.closed) {
+              clearInterval(interval);
+              const authStore = useAuthStore();
+              // Refresh user credits after payment is completed
+              setTimeout(() => {
+                authStore.userMe();
+              }, 3000);
+            }
+          }, 500);
 
           // Close the drawer
           this.showDrawer = false;
@@ -94,6 +109,8 @@ export const useCreditsStore = defineStore("creditsStore", {
             error.response?.data?.message || "Failed to process Stripe payment",
           color: "error",
         });
+      } finally {
+        this.loadings.createStripeOrder = false;
       }
     },
 
@@ -109,11 +126,9 @@ export const useCreditsStore = defineStore("creditsStore", {
           this.numberOfCreditsWanted / this.buyCreditProduct.base_credit
         );
 
-        // For now, using a default product_id - this might need to be configured based on requirements
-        const payload = {
-          product_id: "credit_package_1000", // This should be the actual product ID from your system
-          quantity: quantity,
-        };
+        // use the selected credit product ID
+        const product = this.buyCreditProduct;
+        const payload = { product_id: product.id, quantity };
 
         const response = await apiService.post(
           "/order/cryptomus/create",
@@ -121,28 +136,31 @@ export const useCreditsStore = defineStore("creditsStore", {
         );
         const responseData: CryptomusOrderResponse = response.data;
 
-        // Check if the response indicates success
+        // Handle API response
         if (responseData.success) {
-          // Open the approval URL in a new window
-          window.open(
-            responseData.approval_url,
-            "_blank",
-            "noopener,noreferrer"
-          );
+          const newWindow = popupCenter(600, 700, response.data.approval_url);
 
-          // Close the checkout drawer on successful order creation
+          if (window.focus) newWindow?.focus();
+
+          const interval = setInterval(() => {
+            if (newWindow?.closed) {
+              clearInterval(interval);
+              const authStore = useAuthStore();
+              // Refresh user credits after payment is completed
+              setTimeout(() => {
+                authStore.userMe();
+              }, 3000);
+            }
+          }, 500);
           this.showDrawer = false;
-
           toast.add({
             id: "crypto-order-success",
             title: "Success",
             description:
               "Crypto payment order created successfully. Please complete the payment in the new window.",
             color: "success",
-            timeout: 5000,
           });
         } else {
-          // Handle API response indicating failure
           toast.add({
             id: "crypto-order-error",
             title: "Payment Error",
@@ -150,10 +168,8 @@ export const useCreditsStore = defineStore("creditsStore", {
               responseData.message ||
               "Failed to create crypto payment order. Please try again.",
             color: "error",
-            timeout: 5000,
           });
         }
-
         return responseData;
       } catch (error: any) {
         console.error("🚀 ~ createCryptoOrder error:", error);
@@ -166,7 +182,6 @@ export const useCreditsStore = defineStore("creditsStore", {
             error.message ||
             "Failed to create crypto payment order. Please try again.",
           color: "error",
-          timeout: 5000,
         });
 
         return null;

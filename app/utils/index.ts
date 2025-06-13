@@ -22,3 +22,14 @@ export const canUseFeature = (feature: string): boolean => {
     ] === (true as boolean) || authStore.isSuperUser === true
   )
 }
+
+export const popupCenter = (width: number, height: number, url: string) => {
+  const left = (screen.width - width) / 2
+  const top = (screen.height - height) / 2
+  const options = `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=yes`
+  const newWindow = window.open(url, '_blank', options)
+  if (newWindow) {
+    newWindow.focus()
+  }
+  return newWindow
+}

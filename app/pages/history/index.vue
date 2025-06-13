@@ -1,99 +1,216 @@
 <script setup lang="ts">
-const { t } = useI18n()
+import HistoryImageCard from "~/components/history/HistoryImageCard.vue";
+import HistoryVideoCard from "~/components/history/HistoryVideoCard.vue";
 
-// History categories with routing
-const historyCategories = computed(() => [
-  {
-    key: 'imagen',
-    label: t('history.tabs.imagen'),
-    icon: 'hugeicons:ai-image',
-    route: '/history/imagen',
-    description: 'AI-generated images and artwork'
-  },
-  {
-    key: 'video-gen',
-    label: t('history.tabs.video'),
-    icon: 'hugeicons:ai-video',
-    route: '/history/video-gen',
-    description: 'AI-generated videos and animations'
-  },
-  {
-    key: 'speech',
-    label: t('history.tabs.speech'),
-    icon: 'hugeicons:ai-voice',
-    route: '/history/speech',
-    description: 'AI-generated speech and voice content'
-  },
-  {
-    key: 'music',
-    label: t('history.tabs.music'),
-    icon: 'ri:music-ai-fill',
-    route: '/history/music',
-    description: 'AI-generated music and audio'
+const historyComponents = {
+  image: HistoryImageCard,
+  video: HistoryVideoCard,
+};
+import { ref, watch, nextTick, onMounted, onUnmounted, computed } from "vue";
+
+const { t } = useI18n();
+
+/**
+ * Imagen History page with infinite scroll functionality
+ */
+
+// Use history store for fetching imagen data
+const historyStore = useHistoryStore();
+
+// Filter parameters for the API
+const filterParams = ref({
+  items_per_page: 10,
+});
+
+// Computed properties from store
+const historiesData = computed(() => historyStore.histories);
+const isLoading = computed(
+  () => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories
+);
+const hasMoreData = computed(() => historyStore.hasMoreHistories);
+
+// Error handling from store
+const hasError = computed(() => !!historyStore.errors.fetchHistories);
+const errorMessage = computed(() => {
+  const error = historyStore.errors.fetchHistories;
+  return (
+    error?.response?.data?.message ||
+    error?.message ||
+    "Failed to load imagen history. Please try again."
+  );
+});
+
+// Map history data to image card props
+const librariesData = computed(() => {
+  return historiesData.value.map(history => ({
+    ...history,
+  }));
+});
+
+// Initial data fetch
+const fetchInitialData = async () => {
+  await historyStore.fetchHistories({
+    ...filterParams.value,
+    page: 1,
+  });
+};
+
+// Fetch more data for infinite scroll
+const fetchMoreLibraryItems = async () => {
+  if (!hasMoreData.value || isLoading.value) return;
+
+  await historyStore.fetchMoreHistories(filterParams.value);
+};
+
+// Intersection observer for infinite scroll
+let observer: IntersectionObserver | null = null;
+
+const observeLastElement = (entries: IntersectionObserverEntry[]) => {
+  const entry = entries[0];
+  if (entry && entry.isIntersecting && !isLoading.value) {
+    fetchMoreLibraryItems();
   }
-])
+};
+
+// Setup scroll observer on component mount
+onMounted(async () => {
+  // Fetch initial data
+  await fetchInitialData();
+
+  observer = new IntersectionObserver(observeLastElement, {
+    threshold: 0.5,
+    rootMargin: "0px 0px 200px 0px", // Load more when within 200px of bottom
+  });
+
+  // Setup scroll event for fallback
+  window.addEventListener("scroll", checkScrollPosition);
+});
+
+// Clean up on unmount
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect();
+  }
+  window.removeEventListener("scroll", checkScrollPosition);
+});
+
+// Update observer target when data changes
+watch(librariesData, () => {
+  nextTick(() => {
+    const loadingTrigger = document.getElementById("loading-trigger");
+    if (loadingTrigger && observer) {
+      observer.disconnect();
+      observer.observe(loadingTrigger);
+    }
+  });
+});
+
+// Debounce function to improve scroll performance
+const debounce = (fn: (...args: any[]) => void, delay: number) => {
+  let timeoutId: NodeJS.Timeout;
+  return function (...args: any[]) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn.apply(this, args), delay);
+  };
+};
+
+// Fallback scroll detection with debouncing
+const checkScrollPosition = debounce(() => {
+  if (isLoading.value || !hasMoreData.value) return;
+
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  // Load more when user scrolls to 90% of the page
+  if (scrollPosition >= documentHeight * 0.9) {
+    fetchMoreLibraryItems();
+  }
+}, 200); // 200ms debounce
 </script>
 
 <template>
   <UPage>
-    <UContainer class="pt-30">
+    <UContainer class="pt-10">
       <UPageHero
-        :title="$t('historyPages.aiContentHistoryTitle')"
-        :description="$t('historyPages.aiContentHistoryDescription')"
+        :title="t('Your history')"
+        :description="t('historyPages.imagenDescription')"
       />
 
-      <UPageSection>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Motion
-            v-for="(category, index) in historyCategories"
-            :key="category.key"
-            :initial="{
-              scale: 1.1,
-              opacity: 0,
-              filter: 'blur(20px)'
-            }"
-            :animate="{
-              scale: 1,
-              opacity: 1,
-              filter: 'blur(0px)'
-            }"
-            :transition="{
-              duration: 0.6,
-              delay: index * 0.1
-            }"
-          >
-            <UCard
-              :to="category.route"
-              class="group hover:bg-muted/50 transition-colors cursor-pointer h-full"
+      <!-- Navigation breadcrumb -->
+      <nav class="flex mb-8" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+          <li class="inline-flex items-center">
+            <NuxtLink
+              to="/history"
+              class="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
             >
-              <template #header>
-                <div class="flex items-center gap-3">
-                  <UIcon
-                    :name="category.icon"
-                    class="w-8 h-8 text-primary group-hover:scale-110 transition-transform"
-                  />
-                  <h3 class="text-lg font-semibold">
-                    {{ category.label }}
-                  </h3>
-                </div>
-              </template>
+              <UIcon name="i-lucide-history" class="w-4 h-4 mr-2" />
+              {{ $t("history.tabs.history") }}
+            </NuxtLink>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <UIcon
+                name="i-lucide-chevron-right"
+                class="w-4 h-4 text-muted-foreground"
+              />
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{
+                $t("historyPages.imagenBreadcrumb")
+              }}</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
 
-              <p class="text-muted-foreground text-sm">
-                {{ category.description }}
-              </p>
-
-              <template #footer>
-                <div class="flex justify-end">
-                  <UIcon
-                    name="i-lucide-arrow-right"
-                    class="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all"
-                  />
-                </div>
-              </template>
-            </UCard>
-          </Motion>
+      <!-- Error message -->
+      <div v-if="hasError" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
+        <div class="flex items-center">
+          <UIcon name="i-lucide-alert-triangle" class="w-5 h-5 text-red-500 mr-2" />
+          <p class="text-red-700">{{ errorMessage }}</p>
         </div>
-      </UPageSection>
+      </div>
+      <!-- Content -->
+      <div class="masonry">
+        <Motion
+          class="masonry-item"
+          v-for="(row, index) in librariesData"
+          :key="`row-${index}`"
+          :initial="{
+            scale: 1.1,
+            opacity: 0,
+            filter: 'blur(20px)',
+          }"
+          :animate="{
+            scale: 1,
+            opacity: 1,
+            filter: 'blur(0px)',
+          }"
+          :transition="{
+            duration: 0.6,
+            delay: index * 0.1,
+          }"
+        >
+          <component :is="historyComponents[row.type]" :data="row"/>
+        </Motion>
+      </div>
+      <!-- Loading indicator -->
+      <div v-if="isLoading" class="flex justify-center items-center py-10">
+        <UIcon name="i-lucide-loader" class="animate-spin text-primary h-8 w-8 mr-2" />
+        <span class="text-primary">{{ $t("loadingMoreItems") }}</span>
+      </div>
+
+      <!-- End of list indicator for intersection observer -->
+      <div
+        v-if="hasMoreData && !isLoading"
+        id="loading-trigger"
+        class="h-1 w-full"
+        aria-hidden="true"
+      />
+
+      <!-- End message when all data is loaded -->
+      <div v-if="!hasMoreData" class="text-center py-8 text-gray-500">
+        {{ $t("historyPages.endOfImagesHistory") }}
+      </div>
     </UContainer>
   </UPage>
 </template>

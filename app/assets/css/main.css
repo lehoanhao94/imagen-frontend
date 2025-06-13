@@ -24,7 +24,7 @@
 .dark {
   background-color: initial;
   color: initial;
-  
+
   ::selection {
     color: #ffffff;
     background-color: #474747;
@@ -73,11 +73,13 @@
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     transform: translate(-50%, -50%) scale(1.05);
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1.1);
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
@@ -85,13 +87,36 @@
 }
 
 @keyframes pulse-light {
+
   0%,
   100% {
     transform: translate(-50%, -50%) scale(1.05);
     filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.15));
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1.1);
     filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.2));
+  }
+}
+
+.masonry {
+  column-count: 3;
+  column-gap: 1rem;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+@media (max-width: 768px) {
+  .masonry {
+    column-count: 1;
   }
 }

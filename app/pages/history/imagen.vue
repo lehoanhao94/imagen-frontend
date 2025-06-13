@@ -12,7 +12,7 @@ const historyStore = useHistoryStore()
 
 // Filter parameters for the API
 const filterParams = ref({
-  filter_by: 'imagen', // Filter for image generation type
+  filter_by: 'image', // Filter for image generation type
   items_per_page: 10
 })
 

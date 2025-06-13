@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     'nuxt-vue3-google-signin',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
   ],
   plugins: [{ src: '~/plugins/vue-number-animation', ssr: false }],
   ssr: false,

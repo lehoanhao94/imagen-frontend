@@ -5,6 +5,10 @@ definePageMeta({
 
 const authStore = useAuthStore()
 const { user_credit } = storeToRefs(authStore)
+
+onMounted(() => {
+  authStore.userMe()
+})
 </script>
 
 <template>
