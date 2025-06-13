@@ -427,5 +427,28 @@
     "emailNotifications": "Email Notifications",
     "marketingEmails": "Marketing Emails",
     "securityAlerts": "Security Alerts"
+  },
+  "settings": "設定",
+  "userMenu": {
+    "profile": "プロフィール",
+    "buyCredits": "クレジット購入",
+    "settings": "設定",
+    "api": "API",
+    "logout": "ログアウト",
+    "greeting": "こんにちは、{name}"
+  },
+  "formats": {
+    "mp3": "MP3",
+    "wav": "WAV"
+  },
+  "channels": {
+    "mono": "モノラル",
+    "stereo": "ステレオ"
+  },
+  "options": {
+    "allow": "許可",
+    "dontAllow": "許可しない",
+    "voices": "音声",
+    "pickVoice": "音声を選択"
   }
 }

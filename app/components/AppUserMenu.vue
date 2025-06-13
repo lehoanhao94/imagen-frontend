@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 const items = computed(() => {
@@ -14,29 +15,29 @@ const items = computed(() => {
     ],
     [
       {
-        label: 'Profile',
+        label: t('userMenu.profile'),
         icon: 'i-lucide-user',
         to: '/profile'
       },
       {
-        label: 'Buy Credits',
+        label: t('userMenu.buyCredits'),
         icon: 'mynaui:cart-plus',
         to: '/buy-credits'
       },
       {
-        label: 'Settings',
+        label: t('userMenu.settings'),
         icon: 'i-lucide-cog'
       }
     ],
     [
       {
-        label: 'API',
+        label: t('userMenu.api'),
         icon: 'i-lucide-cloud'
       }
     ],
     [
       {
-        label: 'Logout',
+        label: t('userMenu.logout'),
         icon: 'i-lucide-log-out',
         onSelect: () => authStore.logout()
       }
@@ -53,7 +54,7 @@ const items = computed(() => {
     }"
   >
     <UUser
-      :description="`Hi, ${user?.full_name}`"
+      :description="t('userMenu.greeting', { name: user?.full_name })"
       :avatar="{
         icon: 'solar:user-bold-duotone'
       }"
