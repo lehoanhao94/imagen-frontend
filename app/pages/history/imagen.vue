@@ -7,187 +7,53 @@ const { t } = useI18n()
  * Imagen History page with infinite scroll functionality
  */
 
-// Mock data for images (extracted from original library.vue)
-const imagenInitialData = [
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/ae43823c-9b34-43ec-89d8-a561b2d817cf/generations/09b9108b-e6c3-4300-a31d-4a5a6012e2e1/Leonardo_Phoenix_10_create_an_illustration_of_A_woman_wearing_2.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  },
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/b6c8b211-6345-4cc4-a86b-efa3673506e3/generations/022ef9ef-7435-4580-ada9-bfc39ee325c3/Leonardo_Phoenix_10_A_sophisticated_lady_in_a_forest_green_tea_0.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  },
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/846c2e73-4c2d-4138-afa2-c2f6feecf304/generations/240454cc-405d-4c9d-89bf-8e265324a9cf/Leonardo_Phoenix_10_An_illustration_of_a_graceful_female_figur_0.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  },
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/c675554b-c126-47eb-936a-7ee76290f5e3/generations/27d15640-a5a9-4dbc-a9bc-40fd28f82d10/Leonardo_Phoenix_10_Create_an_image_of_a_majestic_tortoise_in_3.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  },
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/dc4608ba-6fc1-415e-ad8f-8dde28127c66/generations/6313bb9e-0ba2-4e65-a72d-561b348e2100/Leonardo_Phoenix_10_Vibrant_and_highly_detailed_photograph_of_2.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  }
-]
+// Use history store for fetching imagen data
+const historyStore = useHistoryStore()
 
-// Mock data for videos
-const videoInitialData = [
-  {
-    videoUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/ae43823c-9b34-43ec-89d8-a561b2d817cf/generations/09b9108b-e6c3-4300-a31d-4a5a6012e2e1/Leonardo_Phoenix_10_create_an_illustration_of_A_woman_wearing_2.jpg?w=512',
-    title: 'Create a cinematic video of a woman dancing',
-    prompt: 'A beautiful woman with flowing hair dancing gracefully in a sunlit meadow, slow motion, cinematic lighting, golden hour',
-    model: 'Veo 2',
-    style: 'Cinematic',
-    duration: '5s'
-  },
-  {
-    videoUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/b6c8b211-6345-4cc4-a86b-efa3673506e3/generations/022ef9ef-7435-4580-ada9-bfc39ee325c3/Leonardo_Phoenix_10_A_sophisticated_lady_in_a_forest_green_tea_0.jpg?w=512',
-    title: 'Abstract geometric animation',
-    prompt: 'Abstract geometric shapes morphing and transforming in space, vibrant colors, modern art style',
-    model: 'Veo 3',
-    style: 'Abstract',
-    duration: '8s'
-  }
-]
+// Filter parameters for the API
+const filterParams = ref({
+  filter_by: 'imagen', // Filter for image generation type
+  items_per_page: 10
+})
 
-// Mock data for speech
-const speechInitialData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/846c2e73-4c2d-4138-afa2-c2f6feecf304/generations/240454cc-405d-4c9d-89bf-8e265324a9cf/Leonardo_Phoenix_10_An_illustration_of_a_graceful_female_figur_0.jpg?w=512',
-    title: 'Motivational Speech Generation',
-    prompt: 'Generate an inspiring motivational speech about overcoming challenges and achieving dreams',
-    model: 'Gemini 2.5 Pro',
-    voice: 'Professional',
-    duration: '2m 30s'
-  },
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/c675554b-c126-47eb-936a-7ee76290f5e3/generations/27d15640-a5a9-4dbc-a9bc-40fd28f82d10/Leonardo_Phoenix_10_Create_an_image_of_a_majestic_tortoise_in_3.jpg?w=512',
-    title: 'Storytelling Voice Generation',
-    prompt: 'Create a storytelling voice for a children\'s fairy tale with a warm and gentle tone',
-    model: 'Gemini 2.5 Flash',
-    voice: 'Gentle',
-    duration: '1m 45s'
-  }
-]
+// Computed properties from store
+const historiesData = computed(() => historyStore.histories)
+const isLoading = computed(() => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories)
+const hasMoreData = computed(() => historyStore.hasMoreHistories)
 
-// Mock data for music
-const musicInitialData = [
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/dc4608ba-6fc1-415e-ad8f-8dde28127c66/generations/6313bb9e-0ba2-4e65-a72d-561b348e2100/Leonardo_Phoenix_10_Vibrant_and_highly_detailed_photograph_of_2.jpg?w=512',
-    title: 'Upbeat Electronic Music',
-    prompt: 'Create an upbeat electronic dance music track with synthesizers and a strong bass line',
-    model: 'Music Gen Pro',
-    genre: 'Electronic',
-    duration: '3m 15s'
-  },
-  {
-    audioUrl: '#',
-    thumbnailUrl: 'https://cdn.leonardo.ai/users/f33d9042-22f3-4fbb-96ef-923567ea1ed9/generations/50b0bcd7-58f9-4a2c-a8c7-6a5a356bd852/Leonardo_Phoenix_10_Create_a_minimalist_and_elegant_vintageins_2.jpg?w=512',
-    title: 'Relaxing Ambient Music',
-    prompt: 'Generate a peaceful ambient music track with nature sounds and soft melodies for meditation',
-    model: 'Music Gen Standard',
-    genre: 'Ambient',
-    duration: '5m 20s'
-  }
-]
+// Error handling from store
+const hasError = computed(() => !!historyStore.errors.fetchHistories)
+const errorMessage = computed(() => {
+  const error = historyStore.errors.fetchHistories
+  return error?.response?.data?.message || error?.message || 'Failed to load imagen history. Please try again.'
+})
 
-// More sample data for pagination
-const imagenMoreData = [
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/f33d9042-22f3-4fbb-96ef-923567ea1ed9/generations/50b0bcd7-58f9-4a2c-a8c7-6a5a356bd852/Leonardo_Phoenix_10_Create_a_minimalist_and_elegant_vintageins_2.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  },
-  {
-    imageUrl:
-      'https://cdn.leonardo.ai/users/9a6d696b-3a81-4d92-bc5c-7a17fa079e18/generations/d4e3a995-ef53-4bc0-941a-7f0c9ef5d21f/Leonardo_Phoenix_10_A_weathered_rusty_old_train_its_carriages_3.jpg?w=512',
-    title: 'Create an illustration of A woman wearing a white tank top shirt',
-    prompt:
-      'a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.',
-    preset: 'Imagen 3',
-    style: 'Dynamic',
-    resolution: '832x1472'
-  }
-]
+// Map history data to image card props
+const librariesData = computed(() => {
+  return historiesData.value.map(history => ({
+    uuid: history.uuid,
+    imageUrl: history.media_url || 'https://via.placeholder.com/512x512?text=Image',
+    title: history.name || 'Generated Image',
+    prompt: history.input_text || history.custom_prompt || 'No prompt available',
+    preset: history.model_name || history.model || 'Imagen',
+    style: 'AI Generated', // Default style since not in history data
+    resolution: '512x512' // Default resolution since not in history data
+  }))
+})
 
-// Reactive state for imagen content
-const librariesData = ref([...imagenInitialData])
-const pageData = ref(1)
-const isLoadingData = ref(false)
-const hasMoreDataLeft = ref(true)
+// Initial data fetch
+const fetchInitialData = async () => {
+  await historyStore.fetchHistories({
+    ...filterParams.value,
+    page: 1
+  })
+}
 
-// Computed properties
-const isLoading = computed(() => isLoadingData.value)
-const hasMoreData = computed(() => hasMoreDataLeft.value)
-
-// Mock API fetch function
+// Fetch more data for infinite scroll
 const fetchMoreLibraryItems = async () => {
-  const currentTabKey = activeTab.value as keyof typeof dataMap
   if (!hasMoreData.value || isLoading.value) return
 
-  isLoadingData.value = true
-
-  try {
-    // Simulate API call with delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // Mock response based on page
-    if (pageData.value === 1) {
-      // Append new data to existing data (preserving order)
-      librariesData.value = [...librariesData.value, ...imagenMoreData]
-      pageData.value++
-    } else {
-      // For demo purposes, we'll stop loading after second page
-      hasMoreDataLeft.value = false
-    }
-  } catch (error) {
-    console.error('Error fetching more library items:', error)
-    // Show error to user
-    alert('Failed to load more items. Please try again.')
-  } finally {
-    isLoadingData.value = false
-  }
+  await historyStore.fetchMoreHistories(filterParams.value)
 }
 
 // Intersection observer for infinite scroll
@@ -201,7 +67,10 @@ const observeLastElement = (entries: IntersectionObserverEntry[]) => {
 }
 
 // Setup scroll observer on component mount
-onMounted(() => {
+onMounted(async () => {
+  // Fetch initial data
+  await fetchInitialData()
+
   observer = new IntersectionObserver(observeLastElement, {
     threshold: 0.5,
     rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
@@ -257,8 +126,8 @@ const checkScrollPosition = debounce(() => {
   <UPage>
     <UContainer class="pt-30">
       <UPageHero
-        :title="t('library.tabs.imagen')"
-        :description="t('libraryPages.imagenDescription')"
+        :title="t('history.tabs.imagen')"
+        :description="t('historyPages.imagenDescription')"
       />
 
       <!-- Navigation breadcrumb -->
@@ -285,11 +154,25 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('libraryPages.imagenBreadcrumb') }}</span>
+              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{ $t('historyPages.imagenBreadcrumb') }}</span>
             </div>
           </li>
         </ol>
       </nav>
+
+      <!-- Error message -->
+      <div
+        v-if="hasError"
+        class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8"
+      >
+        <div class="flex items-center">
+          <UIcon
+            name="i-lucide-alert-triangle"
+            class="w-5 h-5 text-red-500 mr-2"
+          />
+          <p class="text-red-700">{{ errorMessage }}</p>
+        </div>
+      </div>
 
       <!-- Content -->
       <UPageColumns>
@@ -344,7 +227,7 @@ const checkScrollPosition = debounce(() => {
         v-if="!hasMoreData"
         class="text-center py-8 text-gray-500"
       >
-        {{ $t('libraryPages.endOfImagesLibrary') }}
+        {{ $t('historyPages.endOfImagesHistory') }}
       </div>
     </UContainer>
   </UPage>
