@@ -8,13 +8,12 @@ interface ImageFile {
 const { model, models } = useVideoGenModels()
 const {
   duration,
-  durationOptions,
   personGeneration,
   personGenerationOptions,
-  aspectRatio,
-  aspectRatioOptions,
   enhancePrompt
 } = useVideoGenOptions()
+
+const { videoDimension } = useVideoDimensions()
 
 const appStore = useAppStore()
 const toast = useToast()
@@ -47,7 +46,7 @@ const onGenerate = async () => {
   const result = await textToVideoStore.textToVideo({
     prompt: prompt.value,
     model: model.value?.value,
-    aspect_ratio: aspectRatio.value,
+    aspect_ratio: videoDimension.value,
     person_generation: personGeneration.value,
     enhance_prompt: enhancePrompt.value,
     duration: duration.value,
@@ -122,77 +121,51 @@ const onUsePrompt = (newPrompt: string) => {
         delay: 0.5
       }"
     >
-      <div class="flex flex-col gap-4 mt-4">
-        <!-- First row: Model and Video Type -->
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-          <UFormField :label="$t('modelPreset')">
-            <BaseModelSelect
-              v-model="model"
-              :models="models"
-              class="w-full"
-            />
-          </UFormField>
-          <UFormField :label="$t('videoTypeSelection')">
-            <BaseVideoTypeSelect
-              v-model="selectedVideoType"
-              size="sm"
-            />
-          </UFormField>
-        </div>
-
-        <!-- Second row: Video Options -->
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-          <UFormField :label="$t('aspectRatio')">
-            <USelectMenu
-              v-model="aspectRatio"
-              :options="aspectRatioOptions"
-              option-attribute="label"
-              value-attribute="value"
-              class="w-full"
-            />
-          </UFormField>
-          <UFormField :label="$t('duration')">
-            <USelectMenu
-              v-model="duration"
-              :options="durationOptions"
-              option-attribute="label"
-              value-attribute="value"
-              class="w-full"
-            />
-          </UFormField>
-          <UFormField :label="$t('personGeneration')">
-            <USelectMenu
-              v-model="personGeneration"
-              :options="personGenerationOptions"
-              option-attribute="label"
-              value-attribute="value"
-              class="w-full"
-            />
-          </UFormField>
-        </div>
-
-        <!-- Third row: Image Upload and Options -->
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-          <div class="flex flex-row gap-3 items-end">
-            <UFormField :label="$t('yourImage')">
-              <BaseImageSelect
-                v-model="selectedImages"
-                :multiple="true"
-                @update:model-value="handleImagesSelected"
-              />
-            </UFormField>
-            <BaseImageSelectedList
+      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
+        <UFormField :label="$t('modelPreset')">
+          <BaseModelSelect
+            v-model="model"
+            :models="models"
+            class="w-full"
+          />
+        </UFormField>
+        <UFormField :label="$t('videoTypeSelection')">
+          <BaseVideoTypeSelect
+            v-model="selectedVideoType"
+            size="sm"
+          />
+        </UFormField>
+        <UFormField :label="$t('videoDimensions')">
+          <BaseVideoDimensionsSelect />
+        </UFormField>
+        <UFormField :label="$t('personGeneration')">
+          <USelectMenu
+            v-model="personGeneration"
+            :options="personGenerationOptions"
+            option-attribute="label"
+            value-attribute="value"
+            class="w-full"
+          />
+        </UFormField>
+        <div class="flex flex-row gap-3 items-end">
+          <UFormField :label="$t('yourImage')">
+            <BaseImageSelect
               v-model="selectedImages"
+              :multiple="true"
               @update:model-value="handleImagesSelected"
             />
-          </div>
-          <UFormField :label="$t('enhancePrompt')">
-            <UToggle
-              v-model="enhancePrompt"
-              :label="enhancePrompt ? $t('enabled') : $t('disabled')"
-            />
           </UFormField>
+          <BaseImageSelectedList
+            v-model="selectedImages"
+            @update:model-value="handleImagesSelected"
+          />
         </div>
+        <UFormField :label="$t('enhancePrompt')">
+          <UToggle
+            v-model="enhancePrompt"
+            :label="enhancePrompt ? $t('enabled') : $t('disabled')"
+          />
+        </UFormField>
       </div>
     </Motion>
 
