@@ -32,6 +32,7 @@
   "nav": {
     "aitool": "AI Tool",
     "history": "History",
+    "orders": "Orders",
     "api": "API",
     "login": "Login"
   },

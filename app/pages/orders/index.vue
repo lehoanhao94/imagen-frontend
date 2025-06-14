@@ -240,6 +240,7 @@ onUnmounted(() => {
 definePageMeta({
   title: "orders.meta.title",
   description: "orders.meta.description",
+  middleware: "auth",
 });
 
 useSeoMeta({
