@@ -24,6 +24,12 @@ export const useTextToSpeechStore = defineStore('textToSpeechStore', {
       speed?: number
       output_format?: string
       output_channel?: string
+      voices?: string[]
+      custom_prompt?: string
+      vibe_id?: number
+      accent?: string
+      model_name?: string
+      name?: string
     }) {
       const appStore = useAppStore()
       this.textToSpeechResult = null
@@ -36,18 +42,23 @@ export const useTextToSpeechStore = defineStore('textToSpeechStore', {
 
         // Create request payload
         const requestData = {
-          prompt: payload.prompt,
           model: payload.model,
-          voice_id: payload.voice_id,
-          emotion: payload.emotion,
+          voices: payload.voices || [],
           speed: payload.speed || 1,
+          input: payload.prompt,
           output_format: payload.output_format || 'mp3',
-          output_channel: payload.output_channel || 'mono'
+          emotion: payload.emotion,
+          custom_prompt: payload.custom_prompt,
+          vibe_id: payload.vibe_id || 0,
+          output_channel: payload.output_channel || 'mono',
+          accent: payload.accent,
+          model_name: payload.model_name,
+          name: payload.name
         }
 
         // Make the API call
         const { apiService } = useAPI()
-        const response = await apiService.post('/speech/generate', requestData)
+        const response = await apiService.post('/text-to-speech', requestData)
 
         this.textToSpeechResult = response
 
@@ -57,7 +68,7 @@ export const useTextToSpeechStore = defineStore('textToSpeechStore', {
         toast.add({
           id: 'speech-success',
           title: t('Speech Generation Complete') || 'Speech Generation Complete',
-          description: t('Your speech has been generated successfully') || 'Your speech has been generated successfully',
+          description: t('Your request has been submitted. Results will be notified later') || 'Your request has been submitted. Results will be notified later',
           color: 'success'
         })
 
