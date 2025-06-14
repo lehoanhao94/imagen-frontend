@@ -1,4 +1,7 @@
 {
+  "common": {
+    "home": "Home"
+  },
   "system": "AI Image Generator",
   "helloWorld": "Hello World!",
   "Describe the image you want to generate...": "Describe the image you want to generate...",
@@ -31,6 +34,7 @@
   "nav": {
     "aitool": "AI Tool",
     "history": "History",
+    "orders": "Orders",
     "api": "API",
     "login": "Login"
   },
@@ -352,6 +356,39 @@
       "speech": "Speech",
       "music": "Music",
       "history": "History"
+    }
+  },
+  "orders": {
+    "title": "Order History",
+    "description": "View your transaction and payment history",
+    "orderId": "Order ID",
+    "amount": "Amount",
+    "credits": "Credits",
+    "quantity": "Quantity",
+    "platform": "Platform",
+    "externalId": "Transaction ID",
+    "status": {
+      "completed": "Completed",
+      "success": "Success",
+      "paid": "Paid",
+      "pending": "Pending",
+      "processing": "Processing",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "error": "Error"
+    },
+    "empty": {
+      "title": "No orders yet",
+      "description": "You haven't made any orders yet. Buy credits to start using our services.",
+      "action": "Buy Credits"
+    },
+    "endOfList": "You've seen all orders",
+    "errors": {
+      "fetchFailed": "Failed to load order history. Please try again."
+    },
+    "meta": {
+      "title": "Order History - Imagen AI",
+      "description": "View your transaction and payment history on Imagen AI"
     }
   },
   "promptLabel": "Prompt:",
