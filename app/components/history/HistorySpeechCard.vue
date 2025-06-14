@@ -182,7 +182,7 @@ const displayVoice = computed(() => {
           <!-- Waveform placeholder/icon -->
           <div class="mb-6">
             <UIcon
-              name="i-lucide-audio-waveform"
+              name="i-lucide-volume-2"
               class="w-16 h-16 text-primary"
             />
           </div>
@@ -268,7 +268,7 @@ const displayVoice = computed(() => {
             <!-- Large waveform icon -->
             <div class="mb-4">
               <UIcon
-                name="i-lucide-audio-waveform"
+                name="i-lucide-volume-2"
                 class="w-32 h-32 text-primary"
               />
             </div>
