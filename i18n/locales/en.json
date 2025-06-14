@@ -26,6 +26,8 @@
   "generate": "Generate",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "listenToSpeech": "Listen to Speech",
+  "generateSimilar": "Generate Similar",
   "nav": {
     "aitool": "AI Tool",
     "history": "History",
