@@ -11,27 +11,18 @@ const props = defineProps({
     default:
       "https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512",
   },
-  title: {
-    type: String,
-    default: "A warm and vibrant image of a happy woman with a bright and radiant smile",
-  },
-  prompt: {
-    type: String,
-    default:
-      "a warm and vibrant image of a happy woman with a bright and radiant smile, her eyes sparkling with joy, her skin a healthy and luminous olive tone, her dark brown hair cascading down her back in loose, effortless waves, wearing a flowy and colorful sundress that complements her sunny disposition, set against a soft, creamy background that echoes the warmth of her emotions, with a shallow depth of field that draws attention to her face and emphasizes her infectious happiness.",
-  },
-  preset: {
-    type: String,
-    default: "Imagen 3",
-  },
-  style: {
-    type: String,
-    default: "Dynamic",
-  },
-  resolution: {
-    type: String,
-    default: "1024x1024",
-  },
+  // preset: {
+  //   type: String,
+  //   default: "Imagen 3",
+  // },
+  // style: {
+  //   type: String,
+  //   default: "Dynamic",
+  // },
+  // resolution: {
+  //   type: String,
+  //   default: "1024x1024",
+  // },
   data: {
     type: Object,
     default: () => ({}),
@@ -65,60 +56,75 @@ const generateWithPrompt = () => {
 const firstImage = computed(() => {
   return props.data?.generated_image?.[0] || {};
 });
+
+const title = computed(() => {
+  return props.data?.input_text;
+});
+
+const preset = computed(() => {
+  return props.data?.model_name || props.data?.model || "Imagen";
+});
+const resolution = computed(() => {
+  return props.data?.resolution || "1024x1024";
+});
+const style = computed(() => {
+  return props.data?.style || "Dynamic";
+});
 </script>
 
 <template>
-  <UPageCard
-    :orientation="'vertical'"
-    spotlight
-    spotlight-color="primary"
-    :ui="{
-      container: 'lg:items-start sm:p-0',
-      root: 'overflow-hidden relative group',
-    }"
-  >
-    <div class="relative w-full h-full aspect-square sm:aspect-auto">
-      <img
-        :src="firstImage?.image_url"
-        :alt="title"
-        class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
-        @click="openFullScreen"
-      />
-      <!-- Hover Overlay -->
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4"
-        :class="{ 'opacity-100': isHovered }"
-      >
-        <div class="flex justify-between items-start gap-2">
-          <div
-            class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
-            :class="{ 'translate-y-0 opacity-100': isHovered }"
-            @click.stop="openFullScreen"
-          >
-            {{ title }}
+  <HistoryWrapper :type="data.type">
+    <UPageCard
+      :orientation="'vertical'"
+      spotlight
+      spotlight-color="primary"
+      :ui="{
+        container: 'lg:items-start sm:p-0',
+        root: 'overflow-hidden relative group',
+      }"
+    >
+      <div class="relative w-full h-full aspect-square sm:aspect-auto">
+        <img
+          :src="firstImage?.image_url"
+          :alt="title"
+          class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
+          @click="openFullScreen"
+        />
+        <!-- Hover Overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-100 flex flex-col justify-between p-4"
+          :class="{ 'opacity-100': isHovered }"
+        >
+          <div class="flex justify-between items-start gap-2">
+            <div
+              class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
+              :class="{ 'translate-y-0 opacity-100': isHovered }"
+              @click.stop="openFullScreen"
+            >
+              {{ title }}
+            </div>
+            <UButton
+              icon="i-lucide-maximize"
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
+              :class="{ 'opacity-100': isHovered }"
+              @click.stop="openFullScreen"
+            />
           </div>
-          <UButton
-            icon="i-lucide-maximize"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
-            :class="{ 'opacity-100': isHovered }"
-            @click.stop="openFullScreen"
+          <UChatPromptSubmit
+            color="primary"
+            :label="$t('generateWithPrompt')"
+            class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 mt-auto transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-200"
+            :class="{ 'translate-y-0 opacity-100': isHovered }"
+            icon="mingcute:ai-fill"
+            @click.stop="generateWithPrompt"
           />
         </div>
-        <UChatPromptSubmit
-          color="primary"
-          :label="$t('generateWithPrompt')"
-          class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 mt-auto transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-200"
-          :class="{ 'translate-y-0 opacity-100': isHovered }"
-          icon="mingcute:ai-fill"
-          @click.stop="generateWithPrompt"
-        />
       </div>
-    </div>
-  </UPageCard>
-
+    </UPageCard>
+  </HistoryWrapper>
   <!-- Full Screen Image Modal -->
   <UModal
     v-model:open="isFullScreenOpen"
@@ -171,7 +177,7 @@ const firstImage = computed(() => {
             <p
               class="text-xs md:text-sm mb-4 md:mb-6 overflow-y-auto bg-muted p-2 rounded-lg"
             >
-              {{ prompt }}
+              {{ title }}
             </p>
 
             <div class="grid grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-6">

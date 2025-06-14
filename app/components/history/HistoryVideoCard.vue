@@ -104,56 +104,58 @@ const duration = computed(() => {
 </script>
 
 <template>
-  <UPageCard
-    :orientation="'vertical'"
-    spotlight
-    spotlight-color="primary"
-    :ui="{
-      container: 'lg:items-start sm:p-0',
-      root: 'overflow-hidden relative group',
-    }"
-  >
-    <div class="relative w-full h-full aspect-square sm:aspect-auto">
-      <img
-        :src="thumbnail"
-        :alt="title"
-        class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
-        @click="openFullScreen"
-      />
-      <!-- Hover Overlay -->
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4"
-        :class="{ 'opacity-100': isHovered }"
-      >
-        <div class="flex justify-between items-start gap-2">
-          <div
-            class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
-            :class="{ 'translate-y-0 opacity-100': isHovered }"
-            @click.stop="openFullScreen"
-          >
-            {{ title }}
+  <HistoryWrapper :type="data.type">
+    <UPageCard
+      :orientation="'vertical'"
+      spotlight
+      spotlight-color="primary"
+      :ui="{
+        container: 'lg:items-start sm:p-0',
+        root: 'overflow-hidden relative group',
+      }"
+    >
+      <div class="relative w-full h-full aspect-square sm:aspect-auto">
+        <img
+          :src="thumbnail"
+          :alt="title"
+          class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
+          @click="openFullScreen"
+        />
+        <!-- Hover Overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-100 flex flex-col justify-between p-4"
+          :class="{ 'opacity-100': isHovered }"
+        >
+          <div class="flex justify-between items-start gap-2">
+            <div
+              class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
+              :class="{ 'translate-y-0 opacity-100': isHovered }"
+              @click.stop="openFullScreen"
+            >
+              {{ title }}
+            </div>
+            <UButton
+              icon="i-lucide-maximize"
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
+              :class="{ 'opacity-100': isHovered }"
+              @click.stop="openFullScreen"
+            />
           </div>
-          <UButton
-            icon="i-lucide-maximize"
-            color="neutral"
-            variant="ghost"
-            size="xs"
-            class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
-            :class="{ 'opacity-100': isHovered }"
-            @click.stop="openFullScreen"
+          <UChatPromptSubmit
+            color="primary"
+            :label="$t('generateWithPrompt')"
+            class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 mt-auto transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-200"
+            :class="{ 'translate-y-0 opacity-100': isHovered }"
+            icon="mingcute:ai-fill"
+            @click.stop="generateWithPrompt"
           />
         </div>
-        <UChatPromptSubmit
-          color="primary"
-          :label="$t('generateWithPrompt')"
-          class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 mt-auto transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-200"
-          :class="{ 'translate-y-0 opacity-100': isHovered }"
-          icon="mingcute:ai-fill"
-          @click.stop="generateWithPrompt"
-        />
       </div>
-    </div>
-  </UPageCard>
+    </UPageCard>
+  </HistoryWrapper>
 
   <!-- Full Screen Image Modal -->
   <UModal
