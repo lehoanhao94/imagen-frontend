@@ -38,6 +38,7 @@
     "simplex-noise": "^4.0.3",
     "three": "^0.176.0",
     "translate-locales": "^1.1.2",
+    "vue-audio-visual": "^3.0.11",
     "vue-number-animation": "2.0.2",
     "vue3-google-signin": "^2.1.1"
   },

@@ -1,149 +1,157 @@
 <script setup lang="ts">
-import HistoryImageCard from "~/components/history/HistoryImageCard.vue";
-import HistoryVideoCard from "~/components/history/HistoryVideoCard.vue";
+import HistoryImageCard from '~/components/history/HistoryImageCard.vue'
+import HistoryVideoCard from '~/components/history/HistoryVideoCard.vue'
+import HistorySpeechCard from '~/components/history/HistorySpeechCard.vue'
 
 const historyComponents = {
-  image: HistoryImageCard,
-  video: HistoryVideoCard,
-};
-import { ref, watch, nextTick, onMounted, onUnmounted, computed } from "vue";
+  'image': HistoryImageCard,
+  'video': HistoryVideoCard,
+  'tts-text': HistorySpeechCard
+}
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 /**
  * Imagen History page with infinite scroll functionality
  */
 
 // Use history store for fetching imagen data
-const historyStore = useHistoryStore();
+const historyStore = useHistoryStore()
 
-const { historiesWithPage, currentPage, hasMoreHistories, loadings } = storeToRefs(
-  historyStore
-);
+const { historiesWithPage, currentPage, hasMoreHistories, loadings }
+  = storeToRefs(historyStore)
 
 // Filter parameters for the API
 const filterParams = ref({
-  items_per_page: 9,
-});
+  items_per_page: 9
+})
 
 // Computed properties from store
-const historiesData = computed(() => historyStore.histories);
+const historiesData = computed(() => historyStore.histories)
 const isLoading = computed(
-  () => historyStore.loadings.fetchHistories || historyStore.loadings.fetchMoreHistories
-);
-const hasMoreData = computed(() => historyStore.hasMoreHistories);
+  () =>
+    historyStore.loadings.fetchHistories
+    || historyStore.loadings.fetchMoreHistories
+)
+const hasMoreData = computed(() => historyStore.hasMoreHistories)
 
 // Error handling from store
-const hasError = computed(() => !!historyStore.errors.fetchHistories);
+const hasError = computed(() => !!historyStore.errors.fetchHistories)
 const errorMessage = computed(() => {
-  const error = historyStore.errors.fetchHistories;
+  const error = historyStore.errors.fetchHistories
   return (
-    error?.response?.data?.message ||
-    error?.message ||
-    "Failed to load imagen history. Please try again."
-  );
-});
+    error?.response?.data?.message
+    || error?.message
+    || 'Failed to load imagen history. Please try again.'
+  )
+})
 
 // Map history data to image card props
 const librariesData = computed(() => {
   return historiesData.value.map(history => ({
-    ...history,
-  }));
-});
+    ...history
+  }))
+})
 
 // Initial data fetch
 const fetchInitialData = async () => {
   await historyStore.fetchHistories({
     ...filterParams.value,
-    page: 1,
-  });
-};
+    page: 1
+  })
+}
 
 // Fetch more data for infinite scroll
 const fetchMoreLibraryItems = async () => {
-  if (!hasMoreData.value || isLoading.value) return;
+  if (!hasMoreData.value || isLoading.value) return
 
-  await historyStore.fetchMoreHistories(filterParams.value);
-};
+  await historyStore.fetchMoreHistories(filterParams.value)
+}
 
 // Intersection observer for infinite scroll
-let observer: IntersectionObserver | null = null;
+let observer: IntersectionObserver | null = null
 
 const observeLastElement = (entries: IntersectionObserverEntry[]) => {
-  const entry = entries[0];
+  const entry = entries[0]
   if (entry && entry.isIntersecting && !isLoading.value) {
-    fetchMoreLibraryItems();
+    fetchMoreLibraryItems()
   }
-};
+}
 
 // Setup scroll observer on component mount
 onMounted(async () => {
   // Fetch initial data
-  await fetchInitialData();
+  await fetchInitialData()
 
   observer = new IntersectionObserver(observeLastElement, {
     threshold: 0.5,
-    rootMargin: "0px 0px 200px 0px", // Load more when within 200px of bottom
-  });
+    rootMargin: '0px 0px 200px 0px' // Load more when within 200px of bottom
+  })
 
   // Setup scroll event for fallback
-  window.addEventListener("scroll", checkScrollPosition);
-});
+  window.addEventListener('scroll', checkScrollPosition)
+})
 
 // Clean up on unmount
 onUnmounted(() => {
   if (observer) {
-    observer.disconnect();
+    observer.disconnect()
   }
-  window.removeEventListener("scroll", checkScrollPosition);
-});
+  window.removeEventListener('scroll', checkScrollPosition)
+})
 
 // Update observer target when data changes
 watch(librariesData, () => {
   nextTick(() => {
-    const loadingTrigger = document.getElementById("loading-trigger");
+    const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
-      observer.disconnect();
-      observer.observe(loadingTrigger);
+      observer.disconnect()
+      observer.observe(loadingTrigger)
     }
-  });
-});
+  })
+})
 
 // Debounce function to improve scroll performance
 const debounce = (fn: (...args: any[]) => void, delay: number) => {
-  let timeoutId: NodeJS.Timeout;
+  let timeoutId: NodeJS.Timeout
   return function (...args: any[]) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), delay);
-  };
-};
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
 
 // Fallback scroll detection with debouncing
 const checkScrollPosition = debounce(() => {
-  if (isLoading.value || !hasMoreData.value) return;
+  if (isLoading.value || !hasMoreData.value) return
 
-  const scrollPosition = window.scrollY + window.innerHeight;
-  const documentHeight = document.documentElement.scrollHeight;
+  const scrollPosition = window.scrollY + window.innerHeight
+  const documentHeight = document.documentElement.scrollHeight
 
   // Load more when user scrolls to 90% of the page
   if (scrollPosition >= documentHeight * 0.9) {
-    fetchMoreLibraryItems();
+    fetchMoreLibraryItems()
   }
-}, 200); // 200ms debounce
+}, 200) // 200ms debounce
 </script>
 
 <template>
   <UPage>
     <UContainer class="pt-30">
       <!-- Navigation breadcrumb -->
-      <nav class="flex mb-8" aria-label="Breadcrumb">
+      <nav
+        class="flex mb-8"
+        aria-label="Breadcrumb"
+      >
         <ol class="inline-flex items-center space-x-1 md:space-x-3">
           <li class="inline-flex items-center">
             <NuxtLink
               to="/history"
               class="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-primary"
             >
-              <UIcon name="i-lucide-history" class="w-4 h-4 mr-2" />
+              <UIcon
+                name="i-lucide-history"
+                class="w-4 h-4 mr-2"
+              />
               {{ $t("history.tabs.history") }}
             </NuxtLink>
           </li>
@@ -162,10 +170,18 @@ const checkScrollPosition = debounce(() => {
       </nav>
 
       <!-- Error message -->
-      <div v-if="hasError" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
+      <div
+        v-if="hasError"
+        class="bg-red-50 border border-red-200 rounded-lg p-4 mb-8"
+      >
         <div class="flex items-center">
-          <UIcon name="i-lucide-alert-triangle" class="w-5 h-5 text-red-500 mr-2" />
-          <p class="text-red-700">{{ errorMessage }}</p>
+          <UIcon
+            name="i-lucide-alert-triangle"
+            class="w-5 h-5 text-red-500 mr-2"
+          />
+          <p class="text-red-700">
+            {{ errorMessage }}
+          </p>
         </div>
       </div>
       <!-- Content -->
@@ -179,46 +195,49 @@ const checkScrollPosition = debounce(() => {
               :initial="{
                 scale: 1.1,
                 opacity: 0,
-                filter: 'blur(20px)',
+                filter: 'blur(20px)'
               }"
               :animate="{
                 scale: 1,
                 opacity: 1,
-                filter: 'blur(0px)',
+                filter: 'blur(0px)'
               }"
               :transition="{
                 duration: 0.6,
-                delay: index * 0.1,
+                delay: index * 0.1
               }"
             >
-              <component :is="historyComponents[row.type]" :data="row" />
+              <component
+                :is="historyComponents[row.type]"
+                :data="row"
+              />
             </Motion>
           </template>
           <Motion
-            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
             v-for="n in 3"
-            class="w-full rounded-lg"
+            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
             :key="`row-${n}`"
+            class="w-full rounded-lg"
             :initial="{
               scale: 1.1,
               opacity: 0,
-              filter: 'blur(20px)',
+              filter: 'blur(20px)'
             }"
             :animate="{
               scale: 1,
               opacity: 1,
-              filter: 'blur(0px)',
+              filter: 'blur(0px)'
             }"
             :transition="{
               duration: 0.6,
-              delay: n * 0.1,
+              delay: n * 0.1
             }"
           >
             <USkeleton
               class="w-full"
               :style="{
                 height: 60 * (n + 1) + 'px',
-                borderRadius: '0.5rem',
+                borderRadius: '0.5rem'
               }"
             />
           </Motion>
@@ -231,46 +250,49 @@ const checkScrollPosition = debounce(() => {
               :initial="{
                 scale: 1.1,
                 opacity: 0,
-                filter: 'blur(20px)',
+                filter: 'blur(20px)'
               }"
               :animate="{
                 scale: 1,
                 opacity: 1,
-                filter: 'blur(0px)',
+                filter: 'blur(0px)'
               }"
               :transition="{
                 duration: 0.6,
-                delay: index * 0.1,
+                delay: index * 0.1
               }"
             >
-              <component :is="historyComponents[row.type]" :data="row" />
+              <component
+                :is="historyComponents[row.type]"
+                :data="row"
+              />
             </Motion>
           </template>
           <Motion
-            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
             v-for="n in 4"
-            class="w-full rounded-lg"
+            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
             :key="`row-${n}`"
+            class="w-full rounded-lg"
             :initial="{
               scale: 1.1,
               opacity: 0,
-              filter: 'blur(20px)',
+              filter: 'blur(20px)'
             }"
             :animate="{
               scale: 1,
               opacity: 1,
-              filter: 'blur(0px)',
+              filter: 'blur(0px)'
             }"
             :transition="{
               duration: 0.6,
-              delay: n * 0.1,
+              delay: n * 0.1
             }"
           >
             <USkeleton
               class="w-full"
               :style="{
                 height: 65 * (5 - n) + 'px',
-                borderRadius: '0.5rem',
+                borderRadius: '0.5rem'
               }"
             />
           </Motion>
@@ -283,73 +305,82 @@ const checkScrollPosition = debounce(() => {
               :initial="{
                 scale: 1.1,
                 opacity: 0,
-                filter: 'blur(20px)',
+                filter: 'blur(20px)'
               }"
               :animate="{
                 scale: 1,
                 opacity: 1,
-                filter: 'blur(0px)',
+                filter: 'blur(0px)'
               }"
               :transition="{
                 duration: 0.6,
-                delay: index * 0.1,
+                delay: index * 0.1
               }"
             >
-              <component :is="historyComponents[row.type]" :data="row" />
+              <component
+                :is="historyComponents[row.type]"
+                :data="row"
+              />
             </Motion>
           </template>
 
           <Motion
-            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
             v-for="n in 3"
-            class="w-full rounded-lg"
+            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
             :key="`row-${n}`"
+            class="w-full rounded-lg"
             :initial="{
               scale: 1.1,
               opacity: 0,
-              filter: 'blur(20px)',
+              filter: 'blur(20px)'
             }"
             :animate="{
               scale: 1,
               opacity: 1,
-              filter: 'blur(0px)',
+              filter: 'blur(0px)'
             }"
             :transition="{
               duration: 0.6,
-              delay: n * 0.1,
+              delay: n * 0.1
             }"
           >
             <USkeleton
               class="w-full"
               :style="{
                 height: 60 * (n + 1) + 'px',
-                borderRadius: '0.5rem',
+                borderRadius: '0.5rem'
               }"
             />
           </Motion>
         </div>
       </div>
 
-      <div v-if="false" class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+      <div
+        v-if="false"
+        class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4"
+      >
         <Motion
           v-for="(row, index) in librariesData"
           :key="`row-${index}`"
           :initial="{
             scale: 1.1,
             opacity: 0,
-            filter: 'blur(20px)',
+            filter: 'blur(20px)'
           }"
           :animate="{
             scale: 1,
             opacity: 1,
-            filter: 'blur(0px)',
+            filter: 'blur(0px)'
           }"
           :transition="{
             duration: 0.6,
-            delay: index * 0.1,
+            delay: index * 0.1
           }"
         >
-          <component :is="historyComponents[row.type]" :data="row" />
+          <component
+            :is="historyComponents[row.type]"
+            :data="row"
+          />
         </Motion>
       </div>
 
@@ -361,7 +392,10 @@ const checkScrollPosition = debounce(() => {
         aria-hidden="true"
       />
       <!-- End message when all data is loaded -->
-      <div v-if="!hasMoreData" class="text-center py-8 text-gray-500">
+      <div
+        v-if="!hasMoreData"
+        class="text-center py-8 text-gray-500"
+      >
         {{ $t("historyPages.endOfImagesHistory") }}
       </div>
     </UContainer>
