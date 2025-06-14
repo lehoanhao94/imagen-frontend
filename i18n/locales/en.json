@@ -26,6 +26,10 @@
   "generate": "Generate",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "model": "Model",
+  "duration": "Duration",
+  "listenToSpeech": "Listen to Speech",
+  "generateSimilar": "Generate Similar",
   "nav": {
     "aitool": "AI Tool",
     "history": "History",

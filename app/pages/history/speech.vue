@@ -195,16 +195,17 @@ const checkScrollPosition = debounce(() => {
             delay: index * 0.1
           }"
         >
-          <!-- For now, reuse image card component with audio data -->
-          <AIToolImageLibraryCard
+          <!-- Use dedicated speech card component -->
+          <HistorySpeechCard
             :key="`speech-card-${index}`"
             orientation="vertical"
-            :image-url="speech.thumbnailUrl"
+            :audio-url="speech.audioUrl"
             :title="speech.title"
             :prompt="speech.prompt"
             :preset="speech.model"
-            :style="speech.voice"
-            :resolution="speech.duration"
+            :voice="speech.voice"
+            :duration="speech.duration"
+            :data="historiesData[index]"
           />
         </Motion>
       </UPageColumns>
