@@ -1,4 +1,7 @@
 {
+  "common": {
+    "home": "Trang chủ"
+  },
   "system": "Trình tạo hình ảnh AI",
   "helloWorld": "Xin chào thế giới!",
   "Describe the image you want to generate...": "Mô tả hình ảnh bạn muốn tạo...",
@@ -345,6 +348,39 @@
       "speech": "Giọng nói",
       "music": "Nhạc",
       "history": "Lịch sử"
+    }
+  },
+  "orders": {
+    "title": "Lịch sử giao dịch",
+    "description": "Xem lịch sử giao dịch và thanh toán của bạn",
+    "orderId": "Mã đơn hàng",
+    "amount": "Số tiền",
+    "credits": "Credits",
+    "quantity": "Số lượng",
+    "platform": "Nền tảng",
+    "externalId": "Mã giao dịch",
+    "status": {
+      "completed": "Hoàn thành",
+      "success": "Thành công",
+      "paid": "Đã thanh toán",
+      "pending": "Đang xử lý",
+      "processing": "Đang xử lý",
+      "failed": "Thất bại",
+      "cancelled": "Đã hủy",
+      "error": "Lỗi"
+    },
+    "empty": {
+      "title": "Chưa có giao dịch nào",
+      "description": "Bạn chưa có giao dịch nào. Hãy mua credits để bắt đầu sử dụng dịch vụ.",
+      "action": "Mua Credits"
+    },
+    "endOfList": "Bạn đã xem hết tất cả giao dịch",
+    "errors": {
+      "fetchFailed": "Không thể tải lịch sử giao dịch. Vui lòng thử lại."
+    },
+    "meta": {
+      "title": "Lịch sử giao dịch - Imagen AI",
+      "description": "Xem lịch sử giao dịch và thanh toán của bạn trên Imagen AI"
     }
   },
   "promptLabel": "Gợi ý:",
