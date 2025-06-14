@@ -175,60 +175,55 @@ const checkScrollPosition = debounce(() => {
       </div>
 
       <!-- Content -->
-      <UPageColumns>
-        <Motion
-          v-for="(image, index) in librariesData"
-          :key="`imagen-${index}`"
-          :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }"
-          :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }"
-          :transition="{
-            duration: 0.6,
-            delay: index * 0.1
-          }"
-        >
-          <AIToolImageLibraryCard
-            :key="`imagen-card-${index}`"
-            orientation="vertical"
-            v-bind="image"
+      <!-- Skeleton for initial loading -->
+      <template v-if="isLoading && librariesData.length === 0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <SkUSkeletoneleton
+            v-for="n in filterParams.value.items_per_page"
+            :key="n"
+            class="w-full aspect-square"
           />
-        </Motion>
-      </UPageColumns>
+        </div>
+      </template>
+      <!-- Actual content and load-more skeleton -->
+      <template v-else>
+        <UPageColumns>
+          <Motion
+            v-for="(image, index) in librariesData"
+            :key="`imagen-${index}`"
+            :initial="{
+              scale: 1.1,
+              opacity: 0,
+              filter: 'blur(20px)'
+            }"
+            :animate="{
+              scale: 1,
+              opacity: 1,
+              filter: 'blur(0px)'
+            }"
+            :transition="{
+              duration: 0.6,
+              delay: index * 0.1
+            }"
+          >
+            <AIToolImageLibraryCard
+              :key="`imagen-card-${index}`"
+              orientation="vertical"
+              v-bind="image"
+            />
+          </Motion>
 
-      <!-- Loading indicator -->
-      <div
-        v-if="isLoading"
-        class="flex justify-center items-center py-10"
-      >
-        <UIcon
-          name="i-lucide-loader"
-          class="animate-spin text-primary h-8 w-8 mr-2"
-        />
-        <span class="text-primary">{{ $t('loadingMoreItems') }}</span>
-      </div>
+          <div id="loading-trigger"></div>
 
-      <!-- End of list indicator for intersection observer -->
-      <div
-        v-if="hasMoreData && !isLoading"
-        id="loading-trigger"
-        class="h-1 w-full"
-        aria-hidden="true"
-      />
-
-      <!-- End message when all data is loaded -->
-      <div
-        v-if="!hasMoreData"
-        class="text-center py-8 text-gray-500"
-      >
-        {{ $t('historyPages.endOfImagesHistory') }}
-      </div>
+          <!-- Skeleton for loading more items -->
+          <USkeleton
+            v-if="isLoading"
+            v-for="n in filterParams.value.items_per_page"
+            :key="'skeleton-' + n"
+            class="w-full aspect-square"
+          />
+        </UPageColumns>
+      </template>
     </UContainer>
   </UPage>
 </template>

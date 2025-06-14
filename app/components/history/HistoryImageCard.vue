@@ -63,7 +63,7 @@ const generateWithPrompt = () => {
 };
 
 const firstImage = computed(() => {
-  return props.data?.reference_items?.[0] || {};
+  return props.data?.generated_image?.[0] || {};
 });
 </script>
 
@@ -79,7 +79,7 @@ const firstImage = computed(() => {
   >
     <div class="relative w-full h-full aspect-square sm:aspect-auto">
       <img
-        :src="firstImage?.url"
+        :src="firstImage?.image_url"
         :alt="title"
         class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
         @click="openFullScreen"
@@ -148,7 +148,7 @@ const firstImage = computed(() => {
         >
           <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
           <img
-            :src="imageUrl"
+            :src="firstImage?.image_url"
             :alt="title"
             class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
             @click.stop

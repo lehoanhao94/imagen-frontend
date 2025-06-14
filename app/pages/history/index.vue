@@ -170,34 +170,49 @@ const checkScrollPosition = debounce(() => {
         </div>
       </div>
       <!-- Content -->
-      <div class="masonry">
-        <Motion
-          class="masonry-item"
-          v-for="(row, index) in librariesData"
-          :key="`row-${index}`"
-          :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)',
-          }"
-          :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)',
-          }"
-          :transition="{
-            duration: 0.6,
-            delay: index * 0.1,
-          }"
-        >
-          <component :is="historyComponents[row.type]" :data="row"/>
-        </Motion>
-      </div>
-      <!-- Loading indicator -->
-      <div v-if="isLoading" class="flex justify-center items-center py-10">
-        <UIcon name="i-lucide-loader" class="animate-spin text-primary h-8 w-8 mr-2" />
-        <span class="text-primary">{{ $t("loadingMoreItems") }}</span>
-      </div>
+      <!-- Skeleton for initial loading -->
+      <template v-if="isLoading && librariesData.length === 0">
+        <div class="masonry">
+          <USkeleton
+            v-for="n in 5"
+            :key="n"
+            class="masonry-item w-full aspect-3/4 rounded-lg shadow-lg"
+          />
+        </div>
+      </template>
+      <!-- Actual content and load-more skeleton -->
+      <template v-else>
+        <div class="masonry">
+          <Motion
+            class="masonry-item"
+            v-for="(row, index) in librariesData"
+            :key="`row-${index}`"
+            :initial="{
+              scale: 1.1,
+              opacity: 0,
+              filter: 'blur(20px)',
+            }"
+            :animate="{
+              scale: 1,
+              opacity: 1,
+              filter: 'blur(0px)',
+            }"
+            :transition="{
+              duration: 0.6,
+              delay: index * 0.1,
+            }"
+          >
+            <component :is="historyComponents[row.type]" :data="row" />
+          </Motion>
+          <!-- Skeleton for loading more items -->
+          <USkeleton
+            v-if="isLoading"
+            v-for="n in 7"
+            :key="'skeleton-' + n"
+            class="masonry-item w-full aspect-square"
+          />
+        </div>
+      </template>
 
       <!-- End of list indicator for intersection observer -->
       <div
