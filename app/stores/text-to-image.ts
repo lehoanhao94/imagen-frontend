@@ -37,10 +37,7 @@ export const useTextToImageStore = defineStore('textToImageStore', {
         this.errors.textToImage = null
         this.textToImageResult = {
           title: payload.prompt,
-          prompt: payload.prompt,
-          preset: payload.model,
-          style: payload.style || '',
-          resolution: payload.aspect_ratio || ''
+          ...payload
         }
         // Create FormData for multipart/form-data
         const formData = new FormData()

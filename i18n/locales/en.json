@@ -31,8 +31,7 @@
   "confirm": "Confirm",
   "listenToSpeech": "Listen to Speech",
   "generateSimilar": "Generate Similar",
-  "personGeneration": "Person Generation",
-  "safetyFilter": "Safety Filter",
+  "Safety Filter": "Safety Filter",
   "personGeneration": {
     "dontAllow": "Don't Allow",
     "allowAdult": "Allow Adult",
@@ -40,7 +39,7 @@
   },
   "safetyFilter": {
     "blockLowAndAbove": "Block Low and Above",
-    "blockMediumAndAbove": "Block Medium and Above", 
+    "blockMediumAndAbove": "Block Medium and Above",
     "blockOnlyHigh": "Block Only High",
     "blockNone": "Block None"
   },
@@ -651,7 +650,7 @@
   },
   "aspectRatio": "Aspect Ratio",
   "Image Reference": "Image Reference",
-  "personGeneration": "Person Generation",
+  "Person Generation": "Person Generation",
   "safety_filter_level": "Safety Filter Level",
   "used_credit": "Used Credit"
 }

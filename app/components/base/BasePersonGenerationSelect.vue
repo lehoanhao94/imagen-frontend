@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface PersonGenerationSelectProps {
-  modelValue: string
+  modelValue: any
 }
 
 const props = defineProps<PersonGenerationSelectProps>()
@@ -10,30 +10,42 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 
-const personGenerationOptions = [
-  { label: t('personGeneration.dontAllow'), value: 'DONT_ALLOW' },
-  { label: t('personGeneration.allowAdult'), value: 'ALLOW_ADULT' },
-  { label: t('personGeneration.allowAll'), value: 'ALLOW_ALL' }
-]
+const personGenerationOptions = computed(() => {
+  return [
+    { label: t('personGeneration.dontAllow'), value: 'DONT_ALLOW' },
+    { label: t('personGeneration.allowAdult'), value: 'ALLOW_ADULT' },
+    { label: t('personGeneration.allowAll'), value: 'ALLOW_ALL' }
+  ]
+})
 
-const updateValue = (value: string) => {
+const updateValue = (value: any) => {
   emit('update:modelValue', value)
 }
+
+const selectedLabel = computed(() => {
+  return personGenerationOptions.value.find(
+    row => row.value === props.modelValue
+  )?.label
+})
 </script>
 
 <template>
   <USelectMenu
     :model-value="props.modelValue"
-    :options="personGenerationOptions"
-    option-attribute="label"
-    value-attribute="value"
+    :items="personGenerationOptions"
+    value-key="value"
     size="sm"
-    icon="hugeicons:user-settings"
+    icon="material-symbols-light:person-pin"
     class="min-w-40 hover:bg-default focus:bg-default data-[state=open]:bg-default"
     :ui="{
-      trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
+      trailingIcon:
+        'group-data-[state=open]:rotate-180 transition-transform duration-200',
       content: 'w-48'
     }"
     @update:model-value="updateValue"
-  />
+  >
+    <template #default>
+      {{ selectedLabel }}
+    </template>
+  </USelectMenu>
 </template>

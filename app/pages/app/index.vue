@@ -106,7 +106,7 @@ const onGenerate = () => {
         delay: 0.5
       }"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
+      <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
         <UFormField :label="$t('model')">
           <BaseModelSelect
             v-model="model"
@@ -130,13 +130,13 @@ const onGenerate = () => {
         >
           <BaseImageDimensionsSelect />
         </UFormField>
-        <UFormField :label="$t('personGeneration')">
+        <UFormField :label="$t('Person Generation')">
           <BasePersonGenerationSelect
             v-model="personGeneration"
             class="w-full"
           />
         </UFormField>
-        <UFormField :label="$t('safetyFilter')">
+        <UFormField :label="$t('Safety Filter')">
           <BaseSafetyFilterSelect
             v-model="safetyFilterLevel"
             class="w-full"
