@@ -24,6 +24,8 @@ export const useTextToImageStore = defineStore('textToImageStore', {
       model: string
       style?: string
       aspect_ratio?: string
+      person_generation?: string
+      safety_filter_level?: string
       files?: File[]
     }) {
       const appStore = useAppStore()
@@ -49,6 +51,14 @@ export const useTextToImageStore = defineStore('textToImageStore', {
 
         if (payload.style) {
           formData.append('style', payload.style)
+        }
+
+        if (payload.person_generation) {
+          formData.append('person_generation', payload.person_generation)
+        }
+
+        if (payload.safety_filter_level) {
+          formData.append('safety_filter_level', payload.safety_filter_level)
         }
 
         // Add files if provided

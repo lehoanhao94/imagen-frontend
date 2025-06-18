@@ -28,6 +28,19 @@
   "generate": "Tạo ảnh",
   "cancel": "Hủy",
   "confirm": "Xác nhận",
+  "personGeneration": "Tạo hình người",
+  "safetyFilter": "Bộ lọc an toàn",
+  "personGeneration": {
+    "dontAllow": "Không cho phép",
+    "allowAdult": "Cho phép người lớn",
+    "allowAll": "Cho phép tất cả"
+  },
+  "safetyFilter": {
+    "blockLowAndAbove": "Chặn thấp trở lên",
+    "blockMediumAndAbove": "Chặn trung bình trở lên",
+    "blockOnlyHigh": "Chỉ chặn cao",
+    "blockNone": "Không chặn"
+  },
   "nav": {
     "aitool": "Công cụ AI",
     "history": "Lịch sử",
