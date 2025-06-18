@@ -8,11 +8,15 @@ const emit = defineEmits<{
   'update:modelValue': [value: any]
 }>()
 
-const { safetyFilterOptions } = useSafetyFilterOptions()
+const { safetyFilterOptions, getSafetyFilterLabel } = useSafetyFilterOptions()
 
 const updateValue = (value: any) => {
   emit('update:modelValue', value)
 }
+
+const selectedLabel = computed(() => {
+  return getSafetyFilterLabel(props.modelValue)
+})
 </script>
 
 <template>
@@ -29,5 +33,9 @@ const updateValue = (value: any) => {
       content: 'w-48'
     }"
     @update:model-value="updateValue"
-  />
+  >
+    <template #default>
+      {{ selectedLabel }}
+    </template>
+  </USelectMenu>
 </template>
