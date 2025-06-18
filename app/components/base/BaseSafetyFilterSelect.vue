@@ -8,17 +8,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: any]
 }>()
 
-const { t } = useI18n()
-
-const safetyFilterOptions = [
-  { label: t('safetyFilter.blockLowAndAbove'), value: 'BLOCK_LOW_AND_ABOVE' },
-  {
-    label: t('safetyFilter.blockMediumAndAbove'),
-    value: 'BLOCK_MEDIUM_AND_ABOVE'
-  },
-  { label: t('safetyFilter.blockOnlyHigh'), value: 'BLOCK_ONLY_HIGH' },
-  { label: t('safetyFilter.blockNone'), value: 'BLOCK_NONE' }
-]
+const { safetyFilterOptions } = useSafetyFilterOptions()
 
 const updateValue = (value: any) => {
   emit('update:modelValue', value)

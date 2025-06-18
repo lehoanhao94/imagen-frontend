@@ -8,24 +8,14 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
 }>()
 
-const { t } = useI18n()
-
-const personGenerationOptions = computed(() => {
-  return [
-    { label: t('personGeneration.dontAllow'), value: 'DONT_ALLOW' },
-    { label: t('personGeneration.allowAdult'), value: 'ALLOW_ADULT' },
-    { label: t('personGeneration.allowAll'), value: 'ALLOW_ALL' }
-  ]
-})
+const { personGenerationOptions, getPersonGenerationLabel } = usePersonGenerationOptions()
 
 const updateValue = (value: any) => {
   emit('update:modelValue', value)
 }
 
 const selectedLabel = computed(() => {
-  return personGenerationOptions.value.find(
-    row => row.value === props.modelValue
-  )?.label
+  return getPersonGenerationLabel(props.modelValue)
 })
 </script>
 
