@@ -31,6 +31,19 @@
   "confirm": "Confirm",
   "listenToSpeech": "Listen to Speech",
   "generateSimilar": "Generate Similar",
+  "personGeneration": "Person Generation",
+  "safetyFilter": "Safety Filter",
+  "personGeneration": {
+    "dontAllow": "Don't Allow",
+    "allowAdult": "Allow Adult",
+    "allowAll": "Allow All"
+  },
+  "safetyFilter": {
+    "blockLowAndAbove": "Block Low and Above",
+    "blockMediumAndAbove": "Block Medium and Above", 
+    "blockOnlyHigh": "Block Only High",
+    "blockNone": "Block None"
+  },
   "nav": {
     "aitool": "AI Tool",
     "history": "History",

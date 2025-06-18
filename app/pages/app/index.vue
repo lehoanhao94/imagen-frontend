@@ -32,6 +32,10 @@ const { textToImageResult, aiToolImageCardRef, prompt }
 // Local state for selected images
 const selectedImages = ref<ImageFile[]>([])
 
+// Local state for person generation and safety filter
+const personGeneration = ref('DONT_ALLOW')
+const safetyFilterLevel = ref('BLOCK_LOW_AND_ABOVE')
+
 // Handle image selection
 const handleImagesSelected = (images: ImageFile[]) => {
   selectedImages.value = images
@@ -42,12 +46,14 @@ const handleImagesSelected = (images: ImageFile[]) => {
 const onGenerate = () => {
   // Extract File objects from selected images
   const files = selectedImages.value.map(img => img.file).filter(Boolean)
-  
+
   textToImageStore.textToImage({
     prompt: prompt.value,
     model: model.value?.value || 'gemini-2.0-flash-exp-image-generation',
     style: style.value || 'Portrait',
     aspect_ratio: imageDimension.value || '1:1',
+    person_generation: personGeneration.value,
+    safety_filter_level: safetyFilterLevel.value,
     files: files
   })
 }
@@ -127,6 +133,18 @@ const onGenerate = () => {
           :label="$t('imageDimensions')"
         >
           <BaseImageDimensionsSelect />
+        </UFormField>
+        <UFormField :label="$t('personGeneration')">
+          <BasePersonGenerationSelect
+            v-model="personGeneration"
+            class="w-full"
+          />
+        </UFormField>
+        <UFormField :label="$t('safetyFilter')">
+          <BaseSafetyFilterSelect
+            v-model="safetyFilterLevel"
+            class="w-full"
+          />
         </UFormField>
         <div
           v-if="model?.options?.includes('yourImage')"
