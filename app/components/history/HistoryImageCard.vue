@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue'
 
 const props = defineProps({
   orientation: {
     type: String,
-    default: "horizontal",
+    default: 'horizontal'
   },
   imageUrl: {
     type: String,
     default:
-      "https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512",
+      'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512'
   },
   // preset: {
   //   type: String,
@@ -25,51 +25,52 @@ const props = defineProps({
   // },
   data: {
     type: Object,
-    default: () => ({}),
-  },
-});
+    default: () => ({})
+  }
+})
 
-const isFullScreenOpen = ref(false);
-const isHovered = ref(false);
-const isTouchDevice = ref(false);
+const isFullScreenOpen = ref(false)
+const isHovered = ref(false)
+const isTouchDevice = ref(false)
 
 // Check if it's a touch device on component mount
 onMounted(() => {
-  isTouchDevice.value = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-});
+  isTouchDevice.value
+    = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+})
 
 const openFullScreen = () => {
   // On touch devices, first tap shows overlay, second tap opens fullscreen
   if (isTouchDevice.value && !isHovered.value) {
-    isHovered.value = true;
-    return;
+    isHovered.value = true
+    return
   }
 
-  isFullScreenOpen.value = true;
-};
+  isFullScreenOpen.value = true
+}
 
 const generateWithPrompt = () => {
   // Implement the generate functionality here
-  console.log("Generating with prompt:", props.prompt);
-};
+  console.log('Generating with prompt:', props.prompt)
+}
 
 const firstImage = computed(() => {
-  return props.data?.generated_image?.[0] || {};
-});
+  return props.data?.generated_image?.[0] || {}
+})
 
 const title = computed(() => {
-  return props.data?.input_text;
-});
+  return props.data?.input_text
+})
 
 const preset = computed(() => {
-  return props.data?.model_name || props.data?.model || "Imagen";
-});
+  return props.data?.model_name || props.data?.model || 'Imagen'
+})
 const resolution = computed(() => {
-  return props.data?.resolution || "1024x1024";
-});
+  return props.data?.resolution || '1024x1024'
+})
 const style = computed(() => {
-  return props.data?.style || "Dynamic";
-});
+  return props.data?.style || 'Dynamic'
+})
 </script>
 
 <template>
@@ -80,8 +81,9 @@ const style = computed(() => {
       spotlight-color="primary"
       :ui="{
         container: 'lg:items-start sm:p-0',
-        root: 'overflow-hidden relative group',
+        root: 'overflow-hidden relative group'
       }"
+      @click="openFullScreen"
     >
       <div class="relative w-full h-full aspect-square sm:aspect-auto">
         <img
@@ -89,10 +91,10 @@ const style = computed(() => {
           :alt="title"
           class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
           @click="openFullScreen"
-        />
+        >
         <!-- Hover Overlay -->
         <div
-          class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-100 flex flex-col justify-between p-4"
+          class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity  flex flex-col justify-between p-4"
           :class="{ 'opacity-100': isHovered }"
         >
           <div class="flex justify-between items-start gap-2">
@@ -130,7 +132,7 @@ const style = computed(() => {
     v-model:open="isFullScreenOpen"
     fullscreen
     :ui="{
-      content: 'bg-black/90 backdrop-blur-xl',
+      content: 'bg-black/90 backdrop-blur-xl'
     }"
     @keydown.esc="isFullScreenOpen = false"
   >
@@ -158,7 +160,7 @@ const style = computed(() => {
             :alt="title"
             class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
             @click.stop
-          />
+          >
         </div>
 
         <!-- Right side: Image information and Generate button -->

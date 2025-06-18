@@ -24,9 +24,10 @@
   "generate": "Generieren",
   "nav": {
     "aitool": "KI-Tool",
-    "library": "Bibliothek",
     "api": "API",
-    "login": "Anmelden"
+    "login": "Anmelden",
+    "history": "Geschichte",
+    "orders": "Bestellungen"
   },
   "3D Render": "3D-Rendering",
   "Acrylic": "Acryl",
@@ -309,15 +310,6 @@
     "components": "Komponenten"
   },
   "loadingMoreItems": "Weitere Artikel werden geladen...",
-  "library": {
-    "tabs": {
-      "imagen": "Bild",
-      "video": "Video",
-      "speech": "Sprache",
-      "music": "Musik",
-      "library": "Library"
-    }
-  },
   "promptLabel": "Aufforderung:",
   "videoExamples": "Videobeispiele",
   "videoExamplesDescription": "Erkunden Sie diese Video-Beispiele mit ihren Eingaben und Einstellungen. Klicken Sie auf eine beliebige Schaltfläche 'Diesen Prompt verwenden', um den Prompt in Ihr Eingabefeld zu kopieren.",
@@ -375,17 +367,113 @@
       "title": "Error loading notifications"
     },
     "types": {
-      "ttsHistory": {
-        "title": "Audio Generation Complete",
-        "description": "Your text-to-speech audio has been generated successfully"
-      },
-      "voiceTraining": {
-        "title": "Voice Training Complete",
-        "description": "Your custom voice model training has finished"
-      },
       "default": {
         "title": "Notification",
         "description": "You have a new notification"
+      },
+      "video_1": {
+        "title": "Videoerstellung ausstehend",
+        "description": "Die Videogenerierung wartet auf die Verarbeitung."
+      },
+      "video_2": {
+        "title": "Videoerstellung abgeschlossen",
+        "description": "Video wurde erfolgreich erstellt."
+      },
+      "video_3": {
+        "title": "Videoerstellung fehlgeschlagen",
+        "description": "Videogenerierung fehlgeschlagen"
+      },
+      "image_1": {
+        "title": "Bildgenerierung ausstehend",
+        "description": "Die Bilderzeugung wartet auf die Bearbeitung."
+      },
+      "image_2": {
+        "title": "Bilderzeugung abgeschlossen",
+        "description": "Das Bild wurde erfolgreich generiert."
+      },
+      "image_3": {
+        "title": "Bilderstellung fehlgeschlagen",
+        "description": "Bildgenerierung fehlgeschlagen"
+      },
+      "tts_history_1": {
+        "title": "Audioerzeugung ausstehend",
+        "description": "Text-to-Speech wartet darauf, verarbeitet zu werden."
+      },
+      "tts_history_2": {
+        "title": "Audiogenerierung abgeschlossen",
+        "description": "Die Text-zu-Sprache-Audio wurde erfolgreich generiert."
+      },
+      "tts_history_3": {
+        "title": "Audiogenerierung fehlgeschlagen",
+        "description": "Die Text-zu-Sprache-Generierung ist fehlgeschlagen."
+      },
+      "voice_training_1": {
+        "title": "Sprachtraining ausstehend",
+        "description": "Stimmtraining wartet auf die Bearbeitung."
+      },
+      "voice_training_2": {
+        "title": "Sprachtraining abgeschlossen",
+        "description": "Das Training des benutzerdefinierten Sprachmodells wurde erfolgreich abgeschlossen."
+      },
+      "voice_training_3": {
+        "title": "Stimmtraining fehlgeschlagen",
+        "description": "Stimmtraining fehlgeschlagen"
+      },
+      "music_1": {
+        "title": "Musikgeneration ausstehend",
+        "description": "Musikerzeugung wartet darauf, verarbeitet zu werden."
+      },
+      "music_2": {
+        "title": "Musikerzeugung abgeschlossen",
+        "description": "KI-Musik wurde erfolgreich generiert."
+      },
+      "music_3": {
+        "title": "Musikerstellung fehlgeschlagen",
+        "description": "Musikerstellung fehlgeschlagen"
+      },
+      "speech_1": {
+        "title": "Spracherzeugung ausstehend",
+        "description": "Ihre Anfrage zur Spracherzeugung wartet auf die Verarbeitung."
+      },
+      "speech_2": {
+        "title": "Spracherzeugung abgeschlossen",
+        "description": "Ihre Rede wurde erfolgreich erstellt."
+      },
+      "speech_3": {
+        "title": "Sprachgenerierung fehlgeschlagen",
+        "description": "Ihre Spracherstellung ist fehlgeschlagen. Bitte versuchen Sie es erneut."
+      }
+    },
+    "time": {
+      "justNow": "Gerade eben",
+      "minutesAgo": "Vor {minutes} Minuten",
+      "hoursAgo": "Vor {hours} Stunden",
+      "yesterday": "Gestern"
+    },
+    "status": {
+      "processing": {
+        "title": "Verarbeitung",
+        "description": "Ihre Anfrage wird bearbeitet."
+      },
+      "success": {
+        "title": "Abgeschlossen",
+        "description": "Erfolgreich abgeschlossen"
+      },
+      "failed": {
+        "title": "Fehlgeschlagen",
+        "description": "Ein Fehler ist bei der Verarbeitung aufgetreten."
+      },
+      "warning": {
+        "title": "Warnung",
+        "description": "Abgeschlossen mit Warnungen"
+      },
+      "pending": {
+        "title": "Ausstehend",
+        "description": "Warten auf die Bearbeitung"
+      },
+      "cancelled": {
+        "title": "Abgesagt",
+        "description": "Anfrage wurde storniert"
       }
     }
   },
@@ -398,30 +486,6 @@
     "doctransGPT": "DoctransGPT",
     "nuxtUIOnDiscord": "Nuxt UI on Discord",
     "youtube": "Youtube"
-  },
-  "libraryPages": {
-    "imagenDescription": "Browse your AI-generated images and artwork",
-    "musicDescription": "Browse your AI-generated music and audio content",
-    "speechDescription": "Browse your AI-generated speech and voice content",
-    "videoDescription": "Browse your AI-generated videos and animations",
-    "imagenBreadcrumb": "Imagen",
-    "musicBreadcrumb": "Music",
-    "speechBreadcrumb": "Speech",
-    "videoBreadcrumb": "Video Generation",
-    "endOfImagesLibrary": "You've reached the end of the images library",
-    "endOfMusicLibrary": "You've reached the end of the music library",
-    "endOfSpeechLibrary": "You've reached the end of the speech library",
-    "endOfVideoLibrary": "You've reached the end of the video library",
-    "noVideosFound": "No videos found",
-    "noVideosFoundDescription": "Start generating videos to see them here.",
-    "backToLibrary": "Back to Library",
-    "errorLoadingVideo": "Error Loading Video",
-    "loadingVideoDetails": "Loading video details...",
-    "videoDetails": "Video Details",
-    "videoInformation": "Video Information",
-    "videoNotFound": "The video you are looking for could not be found or loaded.",
-    "aiContentLibraryTitle": "AI Content Library",
-    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",
@@ -450,5 +514,131 @@
     "dontAllow": "Nicht erlauben",
     "voices": "Stimmen",
     "pickVoice": "Stimme auswählen"
-  }
+  },
+  "common": {
+    "home": "Zuhause"
+  },
+  "Describe the speech you want to generate...": "Beschreiben Sie die Rede, die Sie generieren möchten...",
+  "listenToSpeech": "Rede anhören",
+  "generateSimilar": "Ähnliches erzeugen",
+  "voice": "Stimme",
+  "emotion": "Emotion",
+  "speed": "Geschwindigkeit",
+  "speed_settings": "Geschwindigkeitseinstellungen",
+  "speed_value": "Geschwindigkeitswert",
+  "speed_slider": "Geschwindigkeitsregler",
+  "apply": "Anwenden",
+  "speech_settings": "Spracheinstellungen",
+  "current_speed": "Aktuelle Geschwindigkeit",
+  "reset_defaults": "Auf Standardeinstellungen zurücksetzen",
+  "outputFormat": "Ausgabeformat",
+  "outputChannel": "Ausgabekanal",
+  "selectVoice": "Stimme auswählen",
+  "selectEmotion": "Emotion auswählen",
+  "selectFormat": "Format auswählen",
+  "selectChannel": "Kanal auswählen",
+  "noVoicesAvailable": "Keine Stimmen verfügbar",
+  "noEmotionsAvailable": "Keine Emotionen verfügbar",
+  "searchVoices": "Stimmen suchen...",
+  "searchEmotions": "Emotionssuche...",
+  "noVoicesFound": "Keine Stimmen gefunden",
+  "noEmotionsFound": "Keine Emotionen gefunden",
+  "retry": "Erneut versuchen",
+  "noAudioSample": "Kein Audio-Beispiel verfügbar",
+  "Speech Generation Complete": "Spracherzeugung abgeschlossen",
+  "Your speech has been generated successfully": "Ihre Rede wurde erfolgreich erstellt.",
+  "stripe": "Streifen",
+  "stripeDescription": "Sicher mit Stripe bezahlen",
+  "history": {
+    "tabs": {
+      "imagen": "Bild",
+      "video": "Video",
+      "speech": "Rede",
+      "music": "Musik",
+      "history": "Geschichte"
+    }
+  },
+  "orders": {
+    "title": "Bestellverlauf",
+    "description": "Zeigen Sie Ihre Transaktions- und Zahlungshistorie an.",
+    "orderId": "Bestell-ID",
+    "amount": "Betrag",
+    "credits": "Guthaben",
+    "quantity": "Menge",
+    "platform": "Plattform",
+    "externalId": "Transaktions-ID",
+    "status": {
+      "completed": "Abgeschlossen",
+      "success": "Erfolg",
+      "paid": "Bezahlt",
+      "pending": "Ausstehend",
+      "processing": "Verarbeitung",
+      "failed": "Fehlgeschlagen",
+      "cancelled": "Abgesagt",
+      "error": "Fehler"
+    },
+    "empty": {
+      "title": "Noch keine Bestellungen.",
+      "description": "Sie haben noch keine Bestellungen aufgegeben. Kaufen Sie Guthaben, um unsere Dienste zu nutzen.",
+      "action": "Guthaben kaufen"
+    },
+    "endOfList": "Sie haben alle Bestellungen gesehen.",
+    "errors": {
+      "fetchFailed": "Fehler beim Laden der Bestellhistorie. Bitte versuchen Sie es erneut."
+    },
+    "meta": {
+      "title": "Bestellverlauf - Imagen AI",
+      "description": "Sehen Sie sich Ihren Transaktions- und Zahlungsverlauf auf Imagen AI an"
+    }
+  },
+  "historyPages": {
+    "imagenDescription": "Durchsuchen Sie Ihre KI-generierten Bilder und Kunstwerke",
+    "musicDescription": "Durchsuchen Sie Ihre KI-generierten Musik- und Audioinhalte",
+    "speechDescription": "Durchsuchen Sie Ihre KI-generierten Sprach- und Stimm-Inhalte.",
+    "videoDescription": "Durchsuchen Sie Ihre KI-generierten Videos und Animationen",
+    "imagenBreadcrumb": "Bild",
+    "musicBreadcrumb": "Musik",
+    "speechBreadcrumb": "Rede",
+    "videoBreadcrumb": "Videoproduktion",
+    "endOfImagesHistory": "Sie haben das Ende der Bildhistorie erreicht.",
+    "endOfMusicHistory": "Du hast das Ende der Musikgeschichte erreicht.",
+    "endOfSpeechHistory": "Sie haben das Ende der Redegeschichte erreicht.",
+    "endOfVideoHistory": "Sie haben das Ende der Videohistorie erreicht.",
+    "noVideosFound": "Keine Videos gefunden",
+    "noVideosFoundDescription": "Beginnen Sie mit der Erstellung von Videos, um sie hier zu sehen.",
+    "backToLibrary": "Zurück zur Bibliothek",
+    "errorLoadingVideo": "Fehler beim Laden des Videos",
+    "loadingVideoDetails": "Lade Videodetails...",
+    "videoDetails": "Videodetails",
+    "videoInformation": "Videoinformationen",
+    "videoNotFound": "Das gewünschte Video konnte nicht gefunden oder geladen werden.",
+    "aiContentLibraryTitle": "AI-Inhaltsbibliothek",
+    "aiContentLibraryDescription": "Durchsuchen und verwalten Sie Ihre KI-generierten Inhalte in verschiedenen Kategorien."
+  },
+  "demo": {
+    "notifications": {
+      "title": "Benachrichtigungstypen & Statusdemo",
+      "description": "Beispiele für verschiedene Benachrichtigungstypen mit unterschiedlichen Statuszuständen",
+      "statusLegend": "Statuslegende"
+    },
+    "speechVoiceSelect": {
+      "title": "Sprachauswahl-Demo",
+      "description": "Vorführung der wiederverwendbaren BaseSpeechVoiceSelectModal-Komponente mit modelValue-Props"
+    }
+  },
+  "models": {
+    "imagen3": "Bild 3",
+    "gemini2Flash": "Gemini 2.0 Blitz",
+    "gemini25Flash": "Gemini 2.5 Blitz",
+    "sunoAI": "Suno KI",
+    "udio": "Udio",
+    "veo2": "Veo 2",
+    "veo3": "Ich sehe 3",
+    "imagen4": "Bild 4"
+  },
+  "aspectRatio": "Seitenverhältnis",
+  "Image Reference": "Bildreferenz",
+  "personGeneration": "Personengeneration",
+  "safety_filter_level": "Sicherheitsfilterstufe",
+  "used_credit": "Gebrauchter Kredit"
 }

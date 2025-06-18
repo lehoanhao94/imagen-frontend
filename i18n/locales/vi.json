@@ -575,28 +575,28 @@
     "youtube": "Youtube"
   },
   "historyPages": {
-    "imagenDescription": "Duyệt qua các hình ảnh và tác phẩm nghệ thuật được tạo bằng AI của bạn",
-    "musicDescription": "Duyệt qua nội dung âm nhạc và âm thanh được tạo bằng AI của bạn",
-    "speechDescription": "Duyệt qua nội dung giọng nói và voice được tạo bằng AI của bạn",
-    "videoDescription": "Duyệt qua các video và hoạt hình được tạo bằng AI của bạn",
-    "imagenBreadcrumb": "Imagen",
+    "backToLibrary": "Quay lại thư viện",
+    "aiContentLibraryTitle": "Thư viện nội dung AI",
+    "aiContentLibraryDescription": "Khám phá thư viện nội dung AI được tạo ra",
+    "imagenDescription": "Duyệt qua hình ảnh và tác phẩm nghệ thuật do AI tạo ra của bạn",
+    "musicDescription": "Duyệt qua nội dung nhạc và âm thanh do AI tạo ra của bạn",
+    "speechDescription": "Duyệt qua nội dung bài phát biểu và giọng nói do AI tạo ra của bạn",
+    "videoDescription": "Duyệt qua video và hoạt hình do AI tạo ra của bạn.",
+    "imagenBreadcrumb": "Hình ảnh",
     "musicBreadcrumb": "Âm nhạc",
-    "speechBreadcrumb": "Giọng nói",
+    "speechBreadcrumb": "Bài phát biểu",
     "videoBreadcrumb": "Tạo video",
-    "endOfImagesHistory": "Bạn đã xem hết lịch sử hình ảnh",
-    "endOfMusicHistory": "Bạn đã xem hết lịch sử âm nhạc",
-    "endOfSpeechHistory": "Bạn đã xem hết lịch sử giọng nói",
-    "endOfVideoHistory": "Bạn đã xem hết lịch sử video",
-    "noVideosFound": "Không tìm thấy video",
+    "endOfImagesHistory": "Bạn đã xem hết lịch sử hình ảnh.",
+    "endOfMusicHistory": "Bạn đã đi tới phần cuối của lịch sử âm nhạc.",
+    "endOfSpeechHistory": "Bạn đã đến phần cuối của lịch sử bài phát biểu.",
+    "endOfVideoHistory": "Bạn đã xem hết lịch sử video.",
+    "noVideosFound": "Không tìm thấy video nào",
     "noVideosFoundDescription": "Bắt đầu tạo video để xem chúng ở đây.",
-    "backToHistory": "Quay lại lịch sử",
-    "errorLoadingVideo": "Lỗi tải video",
-    "loadingVideoDetails": "Đang tải thông tin video...",
-    "videoDetails": "Thông tin video",
+    "errorLoadingVideo": "Lỗi Tải Video",
+    "loadingVideoDetails": "Đang tải chi tiết video...",
+    "videoDetails": "Chi tiết video",
     "videoInformation": "Thông tin video",
-    "videoNotFound": "Video bạn đang tìm kiếm không thể tìm thấy hoặc tải được.",
-    "aiContentHistoryTitle": "AI Content History",
-    "aiContentHistoryDescription": "Browse and manage your AI-generated content across different categories"
+    "videoNotFound": "Video bạn đang tìm không thể tìm thấy hoặc tải được."
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",
@@ -640,11 +640,18 @@
     "speechVoiceSelect": {
       "title": "Demo Chọn Giọng Nói",
       "description": "Demonstrating component BaseSpeechVoiceSelectModal với modelValue props"
+    },
+    "notifications": {
+      "title": "Loại Thông Báo & Trạng Thái Demo",
+      "description": "Ví dụ về các loại thông báo khác nhau với các trạng thái khác nhau.",
+      "statusLegend": "Trạng thái huyền thoại"
     }
   },
-  "historyPages": {
-    "backToLibrary": "Quay lại thư viện",
-    "aiContentLibraryTitle": "Thư viện nội dung AI",
-    "aiContentLibraryDescription": "Khám phá thư viện nội dung AI được tạo ra"
-  }
+  "listenToSpeech": "Nghe bài phát biểu",
+  "generateSimilar": "Tạo tương tự",
+  "aspectRatio": "Tỷ lệ khung hình",
+  "Image Reference": "Tham khảo hình ảnh",
+  "personGeneration": "Thế hệ con người",
+  "safety_filter_level": "Mức Độ Bộ Lọc An Toàn",
+  "used_credit": "Tín dụng đã sử dụng"
 }

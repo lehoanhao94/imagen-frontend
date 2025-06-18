@@ -26,7 +26,8 @@
     "aitool": "AI工具",
     "history": "历史",
     "api": "API",
-    "login": "登录"
+    "login": "登录",
+    "orders": "订单"
   },
   "3D Render": "3D渲染",
   "Acrylic": "丙烯酸",
@@ -375,17 +376,113 @@
       "title": "Error loading notifications"
     },
     "types": {
-      "ttsHistory": {
-        "title": "Audio Generation Complete",
-        "description": "Your text-to-speech audio has been generated successfully"
-      },
-      "voiceTraining": {
-        "title": "Voice Training Complete",
-        "description": "Your custom voice model training has finished"
-      },
       "default": {
         "title": "Notification",
         "description": "You have a new notification"
+      },
+      "video_1": {
+        "title": "视频生成中",
+        "description": "视频生成正在等待处理"
+      },
+      "video_2": {
+        "title": "视频生成完成",
+        "description": "视频已成功生成"
+      },
+      "video_3": {
+        "title": "视频生成失败",
+        "description": "视频生成失败"
+      },
+      "image_1": {
+        "title": "图像生成中",
+        "description": "图像生成正在等待处理"
+      },
+      "image_2": {
+        "title": "图像生成完成",
+        "description": "图像已成功生成"
+      },
+      "image_3": {
+        "title": "图像生成失败",
+        "description": "图像生成失败"
+      },
+      "tts_history_1": {
+        "title": "音频生成中",
+        "description": "文本转语音正在等待处理"
+      },
+      "tts_history_2": {
+        "title": "音频生成完成",
+        "description": "语音合成功能已成功生成音频"
+      },
+      "tts_history_3": {
+        "title": "音频生成失败",
+        "description": "文本转语音生成失败"
+      },
+      "voice_training_1": {
+        "title": "语音训练待定",
+        "description": "语音训练正在等待处理"
+      },
+      "voice_training_2": {
+        "title": "语音训练完成",
+        "description": "自定义语音模型训练已成功完成。"
+      },
+      "voice_training_3": {
+        "title": "语音训练失败",
+        "description": "语音训练失败"
+      },
+      "music_1": {
+        "title": "音乐生成中",
+        "description": "音乐生成正在等待处理。"
+      },
+      "music_2": {
+        "title": "音乐生成完成",
+        "description": "人工智能音乐已成功生成。"
+      },
+      "music_3": {
+        "title": "音乐生成失败",
+        "description": "音乐生成失败"
+      },
+      "speech_1": {
+        "title": "语音生成待定",
+        "description": "您的语音生成请求正在等待处理。"
+      },
+      "speech_2": {
+        "title": "语音生成完成",
+        "description": "您的演讲已成功生成。"
+      },
+      "speech_3": {
+        "title": "语音生成失败",
+        "description": "您的语音生成失败。请再试一次。"
+      }
+    },
+    "time": {
+      "justNow": "刚才",
+      "minutesAgo": "{minutes}分钟前",
+      "hoursAgo": "{hours}小时前",
+      "yesterday": "昨天"
+    },
+    "status": {
+      "processing": {
+        "title": "处理中",
+        "description": "您的请求正在处理中"
+      },
+      "success": {
+        "title": "已完成",
+        "description": "成功完成"
+      },
+      "failed": {
+        "title": "失败",
+        "description": "处理过程中发生错误"
+      },
+      "warning": {
+        "title": "警告",
+        "description": "已完成，但有警告"
+      },
+      "pending": {
+        "title": "待处理",
+        "description": "等待处理"
+      },
+      "cancelled": {
+        "title": "取消",
+        "description": "请求已取消"
       }
     }
   },
@@ -414,14 +511,14 @@
     "endOfVideoHistory": "You've reached the end of the video history",
     "noVideosFound": "No videos found",
     "noVideosFoundDescription": "Start generating videos to see them here.",
-    "backToHistory": "Back to History",
     "errorLoadingVideo": "Error Loading Video",
     "loadingVideoDetails": "Loading video details...",
     "videoDetails": "Video Details",
     "videoInformation": "Video Information",
     "videoNotFound": "The video you are looking for could not be found or loaded.",
-    "aiContentHistoryTitle": "AI Content History",
-    "aiContentHistoryDescription": "Browse and manage your AI-generated content across different categories"
+    "backToLibrary": "回到图书馆",
+    "aiContentLibraryTitle": "人工智能内容库",
+    "aiContentLibraryDescription": "浏览和管理不同类别的AI生成内容"
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",
@@ -450,5 +547,98 @@
     "dontAllow": "不允许",
     "voices": "语音",
     "pickVoice": "选择语音"
-  }
+  },
+  "common": {
+    "home": "家"
+  },
+  "Describe the speech you want to generate...": "描述您想要生成的讲话内容...",
+  "listenToSpeech": "收听演讲",
+  "generateSimilar": "生成相似",
+  "voice": "语音",
+  "emotion": "情感",
+  "speed": "速度",
+  "speed_settings": "速度设置",
+  "speed_value": "速度值",
+  "speed_slider": "速度滑块",
+  "apply": "申请",
+  "speech_settings": "语音设置",
+  "current_speed": "当前速度",
+  "reset_defaults": "恢复默认设置",
+  "outputFormat": "输出格式",
+  "outputChannel": "输出通道",
+  "selectVoice": "选择语音",
+  "selectEmotion": "选择情感",
+  "selectFormat": "选择格式",
+  "selectChannel": "选择频道",
+  "noVoicesAvailable": "没有可用的语音",
+  "noEmotionsAvailable": "没有情感可用",
+  "searchVoices": "搜索语音...",
+  "searchEmotions": "搜索情感...",
+  "noVoicesFound": "未找到语音",
+  "noEmotionsFound": "未发现情感",
+  "retry": "重试",
+  "noAudioSample": "暂无音频样本可用",
+  "Speech Generation Complete": "语音生成完成",
+  "Your speech has been generated successfully": "您的演讲已成功生成。",
+  "stripe": "Stripe",
+  "stripeDescription": "通过Stripe安全支付",
+  "orders": {
+    "title": "订单历史记录",
+    "description": "查看您的交易和支付历史",
+    "orderId": "订单编号",
+    "amount": "金额",
+    "credits": "积分",
+    "quantity": "数量",
+    "platform": "平台",
+    "externalId": "交易 ID",
+    "status": {
+      "completed": "已完成",
+      "success": "成功",
+      "paid": "已支付",
+      "pending": "待处理",
+      "processing": "处理",
+      "failed": "失败",
+      "cancelled": "已取消",
+      "error": "错误"
+    },
+    "empty": {
+      "title": "尚未收到订单",
+      "description": "您还没有下过订单。购买积分来开始使用我们的服务。",
+      "action": "购买积分"
+    },
+    "endOfList": "您已查看所有订单",
+    "errors": {
+      "fetchFailed": "加载订单历史失败。请重试。"
+    },
+    "meta": {
+      "title": "订单历史 - Imagen AI",
+      "description": "在Imagen AI上查看您的交易和付款历史"
+    }
+  },
+  "demo": {
+    "notifications": {
+      "title": "通知类型与状态演示",
+      "description": "不同通知类型与各种状态的示例",
+      "statusLegend": "状态图例"
+    },
+    "speechVoiceSelect": {
+      "title": "语音选择演示",
+      "description": "演示带有 modelValue 属性的可重用 BaseSpeechVoiceSelectModal 组件"
+    }
+  },
+  "models": {
+    "imagen3": "图像3",
+    "gemini2Flash": "双子座2.0闪光灯",
+    "gemini25Flash": "双子座 2.5 闪光",
+    "sunoAI": "Suno人工智能",
+    "udio": "乌迪欧",
+    "veo2": "我看见2",
+    "veo3": "维奥3",
+    "imagen4": "图像 4"
+  },
+  "aspectRatio": "纵横比",
+  "Image Reference": "图片参考",
+  "personGeneration": "人物生成",
+  "safety_filter_level": "安全过滤级别",
+  "used_credit": "已用信用额度"
 }

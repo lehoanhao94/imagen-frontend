@@ -30,13 +30,18 @@ export const useTextToImageStore = defineStore('textToImageStore', {
     }) {
       const appStore = useAppStore()
       this.textToImageResult = null
-      appStore.loading = true
       const toast = useToast()
 
       try {
         this.loadings.textToImage = true
         this.errors.textToImage = null
-
+        this.textToImageResult = {
+          title: payload.prompt,
+          prompt: payload.prompt,
+          preset: payload.model,
+          style: payload.style || '',
+          resolution: payload.aspect_ratio || ''
+        }
         // Create FormData for multipart/form-data
         const formData = new FormData()
 
@@ -80,39 +85,30 @@ export const useTextToImageStore = defineStore('textToImageStore', {
         // Handle the new response format
         const responseData = response.data
         let imageUrl = ''
-        let imageBase64 = ''
-
+        let firstImage
         // Check if response has generated_image array with image data
-        if (responseData.generated_image && responseData.generated_image.length > 0) {
-          const firstImage = responseData.generated_image[0]
+        if (
+          responseData.generated_image
+          && responseData.generated_image.length > 0
+        ) {
+          firstImage = responseData.generated_image[0]
           if (firstImage.image_url) {
             imageUrl = firstImage.image_url
           }
         }
 
-        // Fallback: try to extract from old format if needed
-        if (!imageUrl) {
-          const imageFromResult = responseData?.result?.find(
-            (item: any) => item.base_64_str
-          )?.base_64_str
-          if (imageFromResult) {
-            imageBase64 = imageFromResult
-            imageUrl = `data:image/jpeg;base64,${imageBase64}`
-          }
-        }
-
-        const prompt = responseData.input_text || responseData?.result?.find(
-          (item: any) => item.text
-        )?.text || payload.prompt
+        const prompt
+          = responseData.input_text
+            || responseData?.result?.find((item: any) => item.text)?.text
+            || payload.prompt
 
         this.textToImageResult = {
-          imageBase64,
           imageUrl,
           title: payload.prompt,
           prompt: prompt,
           preset: payload.model,
-          style: payload.style || '',
-          resolution: payload.aspect_ratio || ''
+          used_credit: responseData.used_credit || '',
+          ...firstImage
         }
 
         // scroll to image card

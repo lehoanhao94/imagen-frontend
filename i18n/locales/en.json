@@ -610,6 +610,10 @@
       "title": "Notification Types & Status Demo",
       "description": "Examples of different notification types with various status states",
       "statusLegend": "Status Legend"
+    },
+    "speechVoiceSelect": {
+      "title": "Speech Voice Select Demo",
+      "description": "Demonstrating the reusable BaseSpeechVoiceSelectModal component with modelValue props"
     }
   },
   "settings": "Settings",
@@ -645,10 +649,9 @@
     "voices": "Voices",
     "pickVoice": "Pick a voice"
   },
-  "demo": {
-    "speechVoiceSelect": {
-      "title": "Speech Voice Select Demo",
-      "description": "Demonstrating the reusable BaseSpeechVoiceSelectModal component with modelValue props"
-    }
-  }
+  "aspectRatio": "Aspect Ratio",
+  "Image Reference": "Image Reference",
+  "personGeneration": "Person Generation",
+  "safety_filter_level": "Safety Filter Level",
+  "used_credit": "Used Credit"
 }

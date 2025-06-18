@@ -24,9 +24,10 @@
   "generate": "生成",
   "nav": {
     "aitool": "AIツール",
-    "library": "ライブラリ",
     "api": "API",
-    "login": "ログイン"
+    "login": "ログイン",
+    "history": "歴史",
+    "orders": "注文"
   },
   "3D Render": "3Dレンダー",
   "Acrylic": "アクリル",
@@ -309,15 +310,6 @@
     "components": "コンポーネント"
   },
   "loadingMoreItems": "アイテムをさらに読み込んでいます...",
-  "library": {
-    "tabs": {
-      "imagen": "イマゲン",
-      "video": "ビデオ",
-      "speech": "スピーチ",
-      "music": "音楽",
-      "library": "Library"
-    }
-  },
   "promptLabel": "プロンプト：",
   "videoExamples": "ビデオの例",
   "videoExamplesDescription": "これらのビデオ例とそれらのプロンプトおよび設定を調べてください。「このプロンプトを使用」ボタンをクリックすると、プロンプトを入力欄にコピーできます。",
@@ -375,17 +367,113 @@
       "title": "Error loading notifications"
     },
     "types": {
-      "ttsHistory": {
-        "title": "Audio Generation Complete",
-        "description": "Your text-to-speech audio has been generated successfully"
-      },
-      "voiceTraining": {
-        "title": "Voice Training Complete",
-        "description": "Your custom voice model training has finished"
-      },
       "default": {
         "title": "Notification",
         "description": "You have a new notification"
+      },
+      "video_1": {
+        "title": "ビデオ生成が保留中",
+        "description": "ビデオ生成は処理待ちです。"
+      },
+      "video_2": {
+        "title": "ビデオ生成が完了しました。",
+        "description": "ビデオが正常に生成されました。"
+      },
+      "video_3": {
+        "title": "ビデオ生成に失敗しました。",
+        "description": "ビデオの生成に失敗しました"
+      },
+      "image_1": {
+        "title": "画像生成待ち",
+        "description": "画像生成は処理待ちです。"
+      },
+      "image_2": {
+        "title": "画像生成完了",
+        "description": "画像が正常に生成されました。"
+      },
+      "image_3": {
+        "title": "画像の生成に失敗しました。",
+        "description": "画像生成に失敗しました。"
+      },
+      "tts_history_1": {
+        "title": "オーディオ生成保留中",
+        "description": "音声合成は処理待ちです。"
+      },
+      "tts_history_2": {
+        "title": "オーディオ生成が完了しました。",
+        "description": "テキスト読み上げ音声が正常に生成されました。"
+      },
+      "tts_history_3": {
+        "title": "オーディオの生成に失敗しました。",
+        "description": "音声合成に失敗しました。"
+      },
+      "voice_training_1": {
+        "title": "発声トレーニング保留中",
+        "description": "ボイストレーニングは処理待ちです。"
+      },
+      "voice_training_2": {
+        "title": "ボイストレーニング完了",
+        "description": "カスタム音声モデルのトレーニングが無事に完了しました。"
+      },
+      "voice_training_3": {
+        "title": "ボイストレーニングが失敗しました。",
+        "description": "ボイストレーニングに失敗しました。"
+      },
+      "music_1": {
+        "title": "音楽生成保留",
+        "description": "音楽生成が処理を待っています。"
+      },
+      "music_2": {
+        "title": "音楽生成完了",
+        "description": "AI音楽が正常に生成されました。"
+      },
+      "music_3": {
+        "title": "音楽の生成に失敗しました。",
+        "description": "音楽の生成に失敗しました。"
+      },
+      "speech_1": {
+        "title": "スピーチ生成保留中",
+        "description": "あなたのスピーチ生成リクエストは処理待ちです。"
+      },
+      "speech_2": {
+        "title": "音声生成完了",
+        "description": "スピーチの生成が成功しました。"
+      },
+      "speech_3": {
+        "title": "スピーチ生成に失敗しました。",
+        "description": "音声生成に失敗しました。もう一度お試しください。"
+      }
+    },
+    "time": {
+      "justNow": "たった今",
+      "minutesAgo": "{minutes}分前",
+      "hoursAgo": "{hours}時間前",
+      "yesterday": "昨日"
+    },
+    "status": {
+      "processing": {
+        "title": "処理",
+        "description": "ご依頼は処理中です。"
+      },
+      "success": {
+        "title": "完了",
+        "description": "正常に完了しました。"
+      },
+      "failed": {
+        "title": "失敗しました",
+        "description": "処理中にエラーが発生しました。"
+      },
+      "warning": {
+        "title": "警告",
+        "description": "警告付きで完了しました。"
+      },
+      "pending": {
+        "title": "保留中",
+        "description": "処理待ち"
+      },
+      "cancelled": {
+        "title": "キャンセルされた",
+        "description": "リクエストはキャンセルされました。"
       }
     }
   },
@@ -398,30 +486,6 @@
     "doctransGPT": "DoctransGPT",
     "nuxtUIOnDiscord": "Nuxt UI on Discord",
     "youtube": "Youtube"
-  },
-  "libraryPages": {
-    "imagenDescription": "Browse your AI-generated images and artwork",
-    "musicDescription": "Browse your AI-generated music and audio content",
-    "speechDescription": "Browse your AI-generated speech and voice content",
-    "videoDescription": "Browse your AI-generated videos and animations",
-    "imagenBreadcrumb": "Imagen",
-    "musicBreadcrumb": "Music",
-    "speechBreadcrumb": "Speech",
-    "videoBreadcrumb": "Video Generation",
-    "endOfImagesLibrary": "You've reached the end of the images library",
-    "endOfMusicLibrary": "You've reached the end of the music library",
-    "endOfSpeechLibrary": "You've reached the end of the speech library",
-    "endOfVideoLibrary": "You've reached the end of the video library",
-    "noVideosFound": "No videos found",
-    "noVideosFoundDescription": "Start generating videos to see them here.",
-    "backToLibrary": "Back to Library",
-    "errorLoadingVideo": "Error Loading Video",
-    "loadingVideoDetails": "Loading video details...",
-    "videoDetails": "Video Details",
-    "videoInformation": "Video Information",
-    "videoNotFound": "The video you are looking for could not be found or loaded.",
-    "aiContentLibraryTitle": "AI Content Library",
-    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",
@@ -450,5 +514,131 @@
     "dontAllow": "許可しない",
     "voices": "音声",
     "pickVoice": "音声を選択"
-  }
+  },
+  "common": {
+    "home": "ホーム"
+  },
+  "Describe the speech you want to generate...": "生成したいスピーチを説明してください...",
+  "listenToSpeech": "スピーチを聞く",
+  "generateSimilar": "類似を生成する",
+  "voice": "声",
+  "emotion": "感情",
+  "speed": "スピード",
+  "speed_settings": "速度設定",
+  "speed_value": "速度値",
+  "speed_slider": "スピードスライダー",
+  "apply": "適用する",
+  "speech_settings": "スピーチ設定",
+  "current_speed": "現在の速度",
+  "reset_defaults": "デフォルトにリセット",
+  "outputFormat": "出力形式",
+  "outputChannel": "出力チャンネル",
+  "selectVoice": "音声を選択",
+  "selectEmotion": "感情を選択",
+  "selectFormat": "形式を選択",
+  "selectChannel": "チャネルを選択",
+  "noVoicesAvailable": "利用可能な音声がありません。",
+  "noEmotionsAvailable": "感情が利用できません。",
+  "searchVoices": "音声を検索...",
+  "searchEmotions": "感情を探す...",
+  "noVoicesFound": "声が見つかりませんでした。",
+  "noEmotionsFound": "感情が見つかりませんでした。",
+  "retry": "再試行",
+  "noAudioSample": "音声サンプルは利用できません。",
+  "Speech Generation Complete": "音声生成完了",
+  "Your speech has been generated successfully": "あなたのスピーチは正常に生成されました。",
+  "stripe": "ストライプ",
+  "stripeDescription": "Stripeで安全に支払う",
+  "history": {
+    "tabs": {
+      "imagen": "イマヘン",
+      "video": "ビデオ",
+      "speech": "スピーチ",
+      "music": "音楽",
+      "history": "歴史"
+    }
+  },
+  "orders": {
+    "title": "注文履歴",
+    "description": "取引と支払い履歴を表示",
+    "orderId": "注文ID",
+    "amount": "量",
+    "credits": "クレジット",
+    "quantity": "数量",
+    "platform": "プラットフォーム",
+    "externalId": "取引ID",
+    "status": {
+      "completed": "完了しました",
+      "success": "成功",
+      "paid": "支払済み",
+      "pending": "保留中",
+      "processing": "処理中",
+      "failed": "失敗しました",
+      "cancelled": "キャンセルされました。",
+      "error": "エラー"
+    },
+    "empty": {
+      "title": "まだ注文がありません。",
+      "description": "まだ注文をしていません。クレジットを購入して、当社のサービスを利用し始めましょう。",
+      "action": "クレジットを購入"
+    },
+    "endOfList": "すべての注文を見ました。",
+    "errors": {
+      "fetchFailed": "注文履歴の読み込みに失敗しました。もう一度お試しください。"
+    },
+    "meta": {
+      "title": "注文履歴 - Imagen AI",
+      "description": "あなたの取引と支払い履歴をImagen AIで確認する"
+    }
+  },
+  "historyPages": {
+    "imagenDescription": "AI生成の画像やアートワークを閲覧する",
+    "musicDescription": "AI生成の音楽や音声コンテンツを閲覧する",
+    "speechDescription": "AI生成のスピーチと音声コンテンツを閲覧する",
+    "videoDescription": "AI生成のビデオやアニメーションを閲覧する",
+    "imagenBreadcrumb": "画像",
+    "musicBreadcrumb": "音楽",
+    "speechBreadcrumb": "スピーチ",
+    "videoBreadcrumb": "ビデオ生成",
+    "endOfImagesHistory": "画像履歴の終わりに到達しました。",
+    "endOfMusicHistory": "あなたは音楽の歴史の終わりにたどり着きました。",
+    "endOfSpeechHistory": "あなたはスピーチの履歴の終わりに達しました。",
+    "endOfVideoHistory": "ビデオ履歴の終わりに到達しました。",
+    "noVideosFound": "ビデオが見つかりませんでした。",
+    "noVideosFoundDescription": "ビデオを生成し始めて、ここで見ることができます。",
+    "backToLibrary": "図書館に戻る",
+    "errorLoadingVideo": "ビデオの読み込みエラー",
+    "loadingVideoDetails": "ビデオの詳細を読み込んでいます...",
+    "videoDetails": "ビデオの詳細",
+    "videoInformation": "ビデオ情報",
+    "videoNotFound": "お探しのビデオが見つからないか、読み込めませんでした。",
+    "aiContentLibraryTitle": "AIコンテンツライブラリ",
+    "aiContentLibraryDescription": "AI生成コンテンツをさまざまなカテゴリで閲覧し、管理する"
+  },
+  "demo": {
+    "notifications": {
+      "title": "通知の種類とステータスのデモ",
+      "description": "さまざまな通知タイプと異なるステータス状態の例",
+      "statusLegend": "ステータス伝説"
+    },
+    "speechVoiceSelect": {
+      "title": "スピーチボイスセレクトデモ",
+      "description": "モデル値プロップを使用して再利用可能なBaseSpeechVoiceSelectModalコンポーネントを示す"
+    }
+  },
+  "models": {
+    "imagen3": "画像3",
+    "gemini2Flash": "ジェミニ2.0フラッシュ",
+    "gemini25Flash": "ジェミニ2.5フラッシュ",
+    "sunoAI": "スノーAI",
+    "udio": "ウディオ",
+    "veo2": "ベオ2",
+    "veo3": "ベオ3",
+    "imagen4": "画像4"
+  },
+  "aspectRatio": "アスペクト比",
+  "Image Reference": "画像参照",
+  "personGeneration": "人物生成",
+  "safety_filter_level": "安全フィルターレベル",
+  "used_credit": "使用済みクレジット"
 }

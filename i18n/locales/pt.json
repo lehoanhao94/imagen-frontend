@@ -24,9 +24,10 @@
   "generate": "Gerar",
   "nav": {
     "aitool": "Ferramenta IA",
-    "library": "Biblioteca",
     "api": "API",
-    "login": "Entrar"
+    "login": "Entrar",
+    "history": "História",
+    "orders": "Pedidos"
   },
   "3D Render": "Renderização 3D",
   "Acrylic": "Acrílico",
@@ -309,15 +310,6 @@
     "components": "Componentes"
   },
   "loadingMoreItems": "Carregando mais itens...",
-  "library": {
-    "tabs": {
-      "imagen": "Imagem",
-      "video": "Vídeo",
-      "speech": "Discurso",
-      "music": "Música",
-      "library": "Library"
-    }
-  },
   "promptLabel": "Solicitação:",
   "videoExamples": "Exemplos de Vídeo",
   "videoExamplesDescription": "Explore estes exemplos de vídeo com seus prompts e configurações. Clique em qualquer botão 'Usar Este Prompt' para copiar o prompt para seu campo de entrada.",
@@ -375,17 +367,113 @@
       "title": "Error loading notifications"
     },
     "types": {
-      "ttsHistory": {
-        "title": "Audio Generation Complete",
-        "description": "Your text-to-speech audio has been generated successfully"
-      },
-      "voiceTraining": {
-        "title": "Voice Training Complete",
-        "description": "Your custom voice model training has finished"
-      },
       "default": {
         "title": "Notification",
         "description": "You have a new notification"
+      },
+      "video_1": {
+        "title": "Geração de Vídeo Pendente",
+        "description": "A geração de vídeo está aguardando para ser processada."
+      },
+      "video_2": {
+        "title": "Geração de Vídeo Concluída",
+        "description": "O vídeo foi gerado com sucesso."
+      },
+      "video_3": {
+        "title": "Geração de Vídeo Falhou",
+        "description": "Falha na geração de vídeo"
+      },
+      "image_1": {
+        "title": "Geração de Imagem Pendente",
+        "description": "A geração de imagem está aguardando para ser processada."
+      },
+      "image_2": {
+        "title": "Geração de Imagem Completa",
+        "description": "A imagem foi gerada com sucesso."
+      },
+      "image_3": {
+        "title": "Falha na Geração da Imagem",
+        "description": "A geração de imagem falhou"
+      },
+      "tts_history_1": {
+        "title": "Geração de Áudio Pendente",
+        "description": "A conversão de texto em fala está aguardando para ser processada."
+      },
+      "tts_history_2": {
+        "title": "Geração de Áudio Concluída",
+        "description": "Áudio de texto para fala foi gerado com sucesso."
+      },
+      "tts_history_3": {
+        "title": "Falha na Geração de Áudio",
+        "description": "Falha na geração de texto para fala"
+      },
+      "voice_training_1": {
+        "title": "Treinamento de Voz Pendente",
+        "description": "O treinamento de voz está aguardando para ser processado."
+      },
+      "voice_training_2": {
+        "title": "Treinamento de Voz Concluído",
+        "description": "O treinamento do modelo de voz personalizado foi concluído com sucesso."
+      },
+      "voice_training_3": {
+        "title": "Treinamento de Voz Falhou",
+        "description": "Treinamento de voz falhou"
+      },
+      "music_1": {
+        "title": "Geração de Música Pendente",
+        "description": "A geração de música está aguardando para ser processada."
+      },
+      "music_2": {
+        "title": "Geração de Música Completa",
+        "description": "Música de IA foi gerada com sucesso."
+      },
+      "music_3": {
+        "title": "Geração de Música Falhou",
+        "description": "Geração de música falhou"
+      },
+      "speech_1": {
+        "title": "Geração de Discurso Pendente",
+        "description": "Seu pedido de geração de discurso está aguardando para ser processado."
+      },
+      "speech_2": {
+        "title": "Geração de Discurso Completa",
+        "description": "Seu discurso foi gerado com sucesso."
+      },
+      "speech_3": {
+        "title": "Geração de Discurso Falhou",
+        "description": "A geração do seu discurso falhou. Por favor, tente novamente."
+      }
+    },
+    "time": {
+      "justNow": "Agora mesmo",
+      "minutesAgo": "{minutes}m atrás",
+      "hoursAgo": "{hours}h atrás",
+      "yesterday": "Ontem"
+    },
+    "status": {
+      "processing": {
+        "title": "Processamento",
+        "description": "Seu pedido está sendo processado."
+      },
+      "success": {
+        "title": "Concluído",
+        "description": "Concluído com sucesso"
+      },
+      "failed": {
+        "title": "Falha",
+        "description": "Ocorreu um erro durante o processamento."
+      },
+      "warning": {
+        "title": "Aviso",
+        "description": "Concluído com avisos"
+      },
+      "pending": {
+        "title": "Pendente",
+        "description": "Aguardando para ser processado"
+      },
+      "cancelled": {
+        "title": "Cancelado",
+        "description": "Solicitação foi cancelada"
       }
     }
   },
@@ -398,30 +486,6 @@
     "doctransGPT": "DoctransGPT",
     "nuxtUIOnDiscord": "Nuxt UI on Discord",
     "youtube": "Youtube"
-  },
-  "libraryPages": {
-    "imagenDescription": "Browse your AI-generated images and artwork",
-    "musicDescription": "Browse your AI-generated music and audio content",
-    "speechDescription": "Browse your AI-generated speech and voice content",
-    "videoDescription": "Browse your AI-generated videos and animations",
-    "imagenBreadcrumb": "Imagen",
-    "musicBreadcrumb": "Music",
-    "speechBreadcrumb": "Speech",
-    "videoBreadcrumb": "Video Generation",
-    "endOfImagesLibrary": "You've reached the end of the images library",
-    "endOfMusicLibrary": "You've reached the end of the music library",
-    "endOfSpeechLibrary": "You've reached the end of the speech library",
-    "endOfVideoLibrary": "You've reached the end of the video library",
-    "noVideosFound": "No videos found",
-    "noVideosFoundDescription": "Start generating videos to see them here.",
-    "backToLibrary": "Back to Library",
-    "errorLoadingVideo": "Error Loading Video",
-    "loadingVideoDetails": "Loading video details...",
-    "videoDetails": "Video Details",
-    "videoInformation": "Video Information",
-    "videoNotFound": "The video you are looking for could not be found or loaded.",
-    "aiContentLibraryTitle": "AI Content Library",
-    "aiContentLibraryDescription": "Browse and manage your AI-generated content across different categories"
   },
   "profileSettings": {
     "emailNotifications": "Email Notifications",
@@ -450,5 +514,131 @@
     "dontAllow": "Não permitir",
     "voices": "Vozes",
     "pickVoice": "Escolher voz"
-  }
+  },
+  "common": {
+    "home": "Casa"
+  },
+  "Describe the speech you want to generate...": "Descreva o discurso que você deseja gerar...",
+  "listenToSpeech": "Ouvir discurso",
+  "generateSimilar": "Gerar Similar",
+  "voice": "Voz",
+  "emotion": "Emoção",
+  "speed": "Velocidade",
+  "speed_settings": "Configurações de Velocidade",
+  "speed_value": "Valor de Velocidade",
+  "speed_slider": "Controle de Velocidade",
+  "apply": "Aplicar",
+  "speech_settings": "Configurações de Fala",
+  "current_speed": "Velocidade Atual",
+  "reset_defaults": "Restaurar Padrões",
+  "outputFormat": "Formato de Saída",
+  "outputChannel": "Canal de Saída",
+  "selectVoice": "Selecionar Voz",
+  "selectEmotion": "Selecionar Emoção",
+  "selectFormat": "Selecionar Formato",
+  "selectChannel": "Selecionar Canal",
+  "noVoicesAvailable": "Sem vozes disponíveis",
+  "noEmotionsAvailable": "Sem emoções disponíveis",
+  "searchVoices": "Procurar vozes...",
+  "searchEmotions": "Buscar emoções...",
+  "noVoicesFound": "Nenhuma voz encontrada",
+  "noEmotionsFound": "Nenhuma emoção encontrada",
+  "retry": "Tentar novamente",
+  "noAudioSample": "Sem amostra de áudio disponível",
+  "Speech Generation Complete": "Geração de fala concluída",
+  "Your speech has been generated successfully": "Seu discurso foi gerado com sucesso.",
+  "stripe": "Stripe",
+  "stripeDescription": "Pague com segurança usando o Stripe",
+  "history": {
+    "tabs": {
+      "imagen": "Imagem",
+      "video": "Vídeo",
+      "speech": "Discurso",
+      "music": "Música",
+      "history": "História"
+    }
+  },
+  "orders": {
+    "title": "Histórico de Pedidos",
+    "description": "Veja seu histórico de transações e pagamentos.",
+    "orderId": "ID do Pedido",
+    "amount": "Quantia",
+    "credits": "Créditos",
+    "quantity": "Quantidade",
+    "platform": "Plataforma",
+    "externalId": "ID da Transação",
+    "status": {
+      "completed": "Concluído",
+      "success": "Sucesso",
+      "paid": "Pago",
+      "pending": "Pendente",
+      "processing": "Processamento",
+      "failed": "Falhou",
+      "cancelled": "Cancelado",
+      "error": "Erro"
+    },
+    "empty": {
+      "title": "Ainda sem pedidos.",
+      "description": "Você ainda não fez nenhum pedido. Compre créditos para começar a usar nossos serviços.",
+      "action": "Comprar Créditos"
+    },
+    "endOfList": "Você viu todos os pedidos.",
+    "errors": {
+      "fetchFailed": "Falha ao carregar o histórico de pedidos. Por favor, tente novamente."
+    },
+    "meta": {
+      "title": "Histórico de Pedidos - Imagen AI",
+      "description": "Visualize seu histórico de transações e pagamentos na Imagen AI"
+    }
+  },
+  "historyPages": {
+    "imagenDescription": "Navegue pelas suas imagens e obras de arte geradas por IA.",
+    "musicDescription": "Navegue pelo seu conteúdo musical e de áudio gerado por IA.",
+    "speechDescription": "Navegue pelo seu conteúdo de fala e voz gerado por IA.",
+    "videoDescription": "Navegue pelos seus vídeos e animações gerados por IA",
+    "imagenBreadcrumb": "Imagem",
+    "musicBreadcrumb": "Música",
+    "speechBreadcrumb": "Discurso",
+    "videoBreadcrumb": "Geração de Vídeo",
+    "endOfImagesHistory": "Você chegou ao fim do histórico de imagens.",
+    "endOfMusicHistory": "Você chegou ao fim da história da música.",
+    "endOfSpeechHistory": "Você chegou ao fim do histórico de discursos.",
+    "endOfVideoHistory": "Você chegou ao final do histórico de vídeos.",
+    "noVideosFound": "Nenhum vídeo encontrado",
+    "noVideosFoundDescription": "Comece a gerar vídeos para vê-los aqui.",
+    "backToLibrary": "Voltar para a Biblioteca",
+    "errorLoadingVideo": "Erro ao Carregar Vídeo",
+    "loadingVideoDetails": "Carregando detalhes do vídeo...",
+    "videoDetails": "Detalhes do Vídeo",
+    "videoInformation": "Informações do Vídeo",
+    "videoNotFound": "O vídeo que você está procurando não pôde ser encontrado ou carregado.",
+    "aiContentLibraryTitle": "Biblioteca de Conteúdo de IA",
+    "aiContentLibraryDescription": "Navegue e gerencie seu conteúdo gerado por IA em diferentes categorias."
+  },
+  "demo": {
+    "notifications": {
+      "title": "Tipos de Notificação e Demonstração de Status",
+      "description": "Exemplos de diferentes tipos de notificações com vários estados de status",
+      "statusLegend": "Legenda de Status"
+    },
+    "speechVoiceSelect": {
+      "title": "Demonstração de Seleção de Voz de Fala",
+      "description": "Demonstrando o componente reutilizável BaseSpeechVoiceSelectModal com a propriedade modelValue"
+    }
+  },
+  "models": {
+    "imagen3": "Imagem 3",
+    "gemini2Flash": "Gemini 2.0 Flash",
+    "gemini25Flash": "Gemini 2.5 Flash",
+    "sunoAI": "Suno AI",
+    "udio": "Udio",
+    "veo2": "Veo 2",
+    "veo3": "Veo 3",
+    "imagen4": "Imagem 4"
+  },
+  "aspectRatio": "Proporção de Tela",
+  "Image Reference": "Referência de Imagem",
+  "personGeneration": "Geração de Pessoas",
+  "safety_filter_level": "Nível de Filtro de Segurança",
+  "used_credit": "Crédito Usado"
 }

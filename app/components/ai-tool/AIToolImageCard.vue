@@ -34,6 +34,14 @@ const props = defineProps({
   resolution: {
     type: String,
     default: '1024x1024'
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  data: {
+    type: Object,
+    default: () => ({})
   }
 })
 
@@ -78,7 +86,7 @@ const onGenerateWithSettings = () => {
   }
 
   // Set the style
-  currentStyle.value = props.style
+  // currentStyle.value = props.style
 
   // Convert resolution format (e.g., "1024x1024" to "1:1")
   const convertResolutionToAspectRatio = (resolution: string) => {
@@ -124,10 +132,19 @@ const onGenerateWithSettings = () => {
     spotlight
     spotlight-color="primary"
     :ui="{
-      container: 'lg:items-start'
+      container: 'lg:items-start',
+      body: 'w-full h-full',
+      wrapper: 'h-full',
+      description: 'h-full flex flex-col'
     }"
   >
+    <USkeleton
+      v-if="loading"
+      class="w-full h-64 lg:h-80 mb-4"
+      :ui="{ container: 'rounded-lg' }"
+    />
     <BasePixelRevealImage
+      v-else
       :src="imageUrl"
       class="order-first lg:order-last w-full"
       custom-class="imagen"
@@ -154,40 +171,30 @@ const onGenerateWithSettings = () => {
           {{ prompt }}
         </div>
       </div>
-
-      <div class="mt-2 grid grid-cols-3">
-        <div>
-          <div class="text-[10px] font-light">
-            {{ $t("preset") }}
-          </div>
-          <div class="text-xs">
-            {{ presetLabel }}
-          </div>
-        </div>
-        <div>
-          <div class="text-[10px] font-light">
-            {{ $t("style") }}
-          </div>
-          <div class="text-xs">
-            {{ style }}
-          </div>
-        </div>
-        <div>
-          <div class="text-[10px] font-light">
-            {{ $t("resolution") }}
-          </div>
-          <div class="text-xs">
-            {{ resolution }}
-          </div>
-        </div>
-      </div>
-      <UChatPromptSubmit
-        color="primary"
-        :label="$t('generateWithSettings')"
-        class="cursor-pointer mt-4 w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
-        icon="mingcute:ai-fill"
-        @click="onGenerateWithSettings"
+      <BaseInfo
+        class="mt-4"
+        :properties="{
+          model: presetLabel,
+          style: data?.style,
+          aspectRatio: data?.aspect_ratio,
+          personGeneration: data?.person_generation,
+          safety_filter_level: data?.safety_filter_level,
+          used_credit: data?.used_credit
+        }"
       />
+      <div
+        v-if="!loading"
+        class="flex flex-row gap-4 items-center mt-auto pb-6"
+      >
+        <UChatPromptSubmit
+          color="primary"
+          :label="$t('generateWithSettings')"
+          class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
+          icon="mingcute:ai-fill"
+          @click="onGenerateWithSettings"
+        />
+        <BaseDownloadButton :link="imageUrl" />
+      </div>
     </template>
   </UPageCard>
 
