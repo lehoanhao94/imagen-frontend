@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const props = defineProps({
   orientation: {
@@ -51,7 +51,7 @@ const openFullScreen = () => {
 
 const generateWithPrompt = () => {
   // Implement the generate functionality here
-  console.log('Generating with prompt:', props.prompt)
+  console.log('Generating with prompt:', title.value)
 }
 
 const firstImage = computed(() => {
@@ -105,15 +105,22 @@ const style = computed(() => {
             >
               {{ title }}
             </div>
-            <UButton
-              icon="i-lucide-maximize"
-              color="neutral"
-              variant="ghost"
-              size="xs"
-              class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
-              :class="{ 'opacity-100': isHovered }"
-              @click.stop="openFullScreen"
-            />
+            <div class="flex gap-2">
+              <BaseDownloadButton
+                :link="firstImage?.image_url"
+                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+                :class="{ 'opacity-100': isHovered }"
+              />
+              <UButton
+                icon="i-lucide-maximize"
+                color="neutral"
+                variant="ghost"
+                size="xs"
+                class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
+                :class="{ 'opacity-100': isHovered }"
+                @click.stop="openFullScreen"
+              />
+            </div>
           </div>
           <UChatPromptSubmit
             color="primary"
@@ -182,35 +189,21 @@ const style = computed(() => {
               {{ title }}
             </p>
 
-            <div class="grid grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-6">
-              <div>
-                <h4 class="text-white/60 text-xs uppercase mb-1">
-                  {{ $t("preset") }}
-                </h4>
-                <p class="text-xs md:text-sm">
-                  {{ preset }}
-                </p>
-              </div>
-              <div>
-                <h4 class="text-white/60 text-xs uppercase mb-1">
-                  {{ $t("style") }}
-                </h4>
-                <p class="text-xs md:text-sm">
-                  {{ props.style }}
-                </p>
-              </div>
-              <div>
-                <h4 class="text-white/60 text-xs uppercase mb-1">
-                  {{ $t("resolution") }}
-                </h4>
-                <p class="text-xs md:text-sm">
-                  {{ resolution }}
-                </p>
-              </div>
-            </div>
+            <BaseInfo
+              class="mb-4 md:mb-6"
+              :properties="{
+                model: preset,
+                style: style,
+                resolution: resolution,
+                aspectRatio: data?.aspect_ratio,
+                personGeneration: data?.person_generation,
+                safety_filter_level: data?.safety_filter_level,
+                used_credit: data?.used_credit
+              }"
+            />
           </div>
 
-          <div class="mt-auto pt-2">
+          <div class="mt-auto pt-2 flex flex-row gap-4 items-center">
             <UChatPromptSubmit
               color="primary"
               :label="$t('generateWithPrompt')"
@@ -218,6 +211,7 @@ const style = computed(() => {
               icon="mingcute:ai-fill"
               @click="generateWithPrompt"
             />
+            <BaseDownloadButton :link="firstImage?.image_url" />
           </div>
         </div>
 
