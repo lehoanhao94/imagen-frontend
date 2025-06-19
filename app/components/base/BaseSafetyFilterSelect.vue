@@ -1,10 +1,6 @@
 <script setup lang="ts">
 interface SafetyFilterSelectProps {
-<<<<<<< HEAD
   modelValue: any
-=======
-  modelValue: string
->>>>>>> 9848bf7 (Add person generation and safety filter components with API integration)
 }
 
 const props = defineProps<SafetyFilterSelectProps>()
