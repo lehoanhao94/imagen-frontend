@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue'
 import BasePixelRevealImage from '~/components/base/BasePixelRevealImage.vue'
 
+const { getPersonGenerationLabel } = usePersonGenerationOptions()
+const { getSafetyFilterLabel } = useSafetyFilterOptions()
+
 const props = defineProps({
   orientation: {
     type: String as () => 'horizontal' | 'vertical',
@@ -177,8 +180,8 @@ const onGenerateWithSettings = () => {
           model: presetLabel,
           style: data?.style,
           aspectRatio: data?.aspect_ratio,
-          personGeneration: data?.person_generation,
-          safety_filter_level: data?.safety_filter_level,
+          personGeneration: getPersonGenerationLabel(data?.person_generation),
+          safety_filter_level: getSafetyFilterLabel(data?.safety_filter_level),
           used_credit: data?.used_credit
         }"
       />

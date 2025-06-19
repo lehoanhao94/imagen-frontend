@@ -311,14 +311,14 @@ export const useNotificationsStore = defineStore('notificationsStore', {
           // Navigate to voice library - simplified version without store dependency
           router.push({
             name: 'voice-library',
-            query: { id: notification.history_uuid }
+            query: { uuid: notification.history_uuid }
           })
           break
         }
         default:
           router.push({
             name: 'history',
-            query: { id: notification.history_uuid }
+            query: { uuid: notification.history_uuid }
           })
           break
       }

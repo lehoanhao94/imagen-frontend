@@ -27,8 +27,12 @@ export function useImageGenModels() {
   ]
   const model = useCookie<any>('image-gen-model', { default: () => models[0] })
 
+  const getImageModelLabel = (value: string): string | undefined => {
+    return models.find(option => option.value === value)?.label
+  }
   return {
     models,
-    model
+    model,
+    getImageModelLabel
   }
 }

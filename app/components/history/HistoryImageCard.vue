@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 
+const route = useRoute()
+const router = useRouter()
+
 const props = defineProps({
   orientation: {
     type: String,
@@ -29,6 +32,10 @@ const props = defineProps({
   }
 })
 
+const { getImageModelLabel } = useImageGenModels()
+const { getPersonGenerationLabel } = usePersonGenerationOptions()
+const { getSafetyFilterLabel } = useSafetyFilterOptions()
+
 const isFullScreenOpen = ref(false)
 const isHovered = ref(false)
 const isTouchDevice = ref(false)
@@ -37,6 +44,10 @@ const isTouchDevice = ref(false)
 onMounted(() => {
   isTouchDevice.value
     = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+
+  if (route.query.uuid && route.query.uuid === props.data.uuid) {
+    isFullScreenOpen.value = true
+  }
 })
 
 const openFullScreen = () => {
@@ -47,6 +58,11 @@ const openFullScreen = () => {
   }
 
   isFullScreenOpen.value = true
+  // Update the URL to include the ID for navigation
+  if (props.data.uuid) {
+    router.push({ query: { uuid: props.data.uuid } })
+  }
+  isHovered.value = false
 }
 
 const generateWithPrompt = () => {
@@ -58,23 +74,39 @@ const firstImage = computed(() => {
   return props.data?.generated_image?.[0] || {}
 })
 
+const thumbnailImage = computed(() => {
+  return firstImage.value?.thumbnails?.find(
+    (thumb: any) => thumb.size === 'medium'
+  )
+})
+
 const title = computed(() => {
   return props.data?.input_text
 })
 
-const preset = computed(() => {
-  return props.data?.model_name || props.data?.model || 'Imagen'
-})
-const resolution = computed(() => {
-  return props.data?.resolution || '1024x1024'
-})
 const style = computed(() => {
-  return props.data?.style || 'Dynamic'
+  return firstImage.value?.style || props.data?.style || 'Unknown'
 })
+
+const onCloseFullScreen = () => {
+  isFullScreenOpen.value = false
+  isHovered.value = false
+  // Clear the URL query parameter when closing
+  router.push({ query: {} })
+}
+
+const onImageError = (event: any) => {
+  console.log('🚀 ~ onImageError ~ event:', event)
+  console.error('Image failed to load:', event.target.src)
+  event.target.src = 'https://via.placeholder.com/512?text=Image+Not+Available'
+}
 </script>
 
 <template>
-  <HistoryWrapper :type="data.type">
+  <HistoryWrapper
+    :type="data.type"
+    :style="style"
+  >
     <UPageCard
       :orientation="'vertical'"
       spotlight
@@ -87,49 +119,63 @@ const style = computed(() => {
     >
       <div class="relative w-full h-full aspect-square sm:aspect-auto">
         <img
-          :src="firstImage?.image_url"
-          :alt="title"
+          v-if="thumbnailImage?.url || firstImage?.image_url"
+          :src="thumbnailImage?.url || firstImage?.image_url"
+          :alt="data.id"
           class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
           @click="openFullScreen"
+          @error="onImageError"
         >
+        <div
+          v-else
+          class="w-full h-40 flex items-center justify-center"
+        >
+          <div
+            class="text-gray-400 dark:text-gray-600 flex flex-col items-center"
+          >
+            <UIcon
+              name="i-lucide-image-off"
+              class="w-8 h-8 mb-2"
+            />
+            {{ $t("noImageAvailable") }}
+          </div>
+        </div>
         <!-- Hover Overlay -->
         <div
-          class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity  flex flex-col justify-between p-4"
+          class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4"
           :class="{ 'opacity-100': isHovered }"
         >
           <div class="flex justify-between items-start gap-2">
             <div
-              class="text-white font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
+              class="dark:text-white text-gray-100 font-medium text-sm line-clamp-3 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 cursor-pointer hover:underline hover:text-primary"
               :class="{ 'translate-y-0 opacity-100': isHovered }"
               @click.stop="openFullScreen"
             >
               {{ title }}
             </div>
             <div class="flex gap-2">
-              <BaseDownloadButton
-                :link="firstImage?.image_url"
-                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
-                :class="{ 'opacity-100': isHovered }"
-              />
               <UButton
                 icon="i-lucide-maximize"
                 color="neutral"
                 variant="ghost"
                 size="xs"
-                class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
+                class="dark:text-white text-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
                 :class="{ 'opacity-100': isHovered }"
                 @click.stop="openFullScreen"
               />
             </div>
           </div>
-          <UChatPromptSubmit
-            color="primary"
-            :label="$t('generateWithPrompt')"
-            class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 mt-auto transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-200"
-            :class="{ 'translate-y-0 opacity-100': isHovered }"
-            icon="mingcute:ai-fill"
-            @click.stop="generateWithPrompt"
-          />
+          <div class="flex flex-row gap-2 w-full items-center mt-auto">
+            <BaseDownloadButton
+              :link="firstImage?.image_url"
+              class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+              :class="{ 'opacity-100': isHovered }"
+              :label="$t('downloadImage')"
+              size="sm"
+              block
+              @click.stop="() => (isFullScreenOpen = false)"
+            />
+          </div>
         </div>
       </div>
     </UPageCard>
@@ -139,7 +185,7 @@ const style = computed(() => {
     v-model:open="isFullScreenOpen"
     fullscreen
     :ui="{
-      content: 'bg-black/90 backdrop-blur-xl'
+      content: 'dark:bg-black/90 backdrop-blur-xl'
     }"
     @keydown.esc="isFullScreenOpen = false"
   >
@@ -153,8 +199,8 @@ const style = computed(() => {
           icon="i-lucide-x"
           color="neutral"
           variant="ghost"
-          class="absolute top-4 right-4 text-white hover:bg-white/10 z-10"
-          @click="isFullScreenOpen = false"
+          class="absolute top-4 right-4 dark:text-white hover:bg-white/10 z-10"
+          @click="onCloseFullScreen"
         />
 
         <!-- Left side: Image -->
@@ -163,28 +209,39 @@ const style = computed(() => {
         >
           <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
           <img
+            v-if="firstImage?.image_url"
             :src="firstImage?.image_url"
             :alt="title"
             class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
             @click.stop
           >
+          <div
+            v-else
+            class="w-full h-40 flex items-center justify-center"
+          >
+            <div
+              class="text-gray-400 dark:text-gray-600 flex flex-col items-center"
+            >
+              <UIcon
+                name="i-lucide-image-off"
+                class="w-8 h-8 mb-2"
+              />
+              {{ $t("noImageAvailable") }}
+            </div>
+          </div>
         </div>
 
         <!-- Right side: Image information and Generate button -->
         <div
-          class="w-full md:w-1/3 lg:w-1/4 h-1/2 md:h-full bg-black/50 backdrop-blur-md p-4 md:p-6 lg:p-8 flex flex-col overflow-y-auto animate-slideInRight"
+          class="w-full md:w-1/3 lg:w-1/4 h-1/2 md:h-full dark:bg-black/50 bg-muted backdrop-blur-md p-4 md:p-6 lg:p-8 flex flex-col overflow-y-auto animate-slideInRight"
           @click.stop
         >
-          <h2 class="text-white text-xl md:text-2xl font-medium mb-4 md:mb-6">
-            {{ title }}
-          </h2>
-
-          <div class="text-white/80 mb-4 md:mb-6">
-            <h3 class="text-white text-base md:text-lg font-medium mb-2">
+          <div class="dark:text-white/80 mb-4 md:mb-6">
+            <h3 class="dark:text-white text-base md:text-lg font-medium mb-2">
               {{ $t("promptDetails") }}
             </h3>
             <p
-              class="text-xs md:text-sm mb-4 md:mb-6 overflow-y-auto bg-muted p-2 rounded-lg"
+              class="text-xs md:text-sm mb-4 md:mb-6 overflow-y-auto bg-gray-200 p-2 rounded-lg dark:bg-gray-800/50"
             >
               {{ title }}
             </p>
@@ -192,12 +249,15 @@ const style = computed(() => {
             <BaseInfo
               class="mb-4 md:mb-6"
               :properties="{
-                model: preset,
+                model: getImageModelLabel(data?.model_name),
                 style: style,
-                resolution: resolution,
                 aspectRatio: data?.aspect_ratio,
-                personGeneration: data?.person_generation,
-                safety_filter_level: data?.safety_filter_level,
+                personGeneration: getPersonGenerationLabel(
+                  data?.person_generation
+                ),
+                safety_filter_level: getSafetyFilterLabel(
+                  data?.safety_filter_level
+                ),
                 used_credit: data?.used_credit
               }"
             />
@@ -216,7 +276,7 @@ const style = computed(() => {
         </div>
 
         <div
-          class="absolute bottom-4 left-4 text-white/70 text-xs md:text-sm hidden md:block"
+          class="absolute bottom-4 left-4 dark:text-white/70 text-xs md:text-sm hidden md:block"
         >
           {{ $t("clickToClose") }}
         </div>
