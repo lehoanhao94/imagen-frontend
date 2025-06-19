@@ -8,21 +8,15 @@ const emit = defineEmits<{
   'update:modelValue': [value: any]
 }>()
 
-const { t } = useI18n()
-
-const safetyFilterOptions = [
-  { label: t('safetyFilter.blockLowAndAbove'), value: 'BLOCK_LOW_AND_ABOVE' },
-  {
-    label: t('safetyFilter.blockMediumAndAbove'),
-    value: 'BLOCK_MEDIUM_AND_ABOVE'
-  },
-  { label: t('safetyFilter.blockOnlyHigh'), value: 'BLOCK_ONLY_HIGH' },
-  { label: t('safetyFilter.blockNone'), value: 'BLOCK_NONE' }
-]
+const { safetyFilterOptions, getSafetyFilterLabel } = useSafetyFilterOptions()
 
 const updateValue = (value: any) => {
   emit('update:modelValue', value)
 }
+
+const selectedLabel = computed(() => {
+  return getSafetyFilterLabel(props.modelValue)
+})
 </script>
 
 <template>
@@ -39,5 +33,9 @@ const updateValue = (value: any) => {
       content: 'w-48'
     }"
     @update:model-value="updateValue"
-  />
+  >
+    <template #default>
+      {{ selectedLabel }}
+    </template>
+  </USelectMenu>
 </template>
