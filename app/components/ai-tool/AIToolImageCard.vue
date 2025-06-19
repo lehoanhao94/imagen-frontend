@@ -187,7 +187,7 @@ const onGenerateWithSettings = () => {
       />
       <div
         v-if="!loading"
-        class="flex flex-row gap-4 items-center mt-auto pb-6"
+        class="flex flex-row gap-4 items-center mt-6"
       >
         <UChatPromptSubmit
           color="primary"

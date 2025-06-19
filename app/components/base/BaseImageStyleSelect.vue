@@ -41,7 +41,7 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
   '3d-render': [
     {
       id: '1',
-      title: '3D Character',
+      title: '3D Render',
       prompt:
         'A charming miniature restaurant interior, rendered with ultra-realistic details and soft morning light. An AI-anthropomorphized orange kitten with a plump round face and expressive eyes shines brightly. The kitten is wearing a white long-sleeved hoodie under pale blue overalls, with its tail peeking out from under the clothes. The kitten has entered a restaurant and is eating udon noodles with chopsticks. He is seated. The noodles are topped with seaweed and spring onion. Style: Handmade miniature diorama, soft and shallow depth of field, Studio Ghibli-inspired aesthetic, warm country atmosphere, 8K resolution, slow motion, close-up, only the face and the udon noodles are visible',
       imageUrl:
@@ -52,7 +52,7 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
   'acrylic': [
     {
       id: '3',
-      title: 'Acrylic Landscape',
+      title: 'Acrylic',
       prompt:
         'Mountain landscape painted in vibrant acrylic colors with bold brushstrokes and texture',
       imageUrl:
@@ -63,7 +63,7 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
   'anime-general': [
     {
       id: '5',
-      title: 'Anime Character',
+      title: 'Anime General',
       prompt:
         'Anime style character with large expressive eyes, colorful hair, and detailed clothing',
       imageUrl:
@@ -74,7 +74,7 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
   'creative': [
     {
       id: '7',
-      title: 'Creative Abstract',
+      title: 'Creative',
       prompt:
         'Abstract creative artwork with flowing colors, dynamic composition, and artistic interpretation',
       imageUrl:
@@ -85,7 +85,7 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
   'dynamic': [
     {
       id: '9',
-      title: 'Dynamic Action',
+      title: 'Dynamic',
       prompt:
         'High-energy action scene with motion blur, dramatic lighting, and dynamic composition',
       imageUrl:
@@ -96,7 +96,7 @@ const imageExamplesByStyle: Record<string, ImageExample[]> = {
   'fashion': [
     {
       id: '11',
-      title: 'Fashion Portrait',
+      title: 'Fashion',
       prompt:
         'High-fashion portrait with elegant styling, professional lighting, and luxury aesthetic',
       imageUrl:
@@ -245,25 +245,30 @@ watch(
                   class="space-y-4 overflow-y-auto"
                 >
                   <div
-                    v-for="example in currentImageExamples"
-                    :key="example.id"
                     class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden"
                   >
                     <img
-                      :src="example.imageUrl"
-                      :alt="example.title"
+                      :src="`/images/${tempSelectedStyle}.png`"
+                      :alt="tempSelectedStyle"
                       class="w-full h-[55vh] object-cover"
                     >
                     <div class="p-3">
                       <h6
                         class="font-medium text-sm text-gray-900 dark:text-white"
                       >
-                        {{ example.title }}
+                        DJ with Cat
                       </h6>
                       <p
                         class="text-xs text-gray-600 dark:text-gray-300 mt-1 line-clamp-2"
                       >
-                        {{ example.prompt }}
+                        A beautiful and sexy female DJ with long flowing hair,
+                        wearing stylish and revealing clubwear, standing
+                        confidently at a modern DJ booth with colorful neon
+                        lights in the background. Beside her, a cute cat with
+                        expressive eyes is sitting calmly, watching her. The
+                        atmosphere is vibrant and energetic, like a high-end
+                        nightclub. Cinematic lighting, high detail, futuristic
+                        and glamorous vibe
                       </p>
                     </div>
                   </div>
