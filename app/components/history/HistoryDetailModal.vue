@@ -8,7 +8,7 @@ const { getImageModelLabel } = useImageGenModels()
 const { getPersonGenerationLabel } = usePersonGenerationOptions()
 const { getSafetyFilterLabel } = useSafetyFilterOptions()
 const historyStore = useHistoryStore()
-const { showDetailModal, historyDetail, loadings } = storeToRefs(historyStore)
+const { showDetailModal, historyDetail, loadings, historyDetailUuid } = storeToRefs(historyStore)
 
 const isHovered = ref(false)
 const isTouchDevice = ref(false)
@@ -19,16 +19,22 @@ onMounted(() => {
     = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
   if (!historyDetail.value) {
-    historyStore.fetchHistoryDetail(route.query.uuid as string)
+    historyStore.fetchHistoryDetail(historyDetailUuid.value || route.query.uuid as string)
   }
 })
 
 watch(
   () => showDetailModal.value,
   (newValue) => {
-    if (newValue && route.query.uuid) {
-      historyStore.fetchHistoryDetail(route.query.uuid as string)
-    }
+    nextTick(() => {
+      if (newValue) {
+        nextTick(() => {
+          historyStore.fetchHistoryDetail(route.query.uuid as string)
+        })
+      } else {
+        historyDetail.value = null
+      }
+    })
   }
 )
 
@@ -39,7 +45,7 @@ onUnmounted(() => {
 
 const generateWithPrompt = () => {
   // Implement the generate functionality here
-  console.log('Generating with prompt:', title.value)
+  historyStore.cloneGeneration(historyDetail.value)
 }
 
 const firstImage = computed(() => {

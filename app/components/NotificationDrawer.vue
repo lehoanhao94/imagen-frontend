@@ -25,14 +25,17 @@
               label: 'View Details',
               trailingIcon: 'icons8:right-round',
               onClick: () => {
-                router.replace({
+                router.push({
                   query: {
                     uuid: notificationHistoryUuid
                   }
                 });
-                openNotificationDrawer = false;
-                isNotificationsSlideoverOpen = false;
-                showDetailModal = true;
+                historyDetailUuid = notificationHistoryUuid;
+                nextTick(() => {
+                  openNotificationDrawer = false;
+                  isNotificationsSlideoverOpen = false;
+                  showDetailModal = true;
+                });
               }
             },
             {
@@ -68,7 +71,7 @@ const appStore = useAppStore()
 const { isNotificationsSlideoverOpen } = storeToRefs(appStore)
 
 const historyStore = useHistoryStore()
-const { showDetailModal } = storeToRefs(historyStore)
+const { showDetailModal, historyDetailUuid } = storeToRefs(historyStore)
 
 const router = useRouter()
 </script>

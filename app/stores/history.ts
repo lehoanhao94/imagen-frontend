@@ -83,7 +83,8 @@ export const useHistoryStore = defineStore('historyStore', {
       fetchHistories: null
     } as Record<string, any>,
 
-    showDetailModal: false
+    showDetailModal: false,
+    historyDetailUuid: undefined
   }),
   getters: {},
   actions: {
@@ -178,15 +179,17 @@ export const useHistoryStore = defineStore('historyStore', {
     cloneGeneration(history: HistoryDetail) {
       const textToImageStore = useTextToImageStore()
       const { prompt } = storeToRefs(textToImageStore)
-      const { model } = useImageGenModels()
+      const { model, models } = useImageGenModels()
       const { style } = useStyles()
       const { imageDimension } = useImageDimensions()
+      this.showDetailModal = false
+
       switch (history.type) {
         case 'text-to-speech':
           return {}
         case 'image':
           prompt.value = history.input_text
-          model.value = history.model_name || 'imagen-4'
+          model.value = models.find(m => m.value === history.model_name) || models[0]
           style.value = history.generated_image?.[0]?.style || 'default'
           imageDimension.value
             = history.generated_image?.[0]?.aspect_ratio || '1:1'
