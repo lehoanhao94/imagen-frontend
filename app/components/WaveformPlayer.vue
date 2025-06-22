@@ -1,13 +1,33 @@
 <template>
   <div class="waveform-container">
-    <div 
-      ref="waveformRef" 
+    <div
+      v-if="props.audioUrl && props.audioUrl !== '#'"
+      ref="waveformRef"
       :class="[
         'waveform-player',
         fullscreen ? 'waveform-fullscreen' : 'waveform-card'
       ]"
     />
-    <div class="waveform-controls">
+    <div
+      v-else
+      :class="[
+        'waveform-placeholder',
+        fullscreen ? 'waveform-fullscreen' : 'waveform-card'
+      ]"
+    >
+      <div class="no-audio-message">
+        <UIcon
+          name="i-heroicons-musical-note"
+          class="w-8 h-8 text-gray-400"
+        />
+        <span class="text-gray-500 text-sm">No audio available</span>
+      </div>
+    </div>
+
+    <div
+      v-if="props.audioUrl && props.audioUrl !== '#'"
+      class="waveform-controls"
+    >
       <UButton
         :icon="isPlaying ? 'i-heroicons-pause-solid' : 'i-heroicons-play-solid'"
         :loading="isLoading"
@@ -24,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import WaveSurfer from 'wavesurfer.js'
 
 interface Props {
@@ -62,7 +82,7 @@ const togglePlay = () => {
 }
 
 const initWaveSurfer = () => {
-  if (!waveformRef.value || !props.audioUrl) return
+  if (!waveformRef.value || !props.audioUrl || props.audioUrl === '#') return
 
   wavesurfer.value = WaveSurfer.create({
     container: waveformRef.value,
@@ -97,13 +117,8 @@ const initWaveSurfer = () => {
     emit('finish')
   })
 
-  wavesurfer.value.on('audioprocess', () => {
-    currentTime.value = wavesurfer.value?.getCurrentTime() || 0
-    emit('timeupdate', currentTime.value)
-  })
-
-  wavesurfer.value.on('seek', () => {
-    currentTime.value = wavesurfer.value?.getCurrentTime() || 0
+  wavesurfer.value.on('timeupdate', (currentTimeSeconds) => {
+    currentTime.value = currentTimeSeconds || 0
     emit('timeupdate', currentTime.value)
   })
 
@@ -114,9 +129,9 @@ const initWaveSurfer = () => {
 }
 
 onMounted(() => {
-  if (process.client) {
+  nextTick(() => {
     initWaveSurfer()
-  }
+  })
 })
 
 onUnmounted(() => {
@@ -127,7 +142,7 @@ onUnmounted(() => {
 
 // Watch for audioUrl changes
 watch(() => props.audioUrl, (newUrl) => {
-  if (newUrl && wavesurfer.value) {
+  if (newUrl && newUrl !== '#' && wavesurfer.value) {
     isLoading.value = true
     wavesurfer.value.load(newUrl)
   }
@@ -143,6 +158,29 @@ watch(() => props.audioUrl, (newUrl) => {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
+}
+
+.waveform-placeholder {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(249 250 251);
+  border: 2px dashed rgb(209 213 219);
+}
+
+.dark .waveform-placeholder {
+  background-color: rgb(31 41 55);
+  border-color: rgb(75 85 99);
+}
+
+.no-audio-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .waveform-card {

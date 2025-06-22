@@ -2,11 +2,26 @@
 import { ref, computed } from 'vue'
 import WaveformPlayer from '../WaveformPlayer.vue'
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => ({})
-  }
+interface Props {
+  data?: any
+  audioUrl?: string
+  title?: string
+  prompt?: string
+  preset?: string
+  voice?: string
+  duration?: string
+  orientation?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  data: () => ({}),
+  audioUrl: '',
+  title: '',
+  prompt: '',
+  preset: '',
+  voice: '',
+  duration: '',
+  orientation: 'vertical'
 })
 
 const lastAudio = computed(() => {
@@ -14,23 +29,28 @@ const lastAudio = computed(() => {
 })
 
 const audioUrl = computed(() => {
-  return lastAudio.value?.audio_url || ''
+  // Use individual prop first, then fall back to data prop
+  return props.audioUrl || lastAudio.value?.audio_url || ''
 })
 
 const title = computed(() => {
-  return props.data?.input_text || props.data?.name || 'Generated Speech'
+  // Use individual prop first, then fall back to data prop
+  return props.title || props.data?.input_text || props.data?.name || 'Generated Speech'
 })
 
 const prompt = computed(() => {
-  return props.data?.input_text || props.data?.custom_prompt || 'No prompt available'
+  // Use individual prop first, then fall back to data prop
+  return props.prompt || props.data?.input_text || props.data?.custom_prompt || 'No prompt available'
 })
 
 const model = computed(() => {
-  return props.data?.model_name || props.data?.model || 'Speech Model'
+  // Use individual prop first, then fall back to data prop
+  return props.preset || props.data?.model_name || props.data?.model || 'Speech Model'
 })
 
 const voice = computed(() => {
-  return props.data?.voice || 'Default Voice'
+  // Use individual prop first, then fall back to data prop
+  return props.voice || props.data?.voice || 'Default Voice'
 })
 
 const isFullScreenOpen = ref(false)
@@ -46,7 +66,10 @@ const closeFullScreen = () => {
 
 <template>
   <!-- Card View -->
-  <UPageCard class="speech-card cursor-pointer" @click="openFullScreen">
+  <UPageCard
+    class="speech-card cursor-pointer"
+    @click="openFullScreen"
+  >
     <div class="p-4">
       <div class="mb-4">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
@@ -56,15 +79,14 @@ const closeFullScreen = () => {
           {{ prompt }}
         </p>
       </div>
-      
+
       <div class="mb-4">
-        <WaveformPlayer 
-          v-if="audioUrl"
+        <WaveformPlayer
           :audio-url="audioUrl"
           :fullscreen="false"
         />
       </div>
-      
+
       <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
         <span>{{ model }}</span>
         <span>{{ voice }}</span>
@@ -115,7 +137,6 @@ const closeFullScreen = () => {
 
           <div class="bg-white/50 dark:bg-gray-800/50 rounded-lg p-8">
             <WaveformPlayer
-              v-if="audioUrl"
               :audio-url="audioUrl"
               :fullscreen="true"
             />
