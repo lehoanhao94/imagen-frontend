@@ -142,7 +142,6 @@ dayjs.extend(relativeTime)
 // Composables and stores
 const notificationsStore = useNotificationsStore()
 const appStore = useAppStore()
-const { t: $t } = useI18n()
 
 // Reactive slideover state
 const isOpen = computed({
@@ -176,6 +175,7 @@ const setupInfiniteScroll = () => {
       }
     },
     {
+      root: notificationsList.value,
       threshold: 0.1,
       rootMargin: '50px'
     }
