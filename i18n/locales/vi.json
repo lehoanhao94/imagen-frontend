@@ -120,6 +120,7 @@
     "loginDescription": "Đăng nhập vào tài khoản của bạn để tiếp tục",
     "email": "Email",
     "enterEmail": "Nhập email của bạn",
+    "filter": "Bộ lọc",
     "password": "Mật khẩu",
     "enterPassword": "Nhập mật khẩu của bạn",
     "rememberMe": "Ghi nhớ đăng nhập",
@@ -573,6 +574,12 @@
     "doctransGPT": "DoctransGPT",
     "nuxtUIOnDiscord": "Nuxt UI trên Discord",
     "youtube": "Youtube"
+  },
+  "historyFilter": {
+    "all": "Tất cả",
+    "imagen": "Imagen",
+    "videoGen": "Video Gen",
+    "speechGen": "Speech Gen"
   },
   "historyPages": {
     "backToLibrary": "Quay lại thư viện",

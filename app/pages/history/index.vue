@@ -2,14 +2,13 @@
 import HistoryImageCard from '~/components/history/HistoryImageCard.vue'
 import HistoryVideoCard from '~/components/history/HistoryVideoCard.vue'
 import HistorySpeechCard from '~/components/history/HistorySpeechCard.vue'
+import BaseHistoryFilterSelect from '~/components/base/BaseHistoryFilterSelect.vue'
 
 const historyComponents = {
   'image': HistoryImageCard,
   'video': HistoryVideoCard,
   'tts-text': HistorySpeechCard
 }
-
-const { t } = useI18n()
 
 /**
  * Imagen History page with infinite scroll functionality
@@ -18,10 +17,11 @@ const { t } = useI18n()
 // Use history store for fetching imagen data
 const historyStore = useHistoryStore()
 
-const { historiesWithPage, currentPage, hasMoreHistories, loadings }
+const { historiesWithPage, loadings }
   = storeToRefs(historyStore)
 
 // Filter parameters for the API
+const selectedFilter = ref('all')
 const filterParams = ref({
   items_per_page: 9
 })
@@ -55,17 +55,38 @@ const librariesData = computed(() => {
 
 // Initial data fetch
 const fetchInitialData = async () => {
-  await historyStore.fetchHistories({
+  const params: any = {
     ...filterParams.value,
     page: 1
-  })
+  }
+  if (selectedFilter.value !== 'all') {
+    params.filter_by = selectedFilter.value
+  }
+  await historyStore.fetchHistories(params)
 }
 
 // Fetch more data for infinite scroll
 const fetchMoreLibraryItems = async () => {
   if (!hasMoreData.value || isLoading.value) return
 
-  await historyStore.fetchMoreHistories(filterParams.value)
+  const params: any = {
+    ...filterParams.value
+  }
+  if (selectedFilter.value !== 'all') {
+    params.filter_by = selectedFilter.value
+  }
+  await historyStore.fetchMoreHistories(params)
+}
+
+// Handle filter change
+const onFilterChange = async (newFilter: string) => {
+  selectedFilter.value = newFilter
+  // Reset histories and fetch new data
+  historyStore.histories = []
+  historyStore.historiesWithPage = [{ page: 1, histories: [] }]
+  historyStore.currentPage = 1
+  historyStore.hasMoreHistories = true
+  await fetchInitialData()
 }
 
 // Intersection observer for infinite scroll
@@ -168,6 +189,19 @@ const checkScrollPosition = debounce(() => {
           </li>
         </ol>
       </nav>
+
+      <!-- Filter Section -->
+      <div class="mb-6">
+        <div class="flex items-center gap-4">
+          <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
+            {{ $t('filter') }}:
+          </span>
+          <BaseHistoryFilterSelect
+            v-model="selectedFilter"
+            @update:model-value="onFilterChange"
+          />
+        </div>
+      </div>
 
       <!-- Error message -->
       <div
