@@ -300,7 +300,7 @@ export const useNotificationsStore = defineStore('notificationsStore', {
      */
     async handleNotificationDetail(notification: Notification) {
       const historyStory = useHistoryStore()
-      const { showDetailModal } = storeToRefs(historyStory)
+      const { showDetailModal, historyDetailUuid } = storeToRefs(historyStory)
       const router = useRouter()
       const appStore = useAppStore()
 
@@ -311,6 +311,7 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       router.replace({
         query: { uuid: notification.history_uuid || notification.uuid }
       })
+      historyDetailUuid.value = notification.history_uuid || notification.uuid
       showDetailModal.value = true
 
       // Mark as read

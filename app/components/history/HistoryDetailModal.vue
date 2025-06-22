@@ -29,7 +29,7 @@ watch(
     nextTick(() => {
       if (newValue) {
         nextTick(() => {
-          historyStore.fetchHistoryDetail(route.query.uuid as string)
+          historyStore.fetchHistoryDetail(historyDetailUuid.value || route.query.uuid as string)
         })
       } else {
         historyDetail.value = null
