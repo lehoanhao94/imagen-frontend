@@ -15,11 +15,6 @@ export const useNavLinks = () => {
       to: '/history'
     },
     {
-      label: t('nav.orders'),
-      icon: 'i-lucide-shopping-cart',
-      to: '/orders'
-    },
-    {
       label: t('nav.api'),
       icon: 'i-lucide-file-text',
       to: '/api-docs'
