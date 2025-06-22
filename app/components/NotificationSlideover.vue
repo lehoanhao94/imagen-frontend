@@ -31,8 +31,7 @@
         <!-- Notifications List -->
         <div
           v-else-if="notificationsStore.notifications.length > 0"
-          ref="notificationsList"
-          class="space-y-2 max-h-96 overflow-y-auto"
+          class="space-y-2"
         >
           <NuxtLink
             v-for="notification in notificationsStore.notifications"
@@ -47,7 +46,7 @@
             >
               <UAvatar
                 :icon="
-                  getNotificationIcon(notification.event_type, notification.status)
+                  getNotificationIcon(notification.type, notification.status)
                 "
                 size="md"
               />
@@ -56,7 +55,7 @@
             <div class="text-sm flex-1">
               <p class="flex items-center justify-between">
                 <span class="text-highlighted font-medium">{{
-                  getNotificationTitle({ ...notification, type: notification.event_type })
+                  getNotificationTitle(notification)
                 }}</span>
 
                 <time
@@ -67,26 +66,10 @@
               </p>
 
               <p class="text-dimmed">
-                {{ getNotificationDescription({ ...notification, type: notification.event_type }) }}
+                {{ getNotificationDescription(notification) }}
               </p>
             </div>
           </NuxtLink>
-
-          <!-- Loading indicator for infinite scroll -->
-          <div
-            v-if="notificationsStore.isFetching"
-            class="flex justify-center py-4"
-          >
-            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900 dark:border-gray-100" />
-          </div>
-
-          <!-- Trigger element for intersection observer -->
-          <div
-            v-if="notificationsStore.showFetchNext && !notificationsStore.isFetching"
-            ref="loadMoreTrigger"
-            class="h-1 w-full"
-            aria-hidden="true"
-          />
         </div>
 
         <!-- Empty State -->
@@ -132,16 +115,17 @@
 </template>
 
 <script setup lang="ts">
+import { formatTimeAgo } from '@vueuse/core'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 dayjs.extend(utc)
 dayjs.extend(relativeTime)
-
 // Composables and stores
 const notificationsStore = useNotificationsStore()
 const appStore = useAppStore()
+const { t: $t } = useI18n()
 
 // Reactive slideover state
 const isOpen = computed({
@@ -151,82 +135,32 @@ const isOpen = computed({
   }
 })
 
-// Refs for scroll functionality
-const notificationsList = ref<HTMLElement>()
-const loadMoreTrigger = ref<HTMLElement>()
-let observer: IntersectionObserver | null = null
-
 // Handle notification click
 const handleNotificationClick = async (notification: any) => {
   await notificationsStore.handleNotificationDetail(notification)
 }
 
-// Setup intersection observer for infinite scroll
-const setupInfiniteScroll = () => {
-  if (observer) {
-    observer.disconnect()
-  }
-
-  observer = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0]
-      if (entry && entry.isIntersecting && !notificationsStore.isFetching && notificationsStore.showFetchNext) {
-        notificationsStore.fetchMore()
-      }
-    },
-    {
-      root: notificationsList.value,
-      threshold: 0.1,
-      rootMargin: '50px'
-    }
-  )
-
-  nextTick(() => {
-    if (loadMoreTrigger.value && observer) {
-      observer.observe(loadMoreTrigger.value)
-    }
-  })
-}
-
-// Watch for changes in notifications to update observer
-watch(() => notificationsStore.notifications.length, () => {
-  if (notificationsStore.showFetchNext && !notificationsStore.isFetching) {
-    nextTick(() => {
-      setupInfiniteScroll()
-    })
-  }
-})
-
 // Mark all notifications as read when slideover closes
 watch(isOpen, (value) => {
   if (!value) {
-    // Clean up observer when closing
-    if (observer) {
-      observer.disconnect()
-      observer = null
-    }
     notificationsStore.markAllAsRead()
   }
   // reload data when slideover opens
   if (value) {
     notificationsStore.fetchNotifications()
-    nextTick(() => {
-      setupInfiniteScroll()
-    })
-  }
-})
-
-// Cleanup on unmount
-onUnmounted(() => {
-  if (observer) {
-    observer.disconnect()
-    observer = null
   }
 })
 
 const {
+  notificationTypes,
   getNotificationIcon,
   getNotificationTitle,
-  getNotificationDescription
+  getNotificationDescription,
+  getNotificationColors,
+  formatNotificationDate,
+  getNotificationPriority,
+  isNotificationError,
+  isNotificationSuccess,
+  isNotificationPending
 } = useNotifications()
 </script>
