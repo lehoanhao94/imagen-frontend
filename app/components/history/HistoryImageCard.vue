@@ -94,12 +94,6 @@ const onCloseFullScreen = () => {
   // Clear the URL query parameter when closing
   router.push({ query: {} })
 }
-
-const onImageError = (event: any) => {
-  console.log('🚀 ~ onImageError ~ event:', event)
-  console.error('Image failed to load:', event.target.src)
-  event.target.src = 'https://via.placeholder.com/512?text=Image+Not+Available'
-}
 </script>
 
 <template>
@@ -124,7 +118,6 @@ const onImageError = (event: any) => {
           :alt="data.id"
           class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
           @click="openFullScreen"
-          @error="onImageError"
         >
         <div
           v-else

@@ -10,7 +10,7 @@ const { style } = useStyles()
 const { imageDimension } = useImageDimensions()
 
 const appStore = useAppStore()
-
+const toast = useToast()
 const { loading } = storeToRefs(appStore)
 
 const aiPhotos = [
@@ -39,11 +39,11 @@ const handleImagesSelected = (images: ImageFile[]) => {
   textToImageStore.selectedImages = images
 }
 
-const onGenerate = () => {
+const onGenerate = async () => {
   // Extract File objects from selected images
   const files = selectedImages.value.map(img => img.file).filter(Boolean)
 
-  textToImageStore.textToImage({
+  const result = await textToImageStore.textToImage({
     prompt: prompt.value,
     model: model.value?.value || 'gemini-2.0-flash-exp-image-generation',
     style: style.value || 'Portrait',
@@ -52,6 +52,15 @@ const onGenerate = () => {
     safety_filter_level: safetyFilterLevel.value,
     files: files
   })
+
+  if (result) {
+    toast.add({
+      id: 'success',
+      title: 'Image Generation',
+      description: 'Your image is being generated. Please check back later.',
+      color: 'success'
+    })
+  }
 }
 </script>
 
@@ -160,7 +169,7 @@ const onGenerate = () => {
       </div>
     </Motion>
     <Motion
-      v-if="textToImageResult || loadings['textToImage']"
+      v-if="false"
       ref="aiToolImageCardRef"
       :initial="{
         scale: 1.1,

@@ -27,6 +27,8 @@ interface NotificationsState {
   limit: number
   range: { from: number, to: number }
   realtimeChannel: RealtimeChannel | null
+  openNotificationDrawer: boolean
+  notificationHistoryUuid?: string
 }
 
 export const useNotificationsStore = defineStore('notificationsStore', {
@@ -38,16 +40,14 @@ export const useNotificationsStore = defineStore('notificationsStore', {
     totalCount: 0,
     limit: 10,
     range: { from: 0, to: 9 },
-    realtimeChannel: null
+    realtimeChannel: null,
+    openNotificationDrawer: false,
+    notificationHistoryUuid: undefined
   }),
 
   getters: {
     hasUnreadNotifications: (state) => {
-      return state.notifications
-        .filter(notification =>
-          ['tts_history', 'voice_training'].includes(notification.event_type)
-        )
-        .some(n => !n.seen)
+      return state.notifications.some(n => !n.seen)
     },
 
     showFetchNext: (state) => {
@@ -269,6 +269,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
      * Handle side effects when receiving notifications
      */
     handleNotificationSideEffects(notification: Notification) {
+      console.log(
+        '🚀 ~ handleNotificationSideEffects ~ notification:',
+        notification
+      )
       const router = useRouter()
 
       // Handle payment notifications
@@ -280,7 +284,13 @@ export const useNotificationsStore = defineStore('notificationsStore', {
           `/profile/thank-you?payment=success&id=${notification?.external_order_id}`
         )
       }
-
+      if (
+        ['2'].includes(String(notification?.status))
+        && notification?.type === 'image'
+      ) {
+        this.openNotificationDrawer = true
+        this.notificationHistoryUuid = notification?.uuid
+      }
       // For other side effects, emit events that components can listen to
       // This allows for loose coupling and prevents dependency on non-existent stores
     },

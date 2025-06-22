@@ -19,5 +19,6 @@ const translatedNavLinks = useNavLinks()
     <LazyLayoutStarBg />
     <LayoutWavesBg />
     <BaseLoadingOverlay />
+    <NotificationDrawer />
   </div>
 </template>

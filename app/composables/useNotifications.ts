@@ -48,7 +48,7 @@ export const useNotifications = () => {
 
     // Video Generation - Status 3 (Failed)
     video_3: {
-      icon: 'i-fa-times-circle',
+      icon: 'ooui:error',
       title: t('notifications.types.video_3.title'),
       description: t('notifications.types.video_3.description'),
       color: 'red',
@@ -68,7 +68,7 @@ export const useNotifications = () => {
 
     // Image Generation - Status 2 (Success)
     image_2: {
-      icon: 'i-fa-check-circle',
+      icon: 'hugeicons:ai-image',
       title: t('notifications.types.image_2.title'),
       description: t('notifications.types.image_2.description'),
       color: 'purple',
@@ -78,7 +78,7 @@ export const useNotifications = () => {
 
     // Image Generation - Status 3 (Failed)
     image_3: {
-      icon: 'i-fa-times-circle',
+      icon: 'ooui:error',
       title: t('notifications.types.image_3.title'),
       description: t('notifications.types.image_3.description'),
       color: 'red',
@@ -108,7 +108,7 @@ export const useNotifications = () => {
 
     // TTS History - Status 3 (Failed)
     tts_history_3: {
-      icon: 'i-fa-times-circle',
+      icon: 'ooui:error',
       title: t('notifications.types.tts_history_3.title'),
       description: t('notifications.types.tts_history_3.description'),
       color: 'red',
@@ -138,7 +138,7 @@ export const useNotifications = () => {
 
     // Voice Training - Status 3 (Failed)
     voice_training_3: {
-      icon: 'i-fa-times-circle',
+      icon: 'ooui:error',
       title: t('notifications.types.voice_training_3.title'),
       description: t('notifications.types.voice_training_3.description'),
       color: 'red',
@@ -168,7 +168,7 @@ export const useNotifications = () => {
 
     // Music Generation - Status 3 (Failed)
     music_3: {
-      icon: 'i-fa-times-circle',
+      icon: 'ooui:error',
       title: t('notifications.types.music_3.title'),
       description: t('notifications.types.music_3.description'),
       color: 'red',
@@ -198,7 +198,7 @@ export const useNotifications = () => {
 
     // Speech Generation - Status 3 (Failed)
     speech_3: {
-      icon: 'i-fa-times-circle',
+      icon: 'ooui:error',
       title: t('notifications.types.speech_3.title'),
       description: t('notifications.types.speech_3.description'),
       color: 'red',

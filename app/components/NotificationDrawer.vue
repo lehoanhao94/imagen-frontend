@@ -1,22 +1,30 @@
 <template>
-  <UChip
-    inset
-    :show="hasUnreadNotifications"
-    color="success"
+  <UDrawer
+    v-model:open="openNotificationDrawer"
+    :overlay="false"
   >
     <UButton
-      icon="i-fa-bell"
-      size="sm"
+      label="Open"
       color="neutral"
-      square
-      variant="soft"
-      class="rounded-full"
-      @click="onOpenNotificationSlideover"
+      variant="subtle"
+      trailing-icon="i-lucide-chevron-up"
     />
-  </UChip>
+    <template #header>
+      <h2 class="text-highlighted font-semibold">
+        Your generated image is ready. Click to view details.
+      </h2>
 
-  <!-- Notification Slideover -->
-  <NotificationSlideover />
+      <UButton
+        color="neutral"
+        variant="ghost"
+        icon="i-lucide-x"
+        @click="openNotificationDrawer = false"
+      />
+    </template>
+    <template #content>
+      {{ notificationHistoryUuid }}
+    </template>
+  </UDrawer>
 </template>
 
 <script setup lang="ts">
@@ -26,7 +34,7 @@
  */
 
 const notificationsStore = useNotificationsStore()
-const { hasUnreadNotifications } = storeToRefs(notificationsStore)
+const { openNotificationDrawer, notificationHistoryUuid } = storeToRefs(notificationsStore)
 const appStore = useAppStore()
 const { isNotificationsSlideoverOpen } = storeToRefs(appStore)
 

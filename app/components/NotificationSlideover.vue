@@ -61,7 +61,7 @@
                 <time
                   :datetime="notification.date"
                   class="text-muted text-[10px]"
-                  v-text="formatNotificationDate(notification.updated_at)"
+                  v-text="dayjs.utc(notification.created_at).fromNow()"
                 />
               </p>
 
@@ -116,6 +116,12 @@
 
 <script setup lang="ts">
 import { formatTimeAgo } from '@vueuse/core'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(utc)
+dayjs.extend(relativeTime)
 // Composables and stores
 const notificationsStore = useNotificationsStore()
 const appStore = useAppStore()
@@ -136,7 +142,7 @@ const handleNotificationClick = async (notification: any) => {
 
 // Mark all notifications as read when slideover closes
 watch(isOpen, (value) => {
-  if (!value && notificationsStore.hasUnreadNotifications) {
+  if (!value) {
     notificationsStore.markAllAsRead()
   }
   // reload data when slideover opens
