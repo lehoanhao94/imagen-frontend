@@ -38,7 +38,7 @@ export const useNotificationsStore = defineStore('notificationsStore', {
     error: null,
     isFetching: false,
     totalCount: 0,
-    limit: 10,
+    limit: 50,
     range: { from: 0, to: 9 },
     realtimeChannel: null,
     openNotificationDrawer: false,
