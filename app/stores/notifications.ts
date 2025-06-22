@@ -299,10 +299,8 @@ export const useNotificationsStore = defineStore('notificationsStore', {
      * Handle notification click/detail view
      */
     async handleNotificationDetail(notification: Notification) {
-      console.log(
-        '🚀 ~ handleNotificationDetail ~ notification:',
-        notification
-      )
+      const historyStory = useHistoryStore()
+      const { showDetailModal } = storeToRefs(historyStory)
       const router = useRouter()
       const appStore = useAppStore()
 
@@ -310,28 +308,10 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       appStore.isNotificationsSlideoverOpen = false
 
       // Navigate based on notification type
-      switch (notification.type) {
-        case 'video':
-          router.push({
-            name: 'history-video-gen-d-uuid',
-            params: { uuid: notification.uuid }
-          })
-          break
-        case 'voice_training': {
-          // Navigate to voice library - simplified version without store dependency
-          router.push({
-            name: 'voice-library',
-            query: { uuid: notification.history_uuid }
-          })
-          break
-        }
-        default:
-          router.push({
-            name: 'history',
-            query: { uuid: notification.history_uuid }
-          })
-          break
-      }
+      router.replace({
+        query: { uuid: notification.history_uuid || notification.uuid }
+      })
+      showDetailModal.value = true
 
       // Mark as read
       await this.markAsRead(notification.id)

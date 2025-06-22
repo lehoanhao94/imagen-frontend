@@ -8,7 +8,7 @@ const { getImageModelLabel } = useImageGenModels()
 const { getPersonGenerationLabel } = usePersonGenerationOptions()
 const { getSafetyFilterLabel } = useSafetyFilterOptions()
 const historyStore = useHistoryStore()
-const { showDetailModal, historyDetail } = storeToRefs(historyStore)
+const { showDetailModal, historyDetail, loadings } = storeToRefs(historyStore)
 
 const isHovered = ref(false)
 const isTouchDevice = ref(false)
@@ -21,6 +21,20 @@ onMounted(() => {
   if (!historyDetail.value) {
     historyStore.fetchHistoryDetail(route.query.uuid as string)
   }
+})
+
+watch(
+  () => showDetailModal.value,
+  (newValue) => {
+    if (newValue && route.query.uuid) {
+      historyStore.fetchHistoryDetail(route.query.uuid as string)
+    }
+  }
+)
+
+onUnmounted(() => {
+  // Cleanup if needed
+  historyDetail.value = null
 })
 
 const generateWithPrompt = () => {
@@ -81,9 +95,23 @@ const onCloseFullScreen = () => {
         <div
           class="w-full md:w-2/3 lg:w-3/4 h-1/2 md:h-full flex items-center justify-center animate-fadeIn p-4"
         >
+          <div
+            v-if="loadings['fetchHistoryDetail']"
+            class="w-full h-40 flex items-center justify-center"
+          >
+            <div
+              class="text-gray-400 dark:text-gray-600 flex flex-col items-center"
+            >
+              <UIcon
+                name="eos-icons:loading"
+                class="w-8 h-8 mb-2"
+              />
+              {{ $t("Please wait a moment...") }}
+            </div>
+          </div>
           <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
           <img
-            v-if="firstImage?.image_url"
+            v-else-if="firstImage?.image_url"
             :src="firstImage?.image_url"
             :alt="title"
             class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
@@ -114,6 +142,10 @@ const onCloseFullScreen = () => {
             <h3 class="dark:text-white text-base md:text-lg font-medium mb-2">
               {{ $t("promptDetails") }}
             </h3>
+            <USkeleton
+              v-if="loadings['historyDetail']"
+              class="h-8 w-full"
+            />
             <p
               class="text-xs md:text-sm mb-4 md:mb-6 overflow-y-auto bg-gray-200 p-2 rounded-lg dark:bg-gray-800/50"
             >
@@ -134,22 +166,30 @@ const onCloseFullScreen = () => {
                 ),
                 used_credit: historyDetail?.used_credit
               }"
+              :loading="loadings['fetchHistoryDetail']"
             />
           </div>
 
           <div class="mt-auto pt-2 flex flex-row gap-4 items-center">
-            <UChatPromptSubmit
-              color="primary"
-              :label="$t('generateWithPrompt')"
-              class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
-              icon="mingcute:ai-fill"
-              @click="generateWithPrompt"
-            />
-            <BaseDownloadButton :link="firstImage?.image_url" />
+            <template v-if="loadings['fetchHistoryDetail']">
+              <USkeleton class="h-10 w-full" />
+              <USkeleton class="h-10 w-10" />
+            </template>
+            <template v-else>
+              <UChatPromptSubmit
+                color="primary"
+                :label="$t('generateWithPrompt')"
+                class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
+                icon="mingcute:ai-fill"
+                @click="generateWithPrompt"
+              />
+              <BaseDownloadButton :link="firstImage?.image_url" />
+            </template>
           </div>
         </div>
 
         <div
+          v-if="!loadings['fetchHistoryDetail']"
           class="absolute bottom-4 left-4 dark:text-white/70 text-xs md:text-sm hidden md:block"
         >
           {{ $t("clickToClose") }}

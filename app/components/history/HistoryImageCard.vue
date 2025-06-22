@@ -32,6 +32,8 @@ const props = defineProps({
   }
 })
 
+const historyStore = useHistoryStore()
+const { showDetailModal, historyDetail } = storeToRefs(historyStore)
 const { getImageModelLabel } = useImageGenModels()
 const { getPersonGenerationLabel } = usePersonGenerationOptions()
 const { getSafetyFilterLabel } = useSafetyFilterOptions()
@@ -56,8 +58,8 @@ const openFullScreen = () => {
     isHovered.value = true
     return
   }
-
-  isFullScreenOpen.value = true
+  historyDetail.value = props.data as any
+  showDetailModal.value = true
   // Update the URL to include the ID for navigation
   if (props.data.uuid) {
     router.push({ query: { uuid: props.data.uuid } })
@@ -173,109 +175,6 @@ const onCloseFullScreen = () => {
       </div>
     </UPageCard>
   </HistoryWrapper>
-  <!-- Full Screen Image Modal -->
-  <UModal
-    v-model:open="isFullScreenOpen"
-    fullscreen
-    :ui="{
-      content: 'dark:bg-black/90 backdrop-blur-xl'
-    }"
-    @keydown.esc="isFullScreenOpen = false"
-  >
-    <template #content>
-      <div
-        class="relative w-full h-full flex flex-col md:flex-row"
-        @click="isFullScreenOpen = false"
-      >
-        <!-- Close button -->
-        <UButton
-          icon="i-lucide-x"
-          color="neutral"
-          variant="ghost"
-          class="absolute top-4 right-4 dark:text-white hover:bg-white/10 z-10"
-          @click="onCloseFullScreen"
-        />
-
-        <!-- Left side: Image -->
-        <div
-          class="w-full md:w-2/3 lg:w-3/4 h-1/2 md:h-full flex items-center justify-center animate-fadeIn p-4"
-        >
-          <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
-          <img
-            v-if="firstImage?.image_url"
-            :src="firstImage?.image_url"
-            :alt="title"
-            class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
-            @click.stop
-          >
-          <div
-            v-else
-            class="w-full h-40 flex items-center justify-center"
-          >
-            <div
-              class="text-gray-400 dark:text-gray-600 flex flex-col items-center"
-            >
-              <UIcon
-                name="i-lucide-image-off"
-                class="w-8 h-8 mb-2"
-              />
-              {{ $t("noImageAvailable") }}
-            </div>
-          </div>
-        </div>
-
-        <!-- Right side: Image information and Generate button -->
-        <div
-          class="w-full md:w-1/3 lg:w-1/4 h-1/2 md:h-full dark:bg-black/50 bg-muted backdrop-blur-md p-4 md:p-6 lg:p-8 flex flex-col overflow-y-auto animate-slideInRight"
-          @click.stop
-        >
-          <div class="dark:text-white/80 mb-4 md:mb-6">
-            <h3 class="dark:text-white text-base md:text-lg font-medium mb-2">
-              {{ $t("promptDetails") }}
-            </h3>
-            <p
-              class="text-xs md:text-sm mb-4 md:mb-6 overflow-y-auto bg-gray-200 p-2 rounded-lg dark:bg-gray-800/50"
-            >
-              {{ title }}
-            </p>
-
-            <BaseInfo
-              class="mb-4 md:mb-6"
-              :properties="{
-                model: getImageModelLabel(data?.model_name),
-                style: style,
-                aspectRatio: data?.aspect_ratio,
-                personGeneration: getPersonGenerationLabel(
-                  data?.person_generation
-                ),
-                safety_filter_level: getSafetyFilterLabel(
-                  data?.safety_filter_level
-                ),
-                used_credit: data?.used_credit
-              }"
-            />
-          </div>
-
-          <div class="mt-auto pt-2 flex flex-row gap-4 items-center">
-            <UChatPromptSubmit
-              color="primary"
-              :label="$t('generateWithPrompt')"
-              class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
-              icon="mingcute:ai-fill"
-              @click="generateWithPrompt"
-            />
-            <BaseDownloadButton :link="firstImage?.image_url" />
-          </div>
-        </div>
-
-        <div
-          class="absolute bottom-4 left-4 dark:text-white/70 text-xs md:text-sm hidden md:block"
-        >
-          {{ $t("clickToClose") }}
-        </div>
-      </div>
-    </template>
-  </UModal>
 </template>
 
 <style scoped>

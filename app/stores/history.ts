@@ -145,7 +145,9 @@ export const useHistoryStore = defineStore('historyStore', {
 
         // Update historiesWithPage
         const page = params.page || 1
-        const pageIndex = this.historiesWithPage.findIndex(item => item.page === page)
+        const pageIndex = this.historiesWithPage.findIndex(
+          item => item.page === page
+        )
         if (pageIndex !== -1 && this.historiesWithPage[pageIndex]) {
           // Update existing page (đảm bảo không undefined)
           this.historiesWithPage[pageIndex] = { page, histories: data.result }
@@ -171,6 +173,30 @@ export const useHistoryStore = defineStore('historyStore', {
 
       const nextPage = this.currentPage + 1
       return await this.fetchHistories({ ...params, page: nextPage }, true)
+    },
+
+    cloneGeneration(history: HistoryDetail) {
+      const textToImageStore = useTextToImageStore()
+      const { prompt } = storeToRefs(textToImageStore)
+      const { model } = useImageGenModels()
+      const { style } = useStyles()
+      const { imageDimension } = useImageDimensions()
+      switch (history.type) {
+        case 'text-to-speech':
+          return {}
+        case 'image':
+          prompt.value = history.input_text
+          model.value = history.model_name || 'imagen-4'
+          style.value = history.generated_image?.[0]?.style || 'default'
+          imageDimension.value
+            = history.generated_image?.[0]?.aspect_ratio || '1:1'
+          navigateTo('/app')
+          return {}
+        case 'text-to-video':
+          return {}
+        default:
+          throw new Error('Unsupported generation type')
+      }
     }
   }
 })
