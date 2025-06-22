@@ -1,28 +1,56 @@
 <template>
   <UDrawer
     v-model:open="openNotificationDrawer"
-    :overlay="false"
+    :overlay="true"
+    :dismissible="false"
+    :ui="{ header: 'flex items-center justify-between' }"
+    inset
+    :handle="false"
+    should-scale-background
   >
-    <UButton
-      label="Open"
-      color="neutral"
-      variant="subtle"
-      trailing-icon="i-lucide-chevron-up"
-    />
-    <template #header>
-      <h2 class="text-highlighted font-semibold">
-        Your generated image is ready. Click to view details.
-      </h2>
-
-      <UButton
-        color="neutral"
-        variant="ghost"
-        icon="i-lucide-x"
-        @click="openNotificationDrawer = false"
-      />
-    </template>
     <template #content>
-      {{ notificationHistoryUuid }}
+      <div class="p-4 space-y-4">
+        <UAlert
+          :title="$t('Your generation is ready')"
+          :description="
+            $t(
+              'Your AI generation is ready to view. Click to open the details.'
+            )
+          "
+          color="neutral"
+          variant="outline"
+          orientation="horizontal"
+          :actions="[
+            {
+              label: 'View Details',
+              trailingIcon: 'icons8:right-round',
+              onClick: () => {
+                router.replace({
+                  query: {
+                    uuid: notificationHistoryUuid
+                  }
+                });
+                openNotificationDrawer = false;
+                isNotificationsSlideoverOpen = false;
+                showDetailModal = true;
+              }
+            },
+            {
+              label: 'See later',
+              color: 'neutral',
+              variant: 'subtle',
+              trailingIcon: 'ion:play-skip-forward-circle-outline',
+              onClick: () => {
+                openNotificationDrawer = false;
+                isNotificationsSlideoverOpen = false;
+              }
+            }
+          ]"
+          :avatar="{
+            icon: 'line-md:circle-filled-to-confirm-circle-filled-transition'
+          }"
+        />
+      </div>
     </template>
   </UDrawer>
 </template>
@@ -34,30 +62,13 @@
  */
 
 const notificationsStore = useNotificationsStore()
-const { openNotificationDrawer, notificationHistoryUuid } = storeToRefs(notificationsStore)
+const { openNotificationDrawer, notificationHistoryUuid }
+  = storeToRefs(notificationsStore)
 const appStore = useAppStore()
 const { isNotificationsSlideoverOpen } = storeToRefs(appStore)
 
-// Initialize notifications on component mount
-onMounted(async () => {
-  // Fetch initial notifications
-  await notificationsStore.fetchNotifications()
+const historyStore = useHistoryStore()
+const { showDetailModal } = storeToRefs(historyStore)
 
-  // Setup real-time subscription
-  notificationsStore.setupRealtimeSubscription()
-})
-
-// Cleanup on unmount
-onUnmounted(() => {
-  notificationsStore.cleanup()
-})
-
-// Handle notification slideover
-const onOpenNotificationSlideover = () => {
-  isNotificationsSlideoverOpen.value = true
-}
-
-// Example usage (these would be used in a real implementation):
-// - notificationsStore.handleNotificationDetail(notification)
-// - notificationsStore.fetchMore()
+const router = useRouter()
 </script>

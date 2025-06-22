@@ -10,19 +10,19 @@ export function useImageGenModels() {
       label: 'Imagen 4 Fast',
       value: 'imagen-4-fast',
       icon: 'hugeicons:ai-chip',
-      options: ['style', 'imageDimensions']
+      options: ['style', 'imageDimensions', 'personGeneration', 'safetyFilterLevel']
     },
     {
       label: 'Imagen 4',
       value: 'imagen-4',
       icon: 'hugeicons:ai-chip',
-      options: ['style', 'imageDimensions']
+      options: ['style', 'imageDimensions', 'personGeneration', 'safetyFilterLevel']
     },
     {
       label: 'Imagen 4 Ultra',
       value: 'imagen-4-ultra',
       icon: 'hugeicons:ai-chip',
-      options: ['style', 'imageDimensions']
+      options: ['style', 'imageDimensions', 'personGeneration', 'safetyFilterLevel']
     }
   ]
   const model = useCookie<any>('image-gen-model', { default: () => models[0] })

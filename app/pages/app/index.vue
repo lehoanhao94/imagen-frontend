@@ -139,13 +139,19 @@ const onGenerate = async () => {
         >
           <BaseImageDimensionsSelect />
         </UFormField>
-        <UFormField :label="$t('Person Generation')">
+        <UFormField
+          v-if="model?.options?.includes('personGeneration')"
+          :label="$t('Person Generation')"
+        >
           <BasePersonGenerationSelect
             v-model="personGeneration"
             class="w-full"
           />
         </UFormField>
-        <UFormField :label="$t('Safety Filter')">
+        <UFormField
+          v-if="model?.options?.includes('safetyFilterLevel')"
+          :label="$t('Safety Filter')"
+        >
           <BaseSafetyFilterSelect
             v-model="safetyFilterLevel"
             class="w-full"

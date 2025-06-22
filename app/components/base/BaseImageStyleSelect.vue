@@ -179,8 +179,10 @@ watch(
       color="neutral"
       variant="outline"
       trailing-icon="lucide:chevron-down"
-      class="justify-between"
       v-bind="$attrs"
+      :ui="{
+        trailingIcon: 'ml-auto'
+      }"
       @click="openModal"
     />
 

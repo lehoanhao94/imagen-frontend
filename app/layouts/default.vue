@@ -20,5 +20,6 @@ const translatedNavLinks = useNavLinks()
     <LayoutWavesBg />
     <BaseLoadingOverlay />
     <NotificationDrawer />
+    <HistoryDetailModal />
   </div>
 </template>
