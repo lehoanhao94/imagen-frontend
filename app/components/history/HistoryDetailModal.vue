@@ -17,10 +17,6 @@ const isTouchDevice = ref(false)
 onMounted(() => {
   isTouchDevice.value
     = 'ontouchstart' in window || navigator.maxTouchPoints > 0
-
-  if (!historyDetail.value) {
-    historyStore.fetchHistoryDetail(historyDetailUuid.value || route.query.uuid as string)
-  }
 })
 
 watch(

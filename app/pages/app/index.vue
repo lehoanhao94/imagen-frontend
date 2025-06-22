@@ -4,11 +4,12 @@ interface ImageFile {
   alt: string
   file: File
 }
-
+const authStore = useAuthStore()
+const { isAuthenticated } = storeToRefs(authStore)
 const { model, models } = useImageGenModels()
 const { style } = useStyles()
 const { imageDimension } = useImageDimensions()
-
+const router = useRouter()
 const appStore = useAppStore()
 const toast = useToast()
 const { loading } = storeToRefs(appStore)
@@ -40,6 +41,11 @@ const handleImagesSelected = (images: ImageFile[]) => {
 }
 
 const onGenerate = async () => {
+  if (!isAuthenticated.value) {
+    router.push('/auth/login')
+    return
+  }
+
   // Extract File objects from selected images
   const files = selectedImages.value.map(img => img.file).filter(Boolean)
 
