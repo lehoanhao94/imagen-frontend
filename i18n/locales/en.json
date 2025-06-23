@@ -121,6 +121,7 @@
     "loginDescription": "Login to your account to continue",
     "email": "Email",
     "enterEmail": "Enter your email",
+    "filter": "Filter",
     "password": "Password",
     "enterPassword": "Enter your password",
     "rememberMe": "Remember me",
@@ -579,6 +580,12 @@
     "doctransGPT": "DoctransGPT",
     "nuxtUIOnDiscord": "Nuxt UI on Discord",
     "youtube": "Youtube"
+  },
+  "historyFilter": {
+    "all": "All",
+    "imagen": "Imagen",
+    "videoGen": "Video Gen",
+    "speechGen": "Speech Gen"
   },
   "historyPages": {
     "imagenDescription": "Browse your AI-generated images and artwork",
