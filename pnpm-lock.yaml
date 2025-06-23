@@ -89,6 +89,9 @@ dependencies:
   vue3-google-signin:
     specifier: ^2.1.1
     version: 2.1.1(vue@3.5.16)
+  wavesurfer.js:
+    specifier: ^7.9.5
+    version: 7.9.5
 
 devDependencies:
   '@nuxt/eslint':
@@ -11867,6 +11870,10 @@ packages:
       '@vue/server-renderer': 3.5.16(vue@3.5.16)
       '@vue/shared': 3.5.16
       typescript: 5.8.3
+
+  /wavesurfer.js@7.9.5:
+    resolution: {integrity: sha512-ioOG9chuAn0bF2NYYKkZtaxjcQK/hFskLg8ViLYbJHhWPk1N5wWtuqVhqeh2ZWT2SK3t0E8UkD7lLDLuZQQaSA==}
+    dev: false
 
   /web-namespaces@2.0.1:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}

@@ -63,7 +63,7 @@ const onGenerate = async () => {
     toast.add({
       id: 'success',
       title: 'Image Generation',
-      description: 'Your image is being generated. Please check back later.',
+      description: 'Your image is ready!',
       color: 'success'
     })
   }
@@ -181,7 +181,7 @@ const onGenerate = async () => {
       </div>
     </Motion>
     <Motion
-      v-if="false"
+      v-if="textToImageResult || loadings['textToImage']"
       ref="aiToolImageCardRef"
       :initial="{
         scale: 1.1,

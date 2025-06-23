@@ -286,7 +286,7 @@ export const useNotificationsStore = defineStore('notificationsStore', {
       }
       if (
         ['2'].includes(String(notification?.status))
-        && notification?.type === 'image'
+        && notification?.type === 'video'
       ) {
         this.openNotificationDrawer = true
         this.notificationHistoryUuid = notification?.uuid
