@@ -6,12 +6,8 @@ interface ImageFile {
 }
 
 const { model, models } = useVideoGenModels()
-const {
-  duration,
-  personGeneration,
-  personGenerationOptions,
-  enhancePrompt
-} = useVideoGenOptions()
+const { duration, personGeneration, personGenerationOptions, enhancePrompt }
+  = useVideoGenOptions()
 
 const { videoDimension } = useVideoDimensions()
 
@@ -23,7 +19,8 @@ const textToVideoStore = useTextToVideoStore()
 const {
   textToVideoResult: _textToVideoResult,
   aiToolImageCardRef: _aiToolImageCardRef,
-  prompt
+  prompt,
+  loadings
 } = storeToRefs(textToVideoStore)
 
 // Video type selection
@@ -99,7 +96,7 @@ const onUsePrompt = (newPrompt: string) => {
           :label="$t('generateVideo')"
           class="bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 cursor-pointer"
           icon="mingcute:ai-fill"
-          :loading="loading"
+          :loading="loadings['textToVideo']"
         />
 
         <template #footer />
@@ -121,34 +118,55 @@ const onUsePrompt = (newPrompt: string) => {
         delay: 0.5
       }"
     >
-      <div class="flex flex-col sm:flex-row sm:items-center gap-3 mt-4">
-        <UFormField :label="$t('modelPreset')">
+      <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <UFormField :label="$t('model')">
           <BaseModelSelect
             v-model="model"
             :models="models"
             class="w-full"
           />
         </UFormField>
-        <UFormField :label="$t('videoTypeSelection')">
+        <!-- <UFormField :label="$t('videoTypeSelection')">
           <BaseVideoTypeSelect
             v-model="selectedVideoType"
             size="sm"
           />
-        </UFormField>
-        <UFormField :label="$t('videoDimensions')">
-          <BaseVideoDimensionsSelect />
-        </UFormField>
-        <UFormField :label="$t('personGeneration')">
-          <USelectMenu
+        </UFormField> -->
+        <UFormField :label="$t('Person Generation')">
+          <BasePersonGenerationSelect
             v-model="personGeneration"
-            :options="personGenerationOptions"
-            option-attribute="label"
-            value-attribute="value"
             class="w-full"
           />
         </UFormField>
-        <div class="flex flex-row gap-3 items-end">
-          <UFormField :label="$t('yourImage')">
+        <UFormField :label="$t('aspectRatio')">
+          <BaseVideoDimensionsSelect />
+        </UFormField>
+
+        <UFormField :label="$t('enhancePrompt')">
+          <template #hint>
+            <UTooltip
+              :delay-duration="0"
+              :text="
+                enhancePrompt
+                  ? $t(
+                    'Prompts will always be refined to improve output quality'
+                  )
+                  : $t('Prompts will not be refined')
+              "
+            >
+              <UIcon name="material-symbols:help" />
+            </UTooltip>
+          </template>
+          <USwitch
+            v-model="enhancePrompt"
+            unchecked-icon="i-lucide-x"
+            checked-icon="i-lucide-check"
+            :label="enhancePrompt ? $t('On') : $t('Off')"
+          />
+        </UFormField>
+
+        <div class="sm:col-span-4 flex flex-row gap-3 items-end">
+          <UFormField :label="$t('Image Reference')">
             <BaseImageSelect
               v-model="selectedImages"
               :multiple="true"
@@ -160,12 +178,6 @@ const onUsePrompt = (newPrompt: string) => {
             @update:model-value="handleImagesSelected"
           />
         </div>
-        <UFormField :label="$t('enhancePrompt')">
-          <UToggle
-            v-model="enhancePrompt"
-            :label="enhancePrompt ? $t('enabled') : $t('disabled')"
-          />
-        </UFormField>
       </div>
     </Motion>
 

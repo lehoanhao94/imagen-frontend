@@ -9,12 +9,10 @@ export const useTextToVideoStore = defineStore('textToVideoStore', {
     selectedImages: [] as any[],
 
     loadings: {
-      textToVideo: false,
       textToVideo: false
     } as Record<string, boolean>,
 
     errors: {
-      textToVideo: false,
       textToVideo: false
     } as Record<string, any>,
     prompt: ''
@@ -32,7 +30,7 @@ export const useTextToVideoStore = defineStore('textToVideoStore', {
     }) {
       const appStore = useAppStore()
       this.textToVideoResult = null
-      appStore.loading = true
+      // appStore.loading = true
       const toast = useToast()
 
       try {

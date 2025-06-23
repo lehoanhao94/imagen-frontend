@@ -25,7 +25,9 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const lastAudio = computed(() => {
-  return props.data?.generated_audio?.[props.data?.generated_audio?.length - 1] || ''
+  return (
+    props.data?.generated_audio?.[props.data?.generated_audio?.length - 1] || ''
+  )
 })
 
 const audioUrl = computed(() => {
@@ -35,17 +37,32 @@ const audioUrl = computed(() => {
 
 const title = computed(() => {
   // Use individual prop first, then fall back to data prop
-  return props.title || props.data?.input_text || props.data?.name || 'Generated Speech'
+  return (
+    props.title
+    || props.data?.input_text
+    || props.data?.name
+    || 'Generated Speech'
+  )
 })
 
 const prompt = computed(() => {
   // Use individual prop first, then fall back to data prop
-  return props.prompt || props.data?.input_text || props.data?.custom_prompt || 'No prompt available'
+  return (
+    props.prompt
+    || props.data?.input_text
+    || props.data?.custom_prompt
+    || 'No prompt available'
+  )
 })
 
 const model = computed(() => {
   // Use individual prop first, then fall back to data prop
-  return props.preset || props.data?.model_name || props.data?.model || 'Speech Model'
+  return (
+    props.preset
+    || props.data?.model_name
+    || props.data?.model
+    || 'Speech Model'
+  )
 })
 
 const voice = computed(() => {
@@ -66,16 +83,15 @@ const closeFullScreen = () => {
 
 <template>
   <!-- Card View -->
-  <UPageCard
-    class="speech-card cursor-pointer"
-    @click="openFullScreen"
-  >
-    <div class="p-4">
-      <div class="mb-4">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-          {{ title }}
-        </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+  <UPageCard class="speech-card cursor-pointer">
+    <div class="p-0">
+      <div
+        class="mb-4 cursor-pointer"
+        @click="openFullScreen"
+      >
+        <p
+          class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 hover:text-primary-500"
+        >
           {{ prompt }}
         </p>
       </div>
@@ -87,7 +103,9 @@ const closeFullScreen = () => {
         />
       </div>
 
-      <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+      <div
+        class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400"
+      >
         <span>{{ model }}</span>
         <span>{{ voice }}</span>
       </div>
@@ -115,7 +133,9 @@ const closeFullScreen = () => {
         />
 
         <!-- Content -->
-        <div class="flex-1 flex flex-col justify-center max-w-4xl mx-auto w-full">
+        <div
+          class="flex-1 flex flex-col justify-center max-w-4xl mx-auto w-full"
+        >
           <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
               {{ title }}
@@ -123,7 +143,9 @@ const closeFullScreen = () => {
             <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
               {{ prompt }}
             </p>
-            <div class="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+            <div
+              class="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400"
+            >
               <span class="flex items-center gap-2">
                 <UIcon name="i-lucide-cpu" />
                 {{ model }}
@@ -143,7 +165,9 @@ const closeFullScreen = () => {
           </div>
         </div>
 
-        <div class="absolute bottom-4 left-4 text-gray-500 dark:text-gray-400 text-sm">
+        <div
+          class="absolute bottom-4 left-4 text-gray-500 dark:text-gray-400 text-sm"
+        >
           Press ESC to close
         </div>
       </div>
@@ -152,15 +176,6 @@ const closeFullScreen = () => {
 </template>
 
 <style scoped>
-.speech-card {
-  transition: all 0.2s ease-in-out;
-}
-
-.speech-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
-
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;

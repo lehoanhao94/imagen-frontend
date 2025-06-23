@@ -2,14 +2,8 @@ export const useVideoGenOptions = () => {
   // Fixed duration at 8 seconds (no options needed)
   const duration = ref(8)
 
-  // Person generation options
-  const personGenerationOptions = [
-    { label: 'Allow', value: 'allow' },
-    { label: 'Don\'t Allow', value: 'dont_allow' }
-  ]
-
   // Default person generation
-  const personGeneration = ref('dont_allow')
+  const personGeneration = ref('DONT_ALLOW')
 
   // Aspect ratio options (kept for backward compatibility, but use videoDimensions instead)
   const aspectRatioOptions = [
@@ -32,8 +26,6 @@ export const useVideoGenOptions = () => {
 
     // Person generation
     personGeneration,
-    personGenerationOptions,
-
     // Aspect ratio (backward compatibility)
     aspectRatio,
     aspectRatioOptions,
