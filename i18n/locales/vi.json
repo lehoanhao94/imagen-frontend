@@ -28,12 +28,10 @@
   "generate": "Tạo ảnh",
   "cancel": "Hủy",
   "confirm": "Xác nhận",
-  "personGeneration": "Tạo hình người",
-  "safetyFilter": "Bộ lọc an toàn",
   "personGeneration": {
-    "dontAllow": "Không cho phép",
-    "allowAdult": "Cho phép người lớn",
-    "allowAll": "Cho phép tất cả"
+    "dontAllow": "Don't Allow",
+    "allowAdult": "Allow Adult",
+    "allowAll": "Allow All"
   },
   "safetyFilter": {
     "blockLowAndAbove": "Chặn thấp trở lên",
@@ -658,7 +656,13 @@
   "generateSimilar": "Tạo tương tự",
   "aspectRatio": "Tỷ lệ khung hình",
   "Image Reference": "Tham khảo hình ảnh",
-  "personGeneration": "Thế hệ con người",
   "safety_filter_level": "Mức Độ Bộ Lọc An Toàn",
-  "used_credit": "Tín dụng đã sử dụng"
+  "used_credit": "Tín dụng đã sử dụng",
+  "Safety Filter": "Safety Filter",
+  "Person Generation": "Person Generation",
+  "downloadImage": "Download Image",
+  "noImageAvailable": "No image available",
+  "enhancePrompt": "Enhance Prompt",
+  "addImages": "Add Images",
+  "generateVideo": "Generate Video"
 }

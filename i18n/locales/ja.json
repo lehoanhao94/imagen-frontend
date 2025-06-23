@@ -121,7 +121,8 @@
     "backToLogin": "ログインに戻る",
     "loginFailed": "ログインに失敗しました",
     "loginWithGoogle": "Googleでログイン",
-    "google": "Google"
+    "google": "Google",
+    "filter": "Filter"
   },
   "validation": {
     "invalidEmail": "無効なメールアドレス",
@@ -638,7 +639,30 @@
   },
   "aspectRatio": "アスペクト比",
   "Image Reference": "画像参照",
-  "personGeneration": "人物生成",
+  "personGeneration": {
+    "dontAllow": "Don't Allow",
+    "allowAdult": "Allow Adult",
+    "allowAll": "Allow All"
+  },
   "safety_filter_level": "安全フィルターレベル",
-  "used_credit": "使用済みクレジット"
+  "used_credit": "使用済みクレジット",
+  "Safety Filter": "Safety Filter",
+  "safetyFilter": {
+    "blockLowAndAbove": "Block Low and Above",
+    "blockMediumAndAbove": "Block Medium and Above",
+    "blockOnlyHigh": "Block Only High",
+    "blockNone": "Block None"
+  },
+  "historyFilter": {
+    "all": "All",
+    "imagen": "Imagen",
+    "videoGen": "Video Gen",
+    "speechGen": "Speech Gen"
+  },
+  "Person Generation": "Person Generation",
+  "downloadImage": "Download Image",
+  "noImageAvailable": "No image available",
+  "enhancePrompt": "Enhance Prompt",
+  "addImages": "Add Images",
+  "generateVideo": "Generate Video"
 }
