@@ -56,26 +56,20 @@
             }"
           >
             <template #emotions-leading="{ item }">
-              <UAvatar
-                :icon="
-                  playingEmotions.has(item.emotion_key)
-                    ? 'lucide:pause'
-                    : 'lucide:play'
-                "
-                size="md"
-                :ui="{
-                  root: 'rounded-lg',
-                  background: getEmotionColor(item.emotion_key)
-                }"
-                @click.stop="togglePlayPreview(item)"
-              >
-                <template #default>
-                  <UIcon
-                    :name="getEmotionIcon(item.emotion_key)"
-                    class="w-4 h-4 text-white"
-                  />
-                </template>
-              </UAvatar>
+              <div class="relative">
+                <div
+                  v-if="playingEmotions.has(item.emotion_key)"
+                  class="absolute rounded-full animate-ping inset-0 w-full h-full bg-primary-500/30"
+                />
+                <UAvatar
+                  size="md"
+                  :ui="{
+                    root: 'rounded-lg'
+                  }"
+                  :src="getEmotionIcon(item.emotion)"
+                  @click.stop="togglePlayPreview(item)"
+                />
+              </div>
             </template>
             <template #emotions-trailing="{ item }">
               <div class="flex items-center gap-2">
@@ -102,26 +96,6 @@
                       : 'ep:right'
                   "
                   @click.stop="onSelectEmotion(item)"
-                />
-
-                <UButton
-                  v-if="item.sample_audio"
-                  :icon="
-                    playingEmotions.has(item.emotion_key)
-                      ? 'lucide:square'
-                      : 'lucide:play'
-                  "
-                  color="primary"
-                  variant="ghost"
-                  @click="togglePlayPreview(item)"
-                />
-                <UButton
-                  v-else
-                  icon="lucide:volume-x"
-                  color="gray"
-                  variant="ghost"
-                  disabled
-                  :title="$t('noAudioSample')"
                 />
               </div>
             </template>
@@ -240,20 +214,8 @@ const getEmotionColor = (emotionKey: string): string => {
   return colorMap[emotionKey] || 'bg-gray-500'
 }
 
-const getEmotionIcon = (emotionKey: string): string => {
-  const iconMap: Record<string, string> = {
-    happy: 'lucide:smile',
-    sad: 'lucide:frown',
-    angry: 'lucide:angry',
-    excited: 'lucide:zap',
-    calm: 'lucide:leaf',
-    neutral: 'lucide:meh',
-    casual: 'lucide:coffee',
-    professional: 'lucide:briefcase',
-    energetic: 'lucide:activity',
-    gentle: 'lucide:heart'
-  }
-  return iconMap[emotionKey] || 'lucide:circle'
+const getEmotionIcon = (emotion: string): string => {
+  return `/emojis/${emotion}.svg`
 }
 
 // Modal functions
