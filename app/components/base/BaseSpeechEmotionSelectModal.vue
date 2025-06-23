@@ -134,11 +134,11 @@
                 }"
                 @click="togglePlayPreview(item)"
               >
-                {{ item.label }}
+                {{ $t(item.label || "") }}
                 <div
                   class="text-xs text-left text-gray-500 dark:text-gray-600 break-all whitespace-break-spaces"
                 >
-                  {{ item.suffix }}
+                  {{ $t(item.suffix || "") }}
                 </div>
               </div>
             </template>
