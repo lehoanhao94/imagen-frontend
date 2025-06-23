@@ -17,8 +17,7 @@ const historyComponents = {
 // Use history store for fetching imagen data
 const historyStore = useHistoryStore()
 
-const { historiesWithPage, loadings }
-  = storeToRefs(historyStore)
+const { historiesWithPage, loadings } = storeToRefs(historyStore)
 
 // Filter parameters for the API
 const selectedFilter = ref('all')
@@ -182,26 +181,15 @@ const checkScrollPosition = debounce(() => {
                 name="i-lucide-chevron-right"
                 class="w-4 h-4 text-muted-foreground"
               />
-              <span class="ml-1 text-sm font-medium text-primary md:ml-2">{{
-                $t("historyPages.imagenBreadcrumb")
-              }}</span>
+              <BaseHistoryFilterSelect
+                v-model="selectedFilter"
+                variant="none"
+                @update:model-value="onFilterChange"
+              />
             </div>
           </li>
         </ol>
       </nav>
-
-      <!-- Filter Section -->
-      <div class="mb-6">
-        <div class="flex items-center gap-4">
-          <span class="text-sm font-medium text-gray-700 dark:text-gray-300">
-            {{ $t('filter') }}:
-          </span>
-          <BaseHistoryFilterSelect
-            v-model="selectedFilter"
-            @update:model-value="onFilterChange"
-          />
-        </div>
-      </div>
 
       <!-- Error message -->
       <div

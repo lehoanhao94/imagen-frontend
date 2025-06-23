@@ -33,12 +33,14 @@ const props = defineProps({
     default: () => ({})
   }
 })
-
+const route = useRoute()
+const router = useRouter()
 const referenceVideo = ref<HTMLVideoElement | null>(null)
 const isFullScreenOpen = ref(false)
 const isHovered = ref(false)
 const isTouchDevice = ref(false)
-
+const historyStore = useHistoryStore()
+const { showDetailModal, historyDetail } = storeToRefs(historyStore)
 // Check if it's a touch device on component mount
 onMounted(() => {
   isTouchDevice.value
@@ -52,7 +54,13 @@ const openFullScreen = () => {
     return
   }
 
-  isFullScreenOpen.value = true
+  historyDetail.value = props.data as any
+  showDetailModal.value = true
+  // Update the URL to include the ID for navigation
+  if (props.data.uuid) {
+    router.push({ query: { uuid: props.data.uuid } })
+  }
+  isHovered.value = false
 }
 
 const generateWithPrompt = () => {
@@ -96,7 +104,7 @@ const onTogglePlay = () => {
 }
 
 const duration = computed(() => {
-  const video = referenceVideo.value
+  const video = lastGenerated.value
   if (video && video.duration) {
     const minutes = Math.floor(video.duration / 60)
     const seconds = Math.floor(video.duration % 60)
@@ -153,14 +161,17 @@ const thumbnailImage = computed(() => {
               @click.stop="openFullScreen"
             />
           </div>
-          <UChatPromptSubmit
-            color="primary"
-            :label="$t('generateWithPrompt')"
-            class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600 mt-auto transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 delay-200"
-            :class="{ 'translate-y-0 opacity-100': isHovered }"
-            icon="mingcute:ai-fill"
-            @click.stop="generateWithPrompt"
-          />
+          <div class="flex flex-row gap-2 w-full items-center mt-auto">
+            <BaseDownloadButton
+              :link="videoUrl"
+              class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+              :class="{ 'opacity-100': isHovered }"
+              :label="$t('downloadVideo')"
+              size="sm"
+              block
+              @click.stop="() => (isFullScreenOpen = false)"
+            />
+          </div>
         </div>
       </div>
     </UPageCard>
@@ -276,13 +287,15 @@ const thumbnailImage = computed(() => {
             </div>
           </div>
 
-          <div class="mt-auto pt-2">
-            <UChatPromptSubmit
-              color="primary"
-              :label="$t('generateWithPrompt')"
-              class="cursor-pointer w-full justify-center bg-gradient-to-r from-primary-500 to-violet-500 max-h-10 dark:text-white hover:from-primary-600 hover:to-violet-600"
-              icon="mingcute:ai-fill"
-              @click="generateWithPrompt"
+          <div class="flex flex-row gap-2 w-full items-center mt-auto">
+            <BaseDownloadButton
+              :link="videoUrl"
+              class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+              :class="{ 'opacity-100': isHovered }"
+              :label="$t('downloadImage')"
+              size="sm"
+              block
+              @click.stop="() => (isFullScreenOpen = false)"
             />
           </div>
         </div>

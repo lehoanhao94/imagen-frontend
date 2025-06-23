@@ -8,7 +8,8 @@ const { getImageModelLabel } = useImageGenModels()
 const { getPersonGenerationLabel } = usePersonGenerationOptions()
 const { getSafetyFilterLabel } = useSafetyFilterOptions()
 const historyStore = useHistoryStore()
-const { showDetailModal, historyDetail, loadings, historyDetailUuid } = storeToRefs(historyStore)
+const { showDetailModal, historyDetail, loadings, historyDetailUuid }
+  = storeToRefs(historyStore)
 
 const isHovered = ref(false)
 const isTouchDevice = ref(false)
@@ -25,7 +26,9 @@ watch(
     nextTick(() => {
       if (newValue) {
         nextTick(() => {
-          historyStore.fetchHistoryDetail(historyDetailUuid.value || route.query.uuid as string)
+          historyStore.fetchHistoryDetail(
+            historyDetailUuid.value || (route.query.uuid as string)
+          )
         })
       } else {
         historyDetail.value = null
@@ -68,6 +71,34 @@ const onCloseFullScreen = () => {
   // Clear the URL query parameter when closing
   router.push({ query: {} })
 }
+
+const lastGenerated = computed(() => {
+  return (
+    historyDetail.value?.generated_video?.[
+      historyDetail.value?.generated_video?.length - 1
+    ] || {}
+  )
+})
+
+const linkDownload = computed(() => {
+  if (historyDetail.value?.type === 'image') {
+    return firstImage.value?.image_url
+  }
+  if (historyDetail.value?.type === 'video') {
+    return lastGenerated.value?.video_url
+  }
+  return ''
+})
+
+const duration = computed(() => {
+  const video = lastGenerated.value
+  if (video && video.duration) {
+    const minutes = Math.floor(video.duration / 60)
+    const seconds = Math.floor(video.duration % 60)
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+  }
+  return '0:00'
+})
 </script>
 
 <template>
@@ -113,12 +144,16 @@ const onCloseFullScreen = () => {
           </div>
           <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
           <img
-            v-else-if="firstImage?.image_url"
+            v-else-if="historyDetail.type === 'image' && firstImage?.image_url"
             :src="firstImage?.image_url"
             :alt="title"
             class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
             @click.stop
           >
+          <BaseVideoPlayer
+            v-else-if="historyDetail.type === 'video'"
+            :data="historyDetail"
+          />
           <div
             v-else
             class="w-full h-40 flex items-center justify-center"
@@ -185,7 +220,7 @@ const onCloseFullScreen = () => {
                 icon="mingcute:ai-fill"
                 @click="generateWithPrompt"
               />
-              <BaseDownloadButton :link="firstImage?.image_url" />
+              <BaseDownloadButton :link="linkDownload" />
             </template>
           </div>
         </div>
