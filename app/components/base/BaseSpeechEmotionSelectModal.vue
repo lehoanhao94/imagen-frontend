@@ -51,10 +51,17 @@
             :loading="loading"
             class="flex-1 h-80"
             :placeholder="t('searchEmotions')"
+            :fuse="{
+              resultLimit: 1000
+            }"
           >
             <template #emotions-leading="{ item }">
               <UAvatar
-                :icon="playingEmotions.has(item.emotion_key) ? 'lucide:pause' : 'lucide:play'"
+                :icon="
+                  playingEmotions.has(item.emotion_key)
+                    ? 'lucide:pause'
+                    : 'lucide:play'
+                "
                 size="md"
                 :ui="{
                   root: 'rounded-lg',
@@ -74,21 +81,36 @@
               <div class="flex items-center gap-2">
                 <UButton
                   :label="
-                    tempSelectedEmotion?.emotion_key === item.emotion_key ? $t('selected') : $t('select')
+                    tempSelectedEmotion?.emotion_key === item.emotion_key
+                      ? $t('selected')
+                      : $t('select')
                   "
                   variant="ghost"
-                  :color="tempSelectedEmotion?.emotion_key === item.emotion_key ? 'primary' : 'neutral'"
+                  :color="
+                    tempSelectedEmotion?.emotion_key === item.emotion_key
+                      ? 'primary'
+                      : 'neutral'
+                  "
                   :class="{
                     'flex': tempSelectedEmotion?.emotion_key === item.emotion_key,
-                    'sm:hidden group-hover:flex': tempSelectedEmotion?.emotion_key !== item.emotion_key
+                    'sm:hidden group-hover:flex':
+                      tempSelectedEmotion?.emotion_key !== item.emotion_key
                   }"
-                  :icon="tempSelectedEmotion?.emotion_key === item.emotion_key ? 'lets-icons:check-fill' : 'ep:right'"
+                  :icon="
+                    tempSelectedEmotion?.emotion_key === item.emotion_key
+                      ? 'lets-icons:check-fill'
+                      : 'ep:right'
+                  "
                   @click.stop="onSelectEmotion(item)"
                 />
 
                 <UButton
                   v-if="item.sample_audio"
-                  :icon="playingEmotions.has(item.emotion_key) ? 'lucide:square' : 'lucide:play'"
+                  :icon="
+                    playingEmotions.has(item.emotion_key)
+                      ? 'lucide:square'
+                      : 'lucide:play'
+                  "
                   color="primary"
                   variant="ghost"
                   @click="togglePlayPreview(item)"
@@ -107,7 +129,8 @@
               <div
                 class="flex flex-col items-start dark:text-gray-300"
                 :class="{
-                  'font-bold': tempSelectedEmotion?.emotion_key === item.emotion_key
+                  'font-bold':
+                    tempSelectedEmotion?.emotion_key === item.emotion_key
                 }"
                 @click="togglePlayPreview(item)"
               >
@@ -172,7 +195,9 @@ const {
 } = useSpeechEmotions()
 
 // Local state for selected emotion - fallback to composable state for backward compatibility
-const selectedEmotion = computed(() => props.modelValue || composableSelectedEmotion.value)
+const selectedEmotion = computed(
+  () => props.modelValue || composableSelectedEmotion.value
+)
 const placeholderText = computed(() => props.placeholder || t('selectEmotion'))
 
 // Modal state
