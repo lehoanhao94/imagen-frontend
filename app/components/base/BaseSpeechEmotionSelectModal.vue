@@ -2,12 +2,13 @@
   <div>
     <!-- Button to open Modal -->
     <UButton
-      :label="selectedEmotion ? selectedEmotion.emotion : $t('selectEmotion')"
+      :label="selectedEmotion ? selectedEmotion.emotion : placeholderText"
       :icon="selectedEmotion ? 'lucide:smile' : 'lucide:meh'"
       color="neutral"
       variant="outline"
       trailing-icon="lucide:chevron-down"
       class="justify-between"
+      :size="props.size"
       v-bind="$attrs"
       @click="openModal"
     />
@@ -19,32 +20,11 @@
       :ui="{ footer: 'justify-end', content: 'max-w-4xl', body: '!p-0' }"
       prevent-close
     >
-      <template #body>
+      <template #content>
         <div class="flex flex-col h-[70vh]">
-          <!-- Search Input -->
-          <div class="p-4 border-b border-gray-200 dark:border-gray-700">
-            <UInput
-              v-model="searchQuery"
-              :placeholder="$t('searchEmotions')"
-              icon="lucide:search"
-              class="w-full"
-            />
-          </div>
-
-          <!-- Loading State -->
-          <div
-            v-if="loading"
-            class="flex items-center justify-center py-12"
-          >
-            <UIcon
-              name="i-lucide-loader"
-              class="animate-spin h-8 w-8 text-primary"
-            />
-          </div>
-
           <!-- Error State -->
           <div
-            v-else-if="error"
+            v-if="error"
             class="flex items-center justify-center py-12 text-red-500"
           >
             <div class="text-center">
@@ -59,105 +39,87 @@
                 class="mt-2"
                 @click="loadEmotions"
               >
-                {{ $t('retry') }}
+                {{ $t("retry") }}
               </UButton>
             </div>
           </div>
 
           <!-- Emotion List -->
-          <div
+          <UCommandPalette
             v-else
-            class="flex-1 overflow-y-auto p-4"
+            :groups="groups"
+            :loading="loading"
+            class="flex-1 h-80"
+            :placeholder="t('searchEmotions')"
           >
-            <div
-              v-if="filteredEmotions.length === 0"
-              class="flex items-center justify-center py-12 text-gray-500"
-            >
-              <div class="text-center">
-                <UIcon
-                  name="i-lucide-search-x"
-                  class="w-8 h-8 mx-auto mb-2 opacity-50"
-                />
-                <p>{{ $t('noEmotionsFound') }}</p>
-              </div>
-            </div>
-
-            <div
-              v-else
-              class="space-y-3"
-            >
-              <UCard
-                v-for="emotion in filteredEmotions"
-                :key="emotion.emotion_key"
-                class="cursor-pointer transition-all duration-200 hover:shadow-md focus:ring-2 focus:ring-primary-500 focus:outline-none"
-                :class="{
-                  'ring-2 ring-primary-500 bg-primary-50 dark:bg-primary-950':
-                    tempSelectedEmotion?.emotion_key === emotion.emotion_key,
-                  'hover:bg-gray-50 dark:hover:bg-gray-800':
-                    tempSelectedEmotion?.emotion_key !== emotion.emotion_key
+            <template #emotions-leading="{ item }">
+              <UAvatar
+                :icon="playingEmotions.has(item.emotion_key) ? 'lucide:pause' : 'lucide:play'"
+                size="md"
+                :ui="{
+                  root: 'rounded-lg',
+                  background: getEmotionColor(item.emotion_key)
                 }"
-                tabindex="0"
-                @click="selectTempEmotion(emotion)"
-                @keydown.enter="selectTempEmotion(emotion)"
-                @keydown.space.prevent="selectTempEmotion(emotion)"
+                @click.stop="togglePlayPreview(item)"
               >
-                <div class="flex items-center gap-4">
-                  <!-- Avatar/Icon -->
-                  <UAvatar
-                    :alt="emotion.emotion"
-                    size="lg"
-                    :ui="{ background: getEmotionColor(emotion.emotion_key) }"
-                  >
-                    <template #default>
-                      <UIcon
-                        :name="getEmotionIcon(emotion.emotion_key)"
-                        class="w-6 h-6 text-white"
-                      />
-                    </template>
-                  </UAvatar>
+                <template #default>
+                  <UIcon
+                    :name="getEmotionIcon(item.emotion_key)"
+                    class="w-4 h-4 text-white"
+                  />
+                </template>
+              </UAvatar>
+            </template>
+            <template #emotions-trailing="{ item }">
+              <div class="flex items-center gap-2">
+                <UButton
+                  :label="
+                    tempSelectedEmotion?.emotion_key === item.emotion_key ? $t('selected') : $t('select')
+                  "
+                  variant="ghost"
+                  :color="tempSelectedEmotion?.emotion_key === item.emotion_key ? 'primary' : 'neutral'"
+                  :class="{
+                    'flex': tempSelectedEmotion?.emotion_key === item.emotion_key,
+                    'sm:hidden group-hover:flex': tempSelectedEmotion?.emotion_key !== item.emotion_key
+                  }"
+                  :icon="tempSelectedEmotion?.emotion_key === item.emotion_key ? 'lets-icons:check-fill' : 'ep:right'"
+                  @click.stop="onSelectEmotion(item)"
+                />
 
-                  <!-- Emotion Info -->
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2 mb-1">
-                      <h3 class="font-semibold text-sm capitalize">
-                        {{ emotion.emotion }}
-                      </h3>
-                    </div>
-                    <div class="text-xs text-gray-500">
-                      <div
-                        v-if="emotion.emotion_long"
-                        class="line-clamp-2"
-                      >
-                        {{ emotion.emotion_long }}
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Action Buttons -->
-                  <div class="flex items-center gap-2 flex-shrink-0">
-                    <!-- Play Preview Button -->
-                    <UButton
-                      v-if="emotion.sample_audio"
-                      size="sm"
-                      variant="ghost"
-                      :icon="playingEmotions.has(emotion.emotion_key) ? 'lucide:square' : 'lucide:play'"
-                      color="primary"
-                      @click.stop="togglePlayPreview(emotion)"
-                    />
-                    <UButton
-                      v-else
-                      size="sm"
-                      variant="ghost"
-                      icon="lucide:volume-x"
-                      color="gray"
-                      disabled
-                      :title="$t('noAudioSample')"
-                    />
-                  </div>
+                <UButton
+                  v-if="item.sample_audio"
+                  :icon="playingEmotions.has(item.emotion_key) ? 'lucide:square' : 'lucide:play'"
+                  color="primary"
+                  variant="ghost"
+                  @click="togglePlayPreview(item)"
+                />
+                <UButton
+                  v-else
+                  icon="lucide:volume-x"
+                  color="gray"
+                  variant="ghost"
+                  disabled
+                  :title="$t('noAudioSample')"
+                />
+              </div>
+            </template>
+            <template #emotions-label="{ item }">
+              <div
+                class="flex flex-col items-start dark:text-gray-300"
+                :class="{
+                  'font-bold': tempSelectedEmotion?.emotion_key === item.emotion_key
+                }"
+                @click="togglePlayPreview(item)"
+              >
+                {{ item.label }}
+                <div
+                  class="text-xs text-left text-gray-500 dark:text-gray-600 break-all whitespace-break-spaces"
+                >
+                  {{ item.suffix }}
                 </div>
-              </UCard>
-            </div>
-          </div>
+              </div>
+            </template>
+          </UCommandPalette>
         </div>
       </template>
 
@@ -183,41 +145,57 @@
 import type { SpeechEmotion } from '~/composables/useSpeechEmotions'
 
 interface BaseSpeechEmotionSelectModalProps {
-  // No modelValue needed - we'll use composable state directly
+  modelValue?: SpeechEmotion | null
+  placeholder?: string
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 }
 
-const props = defineProps<BaseSpeechEmotionSelectModalProps>()
+const props = withDefaults(defineProps<BaseSpeechEmotionSelectModalProps>(), {
+  modelValue: null,
+  placeholder: undefined,
+  size: 'md'
+})
 
-// No emit needed - using composable state directly
+const emit = defineEmits<{
+  'update:modelValue': [value: SpeechEmotion | null]
+}>()
 
 const { t } = useI18n()
 const {
   emotions,
-  selectedEmotion,
   loading,
   error,
   loadEmotions,
-  enabledEmotions
+  enabledEmotions,
+  selectEmotion,
+  selectedEmotion: composableSelectedEmotion
 } = useSpeechEmotions()
+
+// Local state for selected emotion - fallback to composable state for backward compatibility
+const selectedEmotion = computed(() => props.modelValue || composableSelectedEmotion.value)
+const placeholderText = computed(() => props.placeholder || t('selectEmotion'))
 
 // Modal state
 const isModalOpen = ref(false)
 const tempSelectedEmotion = ref<SpeechEmotion | null>(null)
-const searchQuery = ref('')
 const playingEmotions = ref<Set<string>>(new Set())
 const currentAudio = ref<HTMLAudioElement | null>(null)
 
-// Filtered emotions based on search
-const filteredEmotions = computed(() => {
-  const emotionsToFilter = enabledEmotions.value
-
-  if (!searchQuery.value) return emotionsToFilter
-
-  const query = searchQuery.value.toLowerCase()
-  return emotionsToFilter.filter(emotion =>
-    emotion.emotion.toLowerCase().includes(query)
-    || emotion.emotion_long?.toLowerCase().includes(query)
-  )
+// Groups for UCommandPalette
+const groups = computed(() => {
+  return [
+    {
+      id: 'emotions',
+      label: 'Emotions',
+      slot: 'emotions' as const,
+      items: enabledEmotions.value.map(emotion => ({
+        label: emotion.emotion,
+        value: emotion,
+        suffix: emotion.emotion_long,
+        ...emotion
+      }))
+    }
+  ]
 })
 
 // Emotion styling helpers
@@ -257,7 +235,6 @@ const getEmotionIcon = (emotionKey: string): string => {
 const openModal = () => {
   tempSelectedEmotion.value = selectedEmotion.value
   isModalOpen.value = true
-  searchQuery.value = ''
 
   // Load emotions if not loaded
   if (emotions.value.length === 0) {
@@ -273,8 +250,10 @@ const cancelSelection = () => {
 
 const confirmSelection = () => {
   if (tempSelectedEmotion.value) {
-    // Update the composable state directly
-    selectedEmotion.value = tempSelectedEmotion.value
+    // Update composable state for backward compatibility
+    selectEmotion(tempSelectedEmotion.value)
+    // Emit the new value to parent
+    emit('update:modelValue', tempSelectedEmotion.value)
   }
   isModalOpen.value = false
   stopAllAudio()
@@ -282,6 +261,11 @@ const confirmSelection = () => {
 
 const selectTempEmotion = (emotion: SpeechEmotion) => {
   tempSelectedEmotion.value = emotion
+}
+
+const onSelectEmotion = (emotion: SpeechEmotion) => {
+  selectTempEmotion(emotion)
+  confirmSelection()
 }
 
 // Audio functions
