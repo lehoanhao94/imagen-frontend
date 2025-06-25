@@ -63,14 +63,17 @@ const thumbnailImage = computed(() => {
 </script>
 
 <template>
-  <div class="relative order-first lg:order-last w-full group cursor-pointer">
+  <div
+    v-if="videoUrl"
+    class="relative order-first lg:order-last w-full group cursor-pointer"
+  >
     <!-- Prevent click propagation on the video itself -->
     <video
       ref="referenceVideo"
       :src="videoUrl"
       :autoplay="false"
       controls
-      class="object-contain cursor-auto w-full h-full"
+      class="object-contain cursor-auto w-full md:h-[95vh] h-[50vh]"
       :poster="thumbnailImage?.url"
       @click.stop
       @play="isVideoPlaying = true"
@@ -92,6 +95,18 @@ const thumbnailImage = computed(() => {
       class="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded"
     >
       {{ duration }}
+    </div>
+  </div>
+  <div
+    v-else
+    class="w-full h-40 flex items-center justify-center"
+  >
+    <div class="text-gray-400 dark:text-gray-600 flex flex-col items-center">
+      <UIcon
+        name="hugeicons:video-off"
+        class="w-8 h-8 mb-2"
+      />
+      {{ $t("noVideoAvailable") }}
     </div>
   </div>
 </template>

@@ -145,10 +145,10 @@ const thumbnailImage = computed(() => {
             class="text-gray-400 dark:text-gray-600 flex flex-col items-center"
           >
             <UIcon
-              name="i-lucide-image-off"
+              :name="data.status === 1 ? 'eos-icons:loading' : 'i-lucide-image-off'"
               class="w-8 h-8 mb-2"
             />
-            {{ $t("No thumbnail available") }}
+            {{ data.status === 1 ? $t("Generating...") : $t("No thumbnail available") }}
           </div>
         </div>
         <!-- Hover Overlay -->

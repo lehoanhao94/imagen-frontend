@@ -3,10 +3,8 @@ interface VideoExample {
   id: string
   title: string
   prompt: string
-  videoUrl: string
   thumbnailUrl: string
   model: string
-  style: string
   duration: string
 }
 
@@ -18,43 +16,106 @@ const emit = defineEmits<{
 const videoExamples: VideoExample[] = [
   {
     id: '1',
-    title: 'Serene Ocean Waves',
-    prompt: 'A serene ocean scene with gentle waves rolling onto a sandy beach at golden hour, soft lighting, peaceful atmosphere, high quality, cinematic',
-    videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&h=300&fit=crop',
-    model: 'Leonardo Phoenix',
-    style: 'Cinematic',
+    title: 'Icicles',
+    prompt:
+      'Close up shot (composition) of melting icicles (subject) on a frozen rock wall (context) with cool blue tones (ambiance), zoomed in (camera motion) maintaining close-up detail of water drips (action).	',
+
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/icicles2.gif',
+    model: 'Veo 2',
     duration: '5s'
   },
   {
     id: '2',
-    title: 'Mountain Landscape',
-    prompt: 'Majestic mountain landscape with snow-capped peaks, morning mist, dramatic clouds, time-lapse style, breathtaking vista, 4K quality',
-    videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop',
-    model: 'Video Gen Pro',
-    style: 'Realistic',
+    title: 'Man on the phone',
+    prompt:
+      'The camera dollies to show a close up of a desperate man in a green trench coat. He\'s making a call on a rotary-style wall phone with a green neon light. It looks like a movie scene.',
+
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/phonebooth.gif',
+    model: 'Veo 2',
     duration: '8s'
   },
   {
     id: '3',
-    title: 'City at Night',
-    prompt: 'Bustling city street at night with neon lights, car traffic light trails, urban atmosphere, vibrant colors, modern cityscape',
-    videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=500&h=300&fit=crop',
-    model: 'Imagen Video',
-    style: 'Urban',
+    title: 'Running snow leopard',
+    prompt:
+      'Create a short 3D animated scene in a joyful cartoon style. A cute creature with snow leopard-like fur, large expressive eyes, and a friendly, rounded form happily prances through a whimsical winter forest. The scene should feature rounded, snow-covered trees, gentle falling snowflakes, and warm sunlight filtering through the branches. The creature\'s bouncy movements and wide smile should convey pure delight. Aim for an upbeat, heartwarming tone with bright, cheerful colors and playful animation.',
+
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/running_snow_leopard.gif',
+    model: 'Veo 2',
     duration: '6s'
   },
   {
     id: '4',
-    title: 'Forest Path',
-    prompt: 'Enchanted forest path with dappled sunlight filtering through tall trees, magical atmosphere, nature walk, peaceful journey',
-    videoUrl: 'https://cdn.leonardo.ai/users/530d2601-152b-4c3c-8f05-b6465819104d/generations/fb9828c6-64ac-446b-913d-4e06eb269a91/fb9828c6-64ac-446b-913d-4e06eb269a91.mp4',
-    thumbnailUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&h=300&fit=crop',
-    model: 'Leonardo Phoenix',
-    style: 'Fantasy',
+    title: 'Snow leopard',
+    prompt:
+      'A cute creature with snow leopard-like fur is walking in winter forest, 3D cartoon style render.	',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/snow_leopard_short.gif',
+    model: 'Veo 2',
     duration: '7s'
+  },
+  {
+    id: '5',
+    title: 'Subject',
+    prompt:
+      'An architectural rendering of a white concrete apartment building with flowing organic shapes, seamlessly blending with lush greenery and futuristic elements',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/white_building.gif',
+    model: 'Veo 2',
+    duration: '5s'
+  },
+  {
+    id: '6',
+    title: 'Context',
+    prompt:
+      'A satellite floating through outer space with the moon and some stars in the background.',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/satellite2.gif',
+    model: 'Veo 2',
+    duration: '5s'
+  },
+  {
+    id: '7',
+    title: 'Action',
+    prompt:
+      'A wide shot of a woman walking along the beach, looking content and relaxed towards the horizon at sunset.',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/sunset.gif',
+    model: 'Veo 2',
+    duration: '5s'
+  },
+  {
+    id: '8',
+    title: 'Camera motion',
+    prompt:
+      'A POV shot from a vintage car driving in the rain, Canada at night, cinematic.',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/pov_shot.gif',
+    model: 'Veo 2',
+    duration: '5s'
+  },
+  {
+    id: '9',
+    title: 'Composition',
+    prompt:
+      'Extreme close-up of a an eye with city reflected in it.',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/composition_eye_close_up.gif',
+    model: 'Veo 2',
+    duration: '5s'
+  },
+  {
+    id: '10',
+    title: 'Ambiance',
+    prompt:
+      'A close-up of a girl holding adorable golden retriever puppy in the park, sunlight.',
+    thumbnailUrl:
+      'https://ai.google.dev/static/gemini-api/docs/video/images/ambiance_puppy.gif',
+    model: 'Veo 2',
+    duration: '5s'
   }
 ]
 
@@ -85,10 +146,8 @@ const onUsePrompt = (prompt: string) => {
         <VideoPromptCard
           :title="video.title"
           :prompt="video.prompt"
-          :video-url="video.videoUrl"
           :thumbnail-url="video.thumbnailUrl"
           :model="video.model"
-          :style="video.style"
           :duration="video.duration"
           orientation="horizontal"
           @use-prompt="onUsePrompt"

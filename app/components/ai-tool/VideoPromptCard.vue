@@ -6,10 +6,7 @@ const props = defineProps({
     type: String as () => 'horizontal' | 'vertical',
     default: 'horizontal'
   },
-  videoUrl: {
-    type: String,
-    required: true
-  },
+
   thumbnailUrl: {
     type: String,
     required: true
@@ -26,10 +23,7 @@ const props = defineProps({
     type: String,
     default: 'Video Model'
   },
-  style: {
-    type: String,
-    default: 'Dynamic'
-  },
+
   duration: {
     type: String,
     default: '5s'
@@ -72,26 +66,20 @@ const onUsePrompt = () => {
     }"
   >
     <!-- Video thumbnail with play button -->
-    <div
-      class="relative order-first lg:order-last w-full group cursor-pointer"
-      @click="openFullScreen"
-    >
+    <div class="relative order-first lg:order-last w-full group cursor-pointer">
       <img
         :src="thumbnailUrl"
         :alt="title"
         class="w-full h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
       >
       <!-- Play button overlay -->
-      <div class="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <!-- <div class="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <UIcon
           name="i-lucide-play"
           class="w-12 h-12 text-white"
         />
-      </div>
+      </div> -->
       <!-- Duration badge -->
-      <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-        {{ duration }}
-      </div>
     </div>
 
     <template #description>
@@ -104,29 +92,13 @@ const onUsePrompt = () => {
         </div>
       </div>
 
-      <div class="mt-2 grid grid-cols-3">
+      <div class="mt-2 grid grid-cols-2">
         <div>
           <div class="text-[10px] font-light">
             {{ $t("model") }}
           </div>
           <div class="text-xs">
             {{ model }}
-          </div>
-        </div>
-        <div>
-          <div class="text-[10px] font-light">
-            {{ $t("style") }}
-          </div>
-          <div class="text-xs">
-            {{ style }}
-          </div>
-        </div>
-        <div>
-          <div class="text-[10px] font-light">
-            {{ $t("duration") }}
-          </div>
-          <div class="text-xs">
-            {{ duration }}
           </div>
         </div>
       </div>
@@ -181,7 +153,7 @@ const onUsePrompt = () => {
           @click="isFullScreenOpen = false"
         />
         <div class="absolute bottom-4 text-white/70 text-sm">
-          {{ $t('clickToClose') }}
+          {{ $t("clickToClose") }}
         </div>
       </div>
     </template>

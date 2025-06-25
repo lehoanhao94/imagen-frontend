@@ -89,6 +89,7 @@ export const useHistoryStore = defineStore('historyStore', {
   getters: {},
   actions: {
     async fetchHistoryDetail(uuid: string) {
+      if (!uuid) return null
       try {
         this.loadings.fetchHistoryDetail = true
         this.errors.fetchHistoryDetail = null

@@ -64,6 +64,22 @@ const onGenerate = async () => {
 
 const onUsePrompt = (newPrompt: string) => {
   prompt.value = newPrompt
+  // scroll to top and focus on prompt input
+  nextTick(() => {
+    // scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+
+    // try to focus the prompt input after scrolling
+    setTimeout(() => {
+      // look for the prompt input (UChatPrompt component)
+      const promptInput = document.querySelector(
+        '[class*="chat-prompt"] textarea, [class*="chat-prompt"] input'
+      )
+      if (promptInput && promptInput instanceof HTMLElement) {
+        promptInput.focus()
+      }
+    }, 500)
+  })
 }
 </script>
 
