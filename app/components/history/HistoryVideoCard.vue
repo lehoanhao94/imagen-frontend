@@ -7,9 +7,7 @@ const props = defineProps({
     default: 'horizontal'
   },
   imageUrl: {
-    type: String,
-    default:
-      'https://cdn.leonardo.ai/users/07195385-0f39-42ad-876f-1b86c2b71b55/generations/3a3be14d-d7a8-495c-9550-c40ae490f3fe/Leonardo_Phoenix_10_a_warm_and_vibrant_image_of_a_happy_woman_1.jpg?w=512'
+    type: String
   },
   prompt: {
     type: String,
@@ -133,11 +131,26 @@ const thumbnailImage = computed(() => {
     >
       <div class="relative w-full h-full aspect-square sm:aspect-auto">
         <img
+          v-if="thumbnailImage?.url || thumbnail"
           :src="thumbnailImage?.url || thumbnail"
           :alt="title"
           class="w-full h-full object-cover imagen cursor-pointer transition-opacity"
           @click="openFullScreen"
         >
+        <div
+          v-else
+          class="w-full h-40 flex items-center justify-center"
+        >
+          <div
+            class="text-gray-400 dark:text-gray-600 flex flex-col items-center"
+          >
+            <UIcon
+              name="i-lucide-image-off"
+              class="w-8 h-8 mb-2"
+            />
+            {{ $t("No thumbnail available") }}
+          </div>
+        </div>
         <!-- Hover Overlay -->
         <div
           class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-100 flex flex-col justify-between p-4"

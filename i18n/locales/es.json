@@ -646,480 +646,257 @@
   },
   "safety_filter_level": "Nivel de Filtro de Seguridad",
   "used_credit": "Crédito utilizado",
-  "Safety Filter": "Safety Filter",
+  "Safety Filter": "Filtro de seguridad",
   "safetyFilter": {
-    "blockLowAndAbove": "Block Low and Above",
-    "blockMediumAndAbove": "Block Medium and Above",
-    "blockOnlyHigh": "Block Only High",
-    "blockNone": "Block None"
+    "blockLowAndAbove": "Bloque Bajo y Alto",
+    "blockMediumAndAbove": "Bloque medio y superior",
+    "blockOnlyHigh": "Bloquear solo alto",
+    "blockNone": "Bloquear Ninguno"
   },
   "historyFilter": {
-    "all": "All",
+    "all": "Todo",
     "imagen": "Imagen",
     "videoGen": "Video Gen",
-    "speechGen": "Speech Gen"
+    "speechGen": "Generación de Speech"
   },
-  "Person Generation": "Person Generation",
-  "downloadImage": "Download Image",
-  "noImageAvailable": "No image available",
-  "enhancePrompt": "Enhance Prompt",
-  "addImages": "Add Images",
-  "generateVideo": "Generate Video",
-  "happy": "Happy",
-  "sad": "Sad",
-  "angry": "Angry",
-  "excited": "Excited",
-  "laughing": "Laughing",
-  "crying": "Crying",
-  "calm": "Calm",
-  "serious": "Serious",
-  "frustrated": "Frustrated",
-  "hopeful": "Hopeful",
-  "narrative": "Narrative",
-  "kids' storytelling": "Kids' Storytelling",
-  "audiobook": "Audiobook",
-  "poetic": "Poetic",
-  "mysterious": "Mysterious",
-  "inspirational": "Inspirational",
-  "surprised": "Surprised",
-  "confident": "Confident",
-  "romantic": "Romantic",
-  "scared": "Scared",
-  "trailer voice": "Trailer Voice",
-  "advertising": "Advertising",
-  "speech": "Speech",
-  "documentary": "Documentary",
-  "newsreader": "Newsreader",
-  "weather report": "Weather Report",
-  "game commentary": "Game Commentary",
-  "interactive": "Interactive",
-  "customer support": "Customer Support",
-  "playful": "Playful",
-  "tired": "Tired",
-  "sarcastic": "Sarcastic",
-  "disgusted": "Disgusted",
-  "whispering": "Whispering",
-  "persuasive": "Persuasive",
-  "nostalgic": "Nostalgic",
-  "meditative": "Meditative",
-  "announcement": "Announcement",
-  "professional pitch": "Professional Pitch",
-  "casual": "Casual",
-  "exciting trailer": "Exciting Trailer",
-  "dramatic": "Dramatic",
-  "corporate": "Corporate",
-  "tech enthusiast": "Tech Enthusiast",
-  "youthful": "Youthful",
-  "calming reassurance": "Calming Reassurance",
-  "heroic": "Heroic",
-  "festive": "Festive",
-  "urgent": "Urgent",
-  "motivational": "Motivational",
-  "friendly": "Friendly",
-  "energetic": "Energetic",
-  "serene": "Serene",
-  "bold": "Bold",
-  "charming": "Charming",
-  "monotone": "Monotone",
-  "questioning": "Questioning",
-  "directive": "Directive",
-  "dreamy": "Dreamy",
-  "epic": "Epic",
-  "lyrical": "Lyrical",
-  "mystical": "Mystical",
-  "melancholy": "Melancholy",
-  "cheerful": "Cheerful",
-  "eerie": "Eerie",
-  "flirtatious": "Flirtatious",
-  "thoughtful": "Thoughtful",
-  "cinematic": "Cinematic",
-  "humorous": "Humorous",
-  "instructional": "Instructional",
-  "conversational": "Conversational",
-  "apologetic": "Apologetic",
-  "excuse-making": "Excuse-making",
-  "encouraging": "Encouraging",
+  "Person Generation": "Generación de Personas",
+  "downloadImage": "Descargar imagen",
+  "noImageAvailable": "Imagen no disponible",
+  "enhancePrompt": "Mejorar indicación",
+  "addImages": "Agregar imágenes",
+  "generateVideo": "Generar video",
+  "happy": "Feliz",
+  "sad": "Triste",
+  "angry": "Enojado",
+  "excited": "Emocionado",
+  "laughing": "Riendo",
+  "crying": "Llorando",
+  "calm": "Calma",
+  "serious": "Serio",
+  "frustrated": "Frustrado",
+  "hopeful": "Esperanzado",
+  "narrative": "Narrativa",
+  "kids' storytelling": "Narración Infantil",
+  "audiobook": "Audiolibro",
+  "poetic": "Poético",
+  "mysterious": "Misterioso",
+  "inspirational": "Inspirador",
+  "surprised": "Sorpresa",
+  "confident": "Seguro",
+  "romantic": "Romántico",
+  "scared": "Asustado",
+  "trailer voice": "Voz del tráiler",
+  "advertising": "Publicidad",
+  "speech": "Discurso",
+  "documentary": "Documental",
+  "newsreader": "Presentador de noticias",
+  "weather report": "Informe del tiempo",
+  "game commentary": "Comentario del juego",
+  "interactive": "Interactivo",
+  "customer support": "Atención al Cliente",
+  "playful": "Juguetón",
+  "tired": "Cansado",
+  "sarcastic": "Sarcástico",
+  "disgusted": "Disgustado",
+  "whispering": "Susurrando",
+  "persuasive": "Persuasivo",
+  "nostalgic": "Nostálgico",
+  "meditative": "Meditativo",
+  "announcement": "Anuncio",
+  "professional pitch": "Presentación profesional",
+  "casual": "Informal",
+  "exciting trailer": "Tráiler emocionante",
+  "dramatic": "Dramático",
+  "corporate": "Corporativo",
+  "tech enthusiast": "Entusiasta de la tecnología",
+  "youthful": "Juvenil",
+  "calming reassurance": "Tranquilizante Reafirmación",
+  "heroic": "Heroico",
+  "festive": "Festivo",
+  "urgent": "Urgente",
+  "motivational": "Motivacional",
+  "friendly": "Amistoso",
+  "energetic": "Energético",
+  "serene": "Sereno",
+  "bold": "Negrita",
+  "charming": "Encantador",
+  "monotone": "Monótono",
+  "questioning": "Cuestionamiento",
+  "directive": "Directiva",
+  "dreamy": "Soñador",
+  "epic": "Épico",
+  "lyrical": "Lírico",
+  "mystical": "Místico",
+  "melancholy": "Melancolía",
+  "cheerful": "Alegre",
+  "eerie": "Misterioso",
+  "flirtatious": "Coqueta",
+  "thoughtful": "Considerado",
+  "cinematic": "Cinematográfico",
+  "humorous": "Humorístico",
+  "instructional": "Instruccional",
+  "conversational": "Conversacional",
+  "apologetic": "Apologético",
+  "excuse-making": "Fabricación de excusas",
+  "encouraging": "Fomentando",
   "neutral": "Neutral",
-  "authoritative": "Authoritative",
-  "sarcastic cheerful": "Sarcastic Cheerful",
-  "reassuring": "Reassuring",
+  "authoritative": "Autoritativo",
+  "sarcastic cheerful": "Sarcásticamente Alegre",
+  "reassuring": "Tranquilizador",
   "formal": "Formal",
-  "anguished": "Anguished",
-  "giggling": "Giggling",
-  "exaggerated": "Exaggerated",
-  "cold": "Cold",
-  "hot-tempered": "Hot-tempered",
-  "grateful": "Grateful",
-  "regretful": "Regretful",
-  "provocative": "Provocative",
-  "triumphant": "Triumphant",
-  "vengeful": "Vengeful",
-  "heroic narration": "Heroic Narration",
-  "villainous": "Villainous",
-  "hypnotic": "Hypnotic",
-  "desperate": "Desperate",
-  "lamenting": "Lamenting",
-  "celebratory": "Celebratory",
-  "teasing": "Teasing",
-  "exhausted": "Exhausted",
-  "questioning suspicious": "Questioning Suspicious",
-  "optimistic": "Optimistic",
-  "bright, gentle voice, expressing excitement": {
-    "": "Bright, gentle voice, expressing excitement."
-  },
-  "low, slow voice, conveying deep emotions": {
-    "": "Low, slow voice, conveying deep emotions."
-  },
-  "sharp, exaggerated voice, expressing frustration": {
-    "": "Sharp, exaggerated voice, expressing frustration."
-  },
-  "fast, lively voice, full of enthusiasm": {
-    "": "Fast, lively voice, full of enthusiasm."
-  },
-  "interrupted, joyful voice, interspersed with laughter": {
-    "": "Interrupted, joyful voice, interspersed with laughter."
-  },
-  "shaky, low voice, expressing pain": {
-    "": "Shaky, low voice, expressing pain."
-  },
-  "gentle, steady voice, providing reassurance": {
-    "": "Gentle, steady voice, providing reassurance."
-  },
-  "mature, clear voice, suitable for formal content": {
-    "": "Mature, clear voice, suitable for formal content."
-  },
-  "weary, slightly irritated voice": {
-    "": "Weary, slightly irritated voice."
-  },
-  "bright voice, conveying positivity and hope": {
-    "": "Bright voice, conveying positivity and hope."
-  },
-  "natural, gentle voice with a slow rhythm": {
-    "": "Natural, gentle voice with a slow rhythm."
-  },
-  "lively, engaging voice, captivating for children": {
-    "": "Lively, engaging voice, captivating for children."
-  },
-  "even, slow voice, emphasizing content meaning": {
-    "": "Even, slow voice, emphasizing content meaning."
-  },
-  "rhythmic, emotional voice, conveying subtlety": {
-    "": "Rhythmic, emotional voice, conveying subtlety."
-  },
-  "low, slow voice, evoking curiosity": {
-    "": "Low, slow voice, evoking curiosity."
-  },
-  "strong, passionate voice, driving action": {
-    "": "Strong, passionate voice, driving action."
-  },
-  "high, interrupted voice, expressing astonishment": {
-    "": "High, interrupted voice, expressing astonishment."
-  },
-  "firm, powerful voice, persuasive and assuring": {
-    "": "Firm, powerful voice, persuasive and assuring."
-  },
-  "sweet, gentle voice, suitable for emotional content": {
-    "": "Sweet, gentle voice, suitable for emotional content."
-  },
-  "shaky, interrupted voice, conveying anxiety": {
-    "": "Shaky, interrupted voice, conveying anxiety."
-  },
-  "deep, strong voice with emphasis, creating suspense": {
-    "": "Deep, strong voice with emphasis, creating suspense."
-  },
-  "engaging, lively voice, emphasizing product benefits": {
-    "": "Engaging, lively voice, emphasizing product benefits."
-  },
-  "formal, clear voice with focus on key points": {
-    "": "Formal, clear voice with focus on key points."
-  },
-  "calm, profound voice, delivering authenticity": {
-    "": "Calm, profound voice, delivering authenticity."
-  },
-  "standard, neutral voice, clear and precise": {
-    "": "Standard, neutral voice, clear and precise."
-  },
-  "bright, neutral voice, suitable for concise updates": {
-    "": "Bright, neutral voice, suitable for concise updates."
-  },
-  "fast, lively voice, stimulating excitement": {
-    "": "Fast, lively voice, stimulating excitement."
-  },
-  "friendly, approachable voice, encouraging engagement": {
-    "": "Friendly, approachable voice, encouraging engagement."
-  },
-  "empathetic, gentle voice, easy to connect with": {
-    "": "Empathetic, gentle voice, easy to connect with."
-  },
-  "clear voice, emphasizing questions and answers": {
-    "": "Clear voice, emphasizing questions and answers."
-  },
-  "cheerful, playful voice with a hint of mischief": {
-    "": "Cheerful, playful voice with a hint of mischief."
-  },
-  "slow, soft voice lacking energy": {
-    "": "Slow, soft voice lacking energy."
-  },
-  "ironic, sharp voice, sometimes humorous": {
-    "": "Ironic, sharp voice, sometimes humorous."
-  },
-  "cold voice, clearly expressing discomfort": {
-    "": "Cold voice, clearly expressing discomfort."
-  },
-  "soft, mysterious voice, creating intimacy": {
-    "": "Soft, mysterious voice, creating intimacy."
-  },
-  "emotional voice, convincing the listener to act": {
-    "": "Emotional voice, convincing the listener to act."
-  },
-  "gentle voice, evoking feelings of reminiscence": {
-    "": "Gentle voice, evoking feelings of reminiscence."
-  },
-  "even, relaxing voice, suitable for mindfulness": {
-    "": "Even, relaxing voice, suitable for mindfulness."
-  },
-  "clear voice, emphasizing key words": {
-    "": "Clear voice, emphasizing key words."
-  },
-  "confident, clear voice, ideal for business presentations": {
-    "": "Confident, clear voice, ideal for business presentations."
-  },
-  "natural, friendly voice, as if talking to a friend": {
-    "": "Natural, friendly voice, as if talking to a friend."
-  },
-  "fast, powerful voice, creating tension and excitement": {
-    "": "Fast, powerful voice, creating tension and excitement."
-  },
-  "emphasized, suspenseful voice, creating intensity": {
-    "": "Emphasized, suspenseful voice, creating intensity."
-  },
-  "professional, formal voice, suitable for business content": {
-    "": "Professional, formal voice, suitable for business content."
-  },
-  "energetic, lively voice, introducing new technologies": {
-    "": "Energetic, lively voice, introducing new technologies."
-  },
-  "vibrant, cheerful voice, appealing to younger audiences": {
-    "": "Vibrant, cheerful voice, appealing to younger audiences."
-  },
-  "gentle, empathetic voice, easing concerns": {
-    "": "Gentle, empathetic voice, easing concerns."
-  },
-  "strong, decisive voice, full of inspiration": {
-    "": "Strong, decisive voice, full of inspiration."
-  },
-  "bright, excited voice, suitable for celebrations": {
-    "": "Bright, excited voice, suitable for celebrations."
-  },
-  "fast, strong voice, emphasizing urgency": {
-    "": "Fast, strong voice, emphasizing urgency."
-  },
-  "passionate, inspiring voice, encouraging action": {
-    "": "Passionate, inspiring voice, encouraging action."
-  },
-  "warm, approachable voice, fostering connection": {
-    "": "Warm, approachable voice, fostering connection."
-  },
-  "fast, powerful voice, brimming with enthusiasm": {
-    "": "Fast, powerful voice, brimming with enthusiasm."
-  },
-  "slow, gentle voice, evoking peace and tranquility": {
-    "": "Slow, gentle voice, evoking peace and tranquility."
-  },
-  "firm, assertive voice, exuding confidence": {
-    "": "Firm, assertive voice, exuding confidence."
-  },
-  "warm, captivating voice, leaving a strong impression": {
-    "": "Warm, captivating voice, leaving a strong impression."
-  },
-  "flat, unvaried voice, conveying neutrality or irony": {
-    "": "Flat, unvaried voice, conveying neutrality or irony."
-  },
-  "curious voice, emphasizing questions": {
-    "": "Curious voice, emphasizing questions."
-  },
-  "firm, clear voice, guiding the listener step-by-step": {
-    "": "Firm, clear voice, guiding the listener step-by-step."
-  },
-  "gentle, slow voice, evoking a floating sensation": {
-    "": "Gentle, slow voice, evoking a floating sensation."
-  },
-  "deep, resonant voice, emphasizing grandeur": {
-    "": "Deep, resonant voice, emphasizing grandeur."
-  },
-  "soft, melodic voice, similar to singing": {
-    "": "Soft, melodic voice, similar to singing."
-  },
-  "low, drawn-out voice, evoking mystery": {
-    "": "Low, drawn-out voice, evoking mystery."
-  },
-  "slow, low voice, conveying deep sadness": {
-    "": "Slow, low voice, conveying deep sadness."
-  },
-  "bright, energetic voice, full of positivity": {
-    "": "Bright, energetic voice, full of positivity."
-  },
-  "low, whispery voice, evoking fear or strangeness": {
-    "": "Low, whispery voice, evoking fear or strangeness."
-  },
-  "sweet, teasing voice, full of allure": {
-    "": "Sweet, teasing voice, full of allure."
-  },
-  "slow, reflective voice, full of contemplation": {
-    "": "Slow, reflective voice, full of contemplation."
-  },
-  "resonant, emphasized voice, creating a movie-like effect": {
-    "": "Resonant, emphasized voice, creating a movie-like effect."
-  },
-  "lighthearted, cheerful voice, sometimes exaggerated": {
-    "": "Lighthearted, cheerful voice, sometimes exaggerated."
-  },
-  "clear, slow voice, guiding the listener step-by-step": {
-    "": "Clear, slow voice, guiding the listener step-by-step."
-  },
-  "natural voice, as if chatting with the listener": {
-    "": "Natural voice, as if chatting with the listener."
-  },
-  "soft, sincere voice, expressing regret": {
-    "": "Soft, sincere voice, expressing regret."
-  },
-  "hesitant, uncertain voice, sometimes awkward": {
-    "": "Hesitant, uncertain voice, sometimes awkward."
-  },
-  "warm voice, providing motivation and support": {
-    "": "Warm voice, providing motivation and support."
-  },
-  "even voice, free of emotional bias": {
-    "": "Even voice, free of emotional bias."
-  },
-  "strong, powerful voice, exuding credibility": {
-    "": "Strong, powerful voice, exuding credibility."
-  },
-  "cheerful voice with an undertone of mockery": {
-    "": "Cheerful voice with an undertone of mockery."
-  },
-  "gentle, empathetic voice, providing comfort": {
-    "": "Gentle, empathetic voice, providing comfort."
-  },
-  "clear, polite voice, suited for formal occasions": {
-    "": "Clear, polite voice, suited for formal occasions."
-  },
-  "urgent, shaky voice, expressing distress": {
-    "": "Urgent, shaky voice, expressing distress."
-  },
-  "interrupted voice, mixed with light laughter": {
-    "": "Interrupted voice, mixed with light laughter."
-  },
-  "loud, emphasized voice, often humorous": {
-    "": "Loud, emphasized voice, often humorous."
-  },
-  "flat, unemotional voice, conveying detachment": {
-    "": "Flat, unemotional voice, conveying detachment."
-  },
-  "fast, sharp voice, sometimes out of control": {
-    "": "Fast, sharp voice, sometimes out of control."
-  },
-  "warm, sincere voice, expressing appreciation": {
-    "": "Warm, sincere voice, expressing appreciation."
-  },
-  "low, subdued voice, full of remorse": {
-    "": "Low, subdued voice, full of remorse."
-  },
-  "challenging, strong voice, full of insinuation": {
-    "": "Challenging, strong voice, full of insinuation."
-  },
-  "loud, powerful voice, full of victory": {
-    "": "Loud, powerful voice, full of victory."
-  },
-  "low, cold voice, expressing determination for revenge": {
-    "": "Low, cold voice, expressing determination for revenge."
-  },
-  "strong, inspiring voice, emphasizing heroic deeds": {
-    "": "Strong, inspiring voice, emphasizing heroic deeds."
-  },
-  "low, drawn-out voice, full of scheming": {
-    "": "Low, drawn-out voice, full of scheming."
-  },
-  "even, repetitive voice, drawing the listener in": {
-    "": "Even, repetitive voice, drawing the listener in."
-  },
-  "urgent, shaky voice, expressing hopelessness": {
-    "": "Urgent, shaky voice, expressing hopelessness."
-  },
-  "low, sorrowful voice, as if mourning": {
-    "": "Low, sorrowful voice, as if mourning."
-  },
-  "excited, joyful voice, full of festive spirit": {
-    "": "Excited, joyful voice, full of festive spirit."
-  },
-  "light, playful voice, sometimes mockingly": {
-    "": "Light, playful voice, sometimes mockingly."
-  },
-  "weak, broken voice, expressing extreme fatigue": {
-    "": "Weak, broken voice, expressing extreme fatigue."
-  },
-  "slow, emphasized voice, full of suspicion": {
-    "": "Slow, emphasized voice, full of suspicion."
-  },
-  "bright, hopeful voice, creating positivity": {
-    "": "Bright, hopeful voice, creating positivity."
-  },
-  "Your audio will be processed with the latest stable model": {
-    "": "Your audio will be processed with the latest stable model."
-  },
-  "Your audio will be processed with the latest beta model": {
-    "": "Your audio will be processed with the latest beta model."
-  },
-  "You don't have any saved prompts yet": {
-    "": "You don't have any saved prompts yet."
-  },
-  "Commercial Use": "Commercial Use",
-  "You have the right to use the speech output generated by our services for personal, educational, or commercial purposes": {
-    " However, you may not resell, redistribute, or sublicense the speech output without prior written consent from Text To Speech OpenAI": {
-      "": "You have the right to use the speech output generated by our services for personal, educational, or commercial purposes. However, you may not resell, redistribute, or sublicense the speech output without prior written consent from Text To Speech OpenAI."
-    }
-  },
-  "Other people’s privacy": "Other people’s privacy",
-  "You must respect the privacy of others when using our services": {
-    " Do not upload or create speech output containing personal information, confidential data, or copyrighted material without permission": {
-      "": "You must respect the privacy of others when using our services. Do not upload or create speech output containing personal information, confidential data, or copyrighted material without permission."
-    }
-  },
-  "{price}$ per credit": "{price}$ per credit",
-  "Pricing": "Pricing",
-  "Simple and flexible": {
-    " Only pay for what you use": {
-      "": "Simple and flexible. Only pay for what you use."
-    }
-  },
-  "Pay as you go": "Pay as you go",
+  "anguished": "Angustiado",
+  "giggling": "Riéndose",
+  "exaggerated": "Exagerado",
+  "cold": "Frío",
+  "hot-tempered": "Impulsivo",
+  "grateful": "Agradecido",
+  "regretful": "Arrepentido",
+  "provocative": "Provocativo",
+  "triumphant": "Triunfante",
+  "vengeful": "Vengativo",
+  "heroic narration": "Narración heroica",
+  "villainous": "Villanos",
+  "hypnotic": "Hipnótico",
+  "desperate": "Desesperado",
+  "lamenting": "Lamentando",
+  "celebratory": "Celebratorio",
+  "teasing": "Bromear",
+  "exhausted": "Agotado",
+  "questioning suspicious": "Cuestionando lo sospechoso",
+  "optimistic": "Optimista",
+  "bright, gentle voice, expressing excitement.": "Voz brillante y suave, expresando emoción.",
+  "low, slow voice, conveying deep emotions.": "Voz baja y lenta, transmitiendo emociones profundas.",
+  "sharp, exaggerated voice, expressing frustration.": "Voz aguda y exagerada, expresando frustración.",
+  "fast, lively voice, full of enthusiasm.": "Voz rápida y animada, llena de entusiasmo.",
+  "interrupted, joyful voice, interspersed with laughter.": "Voz interrumpida y alegre, intercalada con risas.",
+  "shaky, low voice, expressing pain.": "Voz temblorosa y baja, expresando dolor.",
+  "gentle, steady voice, providing reassurance.": "Voz suave y constante, brindando tranquilidad.",
+  "mature, clear voice, suitable for formal content.": "Voz madura y clara, adecuada para contenido formal.",
+  "weary, slightly irritated voice.": "Voz cansada, ligeramente irritada.",
+  "bright voice, conveying positivity and hope.": "Voz brillante, transmitiendo positividad y esperanza.",
+  "natural, gentle voice with a slow rhythm.": "Voz natural y suave con un ritmo lento.",
+  "lively, engaging voice, captivating for children.": "Voz animada y cautivadora, atractiva para los niños.",
+  "even, slow voice, emphasizing content meaning.": "Voz pausada y tranquila, enfatizando el significado del contenido.",
+  "rhythmic, emotional voice, conveying subtlety.": "Voz rítmica y emotiva, transmitiendo sutileza.",
+  "low, slow voice, evoking curiosity.": "Voz baja y lenta, que evoca curiosidad.",
+  "strong, passionate voice, driving action.": "Voz fuerte y apasionada, impulsando la acción.",
+  "high, interrupted voice, expressing astonishment.": "Voz alta e interrumpida, expresando asombro.",
+  "firm, powerful voice, persuasive and assuring.": "Voz firme, poderosa, persuasiva y tranquilizadora.",
+  "sweet, gentle voice, suitable for emotional content.": "Voz dulce y suave, adecuada para contenido emocional.",
+  "shaky, interrupted voice, conveying anxiety.": "Voz temblorosa e interrumpida, transmitiendo ansiedad.",
+  "deep, strong voice with emphasis, creating suspense.": "Voz profunda y fuerte con énfasis, creando suspense.",
+  "engaging, lively voice, emphasizing product benefits.": "Voz atractiva y animada que resalta los beneficios del producto.",
+  "formal, clear voice with focus on key points.": "Voz formal, clara y centrada en puntos clave.",
+  "calm, profound voice, delivering authenticity.": "Voz calmada y profunda que transmite autenticidad.",
+  "standard, neutral voice, clear and precise.": "Voz estándar, neutral, clara y precisa.",
+  "bright, neutral voice, suitable for concise updates.": "Voz clara y neutral, adecuada para actualizaciones concisas.",
+  "fast, lively voice, stimulating excitement.": "Voz rápida y animada, estimulando la emoción.",
+  "friendly, approachable voice, encouraging engagement.": "Voz amistosa y accesible, alentando la participación.",
+  "empathetic, gentle voice, easy to connect with.": "Voz empática y suave, fácil de conectar.",
+  "clear voice, emphasizing questions and answers.": "Voz clara, enfatizando preguntas y respuestas.",
+  "cheerful, playful voice with a hint of mischief.": "Voz alegre y juguetona con un toque de picardía.",
+  "slow, soft voice lacking energy.": "Voz lenta y suave que carece de energía.",
+  "ironic, sharp voice, sometimes humorous.": "Irónica, voz aguda, a veces humorística.",
+  "cold voice, clearly expressing discomfort.": "Voz fría, expresando claramente incomodidad.",
+  "soft, mysterious voice, creating intimacy.": "Voz suave y misteriosa, creando intimidad.",
+  "emotional voice, convincing the listener to act.": "Voz emotiva, convenciendo al oyente a actuar.",
+  "gentle voice, evoking feelings of reminiscence.": "Voz suave, evocando sentimientos de reminiscencia.",
+  "even, relaxing voice, suitable for mindfulness.": "Voz suave y relajante, adecuada para la atención plena.",
+  "clear voice, emphasizing key words.": "Voz clara, enfatizando palabras clave.",
+  "confident, clear voice, ideal for business presentations.": "Voz segura y clara, ideal para presentaciones empresariales.",
+  "natural, friendly voice, as if talking to a friend.": "Voz natural y amigable, como si estuvieras hablando con un amigo.",
+  "fast, powerful voice, creating tension and excitement.": "Rápida, potente voz, creando tensión y emoción.",
+  "emphasized, suspenseful voice, creating intensity.": "Énfasis, voz suspensiva, creando intensidad.",
+  "professional, formal voice, suitable for business content.": "Voz profesional y formal, adecuada para contenido empresarial.",
+  "energetic, lively voice, introducing new technologies.": "Voz enérgica y animada, introduciendo nuevas tecnologías.",
+  "vibrant, cheerful voice, appealing to younger audiences.": "Voz vibrante y alegre, atractiva para el público más joven.",
+  "gentle, empathetic voice, easing concerns.": "Voz suave y empática, aliviando preocupaciones.",
+  "strong, decisive voice, full of inspiration.": "Voz fuerte y decidida, llena de inspiración.",
+  "bright, excited voice, suitable for celebrations.": "Voz brillante y entusiasta, adecuada para celebraciones.",
+  "fast, strong voice, emphasizing urgency.": "Voz rápida y fuerte, enfatizando la urgencia.",
+  "passionate, inspiring voice, encouraging action.": "Voz apasionada e inspiradora, alentando a la acción.",
+  "warm, approachable voice, fostering connection.": "Voz cálida y accesible, que fomenta la conexión.",
+  "fast, powerful voice, brimming with enthusiasm.": "Voz rápida y poderosa, rebosante de entusiasmo.",
+  "slow, gentle voice, evoking peace and tranquility.": "Voz lenta y suave, que evoca paz y tranquilidad.",
+  "firm, assertive voice, exuding confidence.": "Voz firme y asertiva, irradiando confianza.",
+  "warm, captivating voice, leaving a strong impression.": "Voz cálida y cautivadora, que deja una fuerte impresión.",
+  "flat, unvaried voice, conveying neutrality or irony.": "Voz plana, invariable, que transmite neutralidad o ironía.",
+  "curious voice, emphasizing questions.": "Voz curiosa, enfatizando preguntas.",
+  "firm, clear voice, guiding the listener step-by-step.": "Voz firme y clara, guiando al oyente paso a paso.",
+  "gentle, slow voice, evoking a floating sensation.": "Voz suave y pausada, evocando una sensación de flotación.",
+  "deep, resonant voice, emphasizing grandeur.": "Voz profunda y resonante, que enfatiza la grandeza.",
+  "soft, melodic voice, similar to singing.": "Voz suave y melódica, similar al canto.",
+  "low, drawn-out voice, evoking mystery.": "Voz baja y prolongada, evocando misterio.",
+  "slow, low voice, conveying deep sadness.": "Voz lenta y baja, transmitiendo profunda tristeza.",
+  "bright, energetic voice, full of positivity.": "Voz brillante y enérgica, llena de positividad.",
+  "low, whispery voice, evoking fear or strangeness.": "Voz baja y susurrante, que evoca miedo o extrañeza.",
+  "sweet, teasing voice, full of allure.": "Voz dulce y seductora, llena de atractivo.",
+  "slow, reflective voice, full of contemplation.": "Voz lenta, reflexiva, llena de contemplación.",
+  "resonant, emphasized voice, creating a movie-like effect.": "Voz resonante y enfatizada, creando un efecto cinematográfico.",
+  "lighthearted, cheerful voice, sometimes exaggerated.": "Voz alegre y jovial, a veces exagerada.",
+  "clear, slow voice, guiding the listener step-by-step.": "Voz clara y pausada, guiando al oyente paso a paso.",
+  "natural voice, as if chatting with the listener.": "Voz natural, como si estuvieras charlando con el oyente.",
+  "soft, sincere voice, expressing regret.": "Voz suave y sincera, expresando arrepentimiento.",
+  "hesitant, uncertain voice, sometimes awkward.": "Voz vacilante, incierta, a veces torpe.",
+  "warm voice, providing motivation and support.": "Voz cálida, que ofrece motivación y apoyo.",
+  "even voice, free of emotional bias.": "Voz uniforme, libre de sesgo emocional.",
+  "strong, powerful voice, exuding credibility.": "Voz fuerte y poderosa, que irradia credibilidad.",
+  "cheerful voice with an undertone of mockery.": "Voz alegre con un tono de burla.",
+  "gentle, empathetic voice, providing comfort.": "Voz suave y empática, brindando consuelo.",
+  "clear, polite voice, suited for formal occasions.": "Voz clara y cortés, adecuada para ocasiones formales.",
+  "urgent, shaky voice, expressing distress.": "Urgente, voz temblorosa, expresando angustia.",
+  "interrupted voice, mixed with light laughter.": "Voz interrumpida, mezclada con una risa ligera.",
+  "loud, emphasized voice, often humorous.": "Voz alta y enfatizada, a menudo humorística.",
+  "flat, unemotional voice, conveying detachment.": "Voz plana, sin emociones, que transmite desapego.",
+  "fast, sharp voice, sometimes out of control.": "Voz rápida, aguda, a veces fuera de control.",
+  "warm, sincere voice, expressing appreciation.": "Voz cálida y sincera, expresando aprecio.",
+  "low, subdued voice, full of remorse.": "Voz baja y apagada, llena de remordimiento.",
+  "challenging, strong voice, full of insinuation.": "Desafiante, voz fuerte, llena de insinuación.",
+  "loud, powerful voice, full of victory.": "Voz fuerte y poderosa, llena de victoria.",
+  "low, cold voice, expressing determination for revenge.": "Voz baja y fría, expresando determinación por venganza.",
+  "strong, inspiring voice, emphasizing heroic deeds.": "Voz fuerte e inspiradora, enfatizando hazañas heroicas.",
+  "low, drawn-out voice, full of scheming.": "Voz baja y prolongada, llena de intriga.",
+  "even, repetitive voice, drawing the listener in.": "Voz uniforme y repetitiva, atrayendo al oyente.",
+  "urgent, shaky voice, expressing hopelessness.": "Urgente, voz temblorosa, expresando desesperanza.",
+  "low, sorrowful voice, as if mourning.": "Voz baja y triste, como si estuviera de luto.",
+  "excited, joyful voice, full of festive spirit.": "Voz emocionada y alegre, llena de espíritu festivo.",
+  "light, playful voice, sometimes mockingly.": "Voz ligera y juguetona, a veces burlona.",
+  "weak, broken voice, expressing extreme fatigue.": "Voz débil y rota, expresando fatiga extrema.",
+  "slow, emphasized voice, full of suspicion.": "Voz lenta y enfatizada, llena de sospecha.",
+  "bright, hopeful voice, creating positivity.": "Voz brillante y esperanzadora, creando positividad.",
+  "Your audio will be processed with the latest stable model.": "Su audio será procesado con el modelo estable más reciente.",
+  "Your audio will be processed with the latest beta model.": "Tu audio será procesado con el último modelo beta.",
+  "You don't have any saved prompts yet.": "Todavía no tienes ningún mensaje guardado.",
+  "Commercial Use": "Uso comercial",
+  "You have the right to use the speech output generated by our services for personal, educational, or commercial purposes. However, you may not resell, redistribute, or sublicense the speech output without prior written consent from Text To Speech OpenAI.": "Tienes el derecho de utilizar la salida de voz generada por nuestros servicios para propósitos personales, educativos o comerciales. Sin embargo, no puedes revender, redistribuir o sublicenciar la salida de voz sin el consentimiento previo por escrito de Text To Speech OpenAI.",
+  "Other people’s privacy": "La privacidad de otras personas",
+  "You must respect the privacy of others when using our services. Do not upload or create speech output containing personal information, confidential data, or copyrighted material without permission.": "Debes respetar la privacidad de los demás al utilizar nuestros servicios. No subas ni crees productos de voz que contengan información personal, datos confidenciales o material protegido por derechos de autor sin permiso.",
+  "{price}$ per credit": "{price}$ por crédito",
+  "Pricing": "Precios",
+  "Simple and flexible. Only pay for what you use.": "Simple y flexible. Solo paga por lo que usas.",
+  "Pay as you go": "Paga según el consumo",
   "Flexible": "Flexible",
-  "Input characters": "Input characters",
-  "Audio model": "Audio model",
-  "Credits": "Credits",
-  "Cost": "Cost",
-  "HD quality voices": "HD quality voices",
-  "Advanced model": "Advanced model",
-  "Buy now": "Buy now",
-  "Paste your text to calculate": "Paste your text to calculate",
-  "Paste your text here": {
-    "": {
-      "": {
-        "": "Paste your text here..."
-      }
-    }
-  },
-  "Calculate": "Calculate",
-  "Estimate your cost by drag the slider below or": "Estimate your cost by drag the slider below or",
-  "calming": "Calming",
-  "customer": "Customer",
-  "exciting": "exciting",
-  "excuse": "Excuse",
-  "game": "Game",
-  "hot": "Hot",
-  "kids": "Kids",
-  "professional": "Professional",
-  "tech": "Tech",
-  "trailer": "Trailer",
-  "weather": "Weather"
+  "Input characters": "Caracteres de entrada",
+  "Audio model": "Modelo de audio",
+  "Credits": "Créditos",
+  "Cost": "Costo",
+  "HD quality voices": "Voces de calidad HD",
+  "Advanced model": "Modelo avanzado",
+  "Buy now": "Compra ahora",
+  "Paste your text to calculate": "Pegue su texto para calcular",
+  "Paste your text here...": "Pega tu texto aquí...",
+  "Calculate": "Calcular",
+  "Estimate your cost by drag the slider below or": "Estime su costo arrastrando el control deslizante a continuación o",
+  "calming": "Tranquilizante",
+  "customer": "Cliente",
+  "exciting": "emocionante",
+  "excuse": "Disculpa",
+  "game": "Juego",
+  "hot": "Caliente",
+  "kids": "Niños",
+  "professional": "Profesional",
+  "tech": "Tecnología",
+  "trailer": "Remolque",
+  "weather": "Clima",
+  "No thumbnail available": "Miniatura no disponible"
 }

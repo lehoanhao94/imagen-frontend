@@ -658,468 +658,245 @@
   "Image Reference": "Tham khảo hình ảnh",
   "safety_filter_level": "Mức Độ Bộ Lọc An Toàn",
   "used_credit": "Tín dụng đã sử dụng",
-  "Safety Filter": "Safety Filter",
-  "Person Generation": "Person Generation",
-  "downloadImage": "Download Image",
-  "noImageAvailable": "No image available",
-  "enhancePrompt": "Enhance Prompt",
-  "addImages": "Add Images",
-  "generateVideo": "Generate Video",
-  "happy": "Happy",
-  "sad": "Sad",
-  "angry": "Angry",
-  "excited": "Excited",
-  "laughing": "Laughing",
-  "crying": "Crying",
-  "calm": "Calm",
-  "serious": "Serious",
-  "frustrated": "Frustrated",
-  "hopeful": "Hopeful",
-  "narrative": "Narrative",
-  "kids' storytelling": "Kids' Storytelling",
-  "audiobook": "Audiobook",
-  "poetic": "Poetic",
-  "mysterious": "Mysterious",
-  "inspirational": "Inspirational",
-  "surprised": "Surprised",
-  "confident": "Confident",
-  "romantic": "Romantic",
-  "scared": "Scared",
-  "trailer voice": "Trailer Voice",
-  "advertising": "Advertising",
-  "speech": "Speech",
-  "documentary": "Documentary",
-  "newsreader": "Newsreader",
-  "weather report": "Weather Report",
-  "game commentary": "Game Commentary",
-  "interactive": "Interactive",
-  "customer support": "Customer Support",
-  "playful": "Playful",
-  "tired": "Tired",
-  "sarcastic": "Sarcastic",
-  "disgusted": "Disgusted",
-  "whispering": "Whispering",
-  "persuasive": "Persuasive",
-  "nostalgic": "Nostalgic",
-  "meditative": "Meditative",
-  "announcement": "Announcement",
-  "professional pitch": "Professional Pitch",
-  "casual": "Casual",
-  "exciting trailer": "Exciting Trailer",
-  "dramatic": "Dramatic",
-  "corporate": "Corporate",
-  "tech enthusiast": "Tech Enthusiast",
-  "youthful": "Youthful",
-  "calming reassurance": "Calming Reassurance",
-  "heroic": "Heroic",
-  "festive": "Festive",
-  "urgent": "Urgent",
-  "motivational": "Motivational",
-  "friendly": "Friendly",
-  "energetic": "Energetic",
-  "serene": "Serene",
-  "bold": "Bold",
-  "charming": "Charming",
-  "monotone": "Monotone",
-  "questioning": "Questioning",
-  "directive": "Directive",
-  "dreamy": "Dreamy",
-  "epic": "Epic",
-  "lyrical": "Lyrical",
-  "mystical": "Mystical",
-  "melancholy": "Melancholy",
-  "cheerful": "Cheerful",
-  "eerie": "Eerie",
-  "flirtatious": "Flirtatious",
-  "thoughtful": "Thoughtful",
-  "cinematic": "Cinematic",
-  "humorous": "Humorous",
-  "instructional": "Instructional",
-  "conversational": "Conversational",
-  "apologetic": "Apologetic",
-  "excuse-making": "Excuse-making",
-  "encouraging": "Encouraging",
-  "neutral": "Neutral",
-  "authoritative": "Authoritative",
-  "sarcastic cheerful": "Sarcastic Cheerful",
-  "reassuring": "Reassuring",
-  "formal": "Formal",
-  "anguished": "Anguished",
-  "giggling": "Giggling",
-  "exaggerated": "Exaggerated",
-  "cold": "Cold",
-  "hot-tempered": "Hot-tempered",
-  "grateful": "Grateful",
-  "regretful": "Regretful",
-  "provocative": "Provocative",
-  "triumphant": "Triumphant",
-  "vengeful": "Vengeful",
-  "heroic narration": "Heroic Narration",
-  "villainous": "Villainous",
-  "hypnotic": "Hypnotic",
-  "desperate": "Desperate",
-  "lamenting": "Lamenting",
-  "celebratory": "Celebratory",
-  "teasing": "Teasing",
-  "exhausted": "Exhausted",
-  "questioning suspicious": "Questioning Suspicious",
-  "optimistic": "Optimistic",
-  "bright, gentle voice, expressing excitement": {
-    "": "Bright, gentle voice, expressing excitement."
-  },
-  "low, slow voice, conveying deep emotions": {
-    "": "Low, slow voice, conveying deep emotions."
-  },
-  "sharp, exaggerated voice, expressing frustration": {
-    "": "Sharp, exaggerated voice, expressing frustration."
-  },
-  "fast, lively voice, full of enthusiasm": {
-    "": "Fast, lively voice, full of enthusiasm."
-  },
-  "interrupted, joyful voice, interspersed with laughter": {
-    "": "Interrupted, joyful voice, interspersed with laughter."
-  },
-  "shaky, low voice, expressing pain": {
-    "": "Shaky, low voice, expressing pain."
-  },
-  "gentle, steady voice, providing reassurance": {
-    "": "Gentle, steady voice, providing reassurance."
-  },
-  "mature, clear voice, suitable for formal content": {
-    "": "Mature, clear voice, suitable for formal content."
-  },
-  "weary, slightly irritated voice": {
-    "": "Weary, slightly irritated voice."
-  },
-  "bright voice, conveying positivity and hope": {
-    "": "Bright voice, conveying positivity and hope."
-  },
-  "natural, gentle voice with a slow rhythm": {
-    "": "Natural, gentle voice with a slow rhythm."
-  },
-  "lively, engaging voice, captivating for children": {
-    "": "Lively, engaging voice, captivating for children."
-  },
-  "even, slow voice, emphasizing content meaning": {
-    "": "Even, slow voice, emphasizing content meaning."
-  },
-  "rhythmic, emotional voice, conveying subtlety": {
-    "": "Rhythmic, emotional voice, conveying subtlety."
-  },
-  "low, slow voice, evoking curiosity": {
-    "": "Low, slow voice, evoking curiosity."
-  },
-  "strong, passionate voice, driving action": {
-    "": "Strong, passionate voice, driving action."
-  },
-  "high, interrupted voice, expressing astonishment": {
-    "": "High, interrupted voice, expressing astonishment."
-  },
-  "firm, powerful voice, persuasive and assuring": {
-    "": "Firm, powerful voice, persuasive and assuring."
-  },
-  "sweet, gentle voice, suitable for emotional content": {
-    "": "Sweet, gentle voice, suitable for emotional content."
-  },
-  "shaky, interrupted voice, conveying anxiety": {
-    "": "Shaky, interrupted voice, conveying anxiety."
-  },
-  "deep, strong voice with emphasis, creating suspense": {
-    "": "Deep, strong voice with emphasis, creating suspense."
-  },
-  "engaging, lively voice, emphasizing product benefits": {
-    "": "Engaging, lively voice, emphasizing product benefits."
-  },
-  "formal, clear voice with focus on key points": {
-    "": "Formal, clear voice with focus on key points."
-  },
-  "calm, profound voice, delivering authenticity": {
-    "": "Calm, profound voice, delivering authenticity."
-  },
-  "standard, neutral voice, clear and precise": {
-    "": "Standard, neutral voice, clear and precise."
-  },
-  "bright, neutral voice, suitable for concise updates": {
-    "": "Bright, neutral voice, suitable for concise updates."
-  },
-  "fast, lively voice, stimulating excitement": {
-    "": "Fast, lively voice, stimulating excitement."
-  },
-  "friendly, approachable voice, encouraging engagement": {
-    "": "Friendly, approachable voice, encouraging engagement."
-  },
-  "empathetic, gentle voice, easy to connect with": {
-    "": "Empathetic, gentle voice, easy to connect with."
-  },
-  "clear voice, emphasizing questions and answers": {
-    "": "Clear voice, emphasizing questions and answers."
-  },
-  "cheerful, playful voice with a hint of mischief": {
-    "": "Cheerful, playful voice with a hint of mischief."
-  },
-  "slow, soft voice lacking energy": {
-    "": "Slow, soft voice lacking energy."
-  },
-  "ironic, sharp voice, sometimes humorous": {
-    "": "Ironic, sharp voice, sometimes humorous."
-  },
-  "cold voice, clearly expressing discomfort": {
-    "": "Cold voice, clearly expressing discomfort."
-  },
-  "soft, mysterious voice, creating intimacy": {
-    "": "Soft, mysterious voice, creating intimacy."
-  },
-  "emotional voice, convincing the listener to act": {
-    "": "Emotional voice, convincing the listener to act."
-  },
-  "gentle voice, evoking feelings of reminiscence": {
-    "": "Gentle voice, evoking feelings of reminiscence."
-  },
-  "even, relaxing voice, suitable for mindfulness": {
-    "": "Even, relaxing voice, suitable for mindfulness."
-  },
-  "clear voice, emphasizing key words": {
-    "": "Clear voice, emphasizing key words."
-  },
-  "confident, clear voice, ideal for business presentations": {
-    "": "Confident, clear voice, ideal for business presentations."
-  },
-  "natural, friendly voice, as if talking to a friend": {
-    "": "Natural, friendly voice, as if talking to a friend."
-  },
-  "fast, powerful voice, creating tension and excitement": {
-    "": "Fast, powerful voice, creating tension and excitement."
-  },
-  "emphasized, suspenseful voice, creating intensity": {
-    "": "Emphasized, suspenseful voice, creating intensity."
-  },
-  "professional, formal voice, suitable for business content": {
-    "": "Professional, formal voice, suitable for business content."
-  },
-  "energetic, lively voice, introducing new technologies": {
-    "": "Energetic, lively voice, introducing new technologies."
-  },
-  "vibrant, cheerful voice, appealing to younger audiences": {
-    "": "Vibrant, cheerful voice, appealing to younger audiences."
-  },
-  "gentle, empathetic voice, easing concerns": {
-    "": "Gentle, empathetic voice, easing concerns."
-  },
-  "strong, decisive voice, full of inspiration": {
-    "": "Strong, decisive voice, full of inspiration."
-  },
-  "bright, excited voice, suitable for celebrations": {
-    "": "Bright, excited voice, suitable for celebrations."
-  },
-  "fast, strong voice, emphasizing urgency": {
-    "": "Fast, strong voice, emphasizing urgency."
-  },
-  "passionate, inspiring voice, encouraging action": {
-    "": "Passionate, inspiring voice, encouraging action."
-  },
-  "warm, approachable voice, fostering connection": {
-    "": "Warm, approachable voice, fostering connection."
-  },
-  "fast, powerful voice, brimming with enthusiasm": {
-    "": "Fast, powerful voice, brimming with enthusiasm."
-  },
-  "slow, gentle voice, evoking peace and tranquility": {
-    "": "Slow, gentle voice, evoking peace and tranquility."
-  },
-  "firm, assertive voice, exuding confidence": {
-    "": "Firm, assertive voice, exuding confidence."
-  },
-  "warm, captivating voice, leaving a strong impression": {
-    "": "Warm, captivating voice, leaving a strong impression."
-  },
-  "flat, unvaried voice, conveying neutrality or irony": {
-    "": "Flat, unvaried voice, conveying neutrality or irony."
-  },
-  "curious voice, emphasizing questions": {
-    "": "Curious voice, emphasizing questions."
-  },
-  "firm, clear voice, guiding the listener step-by-step": {
-    "": "Firm, clear voice, guiding the listener step-by-step."
-  },
-  "gentle, slow voice, evoking a floating sensation": {
-    "": "Gentle, slow voice, evoking a floating sensation."
-  },
-  "deep, resonant voice, emphasizing grandeur": {
-    "": "Deep, resonant voice, emphasizing grandeur."
-  },
-  "soft, melodic voice, similar to singing": {
-    "": "Soft, melodic voice, similar to singing."
-  },
-  "low, drawn-out voice, evoking mystery": {
-    "": "Low, drawn-out voice, evoking mystery."
-  },
-  "slow, low voice, conveying deep sadness": {
-    "": "Slow, low voice, conveying deep sadness."
-  },
-  "bright, energetic voice, full of positivity": {
-    "": "Bright, energetic voice, full of positivity."
-  },
-  "low, whispery voice, evoking fear or strangeness": {
-    "": "Low, whispery voice, evoking fear or strangeness."
-  },
-  "sweet, teasing voice, full of allure": {
-    "": "Sweet, teasing voice, full of allure."
-  },
-  "slow, reflective voice, full of contemplation": {
-    "": "Slow, reflective voice, full of contemplation."
-  },
-  "resonant, emphasized voice, creating a movie-like effect": {
-    "": "Resonant, emphasized voice, creating a movie-like effect."
-  },
-  "lighthearted, cheerful voice, sometimes exaggerated": {
-    "": "Lighthearted, cheerful voice, sometimes exaggerated."
-  },
-  "clear, slow voice, guiding the listener step-by-step": {
-    "": "Clear, slow voice, guiding the listener step-by-step."
-  },
-  "natural voice, as if chatting with the listener": {
-    "": "Natural voice, as if chatting with the listener."
-  },
-  "soft, sincere voice, expressing regret": {
-    "": "Soft, sincere voice, expressing regret."
-  },
-  "hesitant, uncertain voice, sometimes awkward": {
-    "": "Hesitant, uncertain voice, sometimes awkward."
-  },
-  "warm voice, providing motivation and support": {
-    "": "Warm voice, providing motivation and support."
-  },
-  "even voice, free of emotional bias": {
-    "": "Even voice, free of emotional bias."
-  },
-  "strong, powerful voice, exuding credibility": {
-    "": "Strong, powerful voice, exuding credibility."
-  },
-  "cheerful voice with an undertone of mockery": {
-    "": "Cheerful voice with an undertone of mockery."
-  },
-  "gentle, empathetic voice, providing comfort": {
-    "": "Gentle, empathetic voice, providing comfort."
-  },
-  "clear, polite voice, suited for formal occasions": {
-    "": "Clear, polite voice, suited for formal occasions."
-  },
-  "urgent, shaky voice, expressing distress": {
-    "": "Urgent, shaky voice, expressing distress."
-  },
-  "interrupted voice, mixed with light laughter": {
-    "": "Interrupted voice, mixed with light laughter."
-  },
-  "loud, emphasized voice, often humorous": {
-    "": "Loud, emphasized voice, often humorous."
-  },
-  "flat, unemotional voice, conveying detachment": {
-    "": "Flat, unemotional voice, conveying detachment."
-  },
-  "fast, sharp voice, sometimes out of control": {
-    "": "Fast, sharp voice, sometimes out of control."
-  },
-  "warm, sincere voice, expressing appreciation": {
-    "": "Warm, sincere voice, expressing appreciation."
-  },
-  "low, subdued voice, full of remorse": {
-    "": "Low, subdued voice, full of remorse."
-  },
-  "challenging, strong voice, full of insinuation": {
-    "": "Challenging, strong voice, full of insinuation."
-  },
-  "loud, powerful voice, full of victory": {
-    "": "Loud, powerful voice, full of victory."
-  },
-  "low, cold voice, expressing determination for revenge": {
-    "": "Low, cold voice, expressing determination for revenge."
-  },
-  "strong, inspiring voice, emphasizing heroic deeds": {
-    "": "Strong, inspiring voice, emphasizing heroic deeds."
-  },
-  "low, drawn-out voice, full of scheming": {
-    "": "Low, drawn-out voice, full of scheming."
-  },
-  "even, repetitive voice, drawing the listener in": {
-    "": "Even, repetitive voice, drawing the listener in."
-  },
-  "urgent, shaky voice, expressing hopelessness": {
-    "": "Urgent, shaky voice, expressing hopelessness."
-  },
-  "low, sorrowful voice, as if mourning": {
-    "": "Low, sorrowful voice, as if mourning."
-  },
-  "excited, joyful voice, full of festive spirit": {
-    "": "Excited, joyful voice, full of festive spirit."
-  },
-  "light, playful voice, sometimes mockingly": {
-    "": "Light, playful voice, sometimes mockingly."
-  },
-  "weak, broken voice, expressing extreme fatigue": {
-    "": "Weak, broken voice, expressing extreme fatigue."
-  },
-  "slow, emphasized voice, full of suspicion": {
-    "": "Slow, emphasized voice, full of suspicion."
-  },
-  "bright, hopeful voice, creating positivity": {
-    "": "Bright, hopeful voice, creating positivity."
-  },
-  "Your audio will be processed with the latest stable model": {
-    "": "Your audio will be processed with the latest stable model."
-  },
-  "Your audio will be processed with the latest beta model": {
-    "": "Your audio will be processed with the latest beta model."
-  },
-  "You don't have any saved prompts yet": {
-    "": "You don't have any saved prompts yet."
-  },
-  "Commercial Use": "Commercial Use",
-  "You have the right to use the speech output generated by our services for personal, educational, or commercial purposes": {
-    " However, you may not resell, redistribute, or sublicense the speech output without prior written consent from Text To Speech OpenAI": {
-      "": "You have the right to use the speech output generated by our services for personal, educational, or commercial purposes. However, you may not resell, redistribute, or sublicense the speech output without prior written consent from Text To Speech OpenAI."
-    }
-  },
-  "Other people’s privacy": "Other people’s privacy",
-  "You must respect the privacy of others when using our services": {
-    " Do not upload or create speech output containing personal information, confidential data, or copyrighted material without permission": {
-      "": "You must respect the privacy of others when using our services. Do not upload or create speech output containing personal information, confidential data, or copyrighted material without permission."
-    }
-  },
-  "{price}$ per credit": "{price}$ per credit",
-  "Pricing": "Pricing",
-  "Simple and flexible": {
-    " Only pay for what you use": {
-      "": "Simple and flexible. Only pay for what you use."
-    }
-  },
-  "Pay as you go": "Pay as you go",
-  "Flexible": "Flexible",
-  "Input characters": "Input characters",
-  "Audio model": "Audio model",
-  "Credits": "Credits",
-  "Cost": "Cost",
-  "HD quality voices": "HD quality voices",
-  "Advanced model": "Advanced model",
-  "Buy now": "Buy now",
-  "Paste your text to calculate": "Paste your text to calculate",
-  "Paste your text here": {
-    "": {
-      "": {
-        "": "Paste your text here..."
-      }
-    }
-  },
-  "Calculate": "Calculate",
-  "Estimate your cost by drag the slider below or": "Estimate your cost by drag the slider below or",
-  "calming": "Calming",
-  "customer": "Customer",
-  "exciting": "exciting",
-  "excuse": "Excuse",
-  "game": "Game",
-  "hot": "Hot",
-  "kids": "Kids",
-  "professional": "Professional",
-  "tech": "Tech",
-  "trailer": "Trailer",
-  "weather": "Weather"
+  "Safety Filter": "Bộ lọc an toàn",
+  "Person Generation": "Tạo Thế Hệ Người",
+  "downloadImage": "Tải xuống hình ảnh",
+  "noImageAvailable": "Không có hình ảnh nào có sẵn",
+  "enhancePrompt": "Tăng cường gợi ý",
+  "addImages": "Thêm hình ảnh",
+  "generateVideo": "Tạo video",
+  "happy": "Hạnh phúc",
+  "sad": "Buồn",
+  "angry": "Tức giận",
+  "excited": "Hào hứng",
+  "laughing": "Cười",
+  "crying": "Khóc",
+  "calm": "Bình tĩnh",
+  "serious": "Nghiêm túc",
+  "frustrated": "Nản lòng",
+  "hopeful": "Hy vọng",
+  "narrative": "Tường thuật",
+  "kids' storytelling": "Câu chuyện kể của trẻ em",
+  "audiobook": "Sách nói",
+  "poetic": "Thơ mộng",
+  "mysterious": "Bí ẩn",
+  "inspirational": "Truyền cảm hứng",
+  "surprised": "Ngạc nhiên",
+  "confident": "Tự tin",
+  "romantic": "Lãng mạn",
+  "scared": "Sợ hãi",
+  "trailer voice": "Giọng Thuyết Minh Trailer",
+  "advertising": "Quảng cáo",
+  "speech": "Bài phát biểu",
+  "documentary": "Phim tài liệu",
+  "newsreader": "Người đọc tin tức",
+  "weather report": "Dự báo thời tiết",
+  "game commentary": "Bình luận trò chơi",
+  "interactive": "Tương tác",
+  "customer support": "Hỗ trợ khách hàng",
+  "playful": "Tinh nghịch",
+  "tired": "Mệt mỏi",
+  "sarcastic": "Châm biếm",
+  "disgusted": "Ghê tởm",
+  "whispering": "Thì thầm",
+  "persuasive": "Thuyết phục",
+  "nostalgic": "Hoài niệm",
+  "meditative": "Thiền định",
+  "announcement": "Thông báo",
+  "professional pitch": "Bài thuyết trình chuyên nghiệp",
+  "casual": "Bình thường",
+  "exciting trailer": "Đoạn trailer thú vị",
+  "dramatic": "Kịch tính",
+  "corporate": "Tập đoàn",
+  "tech enthusiast": "Người đam mê công nghệ",
+  "youthful": "Trẻ trung",
+  "calming reassurance": "Trấn an dịu dàng",
+  "heroic": "Anh hùng",
+  "festive": "Lễ hội",
+  "urgent": "Khẩn cấp",
+  "motivational": "Truyền cảm hứng",
+  "friendly": "Thân thiện",
+  "energetic": "Năng động",
+  "serene": "Thanh bình",
+  "bold": "Đậm",
+  "charming": "Hấp dẫn",
+  "monotone": "Đơn điệu",
+  "questioning": "Chất vấn",
+  "directive": "Chỉ thị",
+  "dreamy": "Mơ mộng",
+  "epic": "Sử thi",
+  "lyrical": "Trữ tình",
+  "mystical": "Huyền bí",
+  "melancholy": "U sầu",
+  "cheerful": "Vui vẻ",
+  "eerie": "Ghê rợn",
+  "flirtatious": "Ve vãn",
+  "thoughtful": "Chu đáo",
+  "cinematic": "Điện ảnh",
+  "humorous": "Hài hước",
+  "instructional": "Hướng dẫn",
+  "conversational": "Đàm thoại",
+  "apologetic": "Xin lỗi",
+  "excuse-making": "Viện cớ",
+  "encouraging": "Khuyến khích",
+  "neutral": "Trung lập",
+  "authoritative": "Đáng tin cậy",
+  "sarcastic cheerful": "Mỉa mai hớn hở",
+  "reassuring": "Trấn an",
+  "formal": "Trang trọng",
+  "anguished": "Khổ đau",
+  "giggling": "Cười khúc khích",
+  "exaggerated": "Phóng đại",
+  "cold": "Lạnh",
+  "hot-tempered": "Nóng tính",
+  "grateful": "Biết ơn",
+  "regretful": "Hối tiếc",
+  "provocative": "Khiêu khích",
+  "triumphant": "Chiến thắng",
+  "vengeful": "Hiếu chiến",
+  "heroic narration": "Tường thuật anh hùng",
+  "villainous": "Xấu xa",
+  "hypnotic": "Thôi miên",
+  "desperate": "Tuyệt vọng",
+  "lamenting": "Than thở",
+  "celebratory": "Chúc mừng",
+  "teasing": "Trêu chọc",
+  "exhausted": "Kiệt sức",
+  "questioning suspicious": "Chất vấn nghi ngờ",
+  "optimistic": "Lạc quan",
+  "bright, gentle voice, expressing excitement.": "Giọng nói trong trẻo, nhẹ nhàng, thể hiện sự phấn khích.",
+  "low, slow voice, conveying deep emotions.": "Giọng trầm, chậm, truyền tải cảm xúc sâu sắc.",
+  "sharp, exaggerated voice, expressing frustration.": "Giọng điệu nhấn mạnh, phóng đại, biểu lộ sự thất vọng.",
+  "fast, lively voice, full of enthusiasm.": "Giọng nói nhanh nhẹn, sôi động, tràn đầy nhiệt huyết.",
+  "interrupted, joyful voice, interspersed with laughter.": "Giọng nói vui vẻ bị ngắt quãng, xen lẫn tiếng cười.",
+  "shaky, low voice, expressing pain.": "Giọng nói run rẩy, trầm thấp, thể hiện sự đau đớn.",
+  "gentle, steady voice, providing reassurance.": "Giọng nói nhẹ nhàng, đều đặn, mang lại sự yên tâm.",
+  "mature, clear voice, suitable for formal content.": "Giọng trưởng thành, rõ ràng, phù hợp với nội dung trang trọng.",
+  "weary, slightly irritated voice.": "Giọng mệt mỏi, hơi khó chịu.",
+  "bright voice, conveying positivity and hope.": "Giọng nói rạng rỡ, truyền tải sự tích cực và hy vọng.",
+  "natural, gentle voice with a slow rhythm.": "Giọng nói tự nhiên, nhẹ nhàng với nhịp điệu chậm rãi.",
+  "lively, engaging voice, captivating for children.": "Giọng nói sống động, lôi cuốn, hấp dẫn đối với trẻ em.",
+  "even, slow voice, emphasizing content meaning.": "Giọng nói đều đặn, chậm rãi, nhấn mạnh ý nghĩa nội dung.",
+  "rhythmic, emotional voice, conveying subtlety.": "Giọng điệu nhịp nhàng, đầy cảm xúc, truyền tải những nét tinh tế.",
+  "low, slow voice, evoking curiosity.": "Giọng nói trầm, chậm rãi, khơi gợi sự tò mò.",
+  "strong, passionate voice, driving action.": "Giọng nói mạnh mẽ, đam mê, thúc đẩy hành động.",
+  "high, interrupted voice, expressing astonishment.": "Giọng cao, ngắt quãng, thể hiện sự kinh ngạc.",
+  "firm, powerful voice, persuasive and assuring.": "Giọng nói chắc chắn, mạnh mẽ, thuyết phục và đáng tin cậy.",
+  "sweet, gentle voice, suitable for emotional content.": "Giọng ngọt ngào, nhẹ nhàng, phù hợp với nội dung cảm xúc.",
+  "shaky, interrupted voice, conveying anxiety.": "Giọng run rẩy, ngắt quãng, truyền đạt sự lo lắng.",
+  "deep, strong voice with emphasis, creating suspense.": "Giọng sâu, mạnh mẽ với sự nhấn nhá, tạo ra sự hồi hộp.",
+  "engaging, lively voice, emphasizing product benefits.": "Giọng nói lôi cuốn, sôi nổi, nhấn mạnh lợi ích của sản phẩm.",
+  "formal, clear voice with focus on key points.": "Giọng nói trang trọng, rõ ràng với sự tập trung vào các điểm chính.",
+  "calm, profound voice, delivering authenticity.": "Giọng điệu trầm lắng, sâu sắc, truyền tải sự chân thực.",
+  "standard, neutral voice, clear and precise.": "Giọng tiêu chuẩn, trung lập, rõ ràng và chính xác.",
+  "bright, neutral voice, suitable for concise updates.": "Giọng sáng, trung tính, phù hợp cho các cập nhật ngắn gọn.",
+  "fast, lively voice, stimulating excitement.": "Giọng nói nhanh, sống động, kích thích sự hứng khởi.",
+  "friendly, approachable voice, encouraging engagement.": "Giọng nói thân thiện, dễ gần, khuyến khích sự tham gia.",
+  "empathetic, gentle voice, easy to connect with.": "Giọng nói giàu cảm xúc, nhẹ nhàng, dễ dàng kết nối.",
+  "clear voice, emphasizing questions and answers.": "Giọng nói rõ ràng, nhấn mạnh vào câu hỏi và câu trả lời.",
+  "cheerful, playful voice with a hint of mischief.": "Giọng nói vui vẻ, tinh nghịch với chút nghịch ngợm.",
+  "slow, soft voice lacking energy.": "Giọng nói chậm, nhẹ nhàng thiếu năng lượng.",
+  "ironic, sharp voice, sometimes humorous.": "Giọng châm biếm, sắc bén, đôi khi hài hước.",
+  "cold voice, clearly expressing discomfort.": "Giọng lạnh lùng, thể hiện rõ sự khó chịu.",
+  "soft, mysterious voice, creating intimacy.": "Giọng nói mềm mại, bí ẩn, tạo sự gần gũi.",
+  "emotional voice, convincing the listener to act.": "Giọng nói đầy cảm xúc, thuyết phục người nghe hành động.",
+  "gentle voice, evoking feelings of reminiscence.": "Giọng nói dịu dàng, gợi nhớ về những ký ức.",
+  "even, relaxing voice, suitable for mindfulness.": "Giọng nói đều đặn, thư giãn, phù hợp cho chánh niệm.",
+  "clear voice, emphasizing key words.": "Giọng nói rõ ràng, nhấn mạnh các từ khóa.",
+  "confident, clear voice, ideal for business presentations.": "Giọng nói tự tin, rõ ràng, lý tưởng cho các buổi thuyết trình kinh doanh.",
+  "natural, friendly voice, as if talking to a friend.": "Giọng nói tự nhiên, thân thiện, như thể đang nói chuyện với một người bạn.",
+  "fast, powerful voice, creating tension and excitement.": "Nhanh, mạnh mẽ giọng nói, tạo ra căng thẳng và hưng phấn.",
+  "emphasized, suspenseful voice, creating intensity.": "Giọng nhấn mạnh, đầy hồi hộp, tạo ra cường độ.",
+  "professional, formal voice, suitable for business content.": "Giọng điệu chuyên nghiệp, trang trọng, phù hợp cho nội dung kinh doanh.",
+  "energetic, lively voice, introducing new technologies.": "Giọng nói tràn đầy năng lượng, sôi nổi, giới thiệu các công nghệ mới.",
+  "vibrant, cheerful voice, appealing to younger audiences.": "Giọng vui tươi, năng động, thu hút khán giả trẻ.",
+  "gentle, empathetic voice, easing concerns.": "Giọng nói nhẹ nhàng, đồng cảm, xoa dịu lo lắng.",
+  "strong, decisive voice, full of inspiration.": "Giọng mạnh mẽ, quyết đoán, đầy cảm hứng.",
+  "bright, excited voice, suitable for celebrations.": "Giọng nói sáng, hào hứng, phù hợp cho các lễ kỷ niệm.",
+  "fast, strong voice, emphasizing urgency.": "Giọng nói nhanh, mạnh mẽ, nhấn mạnh tính cấp bách.",
+  "passionate, inspiring voice, encouraging action.": "Giọng nói đầy đam mê, truyền cảm hứng, khuyến khích hành động.",
+  "warm, approachable voice, fostering connection.": "Giọng nói ấm áp, dễ gần, tạo sự kết nối.",
+  "fast, powerful voice, brimming with enthusiasm.": "Nhanh chóng, giọng mạnh mẽ, tràn đầy nhiệt huyết.",
+  "slow, gentle voice, evoking peace and tranquility.": "Giọng nói chậm rãi, êm ái, gợi lên sự bình yên và tĩnh lặng.",
+  "firm, assertive voice, exuding confidence.": "Giọng nói chắc chắn, quả quyết, toát lên sự tự tin.",
+  "warm, captivating voice, leaving a strong impression.": "Giọng nói ấm áp, lôi cuốn, để lại ấn tượng mạnh mẽ.",
+  "flat, unvaried voice, conveying neutrality or irony.": "Giọng điệu đều đều, không thay đổi, thể hiện sự trung lập hoặc mỉa mai.",
+  "curious voice, emphasizing questions.": "Giọng tò mò, nhấn mạnh các câu hỏi.",
+  "firm, clear voice, guiding the listener step-by-step.": "Giọng kiên định, rõ ràng, hướng dẫn người nghe từng bước một.",
+  "gentle, slow voice, evoking a floating sensation.": "Giọng nói nhẹ nhàng, chậm rãi, gợi lên cảm giác bay bổng.",
+  "deep, resonant voice, emphasizing grandeur.": "Giọng nói sâu, vang dội, nhấn mạnh sự hùng vĩ.",
+  "soft, melodic voice, similar to singing.": "Giọng nói nhẹ nhàng, du dương, giống như đang hát.",
+  "low, drawn-out voice, evoking mystery.": "Giọng thấp, kéo dài, gợi lên sự bí ẩn.",
+  "slow, low voice, conveying deep sadness.": "Giọng nói chậm, trầm, truyền tải nỗi buồn sâu sắc.",
+  "bright, energetic voice, full of positivity.": "Giọng nói sáng sủa, năng động, đầy tích cực.",
+  "low, whispery voice, evoking fear or strangeness.": "Giọng nói nhỏ, thì thầm, khơi gợi nỗi sợ hãi hoặc sự kỳ lạ.",
+  "sweet, teasing voice, full of allure.": "Giọng nói ngọt ngào, trêu ghẹo, đầy quyến rũ.",
+  "slow, reflective voice, full of contemplation.": "Giọng nói chậm rãi, trầm ngâm, đầy suy tư.",
+  "resonant, emphasized voice, creating a movie-like effect.": "Giọng vang dội, nhấn mạnh, tạo hiệu ứng như trong phim.",
+  "lighthearted, cheerful voice, sometimes exaggerated.": "Giọng vui tươi, phấn khởi, đôi lúc có phần phóng đại.",
+  "clear, slow voice, guiding the listener step-by-step.": "Giọng rõ ràng, chậm rãi, hướng dẫn người nghe từng bước một.",
+  "natural voice, as if chatting with the listener.": "Giọng nói tự nhiên, như thể đang trò chuyện với người nghe.",
+  "soft, sincere voice, expressing regret.": "Giọng nói nhẹ nhàng, chân thành, thể hiện sự hối tiếc.",
+  "hesitant, uncertain voice, sometimes awkward.": "Giọng nói do dự, không chắc chắn, đôi khi vụng về.",
+  "warm voice, providing motivation and support.": "Giọng nói ấm áp, mang lại động lực và sự hỗ trợ.",
+  "even voice, free of emotional bias.": "Giọng nói đồng đều, không thiên lệch cảm xúc.",
+  "strong, powerful voice, exuding credibility.": "Giọng nói mạnh mẽ, đầy uy lực, toát lên sự uy tín.",
+  "cheerful voice with an undertone of mockery.": "Giọng nói vui tươi với sự giễu cợt ngầm.",
+  "gentle, empathetic voice, providing comfort.": "Giọng nói nhẹ nhàng, đồng cảm, mang lại sự an ủi.",
+  "clear, polite voice, suited for formal occasions.": "Giọng nói rõ ràng, lịch sự, phù hợp cho các dịp trang trọng.",
+  "urgent, shaky voice, expressing distress.": "Gấp gáp, giọng run rẩy, biểu lộ sự đau khổ.",
+  "interrupted voice, mixed with light laughter.": "Giọng nói bị ngắt quãng, pha lẫn với tiếng cười nhẹ.",
+  "loud, emphasized voice, often humorous.": "Giọng nói to, nhấn mạnh, thường hài hước.",
+  "flat, unemotional voice, conveying detachment.": "Giọng đều đều, thiếu cảm xúc, truyền tải sự thờ ơ.",
+  "fast, sharp voice, sometimes out of control.": "Giọng nói nhanh, sắc bén, đôi khi mất kiểm soát.",
+  "warm, sincere voice, expressing appreciation.": "Giọng ấm áp, chân thành, thể hiện sự trân trọng.",
+  "low, subdued voice, full of remorse.": "Giọng trầm, nhỏ nhẹ, đầy hối hận.",
+  "challenging, strong voice, full of insinuation.": "Thách thức, giọng nói mạnh mẽ, đầy ẩn ý.",
+  "loud, powerful voice, full of victory.": "Giọng nói vang dội, mạnh mẽ, tràn đầy chiến thắng.",
+  "low, cold voice, expressing determination for revenge.": "Giọng nói trầm, lạnh lùng, thể hiện quyết tâm trả thù.",
+  "strong, inspiring voice, emphasizing heroic deeds.": "Giọng nói mạnh mẽ, truyền cảm hứng, nhấn mạnh những hành động anh hùng.",
+  "low, drawn-out voice, full of scheming.": "Giọng nói trầm, kéo dài, đầy mưu mô.",
+  "even, repetitive voice, drawing the listener in.": "Giọng điệu đều đặn, lặp đi lặp lại, thu hút người nghe.",
+  "urgent, shaky voice, expressing hopelessness.": "Khẩn cấp, giọng run rẩy, thể hiện sự tuyệt vọng.",
+  "low, sorrowful voice, as if mourning.": "Giọng trầm, buồn bã, như thể đang than thở.",
+  "excited, joyful voice, full of festive spirit.": "Giọng nói hào hứng, vui tươi, tràn đầy tinh thần lễ hội.",
+  "light, playful voice, sometimes mockingly.": "Giọng nhẹ nhàng, vui tươi, đôi khi chế giễu.",
+  "weak, broken voice, expressing extreme fatigue.": "Giọng nói yếu ớt, đứt quãng, bộc lộ sự mệt mỏi tột độ.",
+  "slow, emphasized voice, full of suspicion.": "Giọng nói chậm rãi, nhấn mạnh, đầy nghi ngờ.",
+  "bright, hopeful voice, creating positivity.": "Giọng nói tươi sáng, đầy hy vọng, tạo ra sự tích cực.",
+  "Your audio will be processed with the latest stable model.": "Âm thanh của bạn sẽ được xử lý bằng mô hình ổn định mới nhất.",
+  "Your audio will be processed with the latest beta model.": "Âm thanh của bạn sẽ được xử lý bằng mô hình beta mới nhất.",
+  "You don't have any saved prompts yet.": "Bạn chưa có lời nhắc nào được lưu.",
+  "Commercial Use": "Sử dụng thương mại",
+  "You have the right to use the speech output generated by our services for personal, educational, or commercial purposes. However, you may not resell, redistribute, or sublicense the speech output without prior written consent from Text To Speech OpenAI.": "Bạn có quyền sử dụng đầu ra giọng nói được tạo bởi dịch vụ của chúng tôi cho mục đích cá nhân, giáo dục hoặc thương mại. Tuy nhiên, bạn không được bán lại, phân phối lại hoặc cấp phép lại đầu ra giọng nói mà không có sự đồng ý bằng văn bản từ Text To Speech OpenAI trước.",
+  "Other people’s privacy": "Quyền riêng tư của người khác",
+  "You must respect the privacy of others when using our services. Do not upload or create speech output containing personal information, confidential data, or copyrighted material without permission.": "Bạn phải tôn trọng quyền riêng tư của người khác khi sử dụng dịch vụ của chúng tôi. Không tải lên hoặc tạo đầu ra giọng nói chứa thông tin cá nhân, dữ liệu bảo mật hoặc tài liệu có bản quyền mà không có sự cho phép.",
+  "{price}$ per credit": "{price}$ mỗi tín chỉ",
+  "Pricing": "Giá cả",
+  "Simple and flexible. Only pay for what you use.": "Đơn giản và linh hoạt. Chỉ trả tiền cho những gì bạn sử dụng.",
+  "Pay as you go": "Trả tiền khi sử dụng",
+  "Flexible": "Linh hoạt",
+  "Input characters": "Ký tự đầu vào",
+  "Audio model": "Mô hình âm thanh",
+  "Credits": "Tín dụng",
+  "Cost": "Chi phí",
+  "HD quality voices": "Giọng nói chất lượng HD",
+  "Advanced model": "Mô hình tiên tiến",
+  "Buy now": "Mua ngay",
+  "Paste your text to calculate": "Dán văn bản của bạn để tính toán",
+  "Paste your text here...": "Dán văn bản của bạn vào đây...",
+  "Calculate": "Tính toán",
+  "Estimate your cost by drag the slider below or": "Ước tính chi phí của bạn bằng cách kéo thanh trượt bên dưới hoặc",
+  "calming": "Êm dịu",
+  "customer": "Khách hàng",
+  "exciting": "thú vị",
+  "excuse": "Xin lỗi",
+  "game": "Trò chơi",
+  "hot": "Nóng",
+  "kids": "Trẻ em",
+  "professional": "Chuyên nghiệp",
+  "tech": "Công nghệ",
+  "trailer": "Đoạn giới thiệu",
+  "weather": "Thời tiết",
+  "No thumbnail available": "Không có hình thu nhỏ nào có sẵn"
 }
