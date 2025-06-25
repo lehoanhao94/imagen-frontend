@@ -144,14 +144,14 @@ const duration = computed(() => {
           </div>
           <!-- Prevent click propagation on the image itself to avoid closing when clicking on the image -->
           <img
-            v-else-if="historyDetail.type === 'image' && firstImage?.image_url"
+            v-else-if="historyDetail?.type === 'image' && firstImage?.image_url"
             :src="firstImage?.image_url"
             :alt="title"
             class="max-h-full max-w-full object-contain cursor-zoom-out animate-scaleIn shadow-2xl border border-white/10 rounded"
             @click.stop
           >
           <BaseVideoPlayer
-            v-else-if="historyDetail.type === 'video'"
+            v-else-if="historyDetail?.type === 'video'"
             :data="historyDetail"
           />
           <div
