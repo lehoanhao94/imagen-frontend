@@ -19,25 +19,27 @@ const estimatedPrice = computed(() => {
         {{ $t('customTopUp') }}
       </h2>
     </div>
-    <div class="flex flex-col gap-4 justify-center items-center">
+    <div class="flex flex-col gap-4 justify-center items-center sm:max-w-lg mx-auto">
       <UFormField
         :label="$t('numberOfCredits')"
-        :help="`~ ${estimatedPrice} $`"
+        class="w-full"
       >
         <UInputNumber
           v-model="value"
           size="xl"
-          class="w-fit"
+          class="w-full"
           :step="buyCreditProduct.base_credit"
           :min="buyCreditProduct.base_credit"
         />
       </UFormField>
       <UButton
-        :label="$t('buyCredits.submit')"
         size="xl"
         color="primary"
+        block
         @click="creditsStore.processBuyCredits(value)"
-      />
+      >
+        ${{ estimatedPrice }} - {{ $t("Top up now") }}
+      </UButton>
     </div>
   </div>
 </template>

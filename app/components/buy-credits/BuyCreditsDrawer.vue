@@ -29,13 +29,13 @@
               class="flex justify-between items-center text-base font-semibold"
             >
               <span>{{ $t("buyCredits.totalCredits") }}:</span>
-              <span class="text-green-600 text-lg">{{ formatNumber(numberOfCreditsWanted) }}</span>
+              <span class="text-primary-600 text-lg">{{ formatNumber(numberOfCreditsWanted) }}</span>
             </div>
             <div
               class="flex justify-between items-center text-base font-semibold"
             >
               <span>{{ $t("buyCredits.totalPrice") }}:</span>
-              <span class="text-green-600 text-lg">${{ totalPrice }}</span>
+              <span class="text-primary-600 text-lg">${{ totalPrice }}</span>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@ const { showDrawer, numberOfCreditsWanted, creditUnitPrice, buyCreditProduct }
 // Calculate unit price based on how credits are priced
 const unitPrice = computed(() => {
   return (creditUnitPrice.value / buyCreditProduct.value.base_credit).toFixed(
-    3
+    6
   )
 })
 

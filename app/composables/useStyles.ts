@@ -2,6 +2,7 @@ export function useStyles() {
   const style = useCookie<string>('llm-style', { default: () => 'Dynamic' })
 
   const styles = [
+    'None',
     '3D Render',
     'Acrylic',
     'Anime General',
@@ -11,7 +12,6 @@ export function useStyles() {
     'Game Concept',
     'Graphic Design 3D',
     'Illustration',
-    'None',
     'Portrait',
     'Portrait Cinematic',
     'Portrait Fashion',

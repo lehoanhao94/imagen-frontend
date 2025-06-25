@@ -19,6 +19,16 @@
           class="size-6 text-amber-500 animate-spin"
         />
         {{ $t('payWithCrypto') }}
+        <div>
+          <UBadge
+            color="warning"
+            variant="subtle"
+            class="rounded-full"
+            size="sm"
+          >
+            +5% credit
+          </UBadge>
+        </div>
       </div>
       <div class="text-sm text-center text-neutral-600 dark:text-neutral-400">
         {{ $t('cryptoDescription') }}
