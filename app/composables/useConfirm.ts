@@ -7,7 +7,7 @@ export interface ConfirmOptions {
   onConfirm: () => void | Promise<void>
 }
 
-export const useConfirm = () => {
+export function useConfirm() {
   const isOpen = ref(false)
   const options = ref<ConfirmOptions | null>(null)
 

@@ -14,7 +14,10 @@
         </div>
       </template>
 
-      <p v-if="options?.description" class="mb-4">
+      <p
+        v-if="options?.description"
+        class="mb-4"
+      >
         {{ options.description }}
       </p>
 
