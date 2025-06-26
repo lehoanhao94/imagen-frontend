@@ -18,6 +18,11 @@ const items = [
     to: '/profile/settings'
   },
   {
+    label: t('profileMenu.integration') || 'Integration',
+    icon: 'i-lucide-puzzle',
+    to: '/profile/integration'
+  },
+  {
     label: t('profileMenu.components'),
     icon: 'i-lucide-box',
     slot: 'components' as const
