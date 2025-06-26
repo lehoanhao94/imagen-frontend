@@ -105,8 +105,6 @@ export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
       model_name?: string
       name?: string
     }) {
-      const textToSpeechStore = useTextToSpeechStore()
-
       try {
         this.loadings.generateSpeech = true
         this.errors.generateSpeech = null
@@ -128,13 +126,12 @@ export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
           return `${speakerName}: ${dialog.input}`
         }).join('\n\n')
 
-        const result = await textToSpeechStore.textToSpeech({
+        // Return the data to be used by the calling component
+        return {
           input: combinedInput,
           voices,
           ...payload
-        })
-
-        return result
+        }
       } catch (error) {
         console.error('Dialog to speech generation failed:', error)
         this.errors.generateSpeech = error

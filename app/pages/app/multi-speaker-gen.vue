@@ -9,12 +9,16 @@ definePageMeta({
 })
 
 const dialogToSpeechStore = useDialogToSpeechStore()
+const textToSpeechStore = useTextToSpeechStore()
 const { t } = useI18n()
 const {
   dialogs,
-  speakers,
-  loadings
+  speakers
 } = storeToRefs(dialogToSpeechStore)
+
+const {
+  loadings
+} = storeToRefs(textToSpeechStore)
 
 // Local reactive variables for UI
 const currentDialogText = ref('')
@@ -40,7 +44,7 @@ const onGenerate = async () => {
     return
   }
 
-  const result = await dialogToSpeechStore.generateDialogSpeech({
+  const speechData = await dialogToSpeechStore.generateDialogSpeech({
     model: model.value.value,
     emotion: selectedEmotion.value?.emotion_key,
     speed: speed.value,
@@ -48,13 +52,19 @@ const onGenerate = async () => {
     output_channel: outputChannel.value
   })
 
-  if (result) {
-    toast.add({
-      id: 'success',
-      title: 'Dialog Speech Generation',
-      description: 'Your multi-speaker dialog is being generated. Please check back later.',
-      color: 'success'
-    })
+  if (speechData) {
+    // Use the text-to-speech store to make the actual API call
+    const textToSpeechStore = useTextToSpeechStore()
+    const result = await textToSpeechStore.textToSpeech(speechData)
+
+    if (result) {
+      toast.add({
+        id: 'success',
+        title: 'Dialog Speech Generation',
+        description: 'Your multi-speaker dialog is being generated. Please check back later.',
+        color: 'success'
+      })
+    }
   }
 }
 
@@ -254,7 +264,7 @@ const updateDialogText = (dialogIndex: number, text: string) => {
           color="primary"
           size="lg"
           icon="mingcute:ai-fill"
-          :loading="loadings.generateSpeech"
+          :loading="loadings.textToSpeech"
           :disabled="!dialogs.length || !speakers.length"
           @click="onGenerate"
         />
