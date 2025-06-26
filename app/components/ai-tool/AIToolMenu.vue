@@ -60,6 +60,22 @@ const items = computed(
         //     description: t('aiToolMenu.gemini25FlashDescription')
         //   }
         // ]
+      },
+      {
+        label: t('Multi-speaker Gen'),
+        icon: 'hugeicons:ai-user',
+        slot: 'components' as const,
+        to: '/app/multi-speaker-gen'
+        // children: [
+        //   {
+        //     label: t('aiToolMenu.gemini25Pro'),
+        //     description: t('aiToolMenu.gemini25ProDescription')
+        //   },
+        //   {
+        //     label: t('aiToolMenu.gemini25Flash'),
+        //     description: t('aiToolMenu.gemini25FlashDescription')
+        //   }
+        // ]
       }
       // {
       //   label: t('aiToolMenu.musicGen'),

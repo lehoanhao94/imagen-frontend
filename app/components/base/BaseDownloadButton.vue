@@ -1,6 +1,7 @@
 <template>
   <UButton
     v-if="isValidLink"
+    class="cursor-pointer"
     :color="isDownloaded ? 'success' : 'neutral'"
     variant="subtle"
     :icon="

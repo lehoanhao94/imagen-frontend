@@ -102,6 +102,7 @@ const onCloseFullScreen = () => {
   <HistoryWrapper
     :type="data.type"
     :style="style"
+    :status="data.status"
   >
     <UPageCard
       :orientation="'vertical'"

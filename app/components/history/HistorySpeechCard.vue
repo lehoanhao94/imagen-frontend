@@ -83,34 +83,39 @@ const closeFullScreen = () => {
 
 <template>
   <!-- Card View -->
-  <UPageCard class="speech-card cursor-pointer">
-    <div class="p-0">
-      <div
-        class="mb-4 cursor-pointer"
-        @click="openFullScreen"
-      >
-        <p
-          class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 hover:text-primary-500"
+  <HistoryWrapper
+    :type="data.type"
+    :status="data.status"
+  >
+    <UPageCard class="speech-card cursor-pointer">
+      <div class="p-0">
+        <div
+          class="mb-4 cursor-pointer"
+          @click="openFullScreen"
         >
-          {{ prompt }}
-        </p>
-      </div>
+          <p
+            class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 hover:text-primary-500 break-all"
+          >
+            {{ prompt }}
+          </p>
+        </div>
 
-      <div class="mb-4">
-        <WaveformPlayer
-          :audio-url="audioUrl"
-          :fullscreen="false"
-        />
-      </div>
+        <div class="mb-4">
+          <WaveformPlayer
+            :audio-url="audioUrl"
+            :fullscreen="false"
+          />
+        </div>
 
-      <div
-        class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400"
-      >
-        <span>{{ model }}</span>
-        <span>{{ voice }}</span>
+        <div
+          class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span>{{ model }}</span>
+          <span>{{ voice }}</span>
+        </div>
       </div>
-    </div>
-  </UPageCard>
+    </UPageCard>
+  </HistoryWrapper>
 
   <!-- Full Screen Modal -->
   <UModal

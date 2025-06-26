@@ -120,7 +120,7 @@ const duration = computed(() => {
           icon="i-lucide-x"
           color="neutral"
           variant="ghost"
-          class="absolute top-4 right-4 dark:text-white hover:bg-white/10 z-10"
+          class="absolute cursor-pointer top-4 right-4 dark:text-white hover:bg-white/10 z-10"
           @click="onCloseFullScreen"
         />
 

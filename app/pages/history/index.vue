@@ -11,7 +11,8 @@ definePageMeta({
 const historyComponents = {
   'image': HistoryImageCard,
   'video': HistoryVideoCard,
-  'tts-text': HistorySpeechCard
+  'tts-text': HistorySpeechCard,
+  'tts-document': HistorySpeechCard
 }
 
 /**

@@ -119,7 +119,10 @@ const thumbnailImage = computed(() => {
 </script>
 
 <template>
-  <HistoryWrapper :type="data.type">
+  <HistoryWrapper
+    :type="data.type"
+    :status="data.status"
+  >
     <UPageCard
       :orientation="'vertical'"
       spotlight
@@ -169,7 +172,7 @@ const thumbnailImage = computed(() => {
               color="neutral"
               variant="ghost"
               size="xs"
-              class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10"
+              class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 hover:bg-white/10 cursor-pointer"
               :class="{ 'opacity-100': isHovered }"
               @click.stop="openFullScreen"
             />

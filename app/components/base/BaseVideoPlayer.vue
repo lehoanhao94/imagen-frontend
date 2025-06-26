@@ -76,7 +76,7 @@ const thumbnailImage = computed(() => {
     >
       <UIcon
         :name="isVideoPlaying ? 'i-lucide-pause' : 'i-lucide-play'"
-        class="w-12 h-12 text-white"
+        class="w-12 h-12 text-white cursor-pointer"
       />
     </div>
     <!-- Duration badge -->

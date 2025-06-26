@@ -902,5 +902,6 @@
   "Debit or Credit Card": "Debit or Credit Card",
   "Visa, Mastercard, American Express and more": "Visa, Mastercard, American Express and more",
   "Top up now": "Top up now",
-  "noVideoAvailable": "No video available"
+  "noVideoAvailable": "No video available",
+  "tts-document": "File to Speech"
 }

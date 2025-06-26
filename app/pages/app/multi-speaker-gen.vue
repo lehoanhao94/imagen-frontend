@@ -9,10 +9,8 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const appStore = useAppStore()
 const textToSpeechStore = useTextToSpeechStore()
 const { t } = useI18n()
-const { loading } = storeToRefs(appStore)
 const {
   prompt,
   selectedFiles,
@@ -133,11 +131,9 @@ watch(
         v-model="prompt"
         class="[view-transition-name:chat-prompt]"
         :placeholder="
-          hasSelectedFiles
-            ? $t('Generate speech from selected file')
-            : $t(
-              'Start writing or paste your text here or select a file to generate speech...'
-            )
+          $t(
+            'Describe the style of your dialog, e.g. *Read this in a dramatic whisper*'
+          )
         "
         :disabled="hasSelectedFiles"
         :maxrows="10"
@@ -152,17 +148,17 @@ watch(
         />
 
         <template #footer>
-          <BaseFiles
-            v-if="hasSelectedFiles"
-            v-model="selectedFiles"
-            :upload-progress="uploadProgress"
-          />
-          <BaseFileSelect
-            v-else
-            v-model="selectedFiles"
-            :support-files="supportFiles"
-            @update:model-value="handleFilesSelected"
-          />
+          <div class="mt-4 px-2 pb-3 w-full">
+            <BaseSpeakerGen />
+
+            <UButton
+              class="mt-4"
+              color="neutral"
+              variant="soft"
+              icon="icons8:plus"
+              :label="$t('Add dialog')"
+            />
+          </div>
         </template>
       </UChatPrompt>
     </Motion>
