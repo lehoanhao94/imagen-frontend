@@ -181,7 +181,10 @@ const onUsePrompt = (newPrompt: string) => {
           />
         </UFormField>
 
-        <div class="sm:col-span-4 flex flex-row gap-3 items-end">
+        <div
+          v-if="model?.options?.includes('yourImage')"
+          class="sm:col-span-4 flex flex-row gap-3 items-end"
+        >
           <UFormField :label="$t('Image Reference')">
             <BaseImageSelect
               v-model="selectedImages"

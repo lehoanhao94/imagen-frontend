@@ -4,6 +4,10 @@ import HistoryVideoCard from '~/components/history/HistoryVideoCard.vue'
 import HistorySpeechCard from '~/components/history/HistorySpeechCard.vue'
 import BaseHistoryFilterSelect from '~/components/base/BaseHistoryFilterSelect.vue'
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 const historyComponents = {
   'image': HistoryImageCard,
   'video': HistoryVideoCard,

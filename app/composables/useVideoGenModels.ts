@@ -10,7 +10,7 @@ export function useVideoGenModels() {
       label: 'Veo 3',
       value: 'veo-3',
       icon: 'hugeicons:ai-chip',
-      options: ['style', 'videoDimensions', 'yourImage']
+      options: ['style', 'videoDimensions']
     }
   ]
   const model = useCookie<any>('video-gen-model', { default: () => models[0] })

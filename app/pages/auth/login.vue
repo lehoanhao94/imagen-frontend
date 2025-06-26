@@ -128,13 +128,6 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
       >{{
         $t("auth.termsOfService")
       }}</ULink>.
-      <button
-        :disabled="!isReady"
-        class="cursor-pointer"
-        @click="() => login()"
-      >
-        {{ $t("auth.loginWithGoogle") }}
-      </button>
     </template>
   </UAuthForm>
 </template>

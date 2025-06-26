@@ -68,17 +68,6 @@ const thumbnailImage = computed(() => {
     class="relative order-first lg:order-last w-full group cursor-pointer"
   >
     <!-- Prevent click propagation on the video itself -->
-    <video
-      ref="referenceVideo"
-      :src="videoUrl"
-      :autoplay="false"
-      controls
-      class="object-contain cursor-auto w-full md:h-[95vh] h-[50vh]"
-      :poster="thumbnailImage?.url"
-      @click.stop
-      @play="isVideoPlaying = true"
-      @pause="isVideoPlaying = false"
-    />
 
     <!-- Play button overlay -->
     <div
@@ -96,6 +85,18 @@ const thumbnailImage = computed(() => {
     >
       {{ duration }}
     </div>
+
+    <video
+      ref="referenceVideo"
+      :src="videoUrl"
+      :autoplay="false"
+      controls
+      class="object-contain cursor-auto w-full md:h-[95vh] h-[50vh]"
+      :poster="thumbnailImage?.url"
+      @click.stop
+      @play="isVideoPlaying = true"
+      @pause="isVideoPlaying = false"
+    />
   </div>
   <div
     v-else
