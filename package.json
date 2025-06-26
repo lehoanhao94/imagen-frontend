@@ -17,25 +17,26 @@
     "i18n:validate": "node scripts/validate-i18n.js"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.40",
-    "@iconify-json/simple-icons": "^1.2.33",
-    "@nuxt/content": "^3.5.1",
+    "@iconify-json/lucide": "^1.2.52",
+    "@iconify-json/simple-icons": "^1.2.40",
+    "@nuxt/content": "^3.6.1",
     "@nuxt/image": "^1.10.0",
-    "@nuxt/ui-pro": "^3.1.1",
+    "@nuxt/ui-pro": "^3.2.0",
     "@nuxtjs/supabase": "1.5.1",
-    "@pinia/nuxt": "^0.11.0",
-    "@supabase/supabase-js": "^2.49.8",
-    "@vueuse/nuxt": "^13.1.0",
+    "@pinia/nuxt": "^0.11.1",
+    "@supabase/supabase-js": "^2.50.2",
+    "@vueuse/nuxt": "^13.4.0",
     "animate.css": "^4.1.1",
     "animejs": "^4.0.2",
-    "axios": "^1.9.0",
+    "axios": "^1.10.0",
+    "better-sqlite3": "^12.1.1",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
-    "motion-v": "^1.0.1",
-    "nuxt": "^3.17.2",
-    "nuxt-og-image": "^5.1.3",
+    "motion-v": "^1.3.1",
+    "nuxt": "^3.17.5",
+    "nuxt-og-image": "^5.1.8",
     "nuxt-vue3-google-signin": "^0.0.11",
-    "pinia": "^3.0.2",
+    "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.3.0",
     "simplex-noise": "^4.0.3",
     "three": "^0.176.0",
@@ -43,14 +44,14 @@
     "vue-audio-visual": "^3.0.11",
     "vue-number-animation": "2.0.2",
     "vue3-google-signin": "^2.1.1",
-    "wavesurfer.js": "^7.9.5"
+    "wavesurfer.js": "^7.9.8"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.3.0",
-    "@nuxtjs/i18n": "^9.5.4",
+    "@nuxt/eslint": "^1.4.1",
+    "@nuxtjs/i18n": "^9.5.6",
     "@types/crypto-js": "^4.2.2",
-    "eslint": "^9.26.0",
-    "sass-embedded": "^1.88.0",
+    "eslint": "^9.29.0",
+    "sass-embedded": "^1.89.2",
     "typescript": "^5.8.3",
     "vue-tsc": "^2.2.10"
   },
@@ -59,6 +60,7 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "better-sqlite3",
       "sharp"
     ],
     "ignoredBuiltDependencies": [

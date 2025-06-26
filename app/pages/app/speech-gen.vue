@@ -5,10 +5,6 @@ const { selectedVoice, loadVoices } = useSpeechVoices()
 const { selectedEmotion } = useSpeechEmotions()
 const toast = useToast()
 
-definePageMeta({
-  middleware: 'auth'
-})
-
 const appStore = useAppStore()
 const textToSpeechStore = useTextToSpeechStore()
 const { t } = useI18n()
