@@ -1,6 +1,14 @@
 {
   "common": {
-    "home": "Home"
+    "home": "Home",
+    "back": "Back",
+    "edit": "Edit",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "copy": "Copy",
+    "copied": "Copied",
+    "manage": "Manage"
   },
   "system": "AI Image Generator",
   "helloWorld": "Hello World!",
@@ -359,6 +367,7 @@
     "guide": "Guide",
     "logo": "Logo",
     "settings": "Settings",
+    "integration": "Integration",
     "components": "Components"
   },
   "loadingMoreItems": "Loading more items...",
@@ -630,6 +639,76 @@
     "api": "API",
     "logout": "Logout",
     "greeting": "Hi, {name}"
+  },
+  "integration": {
+    "title": "Integration",
+    "subtitle": "Manage your API keys and integration settings",
+    "apiKeys": "API Keys",
+    "apiKeysDescription": "Manage your API keys for programmatic access",
+    "webhook": "Webhook",
+    "webhookDescription": "Configure webhook URL for notifications"
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "subtitle": "Manage your API keys for programmatic access",
+    "create": "Create API Key",
+    "createNew": "Create New API Key",
+    "createFirst": "Create First API Key",
+    "name": "Name",
+    "nameDescription": "Give your API key a descriptive name",
+    "namePlaceholder": "e.g., My App API Key",
+    "nameRequired": "API key name is required",
+    "createdAt": "Created",
+    "noKeys": "No API Keys",
+    "noKeysDescription": "Create your first API key to get started with programmatic access",
+    "created": "API key created successfully",
+    "createError": "Failed to create API key",
+    "deleted": "API key deleted successfully",
+    "deleteError": "Failed to delete API key",
+    "deleteConfirm": "Delete API Key",
+    "deleteWarning": "Are you sure you want to delete this API key? This action cannot be undone.",
+    "copied": "API key copied to clipboard",
+    "copyError": "Failed to copy API key"
+  },
+  "webhook": {
+    "title": "Webhook Configuration",
+    "subtitle": "Configure webhook URL for real-time notifications",
+    "configuration": "Webhook URL",
+    "currentUrl": "Current Webhook URL",
+    "currentUrlDescription": "This URL will receive POST requests for webhook events",
+    "notConfigured": "No webhook URL configured",
+    "url": "Webhook URL",
+    "urlDescription": "Enter the URL where you want to receive webhook notifications",
+    "urlPlaceholder": "https://your-domain.com/webhook",
+    "urlRequired": "Please enter a webhook URL first",
+    "invalidUrl": "Please enter a valid URL",
+    "saved": "Webhook URL saved successfully",
+    "saveError": "Failed to save webhook URL",
+    "test": "Test",
+    "testSent": "Test Sent",
+    "testDescription": "Test webhook sent successfully",
+    "information": "Webhook Information",
+    "howItWorks": "How it works",
+    "description": "When configured, we will send HTTP POST requests to your webhook URL whenever certain events occur in your account.",
+    "events": "Webhook Events",
+    "imageGenerated": "Image generation completed",
+    "imageGenerationFailed": "Image generation failed",
+    "creditUpdated": "Credit balance updated",
+    "payloadFormat": "Payload Format",
+    "payloadDescription": "Webhook requests will be sent as JSON with the following structure:",
+    "security": "Security",
+    "securityDescription": "We recommend using HTTPS URLs and implementing signature verification to ensure webhook authenticity."
+  },
+  "error": {
+    "general": "Error",
+    "validation": "Validation Error",
+    "required": "Required field"
+  },
+  "success": {
+    "saved": "Saved successfully",
+    "created": "Created successfully",
+    "deleted": "Deleted successfully",
+    "copied": "Copied to clipboard"
   },
   "models": {
     "imagen3": "Imagen 3",
