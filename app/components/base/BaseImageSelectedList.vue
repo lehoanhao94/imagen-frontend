@@ -71,7 +71,7 @@ const removeImage = (src: string) => {
       }"
     >
       <div
-        class="relative"
+        class="relative cursor-pointer"
         @mouseenter="handleMouseEnter(index)"
         @mouseleave="handleMouseLeave()"
         @click="handleTap(index)"
