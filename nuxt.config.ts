@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     'nuxt-vue3-google-signin',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
+    '@nuxt/content'
   ],
   plugins: [{ src: '~/plugins/vue-number-animation', ssr: false }],
   ssr: false,
@@ -20,7 +21,6 @@ export default defineNuxtConfig({
       pathPrefix: false
     }
   ],
-
   devtools: {
     enabled: true
   },
@@ -45,6 +45,9 @@ export default defineNuxtConfig({
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     disableTransition: false // enable transition when switching themes
   },
+  content: {
+    experimental: { nativeSqlite: true }
+  },
 
   runtimeConfig: {
     public: {
@@ -56,9 +59,14 @@ export default defineNuxtConfig({
       NUXT_GOOGLE_CLIENT_ID:
         process.env.NUXT_GOOGLE_CLIENT_ID
         || '309877442422-22t81sfdbm47ah0fi8e9ggedh0ih2jc8.apps.googleusercontent.com',
-      NUXT_PUBLIC_SUPABASE_URL: process.env.NUXT_PUBLIC_SUPABASE_URL || 'https://realtime-dev.ttsopenai.com',
-      NUXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzI0MDAwNDAwLAogICJleHAiOiA0MDkwODMyNDQzCn0.2jwTXghgcYZRJz38_dDpIPIhRfHq1ZtgRHAHkxHpBcg',
-      NUXT_NOTIFICATION_TABLE: process.env.NUXT_NOTIFICATION_TABLE || 'notifications_geminigen_dev',
+      NUXT_PUBLIC_SUPABASE_URL:
+        process.env.NUXT_PUBLIC_SUPABASE_URL
+        || 'https://realtime-dev.ttsopenai.com',
+      NUXT_PUBLIC_SUPABASE_ANON_KEY:
+        process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY
+        || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzI0MDAwNDAwLAogICJleHAiOiA0MDkwODMyNDQzCn0.2jwTXghgcYZRJz38_dDpIPIhRfHq1ZtgRHAHkxHpBcg',
+      NUXT_NOTIFICATION_TABLE:
+        process.env.NUXT_NOTIFICATION_TABLE || 'notifications_geminigen_dev',
       features: {
         paymentWithCrypto: process.env.FEATURE_PAYMENT_WITH_CRYPTO === 'true'
       }
