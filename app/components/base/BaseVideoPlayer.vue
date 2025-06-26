@@ -82,7 +82,7 @@ const thumbnailImage = computed(() => {
 
     <!-- Play button overlay -->
     <div
-      class="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      class="absolute inset-0 flex items-center justify-center bg-black/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
       @click.stop="onTogglePlay"
     >
       <UIcon

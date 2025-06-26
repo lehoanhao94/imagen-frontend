@@ -130,6 +130,7 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
       }}</ULink>.
       <button
         :disabled="!isReady"
+        class="cursor-pointer"
         @click="() => login()"
       >
         {{ $t("auth.loginWithGoogle") }}
