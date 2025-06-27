@@ -98,5 +98,8 @@ watch(locale, (newLocale) => {
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>
+
+    <!-- Global Confirm Modal -->
+    <BaseConfirmModal />
   </UApp>
 </template>
