@@ -4,14 +4,7 @@ const { model, models, speed, outputFormat, outputChannel }
 const { selectedEmotion } = useSpeechEmotions()
 const toast = useToast()
 
-<<<<<<< copilot/fix-109
-definePageMeta({
-  middleware: 'auth'
-})
-
 const dialogToSpeechStore = useDialogToSpeechStore()
-=======
->>>>>>> develop
 const textToSpeechStore = useTextToSpeechStore()
 const { t } = useI18n()
 const {
