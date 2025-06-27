@@ -1002,5 +1002,7 @@
   "addDialog": "Add Dialog",
   "enterDialogText": "Enter dialog text...",
   "selectSpeaker": "Select Speaker",
-  "generateDialogSpeech": "Generate Dialog Speech"
+  "generateDialogSpeech": "Generate Dialog Speech",
+  "voice 1": "Voice 1",
+  "voice 2": "Voice 2"
 }

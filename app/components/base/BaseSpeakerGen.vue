@@ -1,34 +1,73 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+import type { SelectMenuItem, ChipProps } from '@nuxt/ui'
+
 interface Props {
-  speaker?: any
+  speakerIndex?: number
   input?: string
+  canRemove?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  speaker: () => ({}),
+  speakerIndex: 0,
   input: ''
 })
 
+const emit = defineEmits<{
+  'update:modelValue': [value: any]
+  'remove': [index: number]
+}>()
+
 const { t } = useI18n()
 
-const items = ref(['Voice 1', 'Voice 2'])
-const value = ref('Voice 1')
+const items = computed(() => {
+  return [
+    {
+      label: t('Voice 1'),
+      value: 'Voice 1',
+      chip: {
+        color: 'primary'
+      }
+    },
+    {
+      label: t('Voice 2'),
+      value: 'Voice 2',
+      chip: {
+        color: 'warning'
+      }
+    }
+  ] satisfies SelectMenuItem[]
+})
 
-function onCreate(item: string) {
-  items.value.push(item)
+const speaker = computed({
+  get: () => items.value[props.speakerIndex],
+  set: (value: any) => {
+    const index = items.value.findIndex(item => item.value === value.value)
+    emit('update:modelValue', {
+      speakerIndex: index,
+      input: dialogInput.value
+    })
+  }
+})
 
-  value.value = item
-}
+const dialogInput = computed({
+  get: () => props.input,
+  set: (value: string) => {
+    emit('update:modelValue', {
+      speakerIndex: props.speakerIndex,
+      input: value
+    })
+  }
+})
 </script>
 
 <template>
-  <div>
+  <div class="group">
     <UFormField>
       <template #label>
         <USelectMenu
-          v-model="value"
+          v-model="speaker"
           create-item
           :items="items"
           variant="soft"
@@ -37,19 +76,34 @@ function onCreate(item: string) {
           :ui="{
             content: 'w-48'
           }"
-          @create="onCreate"
-        />
+          :search-input="false"
+        >
+          <template #leading="{ modelValue, ui }">
+            <UChip
+              v-if="modelValue"
+              v-bind="modelValue.chip"
+              inset
+              standalone
+              :size="ui.itemLeadingChipSize() as ChipProps['size']"
+              :class="ui.itemLeadingChip()"
+            />
+          </template>
+        </USelectMenu>
       </template>
       <template #hint>
         <UButton
+          v-if="props.canRemove"
           color="neutral"
           variant="ghost"
           icon="iconamoon:trash-light"
           :label="$t('Remove')"
           size="xs"
+          class="hidden group-hover:flex"
+          @click="emit('remove', props.speakerIndex)"
         />
       </template>
       <UTextarea
+        v-model="dialogInput"
         class="w-full"
         :placeholder="$t('Start typing dialog here...')"
         autoresize

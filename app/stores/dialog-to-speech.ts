@@ -15,7 +15,10 @@ interface SpeakerItem {
 
 export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
   state: () => ({
-    dialogs: [] as DialogItem[],
+    dialogs: [{
+      speakerIndex: 0,
+      input: ''
+    }] as DialogItem[],
     speakers: [] as SpeakerItem[],
 
     loadings: {
@@ -63,8 +66,13 @@ export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
     },
 
     // Dialog management actions
-    addDialog(dialog: DialogItem) {
-      this.dialogs.push(dialog)
+    addDialog(dialog?: DialogItem) {
+      const lastDialog = this.dialogs[this.dialogs.length - 1]
+      const newDialog = dialog || {
+        speakerIndex: lastDialog?.speakerIndex === 0 ? 1 : 0,
+        input: ''
+      }
+      this.dialogs.push(newDialog)
     },
 
     removeDialog(index: number) {

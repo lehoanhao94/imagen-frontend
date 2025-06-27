@@ -62,10 +62,10 @@ const items = computed(
         // ]
       },
       {
-        label: t('Multi-speaker Gen'),
-        icon: 'hugeicons:ai-user',
+        label: t('Dialogue Gen'),
+        icon: 'ri:chat-smile-ai-line',
         slot: 'components' as const,
-        to: '/app/multi-speaker-gen'
+        to: '/app/dialogue-gen'
         // children: [
         //   {
         //     label: t('aiToolMenu.gemini25Pro'),
