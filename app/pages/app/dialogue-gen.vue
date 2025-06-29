@@ -1,32 +1,22 @@
 <script setup lang="ts">
 const { model, models, speed, outputFormat, outputChannel }
   = useSpeechGenModels()
-const { selectedVoice, loadVoices } = useSpeechVoices()
+const { loadVoices } = useSpeechVoices()
 const { selectedEmotion } = useSpeechEmotions()
 const toast = useToast()
 
 const textToSpeechStore = useTextToSpeechStore()
 const { t } = useI18n()
-const {
-  prompt,
-  selectedFiles,
-  supportFiles,
-  hasSelectedFiles,
-  uploadProgress,
-  loadings
-} = storeToRefs(textToSpeechStore)
+const { prompt, selectedFiles, hasSelectedFiles, loadings }
+  = storeToRefs(textToSpeechStore)
 
 const dialogToSpeechStore = useDialogToSpeechStore()
 
-const { dialogs, speakers } = storeToRefs(dialogToSpeechStore)
+const { dialogs, voice1, voice2, custom_prompt }
+  = storeToRefs(dialogToSpeechStore)
 
 const onGenerate = async () => {
-  let result
-  if (hasSelectedFiles.value) {
-    result = await handleDocumentToSpeech()
-  } else {
-    result = await handleTextToSpeech()
-  }
+  const result = await handleDialogToSpeech()
 
   if (result) {
     toast.add({
@@ -38,54 +28,15 @@ const onGenerate = async () => {
   }
 }
 
-const handleTextToSpeech = async () => {
-  return await textToSpeechStore.textToSpeech({
-    input: prompt.value,
+const handleDialogToSpeech = async () => {
+  return await dialogToSpeechStore.generateDialogSpeech({
     model: model.value.value,
-    voices: [
-      {
-        name: selectedVoice.value?.speaker_name,
-        voice: {
-          id: selectedVoice.value?.id,
-          name: selectedVoice.value?.speaker_name
-        }
-      }
-    ],
     emotion: selectedEmotion.value?.emotion_key,
     speed: speed.value,
     output_format: outputFormat.value,
-    output_channel: outputChannel.value
+    output_channel: outputChannel.value,
+    custom_prompt: custom_prompt.value
   })
-}
-
-const handleDocumentToSpeech = async () => {
-  for (const file of selectedFiles.value) {
-    return await textToSpeechStore.documentToSpeech(file, {
-      input: prompt.value,
-      model: model.value.value,
-      emotion: selectedEmotion.value?.emotion_key,
-      speed: speed.value,
-      output_format: outputFormat.value,
-      output_channel: outputChannel.value,
-      voices: [
-        {
-          name: selectedVoice.value?.speaker_name,
-          voice: {
-            id: selectedVoice.value?.id,
-            name: selectedVoice.value?.speaker_name
-          }
-        }
-      ]
-    })
-  }
-}
-
-onMounted(() => {
-  loadVoices()
-})
-
-const handleFilesSelected = (files: File[]) => {
-  textToSpeechStore.selectedFiles = files
 }
 
 watch(
@@ -128,7 +79,7 @@ watch(
       }"
     >
       <UChatPrompt
-        v-model="prompt"
+        v-model="custom_prompt"
         class="[view-transition-name:chat-prompt]"
         :placeholder="
           $t(
@@ -206,8 +157,9 @@ watch(
           :label="$t('voice 1')"
         >
           <BaseSpeechVoiceSelectModal
-            v-model="selectedVoice"
+            v-model="voice1"
             size="sm"
+            @update:model-value="dialogToSpeechStore.setVoice1($event)"
           />
         </UFormField>
 
@@ -216,8 +168,9 @@ watch(
           :label="$t('voice 2')"
         >
           <BaseSpeechVoiceSelectModal
-            v-model="selectedVoice"
+            v-model="voice2"
             size="sm"
+            @update:model-value="dialogToSpeechStore.setVoice2($event)"
           />
         </UFormField>
 

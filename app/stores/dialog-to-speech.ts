@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type { SpeechVoice } from '~/composables/useSpeechVoices'
 
 interface DialogItem {
   speakerIndex: number
@@ -14,12 +15,40 @@ interface SpeakerItem {
 }
 
 export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
+  persist: [
+    {
+      pick: ['voice1', 'voice2'],
+      storage: localStorage
+    }
+  ],
+
   state: () => ({
-    dialogs: [{
-      speakerIndex: 0,
-      input: ''
-    }] as DialogItem[],
-    speakers: [] as SpeakerItem[],
+    dialogs: [
+      {
+        speakerIndex: 0,
+        input: ''
+      }
+    ] as DialogItem[],
+    speakers: [
+      {
+        label: 'Voice 1',
+        value: 'Voice 1',
+        chip: {
+          color: 'primary'
+        }
+      },
+      {
+        label: 'Voice 2',
+        value: 'Voice 2',
+        chip: {
+          color: 'warning'
+        }
+      }
+    ] as any[],
+
+    // Voice settings for Voice 1 and Voice 2
+    voice1: null as SpeechVoice | null,
+    voice2: null as SpeechVoice | null,
 
     loadings: {
       generateSpeech: false
@@ -27,7 +56,9 @@ export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
 
     errors: {
       generateSpeech: null
-    } as Record<string, any>
+    } as Record<string, any>,
+
+    custom_prompt: ''
   }),
 
   getters: {
@@ -35,10 +66,54 @@ export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
     hasSpeakers: state => state.speakers.length > 0,
     getSpeakerByIndex: state => (index: number) => {
       return state.speakers[index] || null
+    },
+    getVoiceByIndex: state => (index: number) => {
+      if (index === 0) return state.voice1
+      if (index === 1) return state.voice2
+      return null
+    },
+    voicesFormatForApi(): any[] {
+      return [
+        {
+          name: 'Voice 1',
+          voice: {
+            id: this.voice1?.id || '',
+            name: this.voice1?.speaker_name || ''
+          }
+        },
+        {
+          name: 'Voice 2',
+          voice: {
+            id: this.voice2?.id || '',
+            name: this.voice2?.speaker_name || ''
+          }
+        }
+      ]
+    },
+    blocksFormatForApi(): any[] {
+      return this.dialogs.map((dialog) => {
+        const speaker = this.speakers[dialog.speakerIndex]
+        console.log('🚀 ~ returnthis.dialogs.map ~ speaker:', speaker)
+
+        if (!speaker) return null
+        return {
+          // input with speaker name
+          input: `${speaker.label}: ${dialog.input}`
+        }
+      })
     }
   },
 
   actions: {
+    // Voice management actions
+    setVoice1(voice: SpeechVoice | null) {
+      this.voice1 = voice
+    },
+
+    setVoice2(voice: SpeechVoice | null) {
+      this.voice2 = voice
+    },
+
     // Speaker management actions
     addSpeaker(speaker: SpeakerItem) {
       this.speakers.push(speaker)
@@ -108,38 +183,33 @@ export const useDialogToSpeechStore = defineStore('dialogToSpeechStore', {
       output_format?: string
       output_channel?: string
       custom_prompt?: string
-      vibe_id?: number
-      accent?: string
       model_name?: string
-      name?: string
     }) {
       try {
         this.loadings.generateSpeech = true
         this.errors.generateSpeech = null
 
-        // Convert dialogs and speakers to the format expected by textToSpeech
-        const voices = this.dialogs.map((dialog) => {
-          const speaker = this.getSpeakerByIndex(dialog.speakerIndex)
-          return {
-            name: speaker?.name || `Speaker ${dialog.speakerIndex + 1}`,
-            voice: speaker?.voice || { id: '', name: '' },
-            input: dialog.input
-          }
-        })
-
-        // Combine all dialog inputs
-        const combinedInput = this.dialogs.map((dialog) => {
-          const speaker = this.getSpeakerByIndex(dialog.speakerIndex)
-          const speakerName = speaker?.name || `Speaker ${dialog.speakerIndex + 1}`
-          return `${speakerName}: ${dialog.input}`
-        }).join('\n\n')
-
-        // Return the data to be used by the calling component
-        return {
-          input: combinedInput,
-          voices,
-          ...payload
+        // Prepare request payload for /tts-multi-speaker API
+        const requestPayload = {
+          voices: this.voicesFormatForApi,
+          model_name: payload.model_name || '',
+          model: payload.model || 'tts-flash',
+          speed: payload.speed || 1,
+          blocks: this.blocksFormatForApi,
+          output_format: payload.output_format?.value || 'mp3',
+          emotion: payload.emotion || '',
+          custom_prompt: payload.custom_prompt || '',
+          output_channel: payload.output_channel?.value || 'mono'
         }
+
+        // Call the API
+        const { apiService } = useAPI()
+        const response = await apiService.post(
+          '/tts-multi-speaker',
+          requestPayload
+        )
+
+        return response.data
       } catch (error) {
         console.error('Dialog to speech generation failed:', error)
         this.errors.generateSpeech = error

@@ -3,6 +3,9 @@ import { ref } from 'vue'
 
 import type { SelectMenuItem, ChipProps } from '@nuxt/ui'
 
+const dialogToSpeechStore = useDialogToSpeechStore()
+const { speakers } = storeToRefs(dialogToSpeechStore)
+
 interface Props {
   speakerIndex?: number
   input?: string
@@ -22,22 +25,10 @@ const emit = defineEmits<{
 const { t } = useI18n()
 
 const items = computed(() => {
-  return [
-    {
-      label: t('Voice 1'),
-      value: 'Voice 1',
-      chip: {
-        color: 'primary'
-      }
-    },
-    {
-      label: t('Voice 2'),
-      value: 'Voice 2',
-      chip: {
-        color: 'warning'
-      }
-    }
-  ] satisfies SelectMenuItem[]
+  return speakers.value.map(speaker => ({
+    ...speaker,
+    label: t(speaker.label)
+  }))
 })
 
 const speaker = computed({
