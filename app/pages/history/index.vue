@@ -50,13 +50,6 @@ const errorMessage = computed(() => {
   )
 })
 
-// Map history data to image card props
-const librariesData = computed(() => {
-  return historiesData.value.map(history => ({
-    ...history
-  }))
-})
-
 // Initial data fetch
 const fetchInitialData = async () => {
   const params: any = {
@@ -126,7 +119,7 @@ onUnmounted(() => {
 })
 
 // Update observer target when data changes
-watch(librariesData, () => {
+watch(historiesData, () => {
   nextTick(() => {
     const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
@@ -212,39 +205,13 @@ const checkScrollPosition = debounce(() => {
         </div>
       </div>
       <!-- Content -->
-      <!-- Actual content and load-more skeleton -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="space-y-4">
-          <template v-for="(historiesData, index) in historiesWithPage">
-            <Motion
-              v-for="(row, rowIndex) in historiesData.histories.slice(0, 3)"
-              :key="`row-${rowIndex}`"
-              :initial="{
-                scale: 1.1,
-                opacity: 0,
-                filter: 'blur(20px)'
-              }"
-              :animate="{
-                scale: 1,
-                opacity: 1,
-                filter: 'blur(0px)'
-              }"
-              :transition="{
-                duration: 0.6,
-                delay: index * 0.1
-              }"
-            >
-              <component
-                :is="historyComponents[row.type]"
-                :data="row"
-              />
-            </Motion>
-          </template>
+      <!-- Masonry grid layout for evenly distributed heights -->
+      <div class="masonry">
+        <template v-for="(historiesData, pageIndex) in historiesWithPage" :key="`page-${pageIndex}`">
           <Motion
-            v-for="n in 3"
-            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
-            :key="`row-${n}`"
-            class="w-full rounded-lg"
+            v-for="(row, rowIndex) in historiesData.histories"
+            :key="`${pageIndex}-${rowIndex}`"
+            class="masonry-item"
             :initial="{
               scale: 1.1,
               opacity: 0,
@@ -257,138 +224,21 @@ const checkScrollPosition = debounce(() => {
             }"
             :transition="{
               duration: 0.6,
-              delay: n * 0.1
+              delay: (pageIndex * historiesData.histories.length + rowIndex) * 0.05
             }"
           >
-            <USkeleton
-              class="w-full"
-              :style="{
-                height: 60 * (n + 1) + 'px',
-                borderRadius: '0.5rem'
-              }"
+            <component
+              :is="historyComponents[row.type]"
+              :data="row"
             />
           </Motion>
-        </div>
-        <div class="space-y-4">
-          <template v-for="(historiesData, index) in historiesWithPage">
-            <Motion
-              v-for="(row, rowIndex) in historiesData.histories.slice(3, 6)"
-              :key="`row-${rowIndex}`"
-              :initial="{
-                scale: 1.1,
-                opacity: 0,
-                filter: 'blur(20px)'
-              }"
-              :animate="{
-                scale: 1,
-                opacity: 1,
-                filter: 'blur(0px)'
-              }"
-              :transition="{
-                duration: 0.6,
-                delay: index * 0.1
-              }"
-            >
-              <component
-                :is="historyComponents[row.type]"
-                :data="row"
-              />
-            </Motion>
-          </template>
-          <Motion
-            v-for="n in 4"
-            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
-            :key="`row-${n}`"
-            class="w-full rounded-lg"
-            :initial="{
-              scale: 1.1,
-              opacity: 0,
-              filter: 'blur(20px)'
-            }"
-            :animate="{
-              scale: 1,
-              opacity: 1,
-              filter: 'blur(0px)'
-            }"
-            :transition="{
-              duration: 0.6,
-              delay: n * 0.1
-            }"
-          >
-            <USkeleton
-              class="w-full"
-              :style="{
-                height: 65 * (5 - n) + 'px',
-                borderRadius: '0.5rem'
-              }"
-            />
-          </Motion>
-        </div>
-        <div class="space-y-4">
-          <template v-for="(historiesData, index) in historiesWithPage">
-            <Motion
-              v-for="(row, rowIndex) in historiesData.histories.slice(6, 9)"
-              :key="`row-${rowIndex}`"
-              :initial="{
-                scale: 1.1,
-                opacity: 0,
-                filter: 'blur(20px)'
-              }"
-              :animate="{
-                scale: 1,
-                opacity: 1,
-                filter: 'blur(0px)'
-              }"
-              :transition="{
-                duration: 0.6,
-                delay: index * 0.1
-              }"
-            >
-              <component
-                :is="historyComponents[row.type]"
-                :data="row"
-              />
-            </Motion>
-          </template>
-
-          <Motion
-            v-for="n in 3"
-            v-if="loadings.fetchMoreHistories || loadings.fetchHistories"
-            :key="`row-${n}`"
-            class="w-full rounded-lg"
-            :initial="{
-              scale: 1.1,
-              opacity: 0,
-              filter: 'blur(20px)'
-            }"
-            :animate="{
-              scale: 1,
-              opacity: 1,
-              filter: 'blur(0px)'
-            }"
-            :transition="{
-              duration: 0.6,
-              delay: n * 0.1
-            }"
-          >
-            <USkeleton
-              class="w-full"
-              :style="{
-                height: 60 * (n + 1) + 'px',
-                borderRadius: '0.5rem'
-              }"
-            />
-          </Motion>
-        </div>
-      </div>
-
-      <div
-        v-if="false"
-        class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4"
-      >
+        </template>
+        
+        <!-- Loading skeletons distributed across columns -->
         <Motion
-          v-for="(row, index) in librariesData"
-          :key="`row-${index}`"
+          v-for="n in (loadings.fetchMoreHistories || loadings.fetchHistories ? 6 : 0)"
+          :key="`skeleton-${n}`"
+          class="masonry-item w-full rounded-lg"
           :initial="{
             scale: 1.1,
             opacity: 0,
@@ -401,12 +251,15 @@ const checkScrollPosition = debounce(() => {
           }"
           :transition="{
             duration: 0.6,
-            delay: index * 0.1
+            delay: n * 0.1
           }"
         >
-          <component
-            :is="historyComponents[row.type]"
-            :data="row"
+          <USkeleton
+            class="w-full"
+            :style="{
+              height: (150 + (n % 3) * 50) + 'px',
+              borderRadius: '0.5rem'
+            }"
           />
         </Motion>
       </div>
