@@ -50,13 +50,6 @@ const errorMessage = computed(() => {
   )
 })
 
-// Map history data to image card props
-const librariesData = computed(() => {
-  return historiesData.value.map(history => ({
-    ...history
-  }))
-})
-
 // Initial data fetch
 const fetchInitialData = async () => {
   const params: any = {
@@ -126,7 +119,7 @@ onUnmounted(() => {
 })
 
 // Update observer target when data changes
-watch(librariesData, () => {
+watch(historiesData, () => {
   nextTick(() => {
     const loadingTrigger = document.getElementById('loading-trigger')
     if (loadingTrigger && observer) {
